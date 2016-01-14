@@ -359,7 +359,7 @@ function loadGraphicalJourneysYearEmployee(){
            			}
 					var bar4 = new RGraph.Bar('cvs', data2.data)
                 							 .set('labels', lista_meses)
-                							 .set('colors', ['#FDB700'])
+                							 .set('colors', ['#0474be'])
                 							 .set('tooltips', lista_tooltip)
                 							 .set('chart.gutter.left', desp)
                 							 .draw();
@@ -416,7 +416,7 @@ function loadGraphicalExpensesYearEmployee(){
            			}
                 	var bar4 = new RGraph.Bar('cvs', data2.data)
                 							 .set('labels', lista_meses)
-                							 .set('colors', ['#FDB700'])
+                							 .set('colors', ['#0474be'])
                 							 .set('tooltips', lista_tooltip)
                 							 .set('chart.gutter.left', desp)
                 							 .draw();
@@ -472,7 +472,7 @@ function loadGraphicalJourneysMonthEmployee(){
 					var line = new RGraph.Line('cvs', lista_data)
          									 .set('labels', lista_dias)
                 							 .set('tooltips', lista_tooltip)
-                							 .set('colors', ['#FDB700'])
+                							 .set('colors', ['#0474be'])
                 							 .set('tickmarks', 'circle')
                 							 .set('linewidth', 3)
                 							 .set('chart.gutter.left', desp)
@@ -547,7 +547,7 @@ function loadGraphicalExpensesMonthEmployee(){
 					var line = new RGraph.Line('cvs', lista_data)
          				.set('labels', lista_dias)
                 		.set('tooltips', lista_tooltip)
-                		.set('colors', ['#FDB700'])
+                		.set('colors', ['#0474be'])
                 		.set('tickmarks', 'circle')
                 		.set('linewidth', 3)
                 		.set('chart.gutter.left', desp)
@@ -630,7 +630,7 @@ function loadFirstGraphicalEmployee(month,year){
 					var line = new RGraph.Line('cvs', lista_data)
          				.set('labels', lista_dias)
                 		.set('tooltips', lista_tooltip)
-                		.set('colors', ['#FDB700'])
+                		.set('colors', ['#0474be'])
                 		.set('tickmarks', 'circle')
                 		.set('linewidth', 3)
                 		.set('chart.gutter.left', desp)

@@ -3,7 +3,7 @@
 #tickets_accordion{}
 #tickets_accordion .panel.closed .panel-heading .panel-title>a{ color: #888;}
 #tickets_accordion .panel.support .panel-heading .panel-title>a{ color: #333;}
-#tickets_accordion .panel.user .panel-heading .panel-title>a{ color: #FDB700;}
+#tickets_accordion .panel.user .panel-heading .panel-title>a{ color: #0474be;}
 	
 #tickets_accordion .messages{ border: 0px solid #999; }
 #tickets_accordion .messages .message{ border: 0px solid #999; width: 70%; float: left; margin: 0px 0px 20px 0px; padding: 15px; background-color: #f9f9f9; border-radius: 4px;}

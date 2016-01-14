@@ -2,7 +2,7 @@
 #drivers_sidebar>.title{text-align: center; margin: 8px; font-size: 22px; }
 #drivers_sidebar .medium{text-align: center;}
 #drivers_sidebar .medium .title{font-size: 12px; padding: 0px;}
-#drivers_sidebar .medium .number{font-size: 40px; line-height: 34px; color: #FDB700; padding: 0px;}
+#drivers_sidebar .medium .number{font-size: 40px; line-height: 34px; color: #0474be; padding: 0px;}
 
 #drivers_list{margin-top: 30px;}
 #drivers_list .item{background-color: #F7F7F7; margin-bottom: 10px; cursor: pointer;}

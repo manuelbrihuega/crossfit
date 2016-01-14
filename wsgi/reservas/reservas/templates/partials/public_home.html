@@ -24,23 +24,16 @@
 {% ifequal LANG 'es' %}
 <div id="level5">
     <div class="container medium_level">
-        <div class="title">BLOG</div>
-
-        <div id="loadingblog" class="row">
-            <div class="col-xs-12 col-sm-offset-1 col-sm-10 clearfix">
-                <img src="static/img/home/loading.gif" />
-                <div class="title">{% trans "Conectando con el blog" %}</div>
-            </div>
-        </div>
-
+        <div class="title">NOTICIAS</div>
         <div class="row">
-            <div id="preblog" class="col-xs-12 col-sm-offset-1 col-sm-10 clearfix"  style="display:none">
-                <img id="blogimg" src="static/img/home/blog.jpg" />
-                <div id="blogtitle" class="title">MACHARAVIAYA REFUGIO DE ARTISTAS</div>
-                <div id="blogcuerpo" class="post">Macharaviaya es de esos lugares que te hacen sentir. Este pequeño pueblo de la Axarquía malagueña te desconecta del mundanal ruido y te conecta contigo mismo.</div>
-                <a id="bloglink" href="blog"><button type="button" class="btn btn-warning">VISITAR BLOG</button></a>
+            <div style="opacity: 1;" class="col-xs-12 col-sm-offset-1 col-sm-10 clearfix" id="preblog">
+                <img src="{{media}}img/home/noticia1.jpg" id="blogimg">
+                <div class="title" id="blogtitle">¡Nuevo sistema de reservas ya disponible! </div>
+                <div class="post" id="blogcuerpo">Tenemos el placer de comunicaros que desde hoy, en esta plataforma, está disponible nuestro nuevo sistema de reserva. Accesible desde PC y cualquier tipo de dispositivo móvil, para que puedas reservar tus plazas de WOD y Open Box a la hora que prefieras desde casa. Para el uso de esta plataforma solo es necesario que te registres como usuario y esperes a que confirmemos tu registro. Desde ese momento podrás utilizar todas sus funcionalidades.</div>
+                <a href="#" id="bloglink"><button class="btn btn-warning" type="button">REGÍSTRATE</button></a>
             </div>
         </div>
+        
 
     </div>
 </div>

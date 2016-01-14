@@ -9,7 +9,7 @@
 .capsule .col.form button:focus{outline:0;}
 .capsule .col.form button:active{outline:0; padding-top: 3px;}
 
-.capsule .col.delete{background-color: #FDB700; text-align: center;}
+.capsule .col.delete{background-color: #0474be; text-align: center;}
 .capsule .col.delete i{font-size: 40px;}
 
 .capsule .row.operators, .capsule .row.operators .col{height: 80px;}

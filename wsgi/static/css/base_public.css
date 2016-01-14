@@ -83,7 +83,7 @@ margin: 10px 15px;
 .modal-body .formulario input:focus{ outline: 0; }
 .modal-body .formulario .checks{border: 0px solid #999; color: #BBB;}
 .modal-footer{text-align: center; border: none; padding: 0px 15px 15px 15px; margin-top: 10px;}
-.modal-footer button{background-color: #FDB700; border-radius: 0px; font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 16px; padding-left: 20px;padding-right: 20px; margin-top: 15px; margin-bottom: 15px;}
+.modal-footer button{background-color: #0474be; border-radius: 0px; font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 16px; padding-left: 20px;padding-right: 20px; margin-top: 15px; margin-bottom: 15px;}
 .modal-footer button.btn-danger{background-color: #D2322D;}
 
 

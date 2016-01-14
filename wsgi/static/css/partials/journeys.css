@@ -3,7 +3,7 @@
 
 #radios_list{}
 #radios_list>.item{  float: left; width: 50%; text-align: center; padding: 4px 0px; margin: 0px; cursor: pointer;}
-#radios_list>.item:hover{background-color: #FDB700; color: #fff;}
+#radios_list>.item:hover{background-color: #0474be; color: #fff;}
 
 .journeys_sm_list{}
 .journeys_sm_list .item, .journeys_md_list .item, .journeys_viewer_list .item{border-left: 4px solid #999; background-color: #F1F1F1; margin-bottom: 10px; padding: 5px 0px; cursor: pointer; margin-left: 0px; margin-right: 0px;}
@@ -72,7 +72,7 @@
 #journey_details_wrapper .agents span{font-size: 12px;}
 #journey_details_wrapper .agents .driver{ }
 #journey_details_wrapper .agents .driver:hover{color: #888;}
-#journey_details_wrapper .agents .driver:hover img{border: 1px solid #FDB700;}
+#journey_details_wrapper .agents .driver:hover img{border: 1px solid #0474be;}
 #journey_details_wrapper .agents .driver img{width: 40px; margin-bottom: 5px;border: 1px solid #FFF;}
 #journey_details_wrapper .agents .driver span{font-size: 12px;}
 

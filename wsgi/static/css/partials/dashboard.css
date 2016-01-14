@@ -12,7 +12,7 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 .responsive-button{float:right;}
 .responsive-btn{float: right;}
 #rgraph_key{background-color: #FFFFFF; border: 1px solid #000000; border-radius: 5px; display: block; margin: auto; padding: 4px; width: 111px;}
-#legend-color{display: inline-block; margin-right: 5px; margin-top: 4px; width: 15px; height: 15px; background-color: #FDB700;}
+#legend-color{display: inline-block; margin-right: 5px; margin-top: 4px; width: 15px; height: 15px; background-color: #0474be;}
 @media (max-width: 991px) {
 	.responsive-prev, .responsive-next{width: 20%; float: left;}
 	.responsive-year{width: 60%; float: left;}
