@@ -1,0 +1,40 @@
+<div class="minisub-header">DATOS DE LA DELEGACIÓN</div><br>
+<div id="radio_wrapper">
+	<form id="edit_delegation_form" role="form">
+		<div class="row">
+			<input type="hidden" class="form-control" id="delegation_id">
+			<div class="col-md-3"><input type="text" class="form-control" id="delegation_country" placeholder="Pais"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="delegation_country_code" placeholder="Código pais"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="delegation_currency" placeholder="Moneda"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="delegation_tax" placeholder="Impuesto"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="delegation_percent" placeholder="Porcentaje"></div>
+		</div><br>
+		<div class="row">
+			<div class="col-md-5"><input type="text" class="form-control" id="delegation_company_name" placeholder="Razón social"></div>
+			<div class="col-md-6"><input type="text" class="form-control" id="delegation_address" placeholder="Dirección"></div>
+		</div><br>
+		<div class="row">
+			<div class="col-md-2"><input type="text" class="form-control" id="delegation_postal_code" placeholder="Código postal"></div>
+			<div class="col-md-5"><input type="text" class="form-control" id="delegation_locality" placeholder="Localidad, Provincia"></div>
+			<div class="col-md-3"><input type="text" class="form-control" id="delegation_cif" placeholder="CIF"></div>
+			<div class="col-md-2"><button id="edit_delegation_submit" type="submit" class="btn btn-default">Enviar</button></div>
+		</div><br>
+	</form>
+</div><br>
+
+<div class="minisub-header">LISTA DE USUARIOS DE DELEGACIÓN <span class="linkable" onclick="show_new_user();"><i class="fa fa-plus-circle"></i></span></div><br>
+<div id="new_user_wrapper" style="display:none;">
+	<form role="form" class="bateria" id="new_user">
+		<div class="row user" >
+			<div class="form-group col-md-1"><input id="new_user_name" class="form-control input-sm name" type="text" placeholder="Nombre"></div>
+			<div class="form-group col-md-2"><input id="new_user_surname" class="form-control input-sm surname" type="text" placeholder="Apellidos"></div>
+			<div class="form-group col-md-3"><input id="new_user_email" class="form-control input-sm email" type="text" placeholder="Email"></div>
+			<div class="form-group col-md-1"><input id="new_user_pass" class="form-control input-sm password" type="text" placeholder="Pass"></div>
+			<div class="form-group col-md-1"><input id="new_user_prefix" class="form-control input-sm prefix" type="text" placeholder="Prefix"></div>
+			<div class="form-group col-md-2"><input id="new_user_phone" class="form-control input-sm phone" type="text" placeholder="Phone"></div>
+			<div class="form-group col-md-2"><button id="new_user_submit" type="submit" class="btn btn-default">Guardar</button></div>
+		</div>
+	</form>
+</div>
+
+<div id="users_list"></div>

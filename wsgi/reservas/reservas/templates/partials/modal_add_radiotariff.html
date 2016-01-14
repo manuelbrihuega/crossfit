@@ -1,0 +1,45 @@
+<form role="form" id="new_radiotariff">
+	<div class="form-group col-md-12">
+		<div class="row">
+			<label id="label-origin" for="origins">Selecciona distrito y zona de origen:</label>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<select class="form-control" id="origin_district" onchange="change_district_origin();">
+					<!-- <option value="1">1</option> -->
+				</select>
+			</div>
+			<div class="col-md-6">
+				<select class="form-control" id="origin_zone">
+					<!-- <option value="1">1</option> -->
+				</select>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<label id="label-target" for="targets">Selecciona distrito y zona de destino:</label>
+		</div>
+		<div class="row" id="selects-target">
+			<div class="col-md-6">
+				<select class="form-control" id="target_district" onchange="change_district_target();">
+					<!-- <option value="1">1</option> -->
+				</select>
+			</div>
+			<div class="col-md-6">
+				<select class="form-control" id="target_zone">
+					<!-- <option value="1">1</option> -->
+				</select>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<label id="label-tariff" for="tariffs">Introduce la tarifa:</label>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<input type="text" class="form-control input-sm" id="tariff" placeholder="Euros">
+			</div>
+			<div id="save-add-radiotariff-modal" class="btn btn-default col-md-2" onclick="save_add_radiotariff();">Añadir</div>
+		</div>
+	</div>
+</form>

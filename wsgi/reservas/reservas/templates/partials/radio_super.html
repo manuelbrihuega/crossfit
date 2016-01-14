@@ -1,0 +1,60 @@
+<div class="buttons_tools pull-right">
+	<div class="item" data-toggle="tooltip" data-placement="bottom" title="Volver a las radios" onclick="goto(base_url+'/radios');"><!-- Nueva --> 
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-arrow-left fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>
+	<div class="item" id="radio_status" style="display:none;"  data-toggle="tooltip" data-placement="bottom" onclick="goto(base_url+'/radiostatus');"><!-- Nueva --> 
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i id="radio_status_i" class="fa fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>
+	<div class="item" id="radio_map" style="display:none;"  data-toggle="tooltip" title="Taxistas en Mapa" data-placement="bottom" onclick="show_radio_map();"><!-- Nueva --> 
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i id="radio_map_i" class="fa fa-map-marker fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>
+	<div class="item" id="radio_active" data-toggle="tooltip" data-placement="bottom" >
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-power-off fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>
+</div>
+
+<h1 class="page-header" id="radio_title"><i class="fa fa-cog fa-spin"></i> <span id="radio_status">CONECTADO</span></h1>
+
+<div class="animated fadeInDown" id="radio_super_wrapper">
+	
+	<div id="radio_submenu" class="row seven-cols buttonset">
+		<div class="col-sm-1">
+			<div class="button stats" onclick="subselect('stats');">ESTADÍSTICAS</div>
+		</div>
+		<div class="col-sm-1">
+			<div class="button historical" onclick="subselect('historical');">HISTÓRICO</div>
+		</div>
+		<div class="col-sm-1">
+			<div class="button locations" onclick="subselect('locations');">LOCALIZACIONES</div>
+		</div>
+		<div class="col-sm-1">
+			<div class="button drivers" onclick="subselect('drivers');">TAXISTAS</div>
+		</div>
+		<div class="col-sm-1">
+			<div class="button stops" onclick="subselect('stops');">SISTEMA ASIGNACIÓN</div>
+		</div>
+		<div class="col-sm-1">
+			<div id="gestoresLabel" class="button viewers" onclick="subselect('viewers');">GESTORES</div>
+		</div>
+		<div class="col-sm-1">
+			<div class="button profile" onclick="subselect('profile');">PREFERENCIAS</div>
+		</div>
+	</div>
+	
+	<div id="submain">
+		<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>
+	</div>
+	
+</div>

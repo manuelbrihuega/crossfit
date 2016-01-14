@@ -1,0 +1,71 @@
+<h1 class="page-header">Dashboard</h1>
+<div class="col-md-12" id="dashboard-admin-enterprise">
+	<div id="row-calendar" class="row" style="display:none;">
+		<div class="panel-group animated fadeInDown" id="graphical_accordion_years">
+			<div class="panel-heading panel-heading-graphical minus-padding col-md-1 responsive-prev">
+				<button id="prev_year" type="button" class="btn btn-default btn-graphical"><</button>
+			</div>
+			<div class="panel-heading panel-heading-graphical minus-padding col-md-10 responsive-year" >
+				<span id="current_year" style="background-color: #ebebeb" class="btn btn-default btn-graphical"></span>
+			</div>
+			<div class="panel-heading panel-heading-graphical minus-padding col-md-1 responsive-next">
+				<button id="next_year" type="button" class="btn btn-default btn-graphical">></button>
+			</div>
+		</div>
+		<div class="panel-group animated fadeInDown" id="graphical_accordion_months">
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="jan" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(0);">Ene</button>
+			</div>
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="feb" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(1);">Feb</button>
+			</div>
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="mar" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(2);">Mar</button>
+			</div>
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="apr" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(3);">Abr</button>
+			</div>
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="may" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(4);">May</button>
+			</div>
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="jun" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(5);">Jun</button>
+			</div>
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="jul" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(6);">Jul</button>
+			</div>
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="aug" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(7);">Ago</button>
+			</div>
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="sep" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(8);">Sep</button>
+			</div>
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="oct" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(9);">Oct</button>
+			</div>
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="nov" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(10);">Nov</button>
+			</div>
+			<div class="responsive-month panel-heading panel-heading-graphical col-md-1 minus-padding">
+				<button id="dec" type="button" class="btn btn-default btn-graphical" onclick="selectMonth(11);">Dic</button>
+			</div>
+		</div>
+	</div>
+	<div class="panel-group" id="accordion_wait"></div>
+	<div class="row" id="graphical-content" style="display:none;">
+		<div class="col-md-8" id="dashboard-graphical"><div id="graphical-wait"></div><canvas id="cvs" >[No canvas support]</canvas></div>
+		<div class="col-md-4 list-group" id="dashboard-list-links">
+			<a id="link-graphical-money-month" href="#" class="list-group-item" onclick="loadGraphicalExpensesMonth();"></a>
+  			<a id="link-graphical-money-year" href="#" class="list-group-item" onclick="loadGraphicalExpensesYear();"></a>
+			<a id="link-graphical-journeys-month" href="#" class="list-group-item active" onclick="loadGraphicalJourneysMonth();"></a>
+  			<a id="link-graphical-journeys-year" href="#" class="list-group-item" onclick="loadGraphicalJourneysYear();"></a>
+		</div>
+	</div>
+</div>
+<script src="{{ MEDIA }}js/aux/RGraph.common.core.js"></script>
+<script src="{{ MEDIA }}js/aux/RGraph.common.dynamic.js"></script>
+<script src="{{ MEDIA }}js/aux/RGraph.common.tooltips.js"></script>
+<script src="{{ MEDIA }}js/aux/RGraph.common.key.js"></script>
+<script src="{{ MEDIA }}js/aux/RGraph.line.js"></script>
+<script src="{{ MEDIA }}js/aux/RGraph.bar.js"></script>
+<script src="{{ MEDIA }}js/dashboard/admin_enterprise.js"></script>

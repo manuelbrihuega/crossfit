@@ -1,0 +1,28 @@
+<form role="form" id="new_journey">
+	<div class="form-group">
+		<label for="address">Dirección</label>
+		<div id="dir-journey" class="form-control"></div>
+		<br>
+	    <label for="num_pasajeros">Número de pasajeros</label>
+		<select class="form-control" id="num_passengers_journey">
+		  <!-- <option value="1">1</option> -->
+		</select>
+	  </div><br>
+	<label>Opciones:</label>
+	<div class="row" id="features_wrapper">
+		
+		<!-- <div class="col-sm-4">
+			<div class="checkbox">
+				<label><input type="checkbox" value="" id="aeropuerto">Aeropuerto</label>
+			</div>
+		</div> -->
+		
+	</div><br>
+	<div class="form-group">
+	    <label for="exampleInputPassword1">Indicaciones Adicionales (Opcional)</label>
+	    <textarea class="form-control" id="indication_journey" rows="3" placeholder="Ej: En la puerta de la estación"></textarea>
+	  </div>
+	  <div id="alert_add_journey" style="margin-bottom:14px; color:#98000A; display:none"></div>
+	  <div id="pedir-taxi-modal" class="btn btn-default" onclick="add_journey(this);">PEDIR TAXI</div>
+	  <!-- <button type="submit" class="btn btn-default">PEDIR TAXI MÁS TARDE</button> -->
+</form>

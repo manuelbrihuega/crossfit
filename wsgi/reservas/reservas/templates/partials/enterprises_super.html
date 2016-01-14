@@ -1,0 +1,69 @@
+<div class="buttons_tools pull-right">
+	<div class="item" onclick="show_new();"><!-- Nueva --> 
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>
+</div>
+
+<h1 class="page-header">Empresas</h1>
+
+<div id="new_enterprise_wrapper">
+	<h3 class="sub-header">Nueva empresa</h3>
+	<form id="new_enterprise_form" role="form">
+		<div class="row">
+			<div class="col-md-3"><input type="text" class="form-control" id="new_enterprise_name" placeholder="Empresa"></div>
+		  	<div class="col-md-2">
+			  	<select class="form-control" id="new_enterprise_delegation"></select>
+			</div>
+			<div class="col-md-1"><input type="text" class="form-control" id="new_enterprise_postal_code" placeholder="CP"></div>
+			<div class="col-md-4"><input type="text" class="form-control" id="new_enterprise_address" placeholder="Dirección"></div>
+			<input type="hidden" id="new_enterprise_address_latitude">
+			<input type="hidden" id="new_enterprise_address_longitude">
+			<div class="col-md-2"><input type="text" class="form-control" id="new_enterprise_cif" placeholder="CIF"></div>
+		</div><br>
+		<div class="row">
+			<div class="col-md-2"><input type="text" class="form-control" id="new_enterprise_discount" placeholder="Descuento"></div>
+			<div class="form-group col-md-5">
+				<select class="form-control" id="enterprise_credit">
+					<option value="0">Ningún día de crédito</option>
+				    <option value="30">30 días de crédito</option>
+				    <option value="45">45 días de crédito</option>
+				    <option value="60">60 días de crédito</option>
+				</select>
+			</div>
+			<div class="col-md-2"><input type="email" class="form-control" id="new_enterprise_pure_email" placeholder="E-mail"></div>
+			<div class="col-md-1"><input type="text" class="form-control" id="new_enterprise_prefix" placeholder="Prefijo" value="34"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="new_enterprise_phone" placeholder="Teléfono"></div>
+		</div>
+		<div class="row">
+			<h3 class="sub-header">Pulsador</h3>
+		  	<div class="col-md-3"><input type="text" class="form-control" id="new_enterprise_pulsador" placeholder="Nombre"></div>
+		  	<div class="col-md-3"><input type="text" class="form-control" id="new_enterprise_email_pulsador" placeholder="Email pulsador"></div>
+			<div class="col-md-3"><input type="text" class="form-control" id="new_enterprise_phone_pulsador" placeholder="Teléfono pulsador"></div>
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-default">Enviar</button>
+		  	</div>
+		</div><br>
+		
+		<br>
+		
+		
+		
+	</form>
+</div>
+<div id="submain">
+	<input class="superinput" type="text" placeholder="Ej. Nombre o teléfono" id="enterprises_search">
+	
+	<h3 id="title_search_results" class="sub-header" style="display:none;">Resultados de la búsqueda:</h3>
+	<div id="result_enterprises" class="row sublista" style="margin-top:30px;"></div>
+	
+	<h3 id="title_pending" class="sub-header" style="display:none;">Pendientes de activación:</h3>
+	<div id="pending_enterprises" class="row sublista" style="display:none; margin-top:30px;" ></div>
+	
+	<h3 class="sub-header">Empresas por delegación:</h3>
+	<div class="panel-group animated fadeInDown" id="enterprises_accordion">
+		<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+<form id="excel_form" name="excel_form" action="{{BASE_URL}}/ajax/upload_excel_tariff" enctype="multipart/form-data" >
+	<div class="form-group col-md-12">
+		<div class="row">
+			<div id="wait-content" class="waiting" style="display:none;"><i class="fa fa-cog fa-spin"></i></div>
+			<label id="label-origin" for="origins">Selecciona un archivo Excel que contenga las tarifas:</label>
+		</div>
+		<div id="container-upload" class="row">
+			<div id="file-content" class="col-md-9 file-upload">
+				<input type="file" name="excel" id="excel" />
+				<input type="hidden" name="radio_id" id="radio_id" />
+			</div>
+			<div class="col-md-3">
+				<div id="load-excel-modal" class="btn btn-default col-md-2" onclick="load_excel();">Cargar</div>
+			</div>
+		</div>	
+	</div>
+</form>

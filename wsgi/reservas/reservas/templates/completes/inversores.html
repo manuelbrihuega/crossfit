@@ -1,0 +1,76 @@
+{% load i18n %}
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="apple-itunes-app" content="app-id=602835004">  
+    <meta name="google-play-app" content="app-id=com.idearioventures.taxible">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Taxible es la aplicación para pedir taxi desde el móvil. Tu Taxi en el móvil a un click, más seguro y sin costes adicionales." />
+    <meta itemprop="description" content="Taxible es la aplicación para pedir taxi desde el móvil. Tu Taxi en el móvil a un click, más seguro y sin costes adicionales.">
+    <meta property="og:description" content="Taxible es la aplicación para pedir taxi desde el móvil. Tu Taxi en el móvil a un click, más seguro y sin costes adicionales." />
+    <meta itemprop="image" content="{{MEDIA}}img/i18n/icono_es.png">
+    <meta property="og:image" content="{{MEDIA}}img/i18n/icono_es.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="Aplicación taxis, taxi iphone, taxi android, taxi blackberry, taxible, pedir taxi desde el móvil, taxi app, spanish taxi app" />
+    <title>{{title}}</title>
+    <meta name="title" content="{{title}}" />
+    <meta itemprop="name" content="{{title}}">
+    <meta property="og:title" content="{{title}}" />
+	<link href="{{MEDIA}}img/common/apple-touch-icon.png" rel="apple-touch-icon"/>
+    <link href="https://plus.google.com/108833228354746039687" rel="publisher" />
+    <link rel="shortcut icon" href="{{MEDIA}}img/common/favicon.ico">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.0.0/animate.min.css">
+	<link rel="stylesheet" href="{{ MEDIA }}css/inversores.css">
+	{% for style in css %} <link rel="stylesheet" href="{{ MEDIA }}css/{{ style }}"> {% endfor %}
+</head>
+
+<body>
+
+
+	<div id="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12" style="position:relative;">
+					<div id="brand">
+						<a href="{{ BASE_URL }}">TAXIBLE</a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div id="content">{{content|safe}}</div>
+	
+	
+
+
+			
+	<script type="text/javascript" charset="utf-8">var base_url="{{ BASE_URL }}/";</script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="{{ BASE_URL }}/assets/js/base_v2.js"></script>
+	
+	{% for js in javascript %} <script type="text/javascript" src="{{ BASE_URL }}/{{ js }}"> </script> {% endfor %}
+</body>
+</html>
+
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		var base_url='{{BASE_URL}}';
+		var media_url='{{MEDIA}}';
+		var api_url='http://api.taxible.com/v2/';
+		 var lang="{{ LANG }}";
+	</script>
+	<script src="{{ STATIC_URL }}js/inversores.js"></script>
+	{% for js in javascript %} <script type="text/javascript" src="{{ MEDIA }}js/{{ js }}"> </script> {% endfor %}
+
+</body>
+</html>
+			
+			

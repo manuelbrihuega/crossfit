@@ -1,0 +1,17 @@
+.panel-heading-tariff{overflow:auto;}
+.button{cursor: pointer; margin-left: 6px;}
+.modal-header h4 {font-weight: 900 !important;}
+.form-group label{font-weight: 400 !important;}
+#save-new-radiotariff-modal{margin-top: 25px;}
+#div-save-district-btn{padding-left: 0px !important;padding-top: 5px;}
+#save-add-radiotariff-modal{height: 31px; margin-top: 0px;margin-left: 14px;}
+.table-responsive-tariff{margin-top: 6px;}
+.no-padding-left{padding-left: 3px;}
+.disactive{background-color: gray !important;}
+.disactive-panel{background-color: #f5f5f5 !important;}
+#excel{width: 100%; margin-top: 2px; height: 29px;}
+#load-excel-modal{width: 100%;}
+#drop{border:2px dashed #bbb; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; padding:25px; text-align:center; font:20pt bold,"Vollkorn";color:#bbb}
+#view_load_excel_modal .modal-content{height: 174px;}
+#container-upload{margin-top: 20px;}
+.botonera{padding-right: 0px; text-align: right;}

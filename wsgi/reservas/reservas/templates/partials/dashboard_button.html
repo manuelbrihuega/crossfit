@@ -1,0 +1,52 @@
+<div class="jumbotron">
+  <div class="container">
+	
+	<div id="loading">
+    	<h1><i class="icon-spinner icon-spin icon-large"></i> Cargando...</h1>
+	</div>
+    
+	<div id="success">
+    	<h1><i class="icon-thumbs-up icon-large"></i>Conectado correctamente</h1>
+		<p>Ya puede cerrar esta ventana</p>
+	</div>
+    
+	<div id="error">
+    	<h1><i class="icon-frown icon-large"></i> Popup bloqueado</h1>
+		<p>Autorice a TaxibleApp.com a abrir una ventana emergente: <span onclick="ver_tutorial();"> Saber cómo se hace</span></p>
+		
+		
+		
+		<button id="boton_reintentar" onclick="abre_pulsador();" type="button" class="btn btn-warning">REINTENTAR</button>
+	</div>
+    
+  </div>
+</div>
+
+<div class="container" id="tutorial">
+		
+		<ul class="nav nav-tabs" id="myTab">
+		  	<li class="active"><a href="#firefox" data-toggle="tab">Mozilla Firefox</a></li>
+			<li><a href="#chrome" data-toggle="tab">Google Chrome</a></li>
+			<li><a href="#explorer" data-toggle="tab">Internet Explorer</a></li>
+		</ul>
+
+		<div class="tab-content">
+		  	<div class="tab-pane active" id="firefox">
+		  		<p>1. Si el navegador bloquea la apertura de ventanas emergentes, se debe pulsar sobre Opciones, situado en la parte superior derecha.</p>
+		  		<img src="{{ MEDIA }}/img/tutorial/firefox01.png">
+				<p>2.  Elegir la opción “Permitir ventanas emergentes para www.taxibleapp.com”. Pulse luego en REINTENTAR.</p>
+		  		<img src="{{ MEDIA }}/img/tutorial/firefox02.png">
+		  	</div>
+		  	<div class="tab-pane" id="chrome">
+		  		<p>1. Si Google Chrome bloquea la apertura de ventanas emergentes, aparecerá un icono a la derecha de la barra de direcciones.</p>
+				<img src="{{ MEDIA }}/img/tutorial/chrome01.png">
+				<p>2. Hacer clic sobre este icono, y pulsar sobre la opción “Permitir siempre pop-ups de www.taxibleapp.com”. Pulsar sobre Ok para guardar los cambios. Pulse luego en REINTENTAR.</p>
+		  		<img src="{{ MEDIA }}/img/tutorial/chrome02.png">
+		  	</div>
+		  	<div class="tab-pane" id="explorer">
+		  		<p>Si el navegador bloque las ventanas emergentes, aparecerá un cuadro abajo informando de esto. Pulsar sobre Opciones para este sitio y luego en “Permitir siempre”. Pulse luego en REINTENTAR.</p>
+				<img src="{{ MEDIA }}/img/tutorial/explorer01.png">
+		  	</div>
+		</div>
+		
+</div>

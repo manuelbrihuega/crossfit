@@ -1,114 +1,70 @@
-"""
-Django settings for reservas project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.8/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.8/ref/settings/
-"""
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# -*- coding: UTF-8 -*-
 import os
-DJ_PROJECT_DIR = os.path.dirname(__file__)
-BASE_DIR = os.path.dirname(DJ_PROJECT_DIR)
-WSGI_DIR = os.path.dirname(BASE_DIR)
-REPO_DIR = os.path.dirname(WSGI_DIR)
-DATA_DIR = os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR)
-
-import sys
-sys.path.append(os.path.join(REPO_DIR, 'libs'))
-import secrets
-SECRETS = secrets.getter(os.path.join(DATA_DIR, 'secrets.json'))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SECRETS['secret_key']
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == 'True'
-
-from socket import gethostname
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+SECRET_KEY = 'qrdor327)nv9wzv$w7pn-76tur1kafvoel6_)$=z0tdyvtqo!i'
+DEBUG = True
+TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = [
-    gethostname(), # For internal OpenShift load balancer security purposes.
-    os.environ.get('OPENSHIFT_APP_DNS'), # Dynamically map to the OpenShift gear name.
-    #'example.com', # First DNS alias (set up in the app)
-    #'www.example.com', # Second DNS alias (set up in the app)
-]
-
-
-# Application definition
-
+    'api.taxible.com',
+    'api.taxibleapp.com',
+    'taxible.com',
+    'taxibleapp.com',
+    '127.0.0.1',
+    'localhost']
+ROOT_URLCONF = 'reservas.urls'
+WSGI_APPLICATION = 'reservas.wsgi.application'
+LANGUAGE_CODE = 'es'
+TIME_ZONE = 'Europe/Madrid'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+_ = lambda s: s
+STATIC_URL = '/static/'
+STATIC_ROOT = ''
+TEMPLATE_DIRS = (PROJECT_PATH+'/templates')
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 31 * 24 * 60 * 60 #
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 )
-
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.static",
+    "django.contrib.messages.context_processors.messages",
+    "reservas.context_processors.baseurl",
+)
+LANGUAGES = (
+    ('es', _('Espaniol ES')),
+    ('cr', _('Espaniol CR')),
+    ('pa', _('Espaniol PA')),
+    ('pe', _('Espaniol PE')),
+    ('ad', _('Espaniol AD')),
+)
+LOCALE_PATHS = (
+    os.path.join(PROJECT_PATH, 'locale'),
+)
 
-# GETTING-STARTED: change 'reservas' to your project name:
-ROOT_URLCONF = 'reservas.urls'
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
-WSGI_APPLICATION = 'reservas.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        # GETTING-STARTED: change 'db.sqlite3' to your sqlite3 database:
-        'NAME': os.path.join(DATA_DIR, 'db.sqlite3'),
-    }
-}
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_PATH, 'static'),
+)
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
+'''
+       Root User: adminqdCT4kk
+   Root Password: WfqmJhVeEqpv
+   Database Name: crossfit
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(WSGI_DIR, 'static')
+Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/'''

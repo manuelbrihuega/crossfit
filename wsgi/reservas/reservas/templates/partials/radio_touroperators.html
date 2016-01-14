@@ -1,0 +1,50 @@
+<div class="minisub-header">TOUROPERADORES <span class="linkable" onclick="show_new_touroperator();"><i class="fa fa-plus-circle"></i></span></div><br>
+
+<div id="new_touroperator_wrapper" style="display:none;">
+	<form role="form" class="bateria" id="new_touroperator_form">
+		
+
+		<h3>Datos del Touroperador</h3>
+		
+		<div class="row">
+			<div class="form-group col-md-2">
+		    	<input type="text" class="form-control input-sm" id="new_touroperator_name" placeholder="Nombre" >
+		  	</div>
+		  	<div class="form-group col-md-3">
+		    	<input type="email" class="form-control input-sm" id="new_touroperator_email" placeholder="Email">
+		  	</div>
+		  	<div class="form-group col-md-2">
+		    	<input type="password" class="form-control input-sm" id="new_touroperator_password" value="" placeholder="Contraseña">
+		  	</div>
+		  	<div class="form-group col-md-2">
+		    	<input type="text" class="form-control input-sm" id="new_touroperator_phone" placeholder="Teléfono">
+		  	</div>
+		  	<div class="form-group col-md-3">
+		    	<input type="text" class="form-control input-sm" id="new_touroperator_cif" placeholder="CIF">
+		  	</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-3">
+		    	<input type="text" class="form-control input-sm" id="new_touroperator_address" placeholder="Dirección" >
+		  	</div>
+		  	<div class="form-group col-md-2">
+		    	<input type="text" class="form-control input-sm" id="new_touroperator_province" placeholder="Provincia">
+		  	</div>
+		  	<div class="form-group col-md-2">
+		    	<input type="text" class="form-control input-sm" id="new_touroperator_city" value="" placeholder="Población">
+		  	</div>
+		  	<div class="form-group col-md-2">
+		    	<input type="text" class="form-control input-sm" id="new_touroperator_cp" placeholder="Código postal">
+		  	</div>
+		  	<div class="form-group col-md-3">
+		    	<input type="text" class="form-control input-sm" id="new_touroperator_web" placeholder="Web">
+		  	</div>
+		</div>
+		<div id="touroperators_registered"></div>
+		<center><input type="submit" value="CREAR TOUROPERADOR" id="new_touroperador_button" class="btn btn-default"></center>
+		
+	</form>
+	
+</div><br>
+
+<div id="touroperators_list" class="drivers_list_md"></div>

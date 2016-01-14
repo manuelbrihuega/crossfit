@@ -1,0 +1,31 @@
+<div class="minisub-header">ADMINISTRADORES<span class="linkable" onclick="show_new_digital_viewer();"><i class="fa fa-plus-circle"></i></span></div><br>
+<div id="new_viewer_wrapper" style="display:none;">
+	<form role="form" class="bateria" id="new_viewer">
+		<div class="row pulsador" >
+			<div class="form-group col-md-1"><input id="new_viewer_name" class="form-control input-sm name" type="text" placeholder="Nombre"></div>
+			<div class="form-group col-md-2"><input id="new_viewer_surname" class="form-control input-sm surname" type="text" placeholder="Apellidos"></div>
+			<div class="form-group col-md-3"><input id="new_viewer_email" class="form-control input-sm email" type="text" placeholder="Email"></div>
+			<div class="form-group col-md-1"><input id="new_viewer_pass" class="form-control input-sm password" type="text" placeholder="Pass"></div>
+			<div class="form-group col-md-1"><input id="new_viewer_prefix" class="form-control input-sm prefix" type="text" placeholder="Prefix"></div>
+			<div class="form-group col-md-2"><input id="new_viewer_phone" class="form-control input-sm phone" type="text" placeholder="Phone"></div>
+			<div class="form-group col-md-2"><button id="new_viewer_submit" type="submit" class="btn btn-default">Guardar</button></div>
+		</div>
+	</form>
+</div>
+
+<div id="viewers_list">Lista de gestores</div>
+<br>
+<div class="minisub-header">OPERADORAS<span class="linkable" onclick="show_new_digital_operator();"><i class="fa fa-plus-circle"></i></span></div><br>
+<div id="new_viewer_wrapper_operator" style="display:none;">
+	<form role="form" class="bateria" id="new_viewer_operator">
+		<div class="row pulsador" >
+			<div class="form-group col-md-3"><input id="new_operator_name" class="form-control input-sm name" type="text" placeholder="Nombre"></div>
+			<div class="form-group col-md-3"><input id="new_operator_email" class="form-control input-sm email" type="text" placeholder="Email"></div>
+			<div class="form-group col-md-3"><input id="new_operator_pass" class="form-control input-sm password" type="text" placeholder="Pass"></div>
+			<input id="new_operator_radio" type="hidden">
+			<div class="form-group col-md-2"><button id="new_operator_submit" type="submit" class="btn btn-default">Guardar</button></div>
+		</div>
+	</form>
+</div>
+
+<div id="operators_list">Lista de gestores</div>

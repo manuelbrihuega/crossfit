@@ -1,0 +1,52 @@
+#nav,#barra_preload{display: none;}
+
+#select_radio{
+
+}
+
+#nuevo_taxista{}
+#nuevo_taxista h3{
+	padding-top: 0px;
+	margin-top: 20px;
+	font-family: 'Raleway', sans-serif;
+	font-size: 26px;
+	font-weight: 200;
+	color: #777;
+	text-transform: uppercase;
+}
+.form-group>label{display: none;}
+input.form-control{
+	border: none;
+	border-radius: 0px;
+	outline: none; box-shadow:none !important;
+	border-bottom: 1px solid #BBB;
+}
+
+.form-inline .form-control{
+    width:100%;
+}
+
+input.form-control:focus{
+	border: none;
+	border-bottom: 1px solid #FF9900;
+}
+
+.checkbox{ margin-right: 20px; }
+.checkbox:last-child{ margin-right: 0px;}
+
+.checkbox{ color: #999; font-family: 'Raleway', sans-serif; cursor: pointer; }
+
+#checkboxes{margin-top: 10px;}
+
+#mismo{
+	font-size: 14px;
+	line-height: 10px;
+	vertical-align: middle;
+	padding-left: 20px;
+	cursor: pointer;
+	text-transform: none;
+}
+
+#enviar{
+	border-radius: 0px;
+}

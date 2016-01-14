@@ -1,0 +1,52 @@
+<h1 class="page-header">Taxible Call</h1>
+
+<div id="submain" class="animated fadeInDown">
+	<div class="minisub-header">OPERADORAS NO ASIGNADAS</div>
+	<div class="capsule">
+		<div class="row operators">
+			<div class="col-md-2 col form">
+				<input id="new_operator_extension" class="extension" type="text" placeholder="Extensión">
+				<input id="new_operator_pass" class="password" type="text" placeholder="Contraseña">
+				<button id="new_operator_submit" onclick="add_operator();">Nueva</button>
+			</div>
+			<div class="col-md-9 col">
+				<div id="unlinked_operators_wrapper">
+					<div id="unlinked_operators_subwrapper"></div>
+				</div>
+			</div>
+			<div class="col-md-1 col delete" id="delete_operator">
+				<i class="fa fa-trash-o"></i>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="minisub-header">NUMERACIONES NO ASIGNADAS</div>
+	<div class="capsule">
+		<div class="row numbers">
+			<div class="col-md-2 col form">
+				<input id="new_number" class="number" type="text" placeholder="Numeración">
+				<button id="new_number_submit" onclick="add_number();">Nueva</button>
+			</div>
+			<div class="col-md-9 col">
+				<div id="unlinked_numbers_wrapper">
+					<div id="unlinked_numbers_subwrapper">
+						
+					</div>
+				</div>
+			</div>
+			<div class="col-md-1 col delete" id="delete_numbers">
+				<i class="fa fa-trash-o"></i>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<div class="minisub-header">RECEPTORES DE LLAMADAS <span class="linkable" onclick="toggleAddQueue();"> <i class="fa fa-plus-circle"></i></span></div>
+	<div id="new_queue_form" class="row" style="display:none;">
+		<div class="col-md-4 col-md-offset-4"><input type="text" class="form-control" id="new_queue_name" placeholder="Nueva plataforma receptora de llamadas"></div>
+		<div class="col-md-3"><button class="btn btn-default" onclick="add_queue();">Nuevo</button></div>
+	</div>
+	<div class="row enqueues" id="queue_list_subwrapper"></div>
+	
+	<br>
+</div>

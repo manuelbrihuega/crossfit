@@ -1,0 +1,24 @@
+<div id="new_location_wrapper">
+	<form id="new_location_form" role="form">
+		<div class="row">
+			<input type="hidden" class="form-control" id="new_location_radio_id">
+			<div class="col-md-2"><input type="text" class="form-control" id="new_location_postal_code" placeholder="CP"></div>
+			<div class="col-md-3"><input type="text" class="form-control" id="new_location_locality" placeholder="Localidad"></div>
+			<div class="col-md-1"><input type="text" class="form-control" id="new_location_country_code" disabled></div>
+			<div class="col-md-1">
+				<select class="form-control" id="new_location_minutes">
+				  <option val="5">5</option>
+				  <option val="7">7</option>
+				  <option val="10">10</option>
+				  <option val="15">15</option>
+				  <option val="20">20</option>
+				</select>
+			</div>
+			<div class="col-md-2"><button type="submit" class="btn btn-default" id="new_location_submit">Enviar</button></div>
+		</div>
+		<br><br>
+		
+	</form>
+</div>
+
+<div id="locations_list" class="row"></div>

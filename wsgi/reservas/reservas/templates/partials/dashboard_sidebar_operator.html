@@ -1,0 +1,118 @@
+<div id="callcenter">
+
+    <div id="webcam">
+      <video id="remoteView" autoplay hidden=true poster="images/logo.png"></video>
+      <!--<video id="remoteView" autoplay
+        src="http://shapeshed.com/examples/HTML5-video-element/video/320x240.ogg">
+      </video>-->
+
+      <video id="selfView" autoplay muted="true" hidden=true></video>
+      <!--<video id="selfView" autoplay
+        src="http://shapeshed.com/examples/HTML5-video-element/video/320x240.ogg">
+      </video>-->
+    </div>
+	
+	<div id="info_sip" class="clearfix" style="display:none;">
+		<div id="conexion"></div>
+		<div id="registro"></div>
+		<div id="register"></div>
+	</div>
+	
+	<div id="sessions"></div>
+
+	<div class="section" id="quienpide_wrapper" style="margin-bottom:15px !important;">
+		<div class="title" style="margin-bottom:2px !important;">¿QUIÉN PIDE EL TAXI?</div>
+		<input id="usuariopide" style="margin-left: 24px; cursor:pointer;" type="radio" name="quienpide" value="Usuario" checked>Usuario
+		<input id="otropide" style="margin-left: 21px; cursor:pointer;" type="radio" name="quienpide" value="Pasajero para otro">Pasajero para otro<br>
+		<input id="taxistapide" style="margin-left: 24px; cursor:pointer;" type="radio" name="quienpide" value="Taxista">Taxista
+		<input id="ocultopide" style="margin-left: 25px; cursor:pointer;" type="radio" name="quienpide" value="Número oculto">Número oculto
+	</div>
+	<div class="section" id="usuario_wrapper">
+		<div class="title">USUARIO <i id="passenger_save_button" class="linkable fa fa-save" style="margin-right: 4px;" onclick="save_passenger_detail();"></i><i id="passenger_erase_button" class="linkable fa fa-eraser" style="margin-right: 4px;" onclick="limpiaCampos('Nueva llamada');"></i><i id="passenger_detail_button" class="linkable fa fa-eye" style="display:none;" onclick="passenger_detail();"></i></div>
+		<div class="field nombre">
+			<div class="insignia" onclick="limpiaCampos('Nueva llamada');" style="cursor:pointer;"></div>
+			<input type="text" placeholder="Nombre" id="nombre">
+		</div>
+		<div class="field apellidos">
+			<div class="insignia" onclick="limpiaCampos('Nueva llamada');" style="cursor:pointer;"></div>
+			<input type="text" placeholder="Apellidos" id="apellidos">
+		</div>
+		<div class="field email">
+			<div class="insignia" onclick="buscaPasajeroEmail();" style="cursor:pointer;"></div>
+			<input type="text" placeholder="Email" id="email">
+		</div>
+		<div class="field telefono">
+			<div class="insignia" onclick="buscaPasajeroTelefono();" style="cursor:pointer;"></div>
+			<input type="text" placeholder="Teléfono" id="telefono">
+		</div>
+	</div>
+
+	<div class="section" id="carrera_wrapper">
+		<div class="title">CARRERA</div>
+	
+		<div class="field origen">
+			<div class="insignia"></div>
+			<input type="text" placeholder="Origen" id="origen">
+		</div>
+		<div class="field destino">
+			<div class="insignia"></div>
+			<input type="text" placeholder="Destino" id="destino">
+		</div>
+		<div class="field apellidos">
+			<div class="insignia" onclick="limpiaCampos('Nueva llamada');" style="cursor:pointer;"></div>
+			<input type="text" placeholder="Asignación manual (Licencia)" id="licencia">
+		</div>
+		<div id="reserva" style="display:none;">
+			<center>
+				<div id="datepicker_wrapper"></div>
+				<input type="hidden" id="datepicker_input">
+				<div id="timepicker_wrapper"></div>
+				<input type="hidden" id="timepicker_input">
+			</center>
+			<div class="row">
+				<div class="col-xs-6" style="text-align:center;">
+					<div class="btn btn-default" onclick="anulaIntentoReserva();">CANCELAR</div>
+				</div>
+				<div class="col-xs-6" style="text-align:center;">
+					<div class="btn btn-default" onclick="reserva();">RESERVAR</div>
+				</div>
+			</div>
+		</div>
+	   
+		
+		<div class="row" id="taxis">
+			<div class="col-xs-6">
+				<div class="label">Nº Taxis</div>
+				<div class="field mini taxis">
+					<div class="insignia"></div>
+					<input type="text" placeholder="1" value="1" id="taxis" disabled="disabled">
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="label">Pasajeros</div>
+				<div class="field mini pasajeros">
+					<div class="insignia"></div>
+					<input type="text" placeholder="1" value="1" id="pasajeros">
+				</div>
+			</div>
+		</div>
+		<div id="tituloCaracteristicas" style="cursor:pointer; margin-top:12px;" onclick="desplegarCaracteristicas();" class="title"><i class="fa fa-arrow-down"></i> CARACTERÍSTICAS ESPECIALES <i class="fa fa-arrow-down"></i></div>
+		<div id="carateristicas" style="display:none;"></div>
+		<div id="observaciones_wrapper" class="field textarea observaciones">
+			<div class="insignia"></div>
+			<textarea type="text" placeholder="Indicaciones para taxista" id="observaciones"></textarea>
+		</div>
+		<div id="observacionescliente_wrapper" class="field textarea observaciones">
+			<div class="insignia"></div>
+			<textarea type="text" placeholder="Indicaciones sobre cliente" id="observacionescliente"></textarea>
+		</div>
+		<div id="request_buttons" class="row botones">
+			<div class="col-xs-6">
+				<div id="ahora" class="solicitar ahora" onclick="intentaSolicitarTaxi('Now');">SOLICITAR<br>TAXI AHORA</div>
+			</div>
+			<div class="col-xs-6">
+				<div id="mastarde" class="solicitar mastarde" onclick="intentaSolicitarTaxiMasTarde();">SOLICITAR MÁS TARDE</div>
+			</div>
+		</div>
+	</div>
+</div>

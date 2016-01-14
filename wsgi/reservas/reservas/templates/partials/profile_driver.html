@@ -1,0 +1,132 @@
+<h1 class="page-header">Perfil</h1>
+<form  class="animated fadeInDown" style="margin-bottom:3em;">
+	<div class="row">
+		<div class="form-group col-md-3">
+    		<label for="driver_name">Nombre</label>
+    		<input type="text" class="form-control" id="driver_name" placeholder="Nombre">
+    		<input type="hidden" class="form-control" id="driver_token">
+  		</div>
+		<div class="form-group col-md-4">
+    		<label for="driver_surname">Apellidos</label>
+    		<input type="text" class="form-control" id="driver_surname" placeholder="Apellidos">
+  		</div>
+  		<div class="form-group col-md-3">
+	    	<label for="driver_email">Email</label>
+	    	<input type="email" class="form-control" id="driver_email" placeholder="Email">
+	  	</div>
+	  	<div class="form-group col-md-2">
+	    	<label for="driver_password">Contraseña</label>
+	    	<input type="password" class="form-control" id="driver_password" placeholder="Nueva contraseña">
+	 	</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-xs-6 col-md-1">
+	    	<label for="driver_prefix">Prefijo</label>
+	    	<input type="text" class="form-control" id="driver_prefix" placeholder="Prefijo">
+			
+	    	<!-- <label for="passenger_email">Prefijo</label><br>
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">+34 <span class="caret"></span></button>
+           
+		    <ul class="dropdown-menu scrollable-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+            </ul> -->
+	    	
+	  	</div>
+	  	<div class="form-group col-xs-6 col-md-3">
+	    	<label for="driver_phone">Teléfono</label>
+	    	<input type="text" class="form-control" id="driver_phone" placeholder="Teléfono">
+	 	</div>
+	 	<div class="form-group col-xs-6 col-md-4">
+	    	<label for="driver_device_model">Modelo</label>
+	    	<input type="text" class="form-control" id="driver_device_model" placeholder="Modelo">
+	 	</div>
+	 	<div class="form-group col-xs-6 col-md-4">
+	    	<label for="driver_os">Sistema operativo</label>
+	    	<input type="text" class="form-control" id="driver_os" placeholder="Sistema operativo">
+	 	</div>
+	</div>
+	<br>
+	<div id="save_profile" class="btn btn-default">GUARDAR PERFIL</div>
+</form>
+
+<h1 class="page-header">Licencia</h1>
+<form  class="animated fadeInDown" style="margin-bottom:3em;">
+	<div class="row">
+		<div class="form-group col-md-3">
+    		<label for="driver_num_licence">Licencia</label>
+    		<input type="hidden" class="form-control input-sm" id="driver_id_licence">
+    		<input type="text" class="form-control" id="driver_num_licence" placeholder="Licencia">
+  		</div>
+		<div class="form-group col-md-3">
+    		<label for="driver_num_plate">Matrícula</label>
+    		<input type="text" class="form-control" id="driver_num_plate" placeholder="Matrícula">
+  		</div>
+  		<div class="form-group col-md-3">
+	    	<label for="driver_car_brand">Marca</label>
+	    	<input type="text" class="form-control" id="driver_car_brand" placeholder="Marca">
+	  	</div>
+	  	<div class="form-group col-md-3">
+	    	<label for="driver_car_model">Modelo</label>
+	    	<input type="text" class="form-control" id="driver_car_model" placeholder="Modelo">
+	 	</div>
+	</div>
+	<br>
+	<div id="save_licence" class="btn btn-default">GUARDAR LICENCIA</div>
+</form>
+<h1 class="page-header">Patrón</h1>
+<form  class="animated fadeInDown" style="margin-bottom:3em;">
+	<div class="row">
+		<div class="form-group col-md-3">
+    		<label for="driver_owner_name">Nombre</label>
+    		<input type="text" class="form-control" id="driver_owner_name" placeholder="Nombre">
+  		</div>
+		<div class="form-group col-md-4">
+    		<label for="driver_owner_surname">Apellidos</label>
+    		<input type="text" class="form-control" id="driver_owner_surname" placeholder="Apellidos">
+  		</div>
+  		<div class="form-group col-md-2">
+	    	<label for="driver_owner_nif">Nif</label>
+	    	<input type="text" class="form-control" id="driver_owner_nif" placeholder="Nif">
+	  	</div>
+	  	<div class="form-group col-md-3">
+	    	<label for="driver_owner_email">Email</label>
+	    	<input type="email" class="form-control" id="driver_owner_email" placeholder="Email">
+	 	</div>
+	</div>
+	<div class="row">
+		
+	 	<div class="form-group col-md-2">
+	    	<label for="driver_owner_phone">Teléfono</label>
+	    	<input type="text" class="form-control" id="driver_owner_phone" placeholder="Teléfono">
+	  	</div>
+	  	<div class="form-group col-md-3">
+	    	<label for="driver_owner_address">Dirección</label>
+	    	<input type="text" class="form-control" id="driver_owner_address" placeholder="Dirección">
+	 	</div>
+	 	<div class="form-group col-md-1">
+	    	<label for="driver_owner_postal_code">C.P.</label>
+	    	<input type="text" class="form-control" id="driver_owner_postal_code" placeholder="Código postal">
+	  	</div>
+	  	<div class="form-group col-md-3">
+	    	<label for="driver_owner_locality">Localidad</label>
+	    	<input type="text" class="form-control" id="driver_owner_locality" placeholder="Localidad">
+	 	</div>
+	 	<div class="form-group col-md-3">
+	    	<label for="driver_owner_province">Provincia</label>
+	    	<input type="text" class="form-control" id="driver_owner_province" placeholder="Provincia">
+	 	</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-md-5">
+	    	<label for="driver_owner_iban">IBAN</label>
+	    	<input type="text" class="form-control" id="driver_owner_iban" placeholder="IBAN">
+	  	</div>
+	  	<div class="form-group col-md-2">
+	    	<label for="driver_owner_swift">Swift</label>
+	    	<input type="text" class="form-control" id="driver_owner_swift" placeholder="Swift">
+	 	</div>
+	</div>
+	<br>
+	<div id="save_owner" class="btn btn-default">GUARDAR PATRÓN</div>
+</form>

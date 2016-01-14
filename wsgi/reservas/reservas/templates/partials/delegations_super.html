@@ -1,0 +1,50 @@
+<div class="buttons_tools pull-right">
+	<div class="item" onclick="show_new();"><!-- Nueva --> 
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>
+</div>
+
+<h1 class="page-header">Delegaciones</h1>
+
+<div id="new_delegation_wrapper">
+	<form id="new_delegation_form" role="form">
+		<div class="row">
+			<div class="col-md-2"><input type="text" class="form-control" id="new_delegation_name" placeholder="Nombre"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="new_delegation_surname" placeholder="Apellidos"></div>
+			<div class="col-md-3"><input type="text" class="form-control" id="new_delegation_email" placeholder="Email"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="new_delegation_password" placeholder="Pass"></div>
+			<div class="col-md-1"><input type="text" class="form-control" id="new_delegation_prefix" placeholder="Prefijo"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="new_delegation_phone" placeholder="Teléfono"></div>
+			
+			
+		</div><br>
+		<div class="row">
+			<div class="col-md-3"><input type="text" class="form-control" id="new_delegation_country" placeholder="Pais"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="new_delegation_country_code" placeholder="Código del país"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="new_delegation_currency" placeholder="Moneda"></div>
+			<div class="col-md-3"><input type="text" class="form-control" id="new_delegation_tax" placeholder="Impuesto"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="new_delegation_percent" placeholder="Porcentaje"></div>
+		  	
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-5"><input type="text" class="form-control" id="new_delegation_company_name" placeholder="Razón social"></div>
+			<div class="col-md-7"><input type="text" class="form-control" id="new_delegation_address" placeholder="Dirección"></div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-3"><input type="text" class="form-control" id="new_delegation_postal_code" placeholder="Código postal"></div>
+			<div class="col-md-5"><input type="text" class="form-control" id="new_delegation_locality" placeholder="Localidad, Provincia"></div>
+			<div class="col-md-3"><input type="text" class="form-control" id="new_delegation_cif" placeholder="CIF"></div>
+			<div class="col-md-1"><button type="submit" class="btn btn-default">Enviar</button></div>
+		</div>
+		
+		
+	</form>
+</div>
+<div id="submain">
+	<div class="row animated fadeInDown" id="delegations_list_wrapper"></div>
+</div>

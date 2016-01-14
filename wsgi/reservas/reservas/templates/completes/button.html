@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="apple-itunes-app" content="app-id=602835004">
+    <meta name="google-play-app" content="app-id=com.idearioventures.taxible">
+	<meta name="viewport" content="width=device-width">
+	<link rel="shortcut icon" href="assets/img/common/favicon.ico">
+
+    <title>Pedir Taxi | Taxible</title>
+    <meta name="title" content="Pedir Taxi | Taxible" />
+    <meta itemprop="name" content="Pedir Taxi | Taxible">
+    <meta property="og:title" content="Pedir Taxi | Taxible" />
+
+    <meta name="description" content="Taxible es la aplicación para pedir taxi desde el móvil. Tu Taxi en el móvil a un click, más seguro y sin costes adicionales." />
+    <meta itemprop="description" content="Taxible es la aplicación para pedir taxi desde el móvil. Tu Taxi en el móvil a un click, más seguro y sin costes adicionales.">
+    <meta property="og:description" content="Taxible es la aplicación para pedir taxi desde el móvil. Tu Taxi en el móvil a un click, más seguro y sin costes adicionales." />
+
+    <meta itemprop="image" content="assets/img/common/icono_portada.png">
+    <meta property="og:image" content="assets/img/common/icono_portada.png" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="Aplicación taxis, taxi iphone, taxi android, taxible, pedir taxi desde el móvil, taxi app, spanish taxi app" />
+
+	<link rel="stylesheet" type="text/css" href="{{MEDIA}}/css/lib/button.min.css" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{MEDIA}}/css/lib/jquery-ui-1.10.3.css" />
+    <link rel="stylesheet" type="text/css" href="{{MEDIA}}/css/lib/datetimepicker.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="assets/css/minimal.css" /> -->
+	<!-- <link rel="stylesheet" type="text/css" href="assets/css/animate.css" /> -->
+
+	<link href="assets/img/common/apple-touch-icon.png" rel="apple-touch-icon"/>
+    <link href="https://plus.google.com/108833228354746039687" rel="publisher" />
+
+	<script type="text/javascript" charset="utf-8">var base_url="{{ BASE_URL }}/";</script>
+
+	<script type="text/javascript">
+
+	  // var _gaq = _gaq || [];
+	  // _gaq.push(['_setAccount', 'UA-29117939-11']);
+	  // _gaq.push(['_setDomainName', 'taxibleapp.com']);
+	  // _gaq.push(['_trackPageview']);
+	  // 
+	  // (function() {
+	  //   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  //   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  //   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  // })();
+
+	</script>
+
+
+
+
+</head>
+
+<body>
+
+<div id="overlay"></div>
+<div id="modal" class="taxible-modal">
+    <div class="texto"></div>
+</div>
+<div id="botonera">
+    <div id="btn_principal" class="on" onclick="abrePulsador()">PULSADOR</div>
+    <div id="btn_solicitudes" onclick="abreSolicitudes()">EN CURSO</div>
+    <div id="btn_historial" onclick="abreHistorial()">HISTORIAL</div>
+    <div id="btn_sesion" onclick="abreCerrarSesion()">SALIR</div>
+</div>
+
+<div class="clear"></div>
+
+<div id="contenido">
+	
+    <div id="logo_empresa"></div>
+    <form id="form_pulsador">
+        <div id="taxis">
+            <div class="texto">Nº TAXIS (MÁX. 5)</div>
+            <div class="input">
+                <input type="number" min="1" max="5" id="input_taxis" name="input_taxis" placeholder="1">
+            </div>
+        </div>
+
+
+        <div id="pasajeros">
+            <div class="texto">Nº PASAJEROS (M4)</div>
+            <div class="input">
+                <input type="number" min="1" max="4" id="input_pasajeros" name="input_pasajeros" placeholder="1"/>
+            </div>
+        </div>
+
+
+        <div class="clear"></div>
+        <div id="origen">
+            <div class="texto">ORIGEN</div>
+            <div class="input disabled">
+                <div class="icono">
+                    <i class="icon-map-marker"></i>
+                </div>
+                <input type="text" id="input_origen" disabled="disabled" name="input_origen"/>
+            </div>
+        </div>
+
+
+        <div class="clear"></div>
+        <div id="destino">
+            <div class="texto">DESTINO <span class="gris">(OPCIONAL)</span></div>
+            <div class="input">
+                <div class="icono">
+                    <i class="icon-map-marker"></i>
+                </div>
+                <input type="text" id="input_destino1" name="input_destino1" placeholder="¿QUIERE INDICAR DESTINO?"/>
+                <input type="text" id="input_destino2" name="input_destino2" placeholder="Núm."/>
+            </div>
+        </div>
+
+        <div id="caracteristicas"></div>
+
+        <div id="indicaciones">
+            <div class="texto">INDICACIONES ADICIONALES <span class="gris">(OPCIONAL)</span></div>
+            <div class="input">
+                <input type="text" id="input_indicaciones" name="input_indicaciones" placeholder="Ej. Preguntar por Sr. Martínez"/>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div id="btn_reservar" class="flat"><div class="chico">SOLICITAR TAXI</div>MÁS TARDE</div>
+        <div id="btn_pulsador" class="flat amarillo"><div class="chico">SOLICITAR TAXI</div>AHORA</div>
+    </form>
+    <div id="solicitudes"></div>
+
+</div>
+
+	<script type="text/javascript" src="{{MEDIA}}/js/lib/button.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="{{MEDIA}}/js/lib/jquery.ui.datepicker.es.js"></script>
+	<script type="text/javascript" src="{{MEDIA}}/js/lib/jquery.ui.timepicker.js"></script>
+    <script type="text/javascript" src="{{MEDIA}}/js/lib/jquery-ui-sliderAccess.js"></script>
+    <script type="text/javascript" src="https://cdn.firebase.com/js/client/1.0.11/firebase.js"></script>
+    <script type="text/javascript" src="{{MEDIA}}/js/aux/date.js"></script>
+    <script type="text/javascript" src="{{MEDIA}}/js/buttons/button.js"></script>
+</body>
+</html>

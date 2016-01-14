@@ -1,0 +1,52 @@
+<div class="minisub-header">DATOS DE LA RADIO</div><br>
+<div id="radio_wrapper">
+	<form id="edit_radio_form" role="form">
+		<div class="row">
+			<input type="hidden" class="form-control" id="radio_id">
+			<div class="col-md-3"><input type="text" class="form-control" id="radio_name" placeholder="Nombre"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="radio_registered_name" placeholder="Razón social"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="radio_cif" placeholder="CIF"></div>
+			<div class="col-md-1"><input type="text" class="form-control" id="radio_prefix" placeholder="Prefijo"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="radio_phone" placeholder="Teléfono"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="radio_email" placeholder="Email"></div>
+		</div><br>
+		<div class="row">
+			<div class="col-md-3"><input type="text" class="form-control" id="radio_address" placeholder="Dirección"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="radio_city" placeholder="Ciudad"></div>
+		  	<div class="col-md-1"><input type="text" class="form-control" id="radio_num_taxis" placeholder="Num. Taxis"></div>
+		  	<div class="col-md-1"><input type="text" class="form-control" id="radio_num_passengers" placeholder="Num. Pasajeros"></div>
+		  	<div id="digitalRadio" class="col-md-1">
+				<div class="checkbox">
+					<label><input type="checkbox" id="radio_digital"> Digital</label>
+				</div>
+		  	</div>
+		  	<div id="bonificadaRadio" class="col-md-2">
+				<div class="checkbox">
+					<label><input type="checkbox" id="subsidized"> Bonificada Fra.</label>
+				</div>
+		  	</div>
+		  	<div class="col-md-2" style="text-align:right;">
+			  	<button id="edit_radio_submit" type="submit" class="btn btn-default">Guardar</button>
+			</div>
+		</div>
+		<br>
+	</form>
+</div>
+<br>
+<div style="display:none;" id="header_features_list" class="minisub-header">LISTA DE CARACTERÍSTICAS</div><br>
+<div style="display:none;" id="features_list" class="row sublista"></div>
+<br>
+<div id="acciones_radios_titulo" class="minisub-header">OPERACIONES ESPECIALES</div><br>
+<center>
+<div class="btn-group" id="acciones_radios">
+  <button id="deactivate_radio_button" type="button" class="btn btn-default" onclick="deactivate_radio();" style="display:none;">DESACTIVAR</button>
+  <button id="activate_radio_button" type="button" class="btn btn-default" onclick="activate_radio();" style="display:none;">ACTIVAR</button>
+  <button id="delete_radio_button" type="button" class="btn btn-default" onclick="delete_radio();">ELIMINAR</button>
+</div>
+</center>
+<br>
+<br>
+<div id="invoicing_radio" class="minisub-header"></div><br>
+<div id="autoinvoicing_radio" class="minisub-header"></div><br>
+
+</div>

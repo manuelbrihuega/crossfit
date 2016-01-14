@@ -1,0 +1,25 @@
+<div class="buttons_tools pull-right">
+	<div class="item" onclick="show_new_employee();"><!-- Nueva --> 
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>
+</div>
+
+<h1 class="page-header">Empleados</h1>
+
+
+<div id="new_employee_wrapper" style="display:none;">
+	<form role="form" class="bateria" id="new_employee">
+		<div class="row pulsador" >
+			<div class="form-group col-md-2"><input id="new_employee_name" class="form-control input-sm name" type="text" placeholder="Nombre"></div>
+			<div class="form-group col-md-3"><input id="new_employee_surname" class="form-control input-sm surname" type="text" placeholder="Apellidos"></div>
+			<div class="form-group col-md-3"><input id="new_employee_email" class="form-control input-sm email" type="text" placeholder="Email"></div>
+			<div class="form-group col-md-2"><input id="new_employee_phone" class="form-control input-sm phone" type="text" placeholder="Phone"></div>
+			<div class="form-group col-md-1"><button id="new_employee_submit" type="submit" class="btn btn-sm btn-default">Guardar</button></div>
+		</div>
+	</form>
+</div>
+
+<div id="employees_list">Lista de gestores</div>

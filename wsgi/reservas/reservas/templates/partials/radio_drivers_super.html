@@ -1,0 +1,116 @@
+<div class="minisub-header">TAXISTAS <span class="linkable" onclick="show_new_driver();"><i class="fa fa-plus-circle"></i></span></div><br>
+
+<div id="new_driver_wrapper" style="display:none;">
+	<form role="form" class="bateria" id="new_driver_form">
+		<h3>Licencia</h3>
+		<div class="row">
+			<div class="form-group col-md-3">
+				<input type="hidden" id="new_driver_licence_id">
+		    	<input type="text" class="form-control input-sm" id="new_driver_num_licence" placeholder="Licencia">
+		  	</div>
+		  	<div class="form-group col-md-3">
+		    	<input type="text" class="form-control input-sm" id="new_driver_num_plate" placeholder="Matrícula">
+		  	</div>
+		  	<div class="form-group col-md-3">
+		    	<input type="text" class="form-control input-sm" id="new_driver_car_brand" placeholder="Marca">
+		  	</div>
+		  	<div class="form-group col-md-3">
+		    	<input type="text" class="form-control input-sm" id="new_driver_car_model" placeholder="Modelo">
+		  	</div>
+		</div>
+		<div class="row special">
+		  	<div class="form-group col-md-1">
+		    	<input type="hidden" id="new_driver_owner_id">
+		    	<input type="text" class="form-control input-sm" id="new_driver_owner_nif" placeholder="NIF">
+		  	</div>
+			<div class="form-group col-md-1">
+		    	<input type="text" class="form-control input-sm" id="new_driver_owner_name" placeholder="Nombre">
+		  	</div>
+		  	<div class="form-group col-md-2">
+		    	<input type="text" class="form-control input-sm" id="new_driver_owner_surname" placeholder="Apellidos">
+		  	</div>
+		  	<div class="form-group col-md-2">
+		    	<input type="email" class="form-control input-sm" id="new_driver_owner_email" placeholder="Email">
+		  	</div>
+		  	<div class="form-group col-md-1">
+		    	<input type="text" class="form-control input-sm" id="new_driver_owner_phone" placeholder="Teléfono">
+		  	</div>
+		  	<div class="form-group col-md-2">
+		    	<input type="text" class="form-control input-sm" id="new_driver_owner_address" placeholder="Dirección">
+		  	</div>
+		  	<div class="form-group col-md-1">
+		    	<input type="text" class="form-control input-sm" id="new_driver_owner_postal_code" placeholder="CP">
+		  	</div>
+		  	<div class="form-group col-md-1">
+		    	<input type="text" class="form-control input-sm" id="new_driver_owner_locality" placeholder="Localidad">
+		  	</div>
+		  	<div class="form-group col-md-1">
+		    	<input type="text" class="form-control input-sm" id="new_driver_owner_province" placeholder="Provincia">
+		  	</div>
+		</div>
+		
+<!-- 		<div class="row">
+			
+			<div class="col-md-9">
+				<h3>Licencia</h3>
+				<div class="row">
+					<div class="form-group col-md-3">
+						<input type="hidden" id="new_driver_licence_id">
+				    	<input type="text" class="form-control input-sm" id="new_driver_num_licence" placeholder="Licencia">
+				  	</div>
+				  	<div class="form-group col-md-3">
+				    	<input type="text" class="form-control input-sm" id="new_driver_num_plate" placeholder="Matrícula">
+				  	</div>
+				  	<div class="form-group col-md-3">
+				    	<input type="text" class="form-control input-sm" id="new_driver_car_brand" placeholder="Marca">
+				  	</div>
+				  	<div class="form-group col-md-3">
+				    	<input type="text" class="form-control input-sm" id="new_driver_car_model" placeholder="Modelo">
+				  	</div>
+				</div>
+		  	</div>
+			<div class="col-md-3" style="border-left:1px solid #EEE;">
+				<h3>Smartphone</h3>
+				<div class="row">
+					<div class="form-group col-md-6">
+				    	<input type="text" class="form-control input-sm" id="new_driver_device_model" placeholder="Modelo">
+				  	</div>
+				  	<div class="form-group col-md-6">
+				    	<input type="text" class="form-control input-sm" id="new_driver_so" placeholder="SO">
+				  	</div>
+				</div>
+		  	</div>
+		  	
+		</div>
+		 -->
+
+		<h3>Datos del conductor <span class="linkable" id="copy_owner" style="display:noneX;" onclick="copy_owner();"><i class="fa fa-files-o"></i></span></h3>
+		
+		<div class="row">
+			<div class="form-group col-md-2">
+		    	<input type="text" class="form-control input-sm" id="new_driver_name" placeholder="Nombre" >
+		  	</div>
+		  	<div class="form-group col-md-2">
+		    	<input type="text" class="form-control input-sm" id="new_driver_surname" placeholder="Apellidos">
+		  	</div>
+		  	<div class="form-group col-md-3">
+		    	<input type="email" class="form-control input-sm" id="new_driver_email" placeholder="Email">
+		  	</div>
+		  	<div class="form-group col-md-2">
+		    	<input type="password" class="form-control input-sm" id="new_driver_password" value="" placeholder="Contraseña">
+		  	</div>
+		  	<div class="form-group col-md-1">
+		    	<input type="text" class="form-control input-sm" id="new_driver_prefix" placeholder="Prefijo">
+		  	</div>
+		  	<div class="form-group col-md-2">
+		    	<input type="text" class="form-control input-sm" id="new_driver_phone" placeholder="Teléfono">
+		  	</div>
+		</div>
+		<div id="drivers_registered"></div>
+		<center><input type="submit" value="CREAR TAXISTA" id="new_driver_button" class="btn btn-default"></center>
+		
+	</form>
+	
+</div><br>
+
+<div id="drivers_list" class="drivers_list_md"></div>

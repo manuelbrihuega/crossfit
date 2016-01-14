@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   	<title>SEGUIMIENTO | TAXIBLE</title>
+    <meta name="title" content="Seguimiento | TAXIBLE" />
+    <link rel="shortcut icon" href="{{ BASE_URL }}/assets/img/common/favicon.ico">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css">
+	<link rel="stylesheet" href="{{ MEDIA }}css/base_dashboard.css">
+	
+	{% for style in css %} <link rel="stylesheet" href="{{ MEDIA }}css/{{ style }}"> {% endfor %}
+		
+</head>
+
+<body data-section="{{section}}" data-item-id="{{item_id}}">
+	<div id="alert"></div>
+	<div id="chivato"></div>
+	<div id="page">
+		
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="display:noneX;">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a id="brand" class="navbar-brand" href="{{BASE_URL}}/seguimiento">TAXIBLE<span>SEGUIMIENTO</span></a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul id="menu" class="nav navbar-nav navbar-right">
+						<li id="user_name"></li>
+						<li id="ninja_super"><a href="#" onclick="restoreNinjaSuper();"><img class="icon" src="{{ MEDIA }}img/common/log_out.png"/>VOLVER COMO SUPER</a></li>
+						<li id="ninja_delegation"><a href="#" onclick="restoreNinjaDelegation();"><img class="icon" src="{{ MEDIA }}img/common/log_out.png"/>VOLVER COMO DELEGACIÓN</a></li>
+						<li><a href="#" onclick="logout();"><img class="icon" src="{{ MEDIA }}img/common/log_out.png"/>SALIR</a></li>
+					</ul>
+				</div>
+			</div>
+	    </div>
+		
+
+		<div id="content" class="container-fluid">
+			<div class="row">
+				<div id="main" class="col-sm-12 col-md-12 main">
+					
+					
+					
+					
+				</div>
+		
+			</div>
+		</div>
+		
+		
+		<div id="push"></div>
+	</div>
+	
+	<!-- <footer id="footer"></footer> -->
+	
+	
+	
+
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		var base_url='{{BASE_URL}}';
+		var media_url='{{MEDIA}}';
+		var api_url='http://api.taxible.com/v2/';
+	</script>
+	<script src="{{ MEDIA }}js/base_dashboard.js"></script>
+</body>
+</html>

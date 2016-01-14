@@ -1,0 +1,39 @@
+/* Invoice content  */
+.panel-heading-invoice{overflow: auto; padding-bottom: 0; padding-right: 0; padding-top: 0;}
+.panel-heading-invoice>h4{float: left; padding-bottom: 12px; padding-top: 14px; width: 83%;}
+.panel-heading-invoice>.margin_yes{margin-top: 5px;}
+.panel-heading-invoice-delegation>div{height: 100%;}
+#invoicing_delegation_accordion_years{height: 50px; margin-bottom: 0px; clear: both; width: 70%; margin: auto;}
+.btn-invoice-delegation{width: 100%;}
+.panel-invoicing-delegation{border: 1px solid #DDDDDD !important; border-radius: 8px !important; margin-bottom: 1em !important;}
+.panel-heading-invoicing-delegation{background-color: white !important; border-radius: 6px !important;}
+.panel-invoicing-traditional-delegation{border: 1px solid #DDDDDD !important; border-radius: 8px !important; margin-bottom: 1em !important;}
+.minus-padding{padding-left: 4px; padding-right: 4px;}
+.panel-body-invoicing-delegation{border-top: 1px solid #DDDDDD !important;}
+.month-selected{background-color: #EBEBEB;}
+#no-invoicing-delegation{font-size: 20px; margin-top: 2em; text-align: center;}
+#invoicing_delegation_accordion_months { clear: both; height: 100%; margin: auto auto 1em; overflow: auto; width: 100%;}
+.invoice-padding{height: 100%; padding-bottom: 0.3em; padding-top: 0.3em;}
+.responsive-button{float:right;}
+.responsive-btn{float: right;}
+#div_invoices>h4{margin-bottom: 1em;}
+#div_autoinvoices>h4{margin-bottom: 1em;}
+#invoices_delegation_div{padding-top:1em; padding-bottom: 1em;}
+#autoinvoices_delegation_div{padding-top:1em; padding-bottom: 1em;}
+#invoicing_accordion_invoices{margin-bottom: 2em;}
+#invoicing_accordion_invoices>h4{font-size: 21px;}
+#invoicing_accordion_autoinvoices>h4{font-size: 21px;}
+
+@media (max-width: 991px) {
+	.responsive-prev, .responsive-next{width: 20%; float: left;}
+	.responsive-year{width: 60%; float: left;}
+	#invoicing_delegation_accordion_years{width: 100%; height: 100%; float: left;}
+	.responsive-month{width:25%; float:left;}
+	.responsive-title{width:70%; float: left; height: 100%; overflow: hidden;}
+	.responsive-button{width:30%; height: 100%; overflow: hidden; float:right;}
+	.responsive-btn{width: 100%; font-size: 12px; float: right;}
+}
+
+@media (max-width: 860px) {
+	.responsive-btn{width: 100%; font-size: 11px;}
+}

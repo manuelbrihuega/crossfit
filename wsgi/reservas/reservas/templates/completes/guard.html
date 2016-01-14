@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width">    
+	<link rel="shortcut icon" href="assets/img/common/favicon.ico">
+	<title>Taxible Status</title>
+	
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css">
+	<link rel="stylesheet" href="{{ MEDIA }}css/partials/guard.css">
+	
+</head>
+
+<body>
+	<div id="contenido" data-contador="">
+		<div id="titulo">Estado del sistema</div>
+		<div id="semaforo" class="on">ON</div>
+		<div id="status"></div>
+	</div>
+	<audio id="sonido">
+		<source src="{{ MEDIA }}sounds/reservation.wav" type="audio/wav"/>
+	</audio>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+            iniciaContador();
+            window.opener.focus();
+		});
+		
+		var base_url='{{BASE_URL}}';
+		var media_url='{{MEDIA}}';
+		var api_url='http://api.taxible.com/v2/';
+		
+		var timer;
+		var segundos;
+		var padre;
+
+		function iniciaContador () {
+		    clearTimeout(timer);
+		    segundos=40;
+		    avanza();
+		}
+		
+		function avanza () {
+			if(window.opener==null){
+	            padre = window.open(base_url+'/dashboard#pending', "Taxible Dashboard", "");
+	            window.close();
+	        }			
+			
+		    if(segundos==-1){
+		        alerta();
+		    }else{
+		        timer = setTimeout(function(){
+					$('#contenido').attr('data-contador',segundos);
+					$('#status').html('');
+					$('#semaforo').removeClass('off').addClass('on').html('ON');
+		            segundos--;
+		            avanza();
+		        },1000);
+		    }
+			console.log(segundos);
+		}
+		
+		var timer_alerta;
+		var segundos_alerta;
+		
+		function alerta () {
+			clearTimeout(timer);
+			$('#status').html('Alerta');
+			$('#semaforo').removeClass('on').addClass('off').html('OFF');
+			sonido();
+			inicia_alerta();
+			
+		}
+		
+		function inicia_alerta(){
+		    clearTimeout(timer_alerta);
+		    segundos_alerta=5;
+		    avanza_alerta();
+		}
+		
+		function avanza_alerta () {
+		    if(segundos_alerta==-2){
+				if(window.opener==null){
+		            padre = window.open(base_url+'/dashboard#pending', "Taxible Dashboard", "");
+		            window.close();
+		        }
+		        // window.opener.actualizar();
+		        
+		    }else{
+		        timer_alerta = setTimeout(function(){
+					$('#contenido').attr('data-contador_alerta',segundos_alerta);
+					$('#status').html('Reconectando...');
+		            segundos_alerta--;
+					window.opener.startStatus();
+		            avanza_alerta();
+		        },1000);
+		    }
+		}
+		
+		// window.onbeforeunload = function(event){
+		// 	        var mensaje='Las solicitudes de servicios no se atenderán';
+		// 	        if(typeof event == 'undefined') event = window.event;
+		// 	        if(event) event.returnValue=mensaje;
+		// 	        return mensaje;
+		// 	    }
+	
+		function sonido () {
+		    var sonido=document.getElementById('sonido');
+			if (window.chrome || navigator.userAgent.toLowerCase().indexOf('safari/') > -1) sonido.load();
+		    sonido.play();
+		}
+		
+	</script>
+</body>
+</html>
+			

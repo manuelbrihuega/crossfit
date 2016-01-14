@@ -1,0 +1,200 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-30 11:38+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: settings.py:50
+msgid "Espaniol ES"
+msgstr ""
+
+#: settings.py:51
+msgid "Espaniol CR"
+msgstr ""
+
+#: settings.py:52
+msgid "Espaniol PA"
+msgstr ""
+
+#: settings.py:53
+msgid "Espaniol PE"
+msgstr ""
+
+#: settings.py:54
+msgid "Espaniol AD"
+msgstr ""
+
+#: templates/completes/public.html:81
+msgid "Tu Taxi a un Click"
+msgstr "El teu Taxi a un click"
+
+#: templates/completes/public.html:83
+msgid "Tel.: 910 052 003"
+msgstr ""
+
+#: templates/completes/public.html:84
+msgid "info[at]taxible.com"
+msgstr ""
+
+#: templates/completes/public.html:89
+msgid "Información Legal"
+msgstr ""
+
+#: templates/completes/public.html:92
+msgid "Condiciones de uso"
+msgstr ""
+
+#: templates/completes/public.html:111
+msgid "https://twitter.com/taxible"
+msgstr ""
+
+#: templates/completes/public.html:112
+msgid "http://www.facebook.com/Taxibleapp"
+msgstr ""
+
+#: templates/partials/downloads.html:4
+msgid "ELIGE TU SISTEMA OPERATIVO"
+msgstr ""
+
+#: templates/partials/modal_enterprise_register.html:15
+msgid "CIF"
+msgstr ""
+
+#: templates/partials/modal_enterprise_register.html:20
+#: templates/partials/signup_drivers.html:42
+#: templates/partials/signup_drivers.html:43
+msgid "LOCALIDAD"
+msgstr ""
+
+#: templates/partials/public_home.html:12
+msgid "TU TAXI A UN CLICK"
+msgstr "EL TEU TAXI A UN CLICK"
+
+#: templates/partials/public_home.html:13
+msgid "Pide Taxi con tan solo un click en más de 30 ciudades Españolas"
+msgstr "El teu taxi disponible a totes les localitats"
+
+#: templates/partials/public_home.html:29
+msgid "PASAJEROS"
+msgstr "PASSATGERS"
+
+#: templates/partials/public_home.html:30
+msgid "¡TU TAXI A UN CLICK!"
+msgstr "EL TEU TAXI A UN CLIC!"
+
+#: templates/partials/public_home.html:31
+msgid ""
+"Pide Taxi desde tu móvil y benefíciate de promociones especiales para tu "
+"ciudad."
+msgstr "Demana un taxi des del teu mòbil i beneficia’t de promocions especials a la teva ciutat"
+
+#: templates/partials/public_home.html:36
+msgid "DESCARGA LA APP AHORA"
+msgstr "DESCARREGA L’APP ARA"
+
+#: templates/partials/public_home.html:47
+msgid "TAXISTAS"
+msgstr "TAXISTES"
+
+#: templates/partials/public_home.html:48
+msgid "LA APP DE LOS TAXISTAS MEJOR VALORADOS"
+msgstr "L’APP DELS TAXISTES MILLOR VALORATS"
+
+#: templates/partials/public_home.html:49
+msgid "Recibe las mejores carreras de tu ciudad directamente en tu móvil."
+msgstr "Rep les millors carreres de la ciutat directament al teu mòbil"
+
+#: templates/partials/public_home.html:54
+msgid "REGISTRARSE COMO TAXISTA"
+msgstr "REGISTRARSE COM A TAXISTA"
+
+#: templates/partials/public_home.html:64
+msgid "EMPRESAS"
+msgstr "EMPRESES"
+
+#: templates/partials/public_home.html:65
+msgid "LA SOLUCIÓN PROFESIONAL PARA EMPRESAS"
+msgstr "LA SOLUCIÓ PROFESSIONAL PER A EMPRESES"
+
+#: templates/partials/public_home.html:66
+msgid ""
+"Ofrece a tus clientes un servicio excelente, sin llamadas ni esperas, con "
+"tan solo un click."
+msgstr "Ofereix als teus clients un servei excel·lent sense trucades ni esperes, només amb un clic"
+
+#: templates/partials/public_home.html:70
+msgid "REGISTRA TU EMPRESA AHORA"
+msgstr "REGISTRA LA TEVA EMPRESA"
+
+#: templates/partials/public_home.html:83
+#: templates/partials/public_home.html:91
+msgid "CIUDADES TAXIBLE"
+msgstr "CIUTATS TAXIBLE"
+
+#: templates/partials/public_home.html:85
+msgid "Una gran red de ciudades disponibles"
+msgstr ""
+
+#: templates/partials/public_home.html:146
+msgid "Conectando con el blog"
+msgstr ""
+
+#: templates/partials/signup_drivers.html:16
+#: templates/partials/signup_drivers.html:17
+msgid "NIF"
+msgstr ""
+
+#: templates/partials/signup_drivers.html:20
+#: templates/partials/signup_drivers.html:21
+msgid "NUM. LICENCIA"
+msgstr ""
+
+#: templates/partials/signup_drivers.html:74
+#: templates/partials/signup_drivers.html:75
+msgid "MATRÍCULA"
+msgstr ""
+
+#: templates/partials/validate_driver.html:10
+msgid ""
+"Taxible se preocupa por la acreditación de los taxistas-conductores para que "
+"sea un sistema seguro para todos, por eso te pedimos lo siguiente:"
+msgstr ""
+
+#: templates/partials/validate_driver.html:11
+msgid "Documentación acreditativa de taxista-conductor"
+msgstr ""
+
+#: templates/partials/validate_driver.html:19
+msgid "Arrastra o haz click para subir un documento"
+msgstr ""
+
+#: templates/partials/validate_driver.html:29
+msgid "Condiciones Generales de Contratación"
+msgstr ""
+
+#: templates/partials/validate_driver.html:30
+msgid "Acepto las Condiciones Generales de Contratación"
+msgstr ""
+
+#: views/public.py:17 views/public.py:30 views/public.py:43 views/public.py:55
+#: views/public.py:73 views/public.py:84 views/public.py:117
+#: views/public.py:129 views/public.py:142
+msgid "Tu Taxi a un Click | TAXIBLE"
+msgstr "El teu Taxi a un Clikc | TAXIBLE"
+
+#: views/public.py:103
+msgid "Bienvenido ES"
+msgstr ""

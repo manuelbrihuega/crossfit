@@ -1,0 +1,32 @@
+<div class="buttons_tools pull-right">
+	<div class="item" onclick="show_new();"><!-- Nueva --> 
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>
+</div>
+
+<h1 class="page-header">Proyectos</h1>
+
+<div id="new_project_wrapper">
+	<h3 class="sub-header">Nuevo proyecto</h3>
+	<form id="new_project_form" role="form">
+		<div class="row">
+			<div class="col-md-4"><input type="text" class="form-control" id="new_project_name" placeholder="Proyecto"></div>
+		  	<div class="col-md-5">
+			  	<select class="form-control" id="new_project_employee" multiple></select>
+			</div>
+			<div class="col-md-3">
+				<button type="submit" class="btn btn-default">Enviar</button>
+		  	</div>
+		</div><br>
+	</form>
+</div>
+<div id="submain">
+	
+	<h3 class="sub-header">Proyectos de la empresa:</h3>
+	<div class="panel-group animated fadeInDown" id="projects_accordion">
+		<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>
+	</div>
+</div>

@@ -1,0 +1,56 @@
+<h1 class="page-header">Estadísticas y analítica</h1>
+<div id="container-graphical-system" class="row" style="display: none;">
+	<div class="col-md-12" id="dashboard-admin-enterprise">
+		<div id="row-calendar" class="row" style="display:none;">
+			<div class="col-md-6">
+				<div class="panel-group animated fadeInDown" id="graphical_accordion_years_stadistics" style="width: 100%;">
+					<div id="container_prev_year" class="col-md-2">
+						<button id="prev_year" type="button" class="btn btn-default btn-graphical" style="width: 100%; padding-left: 1px; padding-right:0px;"><</button>
+					</div>
+					<div id="container_current_year" class="col-md-8">
+						<span id="current_year" style="background-color: #ebebeb" class="btn btn-default btn-graphical"></span>
+					</div>
+					<div id="container_next_year" class="col-md-2">
+						<button id="next_year" type="button" class="btn btn-default btn-graphical" style="width: 100%; padding-left: 0px; padding-right:1px;">></button>
+					</div>
+				</div>
+			</div>
+			<div id="container_type_graphic" class="col-md-6">
+				<select id="link-graphical-journeys-year" class="form-control list-group-item" name="actions">
+					<option value="loadResumen">Informe resumen</a>	
+					<option value="loadGraphicalJourneysYear">Informe de carreras</a>
+					<option value="loadGraphicalJourneysCompletedYear">Informe de carreras finalizadas</a>
+					<option value="loadGraphicalUsersYear">Informe de usuarios registrados</a>
+					<option value="loadGraphicalEnterprisesYear">Informe de pulsadores</a>	
+
+				</select>
+			</div>
+			<!--<div class="col-md-4">
+				<a id="link-graphical-money-year" href="#" class="list-group-item" onclick="loadGraphicalIncomesYear();">Informe de importes</a>
+			</div>-->
+		</div>
+		<div class="panel-group" id="accordion_wait"></div>
+		<div class="row graphical-driver-content" id="graphical-content" style="display:none;">
+			<div class="col-md-12" id="dashboard-graphical">
+				<div id="graphical-wait"></div>
+				<canvas id="cvs" >[No canvas support]</canvas>
+			</div>
+			<div class="col-md-4 list-group" id="dashboard-list-links">
+				
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="panel-group animated fadeInDown" id="subscriber_accordion"></div>
+</div>
+
+<script src="{{ MEDIA }}js/aux/RGraph.common.core.js"></script>
+<script src="{{ MEDIA }}js/aux/RGraph.common.dynamic.js"></script>
+<script src="{{ MEDIA }}js/aux/RGraph.common.tooltips.js"></script>
+<script src="{{ MEDIA }}js/aux/RGraph.common.key.js"></script>
+<script src="{{ MEDIA }}js/aux/RGraph.line.js"></script>
+<script src="{{ MEDIA }}js/aux/RGraph.bar.js"></script>
+<script src="{{ MEDIA }}js/aux/tsort.min.js"></script>
+<script src="{{ MEDIA }}js/aux/jquery.PrintArea.js"></script>
+<script src="{{ MEDIA }}js/stadistics/super.js"></script>

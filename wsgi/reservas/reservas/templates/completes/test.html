@@ -1,0 +1,30 @@
+{% load staticfiles %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		Cadena: {{cadena}}
+		<br>LANGUAGES : {{LANGUAGES}}
+		<br>LANGUAGE_CODE : {{LANGUAGE_CODE}}
+		<br>LANGUAGE_BIDI : {{LANGUAGE_BIDI}}
+		<br>lang_code : {{lang_code}}
+		<br>django_language : {{django_language}}
+		<br>xpire : {{xpire}}
+		<br>dateex : {{dateex}}
+		<br>STATIC_URL : {{ STATIC_URL }}
+		<br>STATIC_ROOT : {{ STATIC_ROOT }}
+		<br>BASE_URL : {{ BASE_URL }}
+		<br>MEDIA : {{ MEDIA }}
+		<br>VARS: {{content}}
+		<br>img : {{MEDIA}}img/i18n/icono_{{lang_code}}.png
+		<br>
+		<img src="{{MEDIA}}img/i18n/icono_{{lang_code}}.png">
+	</body>
+</html>

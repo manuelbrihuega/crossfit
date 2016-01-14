@@ -1,0 +1,47 @@
+<div class="buttons_tools pull-right">
+	<div class="item" onclick="show_new();"><!-- Nueva --> 
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>
+</div>
+
+<h1 class="page-header">Radios</h1>
+
+<div id="new_radio_wrapper">
+	<form id="new_radio_form" role="form">
+		<div class="row">
+			<div class="col-md-3"><input type="text" class="form-control" id="new_radio_name" placeholder="Nombre"></div>
+			<div class="col-md-4"><input type="text" class="form-control" id="new_radio_registered_name" placeholder="Razón social"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="new_radio_cif" placeholder="CIF"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="new_radio_phone" placeholder="Teléfono"></div>
+			
+		</div><br>
+		<div class="row">
+		  	<div class="col-md-3">
+			  	<select class="form-control" id="new_radio_delegation"></select>
+			</div>
+			<div class="col-md-3"><input type="text" class="form-control" id="new_radio_email" placeholder="Email"></div>
+		  	<div class="col-md-2"><input type="text" class="form-control" id="new_radio_num_taxis" placeholder="Num. Taxis"></div>
+		  	<div class="col-md-2"><input type="text" class="form-control" id="new_radio_num_passengers" placeholder="Num. Pasajeros"></div>
+		  	<div class="col-md-1">
+				<div class="checkbox">
+					<label><input type="checkbox" id="new_radio_digital" onchange="digital_changes();"> Digital</label>
+				</div>
+		  	</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-5"><input type="text" class="form-control" id="new_radio_address" placeholder="Dirección"></div>
+			<div class="col-md-3"><input type="text" class="form-control" id="new_radio_city" placeholder="Ciudad"></div>
+		</div>
+		<br>
+		<button type="submit" class="btn btn-default">Enviar</button>
+	</form>
+</div>
+<div id="submain">
+	<input class="superinput" type="text" placeholder="Ej. Radio, ciudad etc." id="radios_search">
+	<div id="result_radios" class="row sublista" style="margin-top:30px;"></div>
+	<div class="panel-group animated fadeInDown" id="radios_accordion"></div>
+</div>

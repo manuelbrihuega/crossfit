@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   	<title>SEGUIMIENTO | TAXIBLE</title>
+    <meta name="title" content="Seguimiento | TAXIBLE" />
+    <link rel="shortcut icon" href="{{ BASE_URL }}/assets/img/common/favicon.ico">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css">
+	<link rel="stylesheet" href="{{ MEDIA }}css/base_dashboard.css">
+	
+	{% for style in css %} <link rel="stylesheet" href="{{ MEDIA }}css/{{ style }}"> {% endfor %}
+		
+</head>
+
+<body data-section="{{section}}" data-item-id="{{item_id}}">
+	<div id="alert"></div>
+	<div id="chivato"></div>
+	<div id="page">
+		
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="display:noneX;">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a id="brand" class="navbar-brand" href="{{BASE_URL}}/">TAXIBLE<span>DASHBOARD</span></a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul id="menu" class="nav navbar-nav navbar-right">
+						<li id="user_name"></li>
+						<li id="ninja_super"><a href="#" onclick="restoreNinjaSuper();"><img class="icon" src="{{ MEDIA }}img/common/log_out.png"/>VOLVER COMO SUPER</a></li>
+						<li id="ninja_delegation"><a href="#" onclick="restoreNinjaDelegation();"><img class="icon" src="{{ MEDIA }}img/common/log_out.png"/>VOLVER COMO DELEGACIÓN</a></li>
+						<li><a href="#" onclick="logout();"><img class="icon" src="{{ MEDIA }}img/common/log_out.png"/>SALIR</a></li>
+					</ul>
+				</div>
+			</div>
+	    </div>
+		
+
+		<div id="content" class="container-fluid">
+			<div class="row">
+				<div id="sidebar" class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li class="animatedX bounceInLeft super dashboard"><a href="{{BASE_URL}}/dashboard">Buscador</a></li>
+						<li class="animatedX bounceInLeft delegation operator dashboard"><a href="{{BASE_URL}}/dashboard">Dashboard</a></li>
+						<li class="animatedX bounceInLeft button dashboard admin_enterprise"><a href="{{BASE_URL}}/dashboard">Dashboard</a></li>
+						<li class="animatedX bounceInLeft admin_enterprise employees"><a href="{{BASE_URL}}/employees">Empleados</a></li>
+						<li class="animatedX bounceInLeft supporter dashboard"><a href="{{BASE_URL}}/dashboard"><span id="badge_tickets_supporter" class="badge pull-right"></span>Dashboard</a></li>
+						<li class="animatedX bounceInLeft viewer dashboard"><a href="{{BASE_URL}}/dashboard">Carreras</a></li>
+						<li class="animatedX bounceInLeft digitalviewer dashboard"><a href="{{BASE_URL}}/dashboard">Estadísticas</a></li>
+						<li class="animatedX bounceInLeft digitalviewer seguimiento"><a href="{{BASE_URL}}/seguimiento">Seguimiento</a></li>
+						<li class="animatedX bounceInLeft digitalviewer locations"><a href="{{BASE_URL}}/locations">Zonas</a></li>
+						<li class="animatedX bounceInLeft digitalviewer drivers"><a href="{{BASE_URL}}/drivers">Taxistas</a></li>
+						<li class="animatedX bounceInLeft digitalviewer flota"><a href="{{BASE_URL}}/flota">Sistema de asignación</a></li>
+						<li class="animatedX bounceInLeft digitalviewer gestores"><a href="{{BASE_URL}}/gestores">Usuarios del sistema</a></li>
+						<li class="animatedX bounceInLeft digitalviewer profile"><a href="{{BASE_URL}}/profile">Datos de la radio</a></li>
+						<li class="animatedX bounceInLeft digitalviewer enterprisesradio"><a href="{{BASE_URL}}/enterprisesradio">Empresas y pulsadores</a></li>
+						<li class="animatedX bounceInLeft touroperators"><a href="{{BASE_URL}}/touroperators">Touroperadores</a></li>
+						<li class="animatedX bounceInLeft driver dashboard"><a href="{{BASE_URL}}/dashboard">Histórico</a></li>
+
+						<li class="animatedX bounceInLeft super delegation journeys"><a href="{{BASE_URL}}/journeys">Carreras</a></li>
+						<li class="animatedX bounceInLeft super delegation passengers"><a href="{{BASE_URL}}/passengers">Pasajeros</a></li>
+						<li class="animatedX bounceInLeft super digitaloperators"><a href="{{BASE_URL}}/digitaloperators">Operadoras digitales</a></li>
+						<!--<li class="animatedX bounceInLeft super call"><a href="{{BASE_URL}}/call">Taxible call</a></li>-->
+						<li class="animatedX bounceInLeft super delegation enterprises"><a href="{{BASE_URL}}/enterprises"><span id="badge_enterprises" class="badge pull-right"></span>Empresas</a></li>
+						<li class="animatedX bounceInLeft super delegation drivers"><a href="{{BASE_URL}}/drivers"><span id="badge_drivers" class="badge pull-right"></span>Info Web Taxistas</a></li>
+						<li class="animatedX bounceInLeft super delegation radios"><a href="{{BASE_URL}}/radios">Radios</a></li>
+						<li class="animatedX bounceInLeft super delegations"><a href="{{BASE_URL}}/delegations">Delegaciones</a></li>
+						<li class="animatedX bounceInLeft analytics"><a href="{{BASE_URL}}/analytics">Análisis</a></li>
+						<li class="animatedX bounceInLeft stadistics super delegation"><a href="{{BASE_URL}}/stadistics">Estadísticas y analítica</a></li>
+						<li class="animatedX bounceInLeft passenger dashboard"><a href="{{BASE_URL}}/dashboard">Pedir Taxi</a></li>
+						<li class="animatedX bounceInLeft get_taxi admin_enterprise"><a href="{{BASE_URL}}/get_taxi">Pedir Taxi</a></li>
+						<li class="animatedX bounceInLeft passenger driver profile"><a href="{{BASE_URL}}/profile">Perfil</a></li>
+						<li class="animatedX bounceInLeft viewer driver subscriber_service"><a href="{{BASE_URL}}/subscriber">Servicios abonados</a></li>
+						<li class="animatedX bounceInLeft delegation admin_enterprise super driver digitalviewer invoicing"><a href="{{BASE_URL}}/invoicing">Facturación</a></li>
+						<li class="animatedX bounceInLeft admin_enterprise passenger historical"><a href="{{BASE_URL}}/historical">Histórico</a></li>
+						<li class="animatedX bounceInLeft delegation tariff"><a href="{{BASE_URL}}/tariff">Tarifario</a></li>
+						<li class="animatedX bounceInLeft passenger favourites"><a href="{{BASE_URL}}/favourites">Favoritos</a></li>
+						<!-- <li class="animatedX bounceInLeft passenger promotions"><a href="promotions">Promociones</a></li> -->
+						
+						<li class="animatedX bounceInLeft super digitalviewer driver viewer passenger admin_enterprise news"><a href="{{BASE_URL}}/news">Comunicaciones</a></li>
+						<li class="animatedX bounceInLeft super digitalviewer delegation driver viewer passenger admin_enterprise tickets"><a href="{{BASE_URL}}/tickets"><span id="badge_tickets" class="badge pull-right"></span>Incidencias</a></li>
+						<li class="animatedX bounceInLeft delegation driver viewer passenger admin_enterprise faqs"><a href="{{BASE_URL}}/faqs">FAQS</a></li>
+						
+					</ul>
+				</div>
+				<div id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ">
+					
+					
+					
+					
+				</div>
+		
+			</div>
+		</div>
+		
+		
+		<div id="push"></div>
+	</div>
+	
+	<!-- <footer id="footer"></footer> -->
+	
+	
+	
+
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		var base_url='{{BASE_URL}}';
+		var media_url='{{MEDIA}}';
+		var api_url='http://api.taxible.com/v2/';
+	</script>
+	<script src="{{ MEDIA }}js/base_dashboard.js"></script>
+</body>
+</html>

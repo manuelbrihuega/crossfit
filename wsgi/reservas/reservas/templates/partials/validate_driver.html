@@ -1,0 +1,40 @@
+{% load i18n %}
+<div class="row">
+    <div class="col-xs-1 col-md-1 visible-xs visible-sm"></div>
+    <div id="driver_validation" class="oculto col-xs-11 col-md-8 col-md-offset-2" style="margin-bottom:50px;">
+        <h1 id="driver_name" class="page-header"></h1>
+        <form id="driver_form" name="driver_form" action="{{BASE_URL}}/ajax/upload_file_driver" enctype="multipart/form-data" >
+
+
+            <div class="preinput">
+                <p>{% trans "Taxible se preocupa por la acreditación de los taxistas-conductores para que sea un sistema seguro para todos, por eso te pedimos lo siguiente:" %}</p>
+                <p><strong>{% trans "Documentación acreditativa de taxista-conductor" %}:</strong></p>
+
+            </div>
+
+            <div class="file_uploader">
+                <p>
+                    <i class="fa fa-file-o"></i>
+                    <br/>
+                    <span>{% trans "Arrastra o haz click para subir un documento" %}</span>
+                </p>
+
+                <input id="file" name="file" type="file"/>
+
+            </div>
+
+            <br/>
+
+            <div class="preinput">
+                <p><a href="#" onclick="modal_condiciones_uso_drivers()">{% trans "Condiciones Generales de Contratación" %}</a></p>
+                <input type="checkbox" id="accept" name="accept"/> {% trans "Acepto las Condiciones Generales de Contratación" %}
+            </div>
+
+            <br/>
+
+            <input type="hidden" id="token" name="token" value="{{token}}"/>
+
+            <button id="send_docu" type="button" class="btn btn-default">ENVIAR</button>
+        </form>
+    </div>
+</div>

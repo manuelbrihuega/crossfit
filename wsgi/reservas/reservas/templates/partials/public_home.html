@@ -1,0 +1,173 @@
+{% load i18n %}
+{% load staticfiles %}
+{% get_current_language as LANG %}
+<div id="level1" class="{{LANG}}">
+	<div class="container">
+	
+		<div id="level1_1" class="row">
+            <div class="col-xs-12 col-sm-4 col-md-3" style="text-align:center;">
+                <img id="logo" class="" src="{{media}}img/i18n/icono_mini_{{LANG}}.png">
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-9">
+                <h1>{% trans "TU TAXI A UN CLICK" %}</h1>
+			    <h3>{% trans "Pide Taxi con tan solo un click en más de 30 ciudades Españolas" %}</h3>
+            </div>
+
+		</div>
+
+        <div id="play_video" onclick="play_video_home();"></div>
+		
+	</div>
+</div>
+
+
+<div id="level3">
+    <div class="container">
+        <div class="row">
+            <div id="pasajeros" class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-0" style="text-align:center;">
+                <div class="content_user">
+                    <div onclick="modal_passengers_info();">
+                        <div class="imagen"></div>
+                        <div class="titulo">{% trans "PASAJEROS" %}</div>
+                        <div class="subtitulo">{% trans "¡TU TAXI A UN CLICK!" %}</div>
+                        <div class="descripcion">{% trans "Pide Taxi desde tu móvil y benefíciate de promociones especiales para tu ciudad." %}</div>
+
+                    </div>
+                    <div class="parrafo">
+                        <button data-toggle="modal" href="#" type="button" class="boton_gratis btn btn-warning" onclick="modal_passengers_download();">
+                            <span style="font-size: 20px;">{% trans "DESCARGA LA APP AHORA" %}</span>
+                        </button>
+                        <div class="gratis"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="taxistas" class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-0" style="text-align:center;">
+                <div class="content_user">
+                    <div onclick="modal_drivers_info();">
+                        <div class="imagen"></div>
+                        <div class="titulo">{% trans "TAXISTAS" %}</div>
+                        <div class="subtitulo">{% trans "LA APP DE LOS TAXISTAS MEJOR VALORADOS" %}</div>
+                        <div class="descripcion">{% trans "Recibe las mejores carreras de tu ciudad directamente en tu móvil." %}</div>
+
+                    </div>
+                    <div class="parrafo">
+                        <button data-toggle="modal" href="#" type="button" class="boton_gratis btn btn-warning" onclick="goto('taxistas');">
+                            <span style="font-size: 15px;">{% trans "REGISTRARSE COMO TAXISTA" %}</span>
+                        </button>
+                        <div class="gratis"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="empresas" class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-0" style="text-align:center;">
+                <div class="content_user">
+                    <div onclick="modal_enterprises_info();">
+                        <div class="imagen"></div>
+                        <div class="titulo">{% trans "EMPRESAS" %}</div>
+                        <div class="subtitulo">{% trans "LA SOLUCIÓN PROFESIONAL PARA EMPRESAS" %}</div>
+                        <div class="descripcion">{% trans "Ofrece a tus clientes un servicio excelente, sin llamadas ni esperas, con tan solo un click." %}</div>
+                    </div>
+                    <div class="parrafo">
+                        <button data-toggle="modal" href="#" type="button" class="boton_gratis btn btn-warning" onclick="modal_enterprise_register();">
+                            <span style="font-size: 15px;">{% trans "REGISTRA TU EMPRESA AHORA" %}</span>
+                        </button>
+                        <div class="gratis"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="level4">
+    <div id="premapa" class="container dark_level {{LANG}}">
+        <div class="title">{% trans "CIUDADES TAXIBLE" %}</div>
+        <div class="subtitle">
+            {% trans "Una gran red de ciudades disponibles" %}
+
+        </div>
+        <div id="ciudades" class="row">
+            <div class=" col-xs-12 col-sm-6 col-md-offset-1 col-md-5">
+                <div class="categoria clearfix">
+                    <div class="title">{% trans "CIUDADES TAXIBLE" %}</div>
+                    <div class="subcategoria">
+                        {% ifequal LANG 'es' %}
+                        <div class="item">Madrid</div>
+                        <div class="item">Valencia</div>
+                        <div class="item">Málaga</div>
+                        <div class="item">Palma de Mallorca</div>
+                        <div class="item">Menorca</div>
+                        <div class="item">Murcia</div>
+                        <div class="item">Elche</div>
+                        <div class="item">Jerez de la Frontera</div>
+                        <div class="item">Sanlúcar de Barrameda</div>
+                        <div class="item">Barbate</div>
+                        <div class="item">Carcaixent</div>
+                        <div class="item">Manacor</div>
+                        {% endifequal %}
+                        {% ifequal LANG 'pa' %}
+                        <div class="item">Panamá</div>
+                        {% endifequal %}
+                        {% ifequal LANG 'cr' %}
+                        <div class="item">San José</div>
+                        {% endifequal %}
+                        {% ifequal LANG 'pe' %}
+                        <div class="item">Lima</div>
+                        {% endifequal %}
+                        {% ifequal LANG 'ad' %}
+                        <div class="item">Andorra La Vella</div>
+                        <div class="item">Escaldes-Engordany</div>
+                        <div class="item">Encamp</div>
+                        <div class="item">La Massana</div>
+                        <div class="item">Ordino</div>
+                        <div class="item">Pass de la Casa</div>
+                        <div class="item">Sant Julià de Lòria</div>
+                        <div class="item">Canillo</div>
+                        {% endifequal %}
+                    </div>
+                </div>
+                {% ifequal LANG 'es' %}
+                <div class="categoria clearfix col-xs-12 col-sm-5 col-md-5">
+                    <div class="title">COSTA RICA</div>
+                    <div class="subcategoria">
+                        <div class="item">San José</div>
+                    </div>
+                </div>
+                <div class="categoria clearfix col-xs-12 col-sm-5 col-md-5">
+                    <div class="title">PANAMÁ</div>
+                    <div class="subcategoria">
+                        <div class="item">Panamá</div>
+                    </div>
+                </div>
+                {% endifequal %}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% ifequal LANG 'es' %}
+<div id="level5">
+    <div class="container medium_level">
+        <div class="title">BLOG</div>
+
+        <div id="loadingblog" class="row">
+            <div class="col-xs-12 col-sm-offset-1 col-sm-10 clearfix">
+                <img src="static/img/home/loading.gif" />
+                <div class="title">{% trans "Conectando con el blog" %}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="preblog" class="col-xs-12 col-sm-offset-1 col-sm-10 clearfix"  style="display:none">
+                <img id="blogimg" src="static/img/home/blog.jpg" />
+                <div id="blogtitle" class="title">MACHARAVIAYA REFUGIO DE ARTISTAS</div>
+                <div id="blogcuerpo" class="post">Macharaviaya es de esos lugares que te hacen sentir. Este pequeño pueblo de la Axarquía malagueña te desconecta del mundanal ruido y te conecta contigo mismo.</div>
+                <a id="bloglink" href="blog"><button type="button" class="btn btn-warning">VISITAR BLOG</button></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endifequal %}

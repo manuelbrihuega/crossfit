@@ -1,0 +1,88 @@
+<div id="driver_profile">
+	<form role="form">
+		<div class="row">
+			<div class="col-md-2">
+				<div id="photo_driver"><img src="http://f.cl.ly/items/0Y2k2I3K373a1u2K3H1d/placeholder1.gif"></div>
+				<div id="rank_driver"></div>
+			</div>
+			<div class="col-md-10">
+				<h3>Datos de usuario</h3>
+				<div class="row">
+					<div class="form-group col-md-2">
+				    	<input type="hidden" class="form-control input-sm" id="driver_auth_id">
+                        <input type="hidden" class="form-control input-sm" id="driver_token">
+				    	<input type="text" class="form-control input-sm" id="driver_name" placeholder="Nombre" disabled>
+				  	</div>
+				  	<div class="form-group col-md-4">
+				    	<input type="text" class="form-control input-sm" id="driver_surname" placeholder="Apellidos" disabled>
+				  	</div>
+				  	<div class="form-group col-md-3">
+				    	<input type="email" class="form-control input-sm" id="driver_email" placeholder="Email" disabled>
+				  	</div>
+				  	<div class="form-group col-md-1">
+				    	<input type="text" class="form-control input-sm" id="driver_prefix" placeholder="Prefijo" disabled>
+				  	</div>
+				  	<div class="form-group col-md-2">
+				    	<input type="text" class="form-control input-sm" id="driver_phone" placeholder="Teléfono" disabled>
+				  	</div>
+				</div><br>
+				<div class="row">
+					<div class="col-md-12" style="border-left:1px solid #EEE;">
+						<h3>Licencia
+                            <span class="linkable download_document_button" onclick="download_document();"><i class="fa fa-download"></i></span>
+                        </h3>
+						<div class="row">
+							<div class="form-group col-md-3">
+						    	<input type="hidden" class="form-control input-sm" id="driver_licence_id">
+						    	<input type="text" class="form-control input-sm" id="driver_num_licence" placeholder="Licencia" disabled>
+						  	</div>
+						  	<div class="form-group col-md-3">
+						    	<input type="text" class="form-control input-sm" id="driver_num_plate" placeholder="Matrícula" disabled>
+						  	</div>
+						  	<div class="form-group col-md-3">
+						    	<input type="text" class="form-control input-sm" id="driver_car_brand" placeholder="Marca" disabled>
+						  	</div>
+						  	<div class="form-group col-md-3">
+						    	<input type="text" class="form-control input-sm" id="driver_car_model" placeholder="Modelo" disabled>
+						  	</div>
+						</div>
+				  	</div>
+				  	
+				</div>
+			</div>
+			
+			
+		</div>
+	</form><br>
+	
+	<h3>PATRON</h3>
+	<div class="row special">
+		<div class="form-group col-md-4">
+	    	<input type="hidden" class="form-control input-sm" id="driver_owner_id">
+	    	<input type="text" class="form-control input-sm" id="driver_owner_name" placeholder="Nombre" disabled>
+	  	</div>
+	  	<div class="form-group col-md-5">
+	    	<input type="text" class="form-control input-sm" id="driver_owner_surname" placeholder="Apellidos" disabled>
+	  	</div>
+	  	<div class="form-group col-md-3">
+	    	<input type="text" class="form-control input-sm" id="driver_owner_phone" placeholder="Teléfono" disabled>
+	  	</div>
+	</div>
+	<br>
+    <h3>CARACTERÍSTICAS</h3>
+	<div class="row special" id="features_licence"></div>
+	<br>
+
+	<div class="row">
+		<div class="col-md-2">
+	    	<h3>PROMEDIOS</h3>
+			<div id="driver_stats"></div>
+	  	</div>
+		<div class="col-md-10"  style="border-left:1px solid #EEE;">
+	    	<h3>Últimas Carreras</h3>
+			<div id="driver_detail_journeys" class="journeys">
+				<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>
+			</div>
+	  	</div>
+	</div>
+</div>

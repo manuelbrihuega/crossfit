@@ -1,0 +1,26 @@
+{% load staticfiles %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<div class="insignia spritehome sphome_enterprise"></div>
+<h1>EMPRESAS</h1>
+<h3>SOLICITAR INFORMACIÓN</h3>
+
+<center>
+    <p>Déjanos tus datos y nos pondremos en contacto contigo.</p>
+</center>
+
+<form class="formulario" id="form_enterprise_signup_request">
+    <input class="medio izq" type="text" placeholder="EMPRESA" id="e_name_input">
+    <input class="medio" type="text" placeholder="{% trans 'CIF' %}" id="e_cif_input">
+    <input class="medio izq" type="text" placeholder="EMAIL" id="e_email_input">
+    <input class="medio" type="text" placeholder="TELÉFONO" id="e_phone_input">
+    <input class="medio izq" type="text" placeholder="DIRECCIÓN" id="e_address_input">
+    <input class="medio" type="text" placeholder="C.POSTAL" id="e_postal_input">
+    <input class="medio izq" type="text" placeholder="{% trans 'LOCALIDAD' %}" id="e_locality_input">
+    <input class="medio" type="text" placeholder="PERSONA DE CONTACTO" id="e_contact_input">
+
+</form>
+
+<div id="alert"></div>
+

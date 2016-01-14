@@ -1,0 +1,170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-16 12:21+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: settings.py:50
+msgid "Espaniol ES"
+msgstr ""
+
+#: settings.py:51
+msgid "Espaniol CR"
+msgstr ""
+
+#: settings.py:52
+msgid "Espaniol PA"
+msgstr ""
+
+#: settings.py:53
+msgid "Espaniol PE"
+msgstr ""
+
+#: templates/completes/public.html:80
+msgid "Tu Taxi a un Click"
+msgstr ""
+
+#: templates/completes/public.html:82
+msgid "Tel.: 910 052 003"
+msgstr "Tel.: 51 984211003"
+
+#: templates/completes/public.html:83
+msgid "info[at]taxible.com"
+msgstr "info.PE[at]taxible.com"
+
+#: templates/completes/public.html:88
+msgid "Información Legal"
+msgstr ""
+
+#: templates/completes/public.html:91
+msgid "Condiciones de uso"
+msgstr ""
+
+#: templates/completes/public.html:110
+msgid "https://twitter.com/taxible"
+msgstr ""
+
+#: templates/completes/public.html:111
+msgid "http://www.facebook.com/Taxibleapp"
+msgstr ""
+
+#: templates/partials/modal_enterprise_register.html:15
+msgid "CIF"
+msgstr "RUC"
+
+#: templates/partials/modal_enterprise_register.html:20
+#: templates/partials/signup_drivers.html:42
+#: templates/partials/signup_drivers.html:43
+msgid "LOCALIDAD"
+msgstr ""
+
+#: templates/partials/public_home.html:12
+msgid "TU TAXI A UN CLICK"
+msgstr ""
+
+#: templates/partials/public_home.html:13
+msgid "Pide Taxi con tan solo un click en más de 30 ciudades Españolas"
+msgstr "Pide Taxi con tan solo un click en la provincia de Lima."
+
+#: templates/partials/public_home.html:29
+msgid "PASAJEROS"
+msgstr ""
+
+#: templates/partials/public_home.html:30
+msgid "¡TU TAXI A UN CLICK!"
+msgstr ""
+
+#: templates/partials/public_home.html:31
+msgid ""
+"Pide Taxi desde tu móvil y benefíciate de promociones especiales para tu "
+"ciudad."
+msgstr ""
+"Pide Taxi desde tu celular  y benefíciate de promociones especiales para la "
+"ciudad de Lima."
+
+#: templates/partials/public_home.html:36
+#: templates/partials/public_home.html:54
+msgid "DESCARGA LA APP AHORA"
+msgstr ""
+
+#: templates/partials/public_home.html:47
+msgid "TAXISTAS"
+msgstr ""
+
+#: templates/partials/public_home.html:48
+msgid "LA APP DE LOS TAXISTAS MEJOR VALORADOS"
+msgstr ""
+
+#: templates/partials/public_home.html:49
+msgid "Recibe las mejores carreras de tu ciudad directamente en tu móvil."
+msgstr ""
+
+#: templates/partials/public_home.html:64
+msgid "EMPRESAS"
+msgstr ""
+
+#: templates/partials/public_home.html:65
+msgid "LA SOLUCIÓN PROFESIONAL PARA EMPRESAS"
+msgstr ""
+
+#: templates/partials/public_home.html:66
+msgid ""
+"Ofrece a tus clientes un servicio excelente, sin llamadas ni esperas, con "
+"tan solo un click."
+msgstr ""
+
+#: templates/partials/public_home.html:70
+msgid "REGISTRA TU EMPRESA AHORA"
+msgstr ""
+
+#: templates/partials/public_home.html:83
+#: templates/partials/public_home.html:91
+msgid "CIUDADES TAXIBLE"
+msgstr ""
+
+#: templates/partials/public_home.html:85
+msgid "Una gran red de ciudades disponibles"
+msgstr "Próximamente en todo Perú"
+
+#: templates/partials/public_home.html:146
+msgid "Conectando con el blog"
+msgstr ""
+
+#: templates/partials/signup_drivers.html:16
+#: templates/partials/signup_drivers.html:17
+msgid "NIF"
+msgstr "DNI"
+
+#: templates/partials/signup_drivers.html:20
+#: templates/partials/signup_drivers.html:21
+msgid "NUM. LICENCIA"
+msgstr "LICENCIA DE CONDUCIR"
+
+#: templates/partials/signup_drivers.html:74
+#: templates/partials/signup_drivers.html:75
+msgid "MATRÍCULA"
+msgstr "PLACA"
+
+#: views/public.py:17 views/public.py:30 views/public.py:43 views/public.py:55
+#: views/public.py:73 views/public.py:84 views/public.py:112
+#: views/public.py:126
+msgid "Tu Taxi a un Click | TAXIBLE"
+msgstr ""
+
+#: views/public.py:98
+msgid "Bienvenido ES"
+msgstr "Bienvenido PE"
