@@ -1,0 +1,85 @@
+.capsule{background-color: #EEE; }
+.capsule .row{ padding: 0px; margin: 0px;}
+
+.capsule .col{margin-left: 0px; margin-right: 0px;}
+.capsule .col.form{background-color: #CCC; padding-top: 4px;}
+.capsule .col.form input{background-color: #DDD;margin: 3px 0px; padding: 1px 4px; width: 100%; border: 0px solid #999; font-size: 12px; line-height: 16px;}
+.capsule .col.form input:focus{ outline: 0; }
+.capsule .col.form button{background-color: #999; color: #fff; font-weight: bold;margin: 3px 0px; padding: 2px 0px;width: 100%; border: 0px solid #999; font-size: 12px; line-height: 16px;}
+.capsule .col.form button:focus{outline:0;}
+.capsule .col.form button:active{outline:0; padding-top: 3px;}
+
+.capsule .col.delete{background-color: #FDB700; text-align: center;}
+.capsule .col.delete i{font-size: 40px;}
+
+.capsule .row.operators, .capsule .row.operators .col{height: 80px;}
+.capsule .row.operators .col.delete i{line-height: 80px; vertical-align: middle;}
+.capsule .row.operators .col.delete.over i{color: #fff;}
+#unlinked_operators_wrapper{width: 100%; height: 80px; overflow-x: scroll;  overflow-y: hidden; }
+#unlinked_operators_subwrapper{width: 2000px;height: 80px;}
+#unlinked_operators_subwrapper.active{background-color: #E5E5E5;}
+#unlinked_operators_subwrapper.hover{background-color: #D7D7D7;}
+#unlinked_operators_wrapper .item{ border: 1px solid #EEE;cursor: move; font-family: Helvetica, sans-serif; display: inline-block; background-color: #FFF; width: 120px; height: 60px; margin: 10px 4px; text-align: center;}
+#unlinked_operators_wrapper .item .extension{font-size: 24px; line-height: 34px;}
+#unlinked_operators_wrapper .item .pass{font-size: 13px;}
+
+#delete_operator, #delete_numbers{}
+#delete_operator.active, #delete_numbers.active{background-color: orange;}
+#delete_operator.hover, #delete_numbers.hover{background-color: red;}
+
+
+.capsule .row.numbers, .capsule .row.numbers .col{height: 80px;}
+.capsule .row.numbers .col.form input{margin-top: 15px;}
+.capsule .row.numbers .col.delete i{line-height: 80px; vertical-align: middle;}
+.capsule .row.numbers .col.delete.over i{color: #fff;}
+#unlinked_numbers_wrapper{width: 100%; height: 80px; overflow-x: scroll;}
+#unlinked_numbers_subwrapper{width: 2000px; height: 80px;}
+#unlinked_numbers_subwrapper.active{background-color: #E5E5E5;}
+#unlinked_numbers_subwrapper.hover{background-color: #D7D7D7;}
+#unlinked_numbers_wrapper .item{border: 1px solid #EEE;cursor: move; font-family: Helvetica, sans-serif;  display: inline-block; background-color: #FFF; width: 180px; height: 60px; margin: 10px 4px; text-align: center;}
+#unlinked_numbers_wrapper .item .number{font-size: 18px; line-height: 30px;}
+#unlinked_numbers_wrapper .item select{ width: 90%;}
+
+
+
+.enqueue_wrapper{background-color: #EEE; padding-bottom: 14px;}
+.enqueue_wrapper>.title{text-align: center; padding: 4px; width: 70%; margin: 6px auto;}
+.enqueue_wrapper>.delete{background-color: #777; color: #FFF;width: 24px; height: 24px; line-height: 24px; vertical-align: middle; text-align: center; font-size: 16px; cursor: pointer;}
+.enqueue_wrapper>.delete:hover{background-color: #999; color: red;}
+.enqueue_wrapper>.delete i{}
+.enqueue_wrapper .row{margin: 14px 0px 0px 0px;}
+.enqueue_wrapper .col{}
+.enqueue_wrapper .col.active{background-color: #555;}
+.enqueue_wrapper .col.hover{background-color: #222;}
+.enqueue_wrapper .col.numbers{}
+.enqueue_wrapper .col.operators{border-right: 1px solid #BBB;}
+
+.enqueue_wrapper .col.numbers .item{border: 1px solid #EEE;cursor: move; font-family: Helvetica, sans-serif; background-color: #FFF; width: 180px; height: 60px; margin: 10px auto; text-align: center;}
+.enqueue_wrapper .col.numbers .item .number{font-size: 18px; line-height: 30px;}
+.enqueue_wrapper .col.numbers .item select{ width: 90%;}
+
+.enqueue_wrapper .col.operators .item{ border: 1px solid #EEE;cursor: move; font-family: Helvetica, sans-serif; background-color: #FFF; width: 120px; height: 60px; margin: 10px auto; text-align: center;}
+.enqueue_wrapper .col.operators .item .extension{font-size: 24px; line-height: 34px;}
+.enqueue_wrapper .col.operators .item .pass{font-size: 13px;}
+
+
+
+
+/* Responsive */
+@media (min-width: 1200px) {
+}
+
+@media (min-width: 991px) and (max-width: 1200px)  {
+}
+
+@media (min-width: 768px) and (max-width: 991px) { 
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+}
+
+@media (max-width: 480px) {
+}

@@ -1,0 +1,31 @@
+#li_counter i{color: #999;}
+#li_counter span{font-size: 15px; font-family: Helvetica, sans-serif; font-weight: bold;}
+#list_status_radios{margin-top: 30px;}
+#list_status_radios .item{background-color: #F9F9F9; padding: 10px; margin-bottom: 15px; border-left: 4px solid #AAA;}
+#list_status_radios .item.on{ border-left: 4px solid #94C522;}
+#list_status_radios .item.off{ border-left: 4px solid #98000A;}
+#list_status_radios .item .title{font-weight: bold;}
+#list_status_radios .item .country{}
+#list_status_radios .item .country a{color: #555;}
+#list_status_radios .item .date{margin-top: 4px;font-size: 11px;text-transform: uppercase; font-family: Helvetica, sans-serif; font-weight: bold;}
+#list_status_radios .item.on .date{color: #94C522;}
+#list_status_radios .item.off .date{color: #98000A;}
+
+/* Responsive */
+@media (min-width: 1200px) {
+}
+
+@media (min-width: 991px) and (max-width: 1200px)  {
+}
+
+@media (min-width: 768px) and (max-width: 991px) { 
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+}
+
+@media (max-width: 480px) {
+}

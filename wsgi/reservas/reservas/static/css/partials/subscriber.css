@@ -1,0 +1,25 @@
+.no-padding-top-bottom{padding-top: 0px; padding-bottom: 0px;}
+#subscriber_accordion{margin-top: 2em;}
+.graphical-driver-content{width: 95%; margin: auto;}
+#container_prev_year_subscriber{padding-left: 0px; padding-right:0.5em;}
+#container_current_year_subscriber{padding:0px;}
+#container_next_year_subscriber{padding-left: 0.5em; padding-right:0px;}
+@media (max-width: 1080px) {
+	.graphical-driver-content {
+    	width: 100%;
+	}
+	#dashboard-admin-enterprise {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+}
+
+@media (max-width: 992px) {
+    #container_prev_year_subscriber{padding-left: 0px; padding-right:0px;}
+    #container_next_year_subscriber{padding-left: 0px; padding-right:0px;}
+    #cvs{margin-top: 7px;}
+}
+@media (max-width: 768px) {
+    #row-calendar-subscriber{width:90%; margin:auto;}
+    .graphical-driver-content {width:100%;}
+}

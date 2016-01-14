@@ -1,0 +1,159 @@
+#passenger_profile .form-group{ padding-right: 0px;}
+#passenger_profile .row .form-group:last-child{ padding-right: 15px;}
+
+#passenger_details_footer.active .activate{display: none;} 
+#passenger_details_footer.active .deactivate{display: none;} 
+#passenger_details_footer.inactive .deactivate{display: none;} 
+#passenger_details_footer.banned .ban{display: none;} 
+#passenger_details_footer.unbanned .unban{display: none;} 
+
+#passenger_detail_journeys tr.pending td{color: #A1C910;}
+#passenger_detail_journeys tr.canceled td{color: #98000A;}
+#passenger_detail_journeys tr.completed td{color: #637889;}
+
+#enterprise_details_footer.active .activate{display: none;}
+#enterprise_details_footer.inactive .deactivate{display: none;}
+
+
+/*operadoras*/
+#operators_linked_radios{ border: 0px solid blue;}
+#operators_linked_radios .btn{width: 100%; margin-bottom: 8px;}
+#operators_linked_radios .btn.btn-warning{font-weight: bold;}
+
+#journey_details_footer.viewer button{display: none;}
+#journey_details_footer.viewer.pending button.cancel,
+#journey_details_footer.viewer.assigned button.cancel,
+#journey_details_footer.viewer.assigned button.pending,
+#journey_details_footer.viewer.canceled button.pending,
+#journey_details_footer.viewer.reserved button.cancel,
+#journey_details_footer.viewer.cancelation_request button.cancel{display: block;}
+
+/*#journey_details_footer.canceled .cancel, #journey_details_footer.canceled .complete{display: none;} */
+/*#journey_details_footer.completed .cancel, #journey_details_footer.completed .complete{display: none;} */
+
+#mapa_empresa{background-color: #ddd; width: 100%; height: 154px;}
+#enterprise_profile #photo_viewer{
+    width: 400px;
+    height: 150px;
+    border: 3px dashed grey;
+    margin: 0px auto;
+}
+
+#enterprise_profile #photo_viewer input[type=file]{
+    height: 150px;
+    width: 400px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+
+#pedir-taxi-modal{background-color: #FDB700; border: 0 solid #DB9825; color: #FFFFFF; cursor: pointer; font-size: 20px; font-weight: bold; height: 40px; line-height: 40px; padding: 0; text-align: center; vertical-align: middle; width: 100%; z-index: 1;}
+#pedir-taxi-modal:hover{background-color: #DB9825;}
+/*DRIVERS*/
+#photo_driver{border: 0px solid #999; text-align: center; padding-top: 30px;}
+#photo_driver img{width: 90px;}
+#rank_driver{border: 0px solid #999; text-align: center; margin-top: 10px;}
+.special .form-control.input-sm{padding-left: 2px; padding-right: 0px;}
+
+
+#features_licence .col-md-2{padding-right: 0px;}
+#features_licence .col-md-2:last-child{padding-right: 15px;}
+.feature_checkbox{font-size: 11px; cursor: pointer;} 
+.subsidized_check{height: 100%; text-align: center;}
+
+#driver_details_footer.active .activate{display: none;} 
+#driver_details_footer.active .deactivate{display: none;} 
+#driver_details_footer.inactive .deactivate{display: none;} 
+#driver_details_footer.banned .ban{display: none;} 
+#driver_details_footer.unbanned .unban{display: none;} 
+#driver_details_footer.no-validated .request_validation{display: none;}
+#driver_detail_journeys tr.pending td{color: #A1C910;}
+#driver_detail_journeys tr.canceled td{color: #98000A;}
+#driver_detail_journeys tr.completed td{color: #637889;}
+
+
+
+
+
+
+.bateria .form-group {padding-right: 0px;}
+.bateria .form-group:last-child{padding-right: 15px;}
+.bateria .botonera {border: 0px solid #999; font-size: 20px; color: #999;}
+.bateria .botonera .button{cursor: pointer; margin-right: 12px;}
+.bateria .botonera .button:hover{color: #555;}
+
+
+.modal-body .row .form-group{padding-right: 0px;}
+.modal-body .row .form-group:last-child{padding-right: 15px;}
+.modal-body .row.special .form-group{padding-left: 4px;}
+.modal-body .row.special .form-group:first-child{padding-left: 15px;}
+
+.modal-dialog.modal-not-padding .modal-content{padding: 0px;}
+.modal-dialog.modal-not-padding .modal-header{padding: 0px;}
+.modal-dialog.modal-not-padding .modal-body{padding: 0px;}
+.modal-dialog.modal-not-padding .modal-footer{padding: 0px;}
+
+
+#modal_passengers_info .modal-dialog {width: 768px;}
+#modal_drivers_info .modal-dialog {width: 768px;}
+#modal_enterprises_sent .modal-dialog {width: 768px;}
+#modal_enterprises_info .modal-dialog {width: 768px;}
+
+#modal_passengers_info .modal-body{background: url(../../img/home/modal_passengers_bg.png) no-repeat; height: 463px; background-size: 100%; }
+#modal_drivers_info .modal-body{background: url(../../img/home/modal_drivers_bg.png) no-repeat; height: 463px;background-size: 100%; }
+#modal_enterprises_info .modal-body{background: url(../../img/home/modal_enterprises_bg.png) no-repeat; height: 463px;background-size: 100%; }
+#modal_enterprises_sent .modal-body{background: url(../../img/home/modal_enterprises_sent_bg.png) no-repeat; height: 463px;background-size: 100%; }
+
+.modal-content .home .botonera{width: 420px; margin: 10px auto; height: 120px;}
+.home .download{margin:10px auto; cursor: pointer;}
+
+
+/* Responsive */
+@media (min-width: 1200px) {
+}
+
+@media (min-width: 991px) and (max-width: 1200px)  {
+}
+
+@media (min-width: 768px) and (max-width: 991px) { 
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+
+   .modal-content .home .botonera {width:220px;}
+   #modal_passengers_info .modal-dialog {width: 80%; margin:0px auto;}
+   #modal_enterprises_info .modal-dialog {width: 80%; margin:0px auto;}
+   #modal_enterprises_sent .modal-dialog {width: 80%; margin:0px auto;}
+   #modal_drivers_info .modal-dialog {width: 80%; margin:0px auto;}
+
+   #modal_passengers_info .modal-body {height: 380px;}
+   #modal_enterprises_info .modal-body {height: 380px;}
+   #modal_enterprises_sent .modal-body {height: 380px;}
+   #modal_drivers_info .modal-body {height: 380px;}
+
+
+}
+
+@media (max-width: 624px) {
+    #modal_passengers_info .modal-body {height: 300px;}
+    #modal_enterprises_info .modal-body {height: 300px;}
+    #modal_enterprises_sent .modal-body {height: 300px;}
+    #modal_drivers_info .modal-body {height: 300px;}
+}
+
+@media (max-width: 524px) {
+    #modal_passengers_info .modal-body {height: 250px;}
+    #modal_enterprises_info .modal-body {height: 250px;}
+    #modal_enterprises_sent .modal-body {height: 250px;}
+    #modal_drivers_info .modal-body {height: 250px;}
+}
+
+@media (max-width: 424px) {
+    #modal_passengers_info .modal-body {height: 200px;}
+    #modal_enterprises_info .modal-body {height: 200px;}
+    #modal_enterprises_sent .modal-body {height: 200px;}
+    #modal_drivers_info .modal-body {height: 200px;}
+}

@@ -1,0 +1,26 @@
+#new_driver_wrapper h3{color: #333; font-size: 14px; font-weight: bold;}
+
+.drivers_list_md{}
+.drivers_list_md .item{border-left: 4px solid #999; background-color: #F1F1F1; margin-bottom: 10px; padding: 5px 0px; cursor: pointer;}
+.drivers_list_md .item:hover{background-color: #E1E1E1;}
+.drivers_list_md .item>div{line-height: 28px; vertical-align: middle;}
+
+
+/* Responsive */
+@media (min-width: 1200px) {
+}
+
+@media (min-width: 991px) and (max-width: 1200px)  {
+}
+
+@media (min-width: 768px) and (max-width: 991px) { 
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+}
+
+@media (max-width: 480px) {
+}

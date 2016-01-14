@@ -21,7 +21,7 @@ USE_L10N = True
 USE_TZ = True
 _ = lambda s: s
 STATIC_URL = '/static/'
-STATIC_ROOT = (PROJECT_PATH + '/assets')
+STATIC_ROOT = (PROJECT_PATH + '/../static')
 TEMPLATE_DIRS = (PROJECT_PATH+'/templates')
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
@@ -57,9 +57,6 @@ LOCALE_PATHS = (
     os.path.join(PROJECT_PATH, 'locale'),
 )
 
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, 'assets'),
-)
 
 
 '''

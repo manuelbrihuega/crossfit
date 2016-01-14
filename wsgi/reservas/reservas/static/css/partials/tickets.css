@@ -1,0 +1,35 @@
+#new_ticket_wrapper{margin-bottom: 30px; display: none;}
+
+#tickets_accordion{}
+#tickets_accordion .panel.closed .panel-heading .panel-title>a{ color: #888;}
+#tickets_accordion .panel.support .panel-heading .panel-title>a{ color: #333;}
+#tickets_accordion .panel.user .panel-heading .panel-title>a{ color: #FDB700;}
+	
+#tickets_accordion .messages{ border: 0px solid #999; }
+#tickets_accordion .messages .message{ border: 0px solid #999; width: 70%; float: left; margin: 0px 0px 20px 0px; padding: 15px; background-color: #f9f9f9; border-radius: 4px;}
+#tickets_accordion .messages .message.reverse{float: right; }
+#tickets_accordion .messages .message .date{font-weight: bold; }
+#tickets_accordion form button{margin-right: 15px; }
+
+#tickets_accordion .panel.closed form{display: none;}
+
+
+
+/* Responsive */
+@media (min-width: 1200px) {
+}
+
+@media (min-width: 991px) and (max-width: 1200px)  {
+}
+
+@media (min-width: 768px) and (max-width: 991px) { 
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+}
+
+@media (max-width: 480px) {
+}

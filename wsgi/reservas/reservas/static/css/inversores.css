@@ -1,0 +1,148 @@
+/*FUENTES*/
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,800,600);
+@font-face { font-family: 'Museo100'; src: url(../fonts/MuseoSans-100.otf); font-weight: 100; }
+@font-face { font-family: 'Museo100i'; src: url(../fonts/MuseoSans-100Italic.otf); font-weight: 100; }
+@font-face { font-family: 'Museo300'; src: url(../fonts/MuseoSans-300.otf); font-weight: 300; }
+@font-face { font-family: 'Museo300i'; src: url(../fonts/MuseoSans-300Italic.otf); font-weight: 300; }
+@font-face { font-family: 'Museo500'; src: url(../fonts/MuseoSans_500.otf); font-weight: 500; }
+@font-face { font-family: 'Museo500i'; src: url(../fonts/MuseoSans_500_Italic.otf); font-weight: 500; }
+@font-face { font-family: 'Museo700'; src: url(../fonts/MuseoSans_700.otf); font-weight: 700; }
+@font-face { font-family: 'Museo700i'; src: url(../fonts/MuseoSans-700Italic.otf); font-weight: 700; }
+@font-face { font-family: 'Museo900'; src: url(../fonts/MuseoSans_900.otf); font-weight: 900; }
+@font-face { font-family: 'Museo900i'; src: url(../fonts/MuseoSans-900Italic.otf); font-weight: 900; }
+
+
+html,body{font-family: 'Raleway', sans-serif; }
+
+html {margin: 0; 	height: 100%; }
+body { 	-webkit-font-smoothing: antialiased;	height: 100%; background-color: #EEE;}
+
+/* Header & nav bar */
+#header{ background-color: #353535; padding: 0; color: #fff; }
+#brand{ font-family: 'Museo900', sans-serif; font-weight: 900; font-size: 18px; line-height: 37px; padding: 0; margin: 0; vertical-align: middle; }
+#brand a{color: #fff;}
+#brand a:hover{color: #CCC; text-decoration: none;}
+
+.container{ width: 1024px; padding: 0px;}
+#level1,#level2,#level3,#level4,#level5,#level6,#level7,#level8,#level9,#level10,#level11,#level12,#level13,#level14,#level15,#level16{text-align: center; padding-top: 50px; overflow: hidden;}
+
+
+.insignia{width: 98px; height: 98px; margin: 0px auto 15px auto; background-repeat: no-repeat; background-position: center center;}
+.titulo{font-family: 'Raleway', sans-serif; font-size: 24px; font-weight: 800; text-shadow: 1px 1px white;}
+.dark .titulo{color: #fff; text-shadow: 0px 2px 3px #000;}
+.subtitulo{font-family: 'Raleway', sans-serif; font-size: 24px; font-weight: 400; text-shadow: 1px 1px white; color: #7F7F7F;}
+.texto{font-family: 'Raleway', sans-serif; font-size: 40px; font-weight: 600; text-shadow: 1px 1px white; line-height: 50px; color: #8C8C8C;}
+.dark .texto{color: #fff; text-shadow: 0px 2px 3px #000;}
+
+/*level1  */
+#level1{ height: 1496px;    }
+#logo{ width:138px; height:138px; margin: 207px auto 30px auto;}
+#level1 h1{ color: #000; font-weight: 900; font-size: 54px; margin: 16px 0px 0px 0px; padding: 0px; font-family: 'Museo900', sans-serif; letter-spacing: 2px; text-shadow: 1px 1px white, -1px -1px #333}
+#level1 h3{ color: #919191; font-family: 'Raleway', sans-serif; font-size: 30px; font-weight: 600;margin: 10px 0px 0px 0px; padding: 0px; text-shadow: 1px 1px white;}
+#level1 .img1{ width:980px; margin: 160px auto 0px auto; }
+
+/*level2  */
+#level2{ height: 768px;     background:#000 center top url(../img/inversores/level02_bg.jpg) no-repeat; }
+#level2 .insignia{background-image: url(../img/inversores/level02_insignia.png);}
+#level2 .texto{margin: 160px auto 0px;}
+
+
+/*level3  */
+#level3{ height: 1536px;    }
+#level3 .insignia{background-image: url(../img/inversores/level03_insignia.png);}
+#level3 .img1{margin: 100px auto 30px auto; }
+#level3 .texto1{margin: 60px auto 40px auto; font-size: 24px; font-weight: 600; }
+#level3 .texto2{margin: 40px auto 0px auto; font-size: 24px; font-weight: 800; }
+
+
+/*level4  */
+#level4{ height: 768px;     background:#000 center top url(../img/inversores/level04_bg.jpg) no-repeat; }
+#level4 .insignia{background-image: url(../img/inversores/level04_insignia.png);}
+#level4 .texto{margin: 100px auto 0px; width: 720px; text-align: justify; font-size: 36px; font-weight: 600; }
+
+/*level5  */
+#level5{ height: 1536px;    }
+#level5 .insignia{background-image: url(../img/inversores/level05_insignia.png);}
+#level5 .texto{margin: 100px auto 120px; width: 1000px; font-size: 36px; font-weight: 400; color: #7F7F7F; }
+
+/*level6  */
+#level6{ height: 768px;     background-color: #000;}
+#level6 .insignia{background-image: url(../img/inversores/level06_insignia.png);}
+#level6 .texto{margin: 100px auto 40px; width: 800px; font-size: 36px; font-weight: 600; }
+
+/*level7  */
+#level7{ height: 1536px;    background:center bottom url(../img/inversores/level07_bg.png) repeat-x; padding-top: 0px;}
+#level7 .insignia{background-image: url(../img/inversores/level07_insignia.png);}
+#level7 .img2{margin: 100px auto 0px auto; }
+
+/*level8  */
+#level8{ height: 768px;     background:center bottom url(../img/inversores/level08_bg.jpg) no-repeat; padding-top: 0px;}
+
+/*level9  */
+#level9{ height: 768px;      padding-top: 0px;}
+
+/*level10  */
+#level10{ height: 768px;    background:#000 center top url(../img/inversores/level10_bg.jpg) no-repeat;}
+#level10 .img1{margin: 150px auto 0px auto; }
+
+/*level11  */
+#level11{ height: 768px;    background-color: #000;padding-top: 0px;}
+
+/*level12  */
+#level12{ height: 768px;    background:#000 center bottom url(../img/inversores/level12_bg.jpg) no-repeat;padding-top: 0px;}
+
+/*level13  */
+#level13{ height: 768px;    }
+#level13 .insignia{background-image: url(../img/inversores/level13_insignia.png);}
+#level13 .img1{margin: 70px auto 0px auto; }
+
+/*level14  */
+#level14{ height: 768px;    }
+#level14 .insignia{background-image: url(../img/inversores/level14_insignia.png);}
+#level14 .img1{margin: 50px auto 0px auto; }
+
+/*level15  */
+#level15{ height: 1536px;    }
+#level15 .insignia{background-image: url(../img/inversores/level15_insignia.png);}
+#level15 .img1{margin: 30px auto 0px auto; }
+
+/*level16  */
+#level16{ height: 768px;    }
+#level16 .insignia{background-image: url(../img/inversores/level16_insignia.png);}
+#calltoaction{margin: 60px auto 30px;}
+#calltoaction .item{background:center top url(../img/inversores/level16_doc.png) no-repeat; padding-top: 90px; border: 0px solid #999;}
+#calltoaction .item a{font-size: 18px; color: #4b4b4b;}
+#calltoaction .item a:hover{color: #000;}
+#level16 .texto{margin: 80px auto 30px;  font-size: 18px; font-weight: 400; color: #4B4B4B; }
+#directamente{width: 380px; margin: 30px auto 30px; border: 0px solid #999;}
+#directamente>div{width: 160px; border: 0px solid #999; font-size: 18px;}
+#directamente img{margin-top: 20px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
