@@ -60,7 +60,6 @@ function load_progress(percent) {
 		delay=(0.0001*percent*percent*percent)+10;
         setTimeout(function(){load_progress(percent);},delay);
     }
-	else bar.slideUp();
 }
 
 

@@ -1,4 +1,4 @@
-#progress_bar{background-color: #f1b518; height: 4px; width: 1%; position: fixed; margin-top:39px; z-index: 900;}
+#progress_bar{background-color: #0474be; height: 4px; width: 1%; position: fixed; margin-top:39px; z-index: 900;}
 
 
 /*LEVEL1*/
@@ -22,7 +22,7 @@
 #boton_app_store{ float: left; margin-left: 25px; }
 
 @media (max-width: 1499px) {
-    #level1{ background-image: url(../../img/i18n/level1_bg_lg_es.jpg);}
+    #level1{ background-image: url(../../img/i18n/level1_bg_lg_es.jpg); background-size: 100% auto;}
     #level1.cr{ background-image: url(../../img/i18n/level1_bg_lg_cr.jpg);}
     #level1.pa{ background-image: url(../../img/i18n/level1_bg_lg_pa.jpg);}
     #level1.pe{ background-image: url(../../img/i18n/level1_bg_lg_pe.jpg);}
