@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,200,600);
 @font-face { font-family: 'Museo100'; src: url(../fonts/MuseoSans-100.otf); font-weight: 100; }
 @font-face { font-family: 'Museo900'; src: url(../fonts/MuseoSans_900.otf); font-weight: 900; }
-html,body{font-family: 'Raleway', sans-serif; }
+html,body{font-family: Arial; }
 html {margin: 0; height: 100%; }
 body { -webkit-font-smoothing: antialiased; height: 100%; }
 #chivato{display: none;position: fixed; top:0px; left:0px; width: 0px; height: 0px;background-color: #000; z-index: 1000; cursor: pointer;}
@@ -12,8 +12,8 @@ body { -webkit-font-smoothing: antialiased; height: 100%; }
 #content{padding-top:39px;}
 #push{height: 105px;}
 /*NAVBAR*/
-.navbar{ background-color: #353535; color: #fff; border-radius: 0px; min-height:37px;margin-bottom: 0px;width: 100%; position: fixed; z-index: 1000;}
-#brand{ font-family: 'Museo900', sans-serif; font-weight: 900; font-size: 18px; height: 37px;line-height: 37px; padding: 0; margin: 0;vertical-align: middle; color: #fff; border: 0px solid #999; }
+.navbar{ background-color: black; color: #fff; border-radius: 0px; min-height:37px;margin-bottom: 0px;width: 100%; position: fixed; z-index: 1000;}
+#brand{ font-family: impact,impact-w01-2010,impact-w02-2010,impact-w10-2010,sans-serif; font-weight: 500; font-size: 18px; height: 37px;line-height: 37px; padding: 0; margin: 0;vertical-align: middle; color: #fff; border: 0px solid #999; }
 #brand:hover{color: #CCC; text-decoration: none;}
 #brand>span{font-family: 'Museo100', sans-serif; font-weight: 100; color: #CCC;}
 .navbar-collapse{border: 0px solid red;}
