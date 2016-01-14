@@ -30,7 +30,7 @@ body { -webkit-font-smoothing: antialiased; height: 100%; }
 #footer .row>div{border: 0px solid #999;}
 #footer .columna1{border: 0px solid #999;padding-top: 14px;margin-right: 50px;float: left;}
 #footer .columna2{   border: 0px solid #999;    padding-top: 63px;    float: left;}
-#footer .columna3{    border: 0px solid #999;    padding-top: 14px;    float: left;}
+#footer .columna3{    border: 0px solid #999;    padding-top: 14px;    float: right;}
 #footer .columna4{    border: 0px solid #999;    padding-top: 10px;    float: right;}
 #footer .titulo{    border: 0px solid #999;    color: #fff;    font-size: 16px;}
 #footer .subtitulo{    border: 0px solid #999;    color: #AAA;    font-size: 15px;    line-height: 17px;    margin-bottom: 8px;}
