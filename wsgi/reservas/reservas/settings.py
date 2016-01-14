@@ -58,7 +58,7 @@ LOCALE_PATHS = (
 )
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, 'static'),
+    os.path.join(PROJECT_PATH, 'assets'),
 )
 
 
