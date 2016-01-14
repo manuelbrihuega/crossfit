@@ -34,7 +34,6 @@ setup(
         'kombu==3.0.10',
         'mailchimp==2.0.7',
         'pexpect==3.2',
-        'pytg==0.1',
         'pytz==2013.9',
         'requests==2.2.1',
         'six==1.6.1',
