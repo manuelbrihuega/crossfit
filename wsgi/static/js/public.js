@@ -3,7 +3,7 @@ $(document).ready(function(){
 	loadLocation();
 	load_progress(1);
     activa_idiomas();
-    setTimeout(function(){loadLastPostBlog();},1000);
+    //setTimeout(function(){loadLastPostBlog();},1000);
     jQuery.fn.reset = function () {
       $(this).each (function() { this.reset(); });
     }
