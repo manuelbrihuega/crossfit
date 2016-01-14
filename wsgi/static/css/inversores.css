@@ -12,7 +12,7 @@
 @font-face { font-family: 'Museo900i'; src: url(../fonts/MuseoSans-900Italic.otf); font-weight: 900; }
 
 
-html,body{font-family: 'Raleway', sans-serif; }
+html,body{font-family: Arial; }
 
 html {margin: 0; 	height: 100%; }
 body { 	-webkit-font-smoothing: antialiased;	height: 100%; background-color: #EEE;}
@@ -28,17 +28,17 @@ body { 	-webkit-font-smoothing: antialiased;	height: 100%; background-color: #EE
 
 
 .insignia{width: 98px; height: 98px; margin: 0px auto 15px auto; background-repeat: no-repeat; background-position: center center;}
-.titulo{font-family: 'Raleway', sans-serif; font-size: 24px; font-weight: 800; text-shadow: 1px 1px white;}
+.titulo{font-family: Arial; font-size: 24px; font-weight: 800; text-shadow: 1px 1px white;}
 .dark .titulo{color: #fff; text-shadow: 0px 2px 3px #000;}
-.subtitulo{font-family: 'Raleway', sans-serif; font-size: 24px; font-weight: 400; text-shadow: 1px 1px white; color: #7F7F7F;}
-.texto{font-family: 'Raleway', sans-serif; font-size: 40px; font-weight: 600; text-shadow: 1px 1px white; line-height: 50px; color: #8C8C8C;}
+.subtitulo{font-family: Arial; font-size: 24px; font-weight: 400; text-shadow: 1px 1px white; color: #7F7F7F;}
+.texto{font-family: Arial; font-size: 40px; font-weight: 600; text-shadow: 1px 1px white; line-height: 50px; color: #8C8C8C;}
 .dark .texto{color: #fff; text-shadow: 0px 2px 3px #000;}
 
 /*level1  */
 #level1{ height: 1496px;    }
 #logo{ width:138px; height:138px; margin: 207px auto 30px auto;}
 #level1 h1{ color: #000; font-weight: 900; font-size: 54px; margin: 16px 0px 0px 0px; padding: 0px; font-family: 'Museo900', sans-serif; letter-spacing: 2px; text-shadow: 1px 1px white, -1px -1px #333}
-#level1 h3{ color: #919191; font-family: 'Raleway', sans-serif; font-size: 30px; font-weight: 600;margin: 10px 0px 0px 0px; padding: 0px; text-shadow: 1px 1px white;}
+#level1 h3{ color: #919191; font-family: Arial; font-size: 30px; font-weight: 600;margin: 10px 0px 0px 0px; padding: 0px; text-shadow: 1px 1px white;}
 #level1 .img1{ width:980px; margin: 160px auto 0px auto; }
 
 /*level2  */

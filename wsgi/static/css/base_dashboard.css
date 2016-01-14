@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,200,600);
 @font-face { font-family: 'Museo100'; src: url(../fonts/MuseoSans-100.otf); font-weight: 100; }
 @font-face { font-family: 'Museo900'; src: url(../fonts/MuseoSans_900.otf); font-weight: 900; }
-html,body{font-family: 'Raleway', sans-serif; }
+html,body{font-family: Arial; }
 html {margin: 0; height: 100%; }
 body { -webkit-font-smoothing: antialiased; height: 100%; }
 #chivato{display: none;position: fixed; top:0px; left:0px; width: 10px; height: 10px;background-color: #000; z-index: 1031; cursor: pointer;}
@@ -90,10 +90,10 @@ body[data-section=faqs] .nav-sidebar > li.faqs> a{ color: #fff; background-color
 
 /* Main content  */
 #main{position: relative;}
-.main { padding: 60px 20px 20px; color: #666; font-family: 'Raleway', sans-serif; }
-.main .page-header { margin-top: 0; font-family: 'Raleway', sans-serif; }
-.main .sub-header { font-family: 'Raleway', sans-serif; }
-.main .minisub-header { font-family: 'Raleway', sans-serif; text-align: center; text-transform: uppercase; }
+.main { padding: 60px 20px 20px; color: #666; font-family: Arial; }
+.main .page-header { margin-top: 0; font-family: Arial; }
+.main .sub-header { font-family: Arial; }
+.main .minisub-header { font-family: Arial; text-align: center; text-transform: uppercase; }
 
 .main .waiting{text-align: center;font-size: 40px; margin: 30px 0px;}
 .main .superinput{width: 600px; height: 40px; padding: 2px 15px; line-height: 40px; vertical-align: middle; font-size: 20px; color: #888; outline: none;border: 2px solid #DDD !important;  box-shadow:none !important; border: 1px solid #999;}
@@ -192,10 +192,10 @@ a:hover, a:focus { color: #0474be; text-decoration: underline; }
 .modal-dialog{margin-top: 50px;}
 .modal-content{border-radius: 0px;}
 .modal-header{border: none;}
-.modal-header h4{font-family: 'Raleway', sans-serif;font-size: 18px;font-weight: 400;color: #888;text-transform: uppercase; }
+.modal-header h4{font-family: Arial;font-size: 18px;font-weight: 400;color: #888;text-transform: uppercase; }
 .modal-body{margin-top: 0px; padding-top: 0px; margin-bottom: 0px; padding-bottom: 15px;}
-.modal-body h1{padding-top: 0px;margin-top: 0px;font-family: 'Raleway', sans-serif;text-align: center;font-size: 36px;font-weight: 200;color: #181818;text-transform: uppercase; }
-.modal-body h3{padding-top: 0px;margin-top: 0px;font-family: 'Raleway', sans-serif;text-align: center;font-size: 14px;font-weight: 400;color: #888;text-transform: uppercase; }
+.modal-body h1{padding-top: 0px;margin-top: 0px;font-family: Arial;text-align: center;font-size: 36px;font-weight: 200;color: #181818;text-transform: uppercase; }
+.modal-body h3{padding-top: 0px;margin-top: 0px;font-family: Arial;text-align: center;font-size: 14px;font-weight: 400;color: #888;text-transform: uppercase; }
 .modal-body h3 .linkable{cursor: pointer;}
 .modal-body h3 .linkable:hover{color: #0474be;}
 .modal-body ul{ list-style-type: none ; }
