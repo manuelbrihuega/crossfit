@@ -35,7 +35,7 @@ msgid "Espaniol PE"
 msgstr ""
 
 #: templates/completes/public.html:80
-msgid "Tu Taxi a un Click"
+msgid "SISTEMA DE RESERVAS"
 msgstr ""
 
 #: templates/completes/public.html:82
@@ -73,7 +73,7 @@ msgid "LOCALIDAD"
 msgstr ""
 
 #: templates/partials/public_home.html:12
-msgid "TU TAXI A UN CLICK"
+msgid "SISTEMA DE RESERVAS"
 msgstr ""
 
 #: templates/partials/public_home.html:13
@@ -85,7 +85,7 @@ msgid "PASAJEROS"
 msgstr ""
 
 #: templates/partials/public_home.html:30
-msgid "¡TU TAXI A UN CLICK!"
+msgid "¡SISTEMA DE RESERVAS!"
 msgstr ""
 
 #: templates/partials/public_home.html:31
@@ -162,7 +162,7 @@ msgstr "PLACA"
 #: views/public.py:17 views/public.py:30 views/public.py:43 views/public.py:55
 #: views/public.py:73 views/public.py:84 views/public.py:112
 #: views/public.py:126
-msgid "Tu Taxi a un Click | TAXIBLE"
+msgid "SISTEMA DE RESERVAS | CrossFit Jerez"
 msgstr ""
 
 #: views/public.py:98

@@ -164,7 +164,7 @@ msgstr "PLACA"
 #: views/public.py:17 views/public.py:30 views/public.py:43 views/public.py:55
 #: views/public.py:73 views/public.py:84 views/public.py:112
 #: views/public.py:126
-msgid "Tu Taxi a un Click | TAXIBLE"
+msgid "SISTEMA DE RESERVAS | CrossFit Jerez"
 msgstr ""
 
 #: views/public.py:98

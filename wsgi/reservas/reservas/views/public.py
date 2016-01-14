@@ -14,7 +14,7 @@ def home(request):
     template = loader.get_template('completes/public.html')
     content = RequestContext(request,{
         'content':render_to_string('partials/public_home.html', {'lang':lang, 'media':getMediaPath(request)}),
-        'title':_('Tu Taxi a un Click | TAXIBLE'),
+        'title':_('SISTEMA DE RESERVAS | CrossFit Jerez'),
         'lang':lang,
         'css':['partials/home.css','partials/modals.css'],
         'javascript':['aux/modals.js']
@@ -27,7 +27,7 @@ def login(request):
     template = loader.get_template('completes/public.html')
     content = RequestContext(request,{
         'content':render_to_string('partials/public_login.html', {'lang':lang, 'media':getMediaPath(request)}),
-        'title':_('Tu Taxi a un Click | TAXIBLE'),
+        'title':_('SISTEMA DE RESERVAS | CrossFit Jerez'),
         'css':['partials/coolform.css'],
         'javascript':['public/login.js'],
         'lang':lang,
@@ -40,7 +40,7 @@ def tokin(request,token):
     template = loader.get_template('completes/clear.html')
     content = RequestContext(request,{
         'content':render_to_string('partials/public_tokin.html', {'lang':lang, 'media':getMediaPath(request),'token':token}),
-        'title':_('Tu Taxi a un Click | TAXIBLE'),
+        'title':_('SISTEMA DE RESERVAS | CrossFit Jerez'),
         'javascript':['public/tokin.js'],
         'lang':lang,
     })
@@ -52,7 +52,7 @@ def button(request):
     template = loader.get_template('completes/button.html')
     content = RequestContext(request,{
         'content':render_to_string('partials/public_tokin.html', {'lang':lang, 'media':getMediaPath(request)}),
-        'title':_('Tu Taxi a un Click | TAXIBLE'),
+        'title':_('SISTEMA DE RESERVAS | CrossFit Jerez'),
         'javascript':['public/tokin.js'],
         'lang':lang,
     })
@@ -70,7 +70,7 @@ def inversores(request):
     template = loader.get_template('completes/inversores.html')
     content = RequestContext(request,{
         'content':render_to_string('partials/inversores.html', {'lang':lang, 'media':getMediaPath(request)}),
-        'title':_('Tu Taxi a un Click | TAXIBLE'),
+        'title':_('SISTEMA DE RESERVAS | CrossFit Jerez'),
         'javascript':['public/tokin.js'],
         'lang':lang,
     })
@@ -81,7 +81,7 @@ def radiostatus(request):
     template = loader.get_template('completes/public.html')
     content = RequestContext(request,{
         'content':render_to_string('partials/radiostatus.html', {'lang':lang, 'media':getMediaPath(request)}),
-        'title':_('Tu Taxi a un Click | TAXIBLE'),
+        'title':_('SISTEMA DE RESERVAS | CrossFit Jerez'),
         'css':['partials/radiostatus.css'],
         'javascript':['public/radiostatus.js'],
         'lang':lang,
@@ -114,7 +114,7 @@ def taxistas(request):
     template = loader.get_template('completes/public.html')
     content = RequestContext(request,{
         'content':render_to_string('partials/signup_drivers.html', {'lang':lang, 'media':getMediaPath(request)}),
-        'title':_('Tu Taxi a un Click | TAXIBLE'),
+        'title':_('SISTEMA DE RESERVAS | CrossFit Jerez'),
         'css':['partials/coolform.css','partials/signup_driver.css'],
         'javascript':['public/signup_drivers.js'],
         'lang':lang,
@@ -126,7 +126,7 @@ def downloads(request):
     template = loader.get_template('completes/public.html')
     content = RequestContext(request,{
         'content':render_to_string('partials/downloads.html', {'lang':lang, 'media':getMediaPath(request)}),
-        'title':_('Tu Taxi a un Click | TAXIBLE'),
+        'title':_('SISTEMA DE RESERVAS | CrossFit Jerez'),
         'css':['partials/downloads.css'],
         'javascript':[],
         'lang':lang,
@@ -139,7 +139,7 @@ def validate_driver(request,token):
     template = loader.get_template('completes/public.html')
     content = RequestContext(request,{
         'content':render_to_string('partials/validate_driver.html', {'lang':lang, 'media':getMediaPath(request),'token':token}),
-        'title':_('Tu Taxi a un Click | TAXIBLE'),
+        'title':_('SISTEMA DE RESERVAS | CrossFit Jerez'),
         'javascript':['public/validate_driver.js','aux/modals.js'],
         'css':['partials/validate_driver.css'],
         'lang':lang,
