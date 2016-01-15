@@ -3,7 +3,7 @@
 #radios_accordion{}
 #radios_accordion .panel.closed .panel-heading .panel-title>a{ color: #888;}
 #radios_accordion .panel.support .panel-heading .panel-title>a{ color: #333;}
-#radios_accordion .panel.user .panel-heading .panel-title>a{ color: #0474be;}
+#radios_accordion .panel.user .panel-heading .panel-title>a{ color: #075a8f;}
 #radios_accordion .messages{ border: 0px solid #999; }
 #radios_accordion .messages .message{ border: 0px solid #999; width: 70%; float: left; margin: 0px 0px 20px 0px; padding: 15px; background-color: #f9f9f9; border-radius: 4px;}
 #radios_accordion .messages .message.reverse{float: right; }
@@ -19,7 +19,7 @@
 
 #viewer_submenu{}
 #viewer_submenu .badge{ font-family: "Lucida Grande", Verdana, Arial, Helvetica, sans-serif; font-size: 10px; display: none;}
-#viewer_submenu .button.active .badge{ background-color: #0474be; color: #FFF;}
+#viewer_submenu .button.active .badge{ background-color: #075a8f; color: #FFF;}
 
 #viewer_counter{text-align: center; margin-top: 80px;}
 #viewer_counter .title{color: #DDD; font-size: 12px; margin: 0px; padding: 0px;}
@@ -30,10 +30,10 @@
 #stops_system_select .item:hover{border: 2px solid #888;}
 
 #stops_system_select.nostops .item.stop{font-weight: normal;  cursor: pointer;}
-#stops_system_select.nostops .item.near{font-weight: bold;border: 2px solid #0474be; color: #0474be;}
+#stops_system_select.nostops .item.near{font-weight: bold;border: 2px solid #075a8f; color: #075a8f;}
 #stops_system_select.nostops .item.near .fa-circle-o{display: none;}
 #stops_system_select.nostops .item.stop .fa-dot-circle-o{display: none;}
-#stops_system_select.stops .item.stop{font-weight: bold;border: 2px solid #0474be; color: #0474be;}
+#stops_system_select.stops .item.stop{font-weight: bold;border: 2px solid #075a8f; color: #075a8f;}
 #stops_system_select.stops .item.near{font-weight: normal;  cursor: pointer;}
 #stops_system_select.stops .item.near .fa-dot-circle-o{display: none;}
 #stops_system_select.stops .item.stop .fa-circle-o{display: none;}

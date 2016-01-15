@@ -137,7 +137,7 @@ function loadGraphicalJourneysYear(){
            	}
 			var bar4 = new RGraph.Bar('cvs', data2.data)
                 							 .set('labels', lista_meses)
-                							 .set('colors', ['#0474be'])
+                							 .set('colors', ['#075a8f'])
                 							 .set('tooltips', lista_tooltip)
                 							 .set('chart.gutter.left', desp)
                 							 .draw();
@@ -225,7 +225,7 @@ function loadGraphicalEnterprisesYear(){
            	}
 			var bar4 = new RGraph.Bar('cvs', data2.data)
                 							 .set('labels', lista_meses)
-                							 .set('colors', ['#0474be'])
+                							 .set('colors', ['#075a8f'])
                 							 .set('tooltips', lista_tooltip)
                 							 .set('chart.gutter.left', desp)
                 							 .draw();
@@ -277,7 +277,7 @@ function loadGraphicalUsersYear(){
            	}
 			var bar4 = new RGraph.Bar('cvs', data2.data)
                 							 .set('labels', lista_meses)
-                							 .set('colors', ['#0474be'])
+                							 .set('colors', ['#075a8f'])
                 							 .set('tooltips', lista_tooltip)
                 							 .set('chart.gutter.left', desp)
                 							 .draw();
@@ -329,7 +329,7 @@ function loadGraphicalJourneysCompletedYear(){
            	}
 			var bar4 = new RGraph.Bar('cvs', data2.data)
                 							 .set('labels', lista_meses)
-                							 .set('colors', ['#0474be'])
+                							 .set('colors', ['#075a8f'])
                 							 .set('tooltips', lista_tooltip)
                 							 .set('chart.gutter.left', desp)
                 							 .draw();
@@ -369,7 +369,7 @@ function loadGraphicalJourneysCompletedYear(){
             }
 			var bar4 = new RGraph.Bar('cvs', data2.data)
                 							 .set('labels', lista_meses)
-                							 .set('colors', ['#0474be'])
+                							 .set('colors', ['#075a8f'])
                 							 .set('tooltips', lista_tooltip)
                 							 .draw();
       		$('#graphical-wait').hide();

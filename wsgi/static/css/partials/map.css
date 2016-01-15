@@ -1,5 +1,5 @@
 #map {position: absolute;top: 37px;left: 0px;z-index: 0;width: 100%;margin: 0px;padding: 0px; margin-right: 0px;}
-#pedir {display: Xnone;position: absolute;top: 62px;left: 835px;z-index: 1;width: 140px; height: 40px; padding: 0px; line-height: 40px; vertical-align: middle; font-size: 20px; color: #FFF; font-weight: bold; background-color: #0474be; border: 0px solid #DB9825; text-align: center; cursor: pointer;}
+#pedir {display: Xnone;position: absolute;top: 62px;left: 835px;z-index: 1;width: 140px; height: 40px; padding: 0px; line-height: 40px; vertical-align: middle; font-size: 20px; color: #FFF; font-weight: bold; background-color: #075a8f; border: 0px solid #DB9825; text-align: center; cursor: pointer;}
 #pedir:hover{background-color: #DB9825;}
 #pendientes {display: Xnone;position: absolute;top: 62px;left: 975px;z-index: 1;width: 140px; height: 40px; padding: 0px; padding-top: 4px; line-height: 17px; vertical-align: middle; font-size: 17px; color: #FFF; font-weight: bold; background-color: grey; border: 0px solid #353535; text-align: center; cursor: pointer;}
 #pendientes:hover{background-color: #353535;}
