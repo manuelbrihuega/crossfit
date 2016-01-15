@@ -42,12 +42,12 @@
     #divlogo{width:100% !important;}
 }
 @media (max-width: 767px) {
-	#level1{background-image: url(../../img/i18n/level1_bg_md_es.jpg);}
+	#level1{background-image: url(../../img/i18n/level1_bg_md_es.jpg); background-size: none;}
     #level1.cr{background-image: url(../../img/i18n/level1_bg_md_cr.jpg);}
 	#level1.pa{background-image: url(../../img/i18n/level1_bg_md_pa.jpg);}
 	#level1.pe{background-image: url(../../img/i18n/level1_bg_md_pe.jpg);}
 	#level1.ad{background-image: url(../../img/i18n/level1_bg_md_ad.jpg);}
-	#logo{ margin: 0px auto 0px auto; float:none;}
+	#logo{ margin: 135px auto 0; float:none;}
 	#level1_1 h1{font-size: 35px;margin: 10px 0px 0px 0px; text-align: center;}
 	#level1_1 h3{font-size: 20px;margin: 2px 0px 30px 0px; text-align: center;}
 	#boton_descargar{ font-size: 12px;  }
