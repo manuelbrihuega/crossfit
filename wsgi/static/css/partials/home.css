@@ -30,13 +30,16 @@
 }
 
 @media (max-width: 991px) {
+    #level1{ background-image: url(../../img/i18n/level1_bg_lg_es_2.jpg); background-size: 100% auto;}
 	#level1_1{width: auto;}
-	#logo{margin: 0px 15px 0px 0px;}
+	#logo{margin: 0px 15px 0px 0px; width: 100%;}
 	#level1_1 h1{font-size: 40px;margin: 10px 0px 0px 0px;}
 	#level1_1 h3{font-size: 25px;margin: 10px 0px 0px 0px;}
 	#boton_descargar{ font-size: 14px; padding-left: 10px; padding-right: 10px; }
     #boton_google_play{ margin-left: 25px; }
     #boton_app_store{ margin-left: 25px; }
+    #titulonuevo{display: none;}
+    #divlogo{width:100% !important;}
 }
 @media (max-width: 767px) {
 	#level1{background-image: url(../../img/i18n/level1_bg_md_es.jpg);}
@@ -44,7 +47,7 @@
 	#level1.pa{background-image: url(../../img/i18n/level1_bg_md_pa.jpg);}
 	#level1.pe{background-image: url(../../img/i18n/level1_bg_md_pe.jpg);}
 	#level1.ad{background-image: url(../../img/i18n/level1_bg_md_ad.jpg);}
-	#logo{width:137px; height:137px; margin: 0px auto 0px auto; float:none;}
+	#logo{ margin: 0px auto 0px auto; float:none;}
 	#level1_1 h1{font-size: 35px;margin: 10px 0px 0px 0px; text-align: center;}
 	#level1_1 h3{font-size: 20px;margin: 2px 0px 30px 0px; text-align: center;}
 	#boton_descargar{ font-size: 12px;  }
