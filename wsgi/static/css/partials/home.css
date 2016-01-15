@@ -42,7 +42,7 @@
     #divlogo{width:100% !important;}
 }
 @media (max-width: 767px) {
-	#level1{background-image: url(../../img/i18n/level1_bg_md_es.jpg); background-size: none;}
+	#level1{background-image: url(../../img/i18n/level1_bg_md_es.jpg); background-size: auto;}
     #level1.cr{background-image: url(../../img/i18n/level1_bg_md_cr.jpg);}
 	#level1.pa{background-image: url(../../img/i18n/level1_bg_md_pa.jpg);}
 	#level1.pe{background-image: url(../../img/i18n/level1_bg_md_pe.jpg);}
