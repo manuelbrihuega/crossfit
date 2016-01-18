@@ -40,11 +40,6 @@ def login(request):
             if not auth.active:
                 raise Exception('not_activated',{'token':auth.token})
 
-            if validate_parameter(request.GET,'device_id'):
-                passengers=U_Customers.objects.all()
-                for passenger in passengers:
-                    if passenger.auth.banned:
-                        raise Exception('banned',{'id':auth.id})
             request.session['auth_id'] = auth.id
             data=json.dumps({'status': 'success', 'response':'logged', 'data':{'id':auth.id, 'role':auth.role.role}})
         else:
