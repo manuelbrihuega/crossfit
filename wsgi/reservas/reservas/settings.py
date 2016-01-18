@@ -7,6 +7,8 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = [
     'api.taxible.com',
+    'crossfit-reservasjerez.rhcloud.com/api/',
+    'crossfit-reservasjerez.rhcloud.com',
     'api.taxibleapp.com',
     'taxible.com',
     'taxibleapp.com',
