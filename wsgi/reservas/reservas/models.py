@@ -65,11 +65,11 @@ class U_Customers(models.Model):
     birthdate = models.DateTimeField(default=None,null=True)
     credit_wod = models.IntegerField(default=0,null=False)
     credit_box = models.IntegerField(default=0,null=False)
-	paid = models.BooleanField(default=True)
-	vip = models.BooleanField(default=False)
-	test_user = models.BooleanField(default=False)
-	validated = models.IntegerField(default=0)
-	rate = models.ForeignKey('Rates', null=True, blank=True,on_delete = models.SET_NULL) 
+    paid = models.BooleanField(default=True)
+    vip = models.BooleanField(default=False)
+    test_user = models.BooleanField(default=False)
+    validated = models.IntegerField(default=0)
+    rate = models.ForeignKey('Rates', null=True, blank=True,on_delete = models.SET_NULL) 
 
     def __unicode__(self):
         return self.auth.name+" "+self.auth.surname
