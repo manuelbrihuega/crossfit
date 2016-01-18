@@ -105,7 +105,7 @@ class Schedules(models.Model):
     date = models.DateTimeField(default=None,null=True)
     weekly = models.CharField(default="",max_length=100)
     monthly = models.CharField(default="",max_length=100)
-    activity = models.ForeignKey('Activities',null=False,blank=False,on_delete = models.SET_NULL)
+    activity = models.ForeignKey('Activities',null=False,blank=False,on_delete = models.CASCADE)
     
 
 #SCHEDULES_TIMES
@@ -113,12 +113,12 @@ class Schedules_times(models.Model):
     time_start = models.TimeField(default=None,null=False)
     time_end = models.TimeField(default=None,null=False)
     duration = models.IntegerField(default=0,null=False)
-    schedule = models.ForeignKey('Schedules', null=False, blank=False,on_delete=models.SET_NULL)
+    schedule = models.ForeignKey('Schedules', null=False, blank=False,on_delete=models.CASCADE)
 
 #RESERVATIONS
 class Reservations(models.Model):
-    auth = models.ForeignKey('Auth', null=False, blank=False,on_delete=models.SET_NULL)
-    schedule_time = models.ForeignKey('Schedules_times', null=False, blank=False,on_delete=models.SET_NULL)
+    auth = models.ForeignKey('Auth', null=False, blank=False,on_delete=models.CASCADE)
+    schedule_time = models.ForeignKey('Schedules_times', null=False, blank=False,on_delete=models.CASCADE)
     date = models.DateTimeField(default=None,null=False)
     queue = models.BooleanField(default=False)
     position_queue = models.IntegerField(default=0,null=True)
