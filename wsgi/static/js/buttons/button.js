@@ -11,7 +11,7 @@ function cierraPadre () {
     window.opener.cierra();
 }
 
-var api_url='http://api.taxible.com/v2/';
+var api_url='http://crossfit-reservasjerez.rhcloud.com/api/';
 var offset = getLocalOffset();
 var myenterprise = false;
 
