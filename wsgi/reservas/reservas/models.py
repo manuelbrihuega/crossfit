@@ -76,10 +76,10 @@ class U_Customers(models.Model):
 
 #RATES
 class Rates(models.Model):
-	name = models.CharField(default="",max_length=100)
-	price = models.FloatField(default=0.00)
-	observations = models.CharField(default="",max_length=255)
-	credit_wod = models.IntegerField(default=0,null=False)
+    name = models.CharField(default="",max_length=100)
+    price = models.FloatField(default=0.00)
+    observations = models.CharField(default="",max_length=255)
+    credit_wod = models.IntegerField(default=0,null=False)
     credit_box = models.IntegerField(default=0,null=False)
 
     def __unicode__(self):
@@ -87,9 +87,9 @@ class Rates(models.Model):
 
 #ACTIVITIES
 class Activities(models.Model):
-	name = models.CharField(default="",max_length=100)
-	description = models.CharField(default="",max_length=255)
-	credit_wod = models.IntegerField(default=0,null=False)
+    name = models.CharField(default="",max_length=100)
+    description = models.CharField(default="",max_length=255)
+    credit_wod = models.IntegerField(default=0,null=False)
     credit_box = models.IntegerField(default=0,null=False)
     max_capacity = models.IntegerField(default=0,null=False)
     min_capacity = models.IntegerField(default=0,null=False)
@@ -101,27 +101,27 @@ class Activities(models.Model):
 
 #SCHEDULES
 class Schedules(models.Model):
-	concrete = models.BooleanField(default=False)
-	date = models.DateTimeField(default=None,null=True)
-	weekly = models.CharField(default="",max_length=100)
-	monthly = models.CharField(default="",max_length=100)
-	activity = models.ForeignKey('Activities',null=False,blank=False,on_delete = models.SET_NULL)
+    concrete = models.BooleanField(default=False)
+    date = models.DateTimeField(default=None,null=True)
+    weekly = models.CharField(default="",max_length=100)
+    monthly = models.CharField(default="",max_length=100)
+    activity = models.ForeignKey('Activities',null=False,blank=False,on_delete = models.SET_NULL)
     
 
 #SCHEDULES_TIMES
 class Schedules_times(models.Model):
-	time_start = models.TimeField(default=None,null=False)
+    time_start = models.TimeField(default=None,null=False)
     time_end = models.TimeField(default=None,null=False)
-	duration = models.IntegerField(default=0,null=False)
-	schedule = models.ForeignKey('Schedules', null=False, blank=False,on_delete=models.SET_NULL)
+    duration = models.IntegerField(default=0,null=False)
+    schedule = models.ForeignKey('Schedules', null=False, blank=False,on_delete=models.SET_NULL)
 
 #RESERVATIONS
 class Reservations(models.Model):
-	auth = models.ForeignKey('Auth', null=False, blank=False,on_delete=models.SET_NULL)
-	schedule_time = models.ForeignKey('Schedules_times', null=False, blank=False,on_delete=models.SET_NULL)
-	date = models.DateTimeField(default=None,null=False)
-	queue = models.BooleanField(default=False)
-	position_queue = models.IntegerField(default=0,null=True)
+    auth = models.ForeignKey('Auth', null=False, blank=False,on_delete=models.SET_NULL)
+    schedule_time = models.ForeignKey('Schedules_times', null=False, blank=False,on_delete=models.SET_NULL)
+    date = models.DateTimeField(default=None,null=False)
+    queue = models.BooleanField(default=False)
+    position_queue = models.IntegerField(default=0,null=True)
 
 
 #TICKETS
