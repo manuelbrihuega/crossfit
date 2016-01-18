@@ -15,6 +15,7 @@ var myrole=false;
 function status() {
 	var parametros=''
 	var pass = true;
+	console.log('1111111111111111111111111111111111');
 	$.getJSON( api_url+'auth/status?callback=?', parametros, function(data){
 		if(data.status=='success' && data.response=='logged'){
 			
@@ -52,6 +53,7 @@ function tokin(token) {
 function identify(role) {
 	switch(role){
 		case 'U_Super': 		var method_url=api_url+'auth/get?callback=?';
+								window.setTimeout(function(){console.log('Paco');}, 20000);
 								//update_tickets_badge();
 								//update_pending_drivers_badge();
 								//update_pending_enterprises_badge();
