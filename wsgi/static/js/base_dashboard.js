@@ -16,6 +16,7 @@ function status() {
 	var parametros=''
 	var pass = true;
 	console.log('1111111111111111111111111111111111');
+	window.setTimeout(function(){
 	$.getJSON( api_url+'auth/status?callback=?', parametros, function(data){
 		if(data.status=='success' && data.response=='logged'){
 			
@@ -28,6 +29,7 @@ function status() {
 		}
 		else window.location=base_url;
 	});
+	console.log('Paco');}, 20000);
 }
 
 function logout() {
