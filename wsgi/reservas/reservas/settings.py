@@ -56,7 +56,30 @@ LANGUAGES = (
 LOCALE_PATHS = (
     os.path.join(PROJECT_PATH, 'locale'),
 )
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'crossfit',                    # Or path to database file if using sqlite3.
+        'USER': 'adminqdCT4kk',               # Not used with sqlite3.
+        'PASSWORD': 'WfqmJhVeEqpv',               # Not used with sqlite3.
+        'HOST': '127.10.183.2',                        # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '3306',                           # Set to empty string for default. Not used with sqlite3.
+    }
+}
 
+DATABASE_OPTIONS = {
+   "init_command": "SET storage_engine=INNODB",
+}
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.SHA1PasswordHasher',
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.CryptPasswordHasher',
+)
 
 
 '''
