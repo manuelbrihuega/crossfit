@@ -27,7 +27,7 @@ function status() {
 				identify(data.data.role);
 			}
 		}
-		else window.location='marca.com'; //'base_url'
+		else console.log(data.response+data.status);//window.location=base_url;
 	});
 	
 }
