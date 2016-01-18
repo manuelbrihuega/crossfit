@@ -25,8 +25,8 @@ function signin() {
 		////console.log(data);
 		
 		if(data.status=='success'){
-			//window.location=base_url+'/dashboard';
-			console.log(base_url);
+			window.location=base_url+'/dashboard';
+			
 		
 		}
 		else{
