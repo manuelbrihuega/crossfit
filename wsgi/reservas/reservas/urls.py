@@ -5,7 +5,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
    
     #BACKEND
-    url(r'^api/dashboard$', 'reservas.views.dashboard.dashboard'),
+    url(r'^dashboard$', 'reservas.views.dashboard.dashboard'),
     url(r'^api/auth/login$', 'reservas.views.auth.login'),
     url(r'^api/auth/logout$', 'reservas.views.auth.logout'),
     url(r'^api/auth/status$', 'reservas.views.auth.status'),
