@@ -17,16 +17,7 @@ function status() {
 	var pass = true;
 	$.getJSON( api_url+'auth/status?callback=?', parametros, function(data){
 		if(data.status=='success' && data.response=='logged'){
-			if(data.data.role=='U_Drivers'){
-				$.getJSON(api_url+'drivers/get?callback=?', '', function(data){
-					if(data.status=='success'){
-						if (data.data.driver_profile.validated == '0'){
-							pass=false;
-							window.location.href="/validate_driver/"+data.data.auth_profile.token;
-						}
-					}
-				});
-			}
+			
 			if(pass){
 				myrole=data.data.role;
 				$('body').attr({'data-role':data.data.role, 'data-auth-id':data.data.auth_id});
@@ -42,7 +33,6 @@ function logout() {
 	$.getJSON( api_url+'auth/logout?callback=?', '', function(data){
 		if(data.status=='success' || data.response=='not_logged'){
 			$.jCookie('U_Super',null);
-			$.jCookie('U_Delegations',null);
 			window.location=base_url;
 		}
 		else launch_alert('<i class="fa fa-frown-o"></i> Error al desconectar','warning')
@@ -62,55 +52,15 @@ function tokin(token) {
 function identify(role) {
 	switch(role){
 		case 'U_Super': 		var method_url=api_url+'auth/get?callback=?';
-								update_tickets_badge();
-								update_pending_drivers_badge();
-								update_pending_enterprises_badge();
+								//update_tickets_badge();
+								//update_pending_drivers_badge();
+								//update_pending_enterprises_badge();
 								break;
 
-		case 'U_Delegations': 	var method_url=api_url+'auth/get?callback=?';
-								update_tickets_badge();
-								update_pending_drivers_badge();
-								update_pending_enterprises_badge();
-								ninja_jumps();
-								break;
-
-		case 'U_Passengers': 	var method_url=api_url+'passengers/get?callback=?';
+		case 'U_Customers': 	var method_url=api_url+'passengers/get?callback=?';
 								update_tickets_badge();
 								ninja_jumps();
 								break;
-
-		case 'U_Drivers': 		var method_url=api_url+'auth/get?callback=?';
-								update_tickets_badge();
-								ninja_jumps();
-								break;
-
-		case 'U_Buttons': 		var method_url=api_url+'auth/get?callback=?';
-								ninja_jumps();
-								break;
-
-		case 'U_Viewer_Radios': var method_url=api_url+'auth/get?callback=?';
-								update_tickets_badge();
-								ninja_jumps();
-								break;
-
-		case 'U_Viewer_Digital_Radios': var method_url=api_url+'auth/get?callback=?';
-								update_tickets_badge();
-								ninja_jumps();
-								break;
-
-		case 'U_Admin_Enterprises':var method_url=api_url+'auth/get?callback=?';
-								update_tickets_badge();
-								ninja_jumps();
-								break;
-
-		case 'U_Operators': 	var method_url=api_url+'auth/get?callback=?';
-								ninja_jumps();
-								break;
-
-        case 'U_Supporters': var method_url=api_url+'auth/get?callback=?';
-                                update_tickets_supporter_badge();
-                                ninja_jumps();
-                                break;
 
 		default: ninja_jumps();
 	}
@@ -138,17 +88,8 @@ function select_content() {
 
 
 	switch (section) {
-		case 'dashboard': 			if(role=='U_Passengers') javascript='dashboard/passenger.js';
-									if(role=='U_Drivers') javascript='historical/driver.js';
-									if(role=='U_Buttons') javascript='dashboard/button.js';
-									if(role=='U_Viewer_Radios') javascript='dashboard/viewer.js';
-									if(role=='U_Viewer_Digital_Radios') javascript='dashboard/digitalviewer.js';
-									if(role=='U_Delegations') javascript='delegations/delegation_super.js';
+		case 'dashboard': 			if(role=='U_Customers') javascript='dashboard/passenger.js';
 									if(role=='U_Super') javascript='dashboard/super.js';
-									if(role=='U_Supporters') javascript='tickets/supporters.js';
-									if(role=='U_Operators') javascript='dashboard/operator.js';
-									if(role=='U_Admin_Enterprises') javascript='dashboard/admin_enterprise.js';
-
 									break;
 
 		case 'locations': 			if(role=='U_Viewer_Digital_Radios') javascript='locations/digitalviewer.js';
