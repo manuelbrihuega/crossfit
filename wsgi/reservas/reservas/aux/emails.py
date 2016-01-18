@@ -5,7 +5,6 @@ from django.template import RequestContext, loader
 from django.core.mail import EmailMultiAlternatives
 from reservas.models import *
 from reservas.aux.auth import *
-from reservas.aux.journeys import *
 
 # MAIN METHOD
 def send_email(content,subject,emails,title, sender=None):
@@ -51,16 +50,7 @@ def send_email_restorepass(url,email):
     content = render_to_string("emails/restorepass.html", {'url':url})
     send_email(content,'Cambio de contraseña', [email],'CAMBIO DE CONTRASEÑA','Taxible Support <soporte@taxible.com>')
 
-def send_email_daily_report():
-    """Send an email with daily report"""
-    try:
-        new_users_data = info_new_users_today()
-        journeys_data = daily_report()
-        services = journeys_data['data']
-        content = render_to_string("emails/daily_report.html", {'new_users': new_users_data['data'], 'radios': services['services'], 'total_completed': services['total_completed'], 'total_canceled':services['total_canceled']})
-        send_email(content,'Informe diario de Taxible.com', ['soporte@taxible.com', 'info@taxible.com'],'INFORME DIARIO DE TAXIBLE.COM','Taxible Community <hola@taxible.com>')
-    except:
-        pass
+
 
 def send_email_banned_user(email,name):
     """Send an email to announce an user has been banned"""
@@ -83,31 +73,7 @@ def send_email_tradicional_radio_disconnected(radio_name):
     content = render_to_string("emails/radio_desconnected.html", {'radio_name':radio_name})
     send_email(content,'Radio desconectada', ['soporte@taxible.com', 'info@taxible.com'],'RADIO DESCONECTADA','Taxible Support <soporte@taxible.com>')
     
-def send_email_not_served_journey(journey_id):
-    """Send an email to announce there is not served journey"""
-    from api.models import Journeys
-    try:
-        journey = Journeys.objects.get(id=journey_id)
-        radio = journey.location.radio.name
-        name = journey.auth.name+' '+journey.auth.surname+' ('+journey.auth.phone+' | '+journey.auth.email+')'
-        origin = journey.origin
-        content = render_to_string("emails/not_served_journey.html", {'radio':radio, 'name': name, 'origin': origin })
-        send_email(content,'Carrera no servida', ['soporte@taxible.com', 'info@taxible.com'],'CARRERA NO SERVIDA','Taxible Support <soporte@taxible.com>')
-    except:
-        pass
 
-def send_email_cancel_reserved_journey(journey_id, motivation):
-    """Send an email to announce cancelation reserved by radio"""
-    from api.models import Journeys
-    try:
-        journey = Journeys.objects.get(id=journey_id)
-        radio = journey.location.radio.name
-        name = journey.auth.name+' '+journey.auth.surname+' ('+journey.auth.phone+' | '+journey.auth.email+')'
-        origin = journey.origin
-        content = render_to_string("emails/cancel_reserved_journey.html", {'radio':radio, 'name': name, 'origin': origin, 'motivation':motivation })
-        send_email(content,'Reserva cancelada', ['soporte@taxible.com', 'info@taxible.com'],'RESERVA CANCELADA','Taxible Support <soporte@taxible.com>')
-    except:
-        pass
 
 def send_email_corporate_code_passenger(passenger_id, country_code):
     """Send an email with corporate code"""
