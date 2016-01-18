@@ -27,19 +27,6 @@ function loadLocation() {
             if(langs.indexOf(countryCode)==-1) setLang('es', false);
         });
     }
-
-    $.getJSON(api_url+'delegations/list_all?callback=?', {}, function(data){
-        var list_delegations=[];
-        var country=0;
-        if(data.status=='success') list_delegations=data.data.delegations;
-        for(var i=0;i<list_delegations.length;i++){
-            if (list_delegations[i].country_code.toUpperCase()==lang.toUpperCase()){
-                country=list_delegations[i].id;
-                prefix=list_delegations[i].prefix;
-            }
-        }
-    });
-
 }
 
 
