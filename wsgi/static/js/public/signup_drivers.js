@@ -51,13 +51,10 @@ if($('#password').val()==$('#password_repeat').val()){
             $('#movil').val('');
             $('#birthdate').val('');
             
-            $('#nuevo_taxista').empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-smile-o"></i></div><div class="text">¡YA ESTAS REGISTRADO!<br> Descarga la APP AHORA y nos pondremos en contacto contigo para activarla.</div></div>');
+            $('#nuevo_taxista').empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-smile-o"></i></div><div class="text">¡YA ESTAS REGISTRADO!<br> Podrás acceder a tu cuenta cuando uno de nuestros monitores valide tu registro. Gracias por registrarte en nuestro sistema de reservas!</div></div>');
             var content_botonera=$('<div></div>').attr({'class':'download_content'}); $('#nuevo_taxista').append(content_botonera);
             var botonera=$('<div></div>').attr({'class':'botonera'}); content_botonera.append(botonera);
-            var link = $('<a>').attr({'href':'https://itunes.apple.com/es/app/taxible-driver/id848377763?mt=8'}); botonera.append(link);
-            var button = $('<div></div>').attr({'class':'download spritehome sphome_app_store'}); link.append(button);
-            var link = $('<a>').attr({'href':'https://play.google.com/store/apps/details?id=com.idearioventures.taxibledriver'}); botonera.append(link);
-            var button = $('<div></div>').attr({'class':'download spritehome sphome_google_play'}); link.append(button);
+            var img = $('<img>').attr({'src':base_url+'static/img/common/logoregistro.png'}); botonera.append(img);
         }
 
         else{

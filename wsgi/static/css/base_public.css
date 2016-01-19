@@ -55,7 +55,7 @@ body { -webkit-font-smoothing: antialiased; height: 100%; }
 .overflow{overflow:hidden;}
 
 
-.notice{text-align: center; border: 0px solid #999; color: #DDD; margin: 40px 0px;}
+.notice{text-align: center; border: 0px solid #999; color: gray; margin: 40px 0px;}
 .notice.full{margin: 60px 0px 0px;}
 .notice .icon{font-size: 160px;}
 .notice .text{font-size: 20px;}

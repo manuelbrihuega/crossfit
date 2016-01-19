@@ -8,14 +8,12 @@ def create_customer(data,auth,rate):
         customer=U_Customers()
         customer.auth=auth
         customer.rate=rate
+        customer.credit_wod=rate.credit_wod
+        customer.credit_box=rate.credit_box
         customer.paid=False
         customer.vip=False
         customer.test_user=False
         customer.validated=False
-        if validate_parameter(data,'credit_wod'):
-            customer.credit_wod=data["credit_wod"]
-        if validate_parameter(data,'credit_box'):
-            customer.credit_box=data["credit_box"]
         if validate_parameter(data,'birthdate'):
             customer.birthdate=data["birthdate"]
         if validate_parameter(data,'nif'):
