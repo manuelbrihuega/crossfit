@@ -7,98 +7,20 @@ var prefix=34;
 
 function list_radios(){
     var lang=$('body').attr('data-lang');
-    $.getJSON(api_url+'delegations/list_all?callback=?', {}, function(data){
-        var list_delegations=[];
-        var country=0;
-        if(data.status=='success') list_delegations=data.data.delegations;
-        for(var i=0;i<list_delegations.length;i++){
-            if (list_delegations[i].country_code.toUpperCase()==lang.toUpperCase()){
-                country=list_delegations[i].id;
-                prefix=list_delegations[i].prefix;
-            }
+    $.getJSON(api_url+'tarifas/list_all?callback=?', {}, function(data){
+        var list_tarifas=[];
+        if(data.status=='success') list_tarifas=data.data.rates;
+        var select=$('#radio');
+        var optioninicial=$('<option></option>').attr({'value':-1}).text('-'); select.append(optioninicial);
+        for(var i=0;i<list_tarifas.length;i++){
+            id=list_tarifas[i].id;
+            nombres=list_tarifas[i].name;
+            var option=$('<option></option>').attr({'value':list_tarifas[i].id, 'data-credit-box':list_tarifas[i].credit_box, 'data-credit-wod':list_tarifas[i].credit_wod}).text(list_tarifas[i].name+" ("+list_tarifas[i].price+" €)"); select.append(option);
         }
-
-        $.getJSON(api_url+'delegations/list_cities?callback=?', {delegation_id:country}, function(data){
-            var list_cities=data.data.cities;
-            var select=$('#radio');
-            var optioninicial=$('<option></option>').attr({'value':-1}).text('-'); select.append(optioninicial);
-            var optioninicial=$('<option></option>').attr({'value':0}).text('Sugerir una nueva ciudad Taxible'); select.append(optioninicial);
-            for(var i=0;i<list_cities.length;i++){
-                var option=$('<option></option>').attr({'value':list_cities[i].id}).text(list_cities[i].city); select.append(option);
-            }
-
-            select.bind({
-                change:function(){
-
-                    change_radio();
-
-                }
-            });
-
-            change_radio();
-        });
-
     });
 }
 
-function change_radio(){
 
-    var value=$('#radio').val();
-    if(value>-1){
-        $.getJSON(api_url+'features/list_by_radio?callback=?',{radio_id:value},function(data){
-            var destination=$('#checkboxes>div');
-            destination.empty();
-            if (data.status=='success'){
-                for(var i=0;i<data.data.features.length;i++){
-                    var divcheck=$('<div></div>').attr({'class':'checkbox'});
-                    var textcheck=$('<i></i>').attr({'id':data.data.features[i].id,'class':'fa fa-square'}).text(' '+data.data.features[i].description);
-
-                    divcheck.click(function(){
-                       check(this);
-                    });
-
-                    divcheck.append(textcheck);
-                    destination.append(divcheck);
-                }
-
-
-
-            }
-
-            $('#form_driver').css('display','block');
-            $('#form_driver').removeClass('oculto');
-
-        });
-    }
-
-    else{
-        $('#form_driver').addClass('oculto');
-        $('#form_driver').css('display','none');
-
-    }
-
-}
-
-function check(element) {
-	var checkwrapper=$(element);
-	var i = checkwrapper.find('i');
-	if(i.hasClass('fa-square')) i.removeClass('fa-square').addClass('fa-check-square');
-	else i.removeClass('fa-check-square').addClass('fa-square');
-}
-
-function mismo(element) {
-	var i = $(element).find('i');
-	if(i.hasClass('fa-square')){
-		i.removeClass('fa-square').addClass('fa-check-square');
-		$('#t_email').val( $('#email').val() );
-        $('#t_nombre').val($('#nombre').val() );
-        $('#t_apellidos').val($('#apellidos').val() );
-		$('#t_movil').val( $('#movil').val() );
-	}
-	else{
-		i.removeClass('fa-check-square').addClass('fa-square');
-	}
-}
 
 function enviar() {
 

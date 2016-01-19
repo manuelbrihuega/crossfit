@@ -2,29 +2,25 @@
 
 <div id="nuevo_taxista" class="container">
 
-    <h3 class="">Seleccione una ciudad</h3>
+    <h3 class="">Selecciona tu tarifa</h3>
     <div id="select_radio">
         <select name="radio" id="radio"></select>
     </div>
 
 	<form id="form_driver" class="form-inline oculto" role="form">
 
-        <h3 class="">Licencia</h3>
+        <h3 class="">Datos de usuario</h3>
 
 		<div class="row">
-	  		<div class="form-group  col-sm-2">
+	  		<div class="form-group  col-sm-3">
 	    		<label for="nif">{% trans 'NIF' %}</label>
 	    		<input type="text" class="form-control" id="nif" placeholder="{% trans 'NIF' %}">
 	  		</div>
-	  		<div class="form-group  col-sm-3">
-	    		<label for="licencia">{% trans 'NUM. LICENCIA'%}</label>
-	    		<input type="text" class="form-control" id="licencia" placeholder="{% trans 'NUM. LICENCIA'%}">
-	  		</div>
-	  		<div class="form-group col-sm-3">
+	  		<div class="form-group col-sm-4">
 	    		<label for="nombre">Nombre</label>
 	    		<input type="text" class="form-control" id="nombre" placeholder="NOMBRE">
 	  		</div>
-	  		<div class="form-group  col-sm-4">
+	  		<div class="form-group  col-sm-5">
 	    		<label for="apellidos">Apellidos</label>
 	    		<input type="text" class="form-control" id="apellidos" placeholder="APELLIDOS">
 	  		</div>
@@ -33,25 +29,7 @@
 
 		</div>
 	 	<br>
-		<div class="row">
-	  		<div class="form-group  col-sm-4">
-	    		<label for="direccion">Dirección</label>
-	    		<input type="text" class="form-control" id="direccion" placeholder="DIRECCIÓN">
-	  		</div>
-	  		<div class="form-group  col-sm-3">
-	    		<label for="localidad">{% trans 'LOCALIDAD' %}</label>
-	    		<input type="text" class="form-control" id="localidad" placeholder="{% trans 'LOCALIDAD' %}">
-	  		</div>
-	  		<div class="form-group  col-sm-2">
-	    		<label for="cp">Código Postal</label>
-	    		<input type="text" class="form-control" id="cp" placeholder="COD. POSTAL">
-	  		</div>
-	  		<div class="form-group  col-sm-3">
-	    		<label for="provincia">Provincia</label>
-	    		<input type="text" class="form-control" id="provincia" placeholder="PROVINCIA">
-	  		</div>
-		</div>
-	 	<br>
+		
 		<div class="row">
 	  		<div class="form-group  col-sm-4">
 	    		<label for="email">Email</label>
@@ -64,88 +42,19 @@
 	  		</div>
 
 	  		<div class="form-group  col-sm-4">
-	    		<label for="movil">Móvil</label>
+	    		<label for="movil">Teléfono</label>
 	    		<input type="text" class="form-control" id="movil" placeholder="MÓVIL">
 	  		</div>
 		</div>
         <br/>
         <div class="row">
-            <div class="form-group  col-sm-4">
-	    		<label for="matricula">{% trans 'MATRÍCULA'%}</label>
-	    		<input type="text" class="form-control" id="matricula" placeholder="{% trans 'MATRÍCULA'%}">
-	  		</div>
-	  		<div class="form-group  col-sm-4">
-	    		<label for="marca">Marca</label>
-	    		<input type="text" class="form-control" id="marca" placeholder="MARCA">
-	  		</div>
-	  		<div class="form-group  col-sm-4">
-	    		<label for="modelo">Modelo</label>
-	    		<input type="text" class="form-control" id="modelo" placeholder="MODELO">
+            <div class="form-group  col-sm-12">
+	    		Fecha nacimiento: <input type="date" name="birthdate" step="1" min="1800-01-01" max="2016-12-31" value="2016-01-01">
 	  		</div>
         </div>
 
-		<br>
-		<div id="checkboxes" class="row">
-			<div class="col-sm-12">
-				<div class="checkbox" onclick="check(this);">
-					<i id="tarjeta" class="fa fa-square"></i> Pago con tarjeta
-				</div>
-				<div class="checkbox" onclick="check(this);">
-					<i id="mensajeria" class="fa fa-square"></i> Mensajería
-				</div>
-				<div class="checkbox" onclick="check(this);">
-					<i id="aeropuerto" class="fa fa-square"></i> Aeropuerto
-				</div>
-				<div class="checkbox" onclick="check(this);">
-					<i id="animales" class="fa fa-square"></i> Admite animales
-				</div>
-				<div class="checkbox" onclick="check(this);">
-					<i id="ecologico" class="fa fa-square"></i> Coche ecológico
-				</div>
-				<div class="checkbox" onclick="check(this);">
-					<i id="discapacitados" class="fa fa-square"></i> Discapacitados
-				</div>
-				<div class="checkbox" onclick="check(this);">
-					<i id="abonado" class="fa fa-square"></i> Servicio abonado
-				</div>
-				
-	
-			</div>
-		</div>
+		
         <br>
-
-        <h3>Taxista <span id="mismo" onclick="mismo(this);"><i class="fa fa-square"></i> Mismo conductor</span></h3>
-
-        <form class="form-inline" role="form">
-            <div class="row">
-                <div class="form-group  col-sm-2">
-                    <label for="t_email">Email</label>
-                    <input type="text" class="form-control" id="t_email" placeholder="EMAIL">
-                </div>
-                <div class="form-group  col-sm-3">
-                    <label for="t_nombre">Nombre</label>
-                    <input type="text" class="form-control" id="t_nombre" placeholder="NOMBRE">
-                </div>
-
-                <div class="form-group  col-sm-3">
-                    <label for="t_apellidos">Apellidos</label>
-                    <input type="text" class="form-control" id="t_apellidos" placeholder="APELLIDOS">
-                </div>
-
-                <div class="form-group col-sm-2">
-                    <label for="t_movil">Móvil</label>
-                    <input type="text" class="form-control" id="t_movil" placeholder="MÓVIL">
-                </div>
-                <div class="form-group  col-sm-2">
-                    <label for="t_modelo">Modelo</label>
-                    <input type="text" class="form-control" id="t_modelo" placeholder="MODELO MÓVIL">
-                </div>
-            </div>
-            <br><br>
-            <center>
-                <div id="enviar" class="btn btn-default" onclick="enviar();">ENVIAR</div>
-            </center>
-        </form>
 
 
     </form>
