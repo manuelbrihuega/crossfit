@@ -22,7 +22,7 @@ def create_customer(data,auth,rate):
             customer.nif=data["nif"]
         customer.save()
 
-        return {'status':'success','response':driver}
+        return {'status':'success','response':customer}
 
     except:
-        return {'status':'failed','response':'driver_not_created'}
+        return {'status':'failed','response':'customer_not_created'}
