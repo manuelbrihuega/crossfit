@@ -20,7 +20,7 @@ def add(request):
     Creates a customer.
     """
     try:
-        params=['birthdate','nif','name','surname','password','email','movil','rate_id']
+        params=['birthdate','nif','name','surname','password','email','phone','rate_id']
         for param in params:
             if not validate_parameter(request.GET,param):
                 raise Exception(param+'_missed')
