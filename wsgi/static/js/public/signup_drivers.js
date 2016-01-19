@@ -81,7 +81,7 @@ if($('#password').val()==$('#password_repeat').val()){
 
 	});
 }else{
-    launch_alert(warning,'Las contraseñas no coinciden');
+    launch_alert('Las contraseñas no coinciden','warning');
 }
 
 }
