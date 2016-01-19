@@ -26,7 +26,7 @@ function status() {
 				identify(data.data.role);
 			}
 		}
-		else console.log(data.response+data.status);//window.location=base_url; 
+		else window.location=base_url; 
 	});
 	
 }
