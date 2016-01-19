@@ -28,7 +28,7 @@ input.form-control{
 
 input.form-control:focus{
 	border: none;
-	border-bottom: 1px solid #FF9900;
+	border-bottom: 1px solid #075a8f;
 }
 
 .checkbox{ margin-right: 20px; }

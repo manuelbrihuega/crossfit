@@ -24,6 +24,7 @@ function list_radios(){
 
 function enviar() {
 
+if($('#password').val()==$('#password_repeat').val()){
     var tarifa_id=$('#radio').val();
     var datainput = {
         email: $('#email').val(),
@@ -79,6 +80,8 @@ function enviar() {
 
 
 	});
-
+}else{
+    launch_alert(warning,'Las contraseñas no coinciden');
+}
 
 }
