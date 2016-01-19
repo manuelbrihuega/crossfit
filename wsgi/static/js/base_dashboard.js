@@ -35,7 +35,7 @@ function logout() {
 	$.getJSON( api_url+'auth/logout?callback=?', '', function(data){
 		if(data.status=='success' || data.response=='not_logged'){
 			$.jCookie('U_Super',null);
-			//window.location=base_url;
+			window.location=base_url;
 		}
 		else launch_alert('<i class="fa fa-frown-o"></i> Error al desconectar','warning')
 	});
