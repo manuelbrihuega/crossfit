@@ -36,10 +36,8 @@ def add(request):
                 if r_customer['status']=='failed':
                     raise Exception(r_customer['response'])
 
-                #add_task(datetime.utcnow(),'send_email_new_driver_info_task(driver_id='+str(r_driver['response'].id)+')')
+#add_task(datetime.utcnow(),'send_email_new_driver_info_task(driver_id='+str(r_driver['response'].id)+')')
 				data=json.dumps({'status':'success','response':'created','data':{'auth_id':result_auth['response'].id,'driver_id':r_driver['response'].id}})
-
-
             else:
                 raise Exception(result_auth['response'])
 
