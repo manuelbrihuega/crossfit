@@ -92,6 +92,6 @@ PASSWORD_HASHERS = (
 #Configuramos variables para envio de email.
 EMAIL_HOST="smtp.gmail.com"
 EMAIL_PORT=587
-EMAIL_HOST_USER="idearioventures.developers@gmail.com"
+EMAIL_HOST_USER="crossfitjerezdelafrontera@gmail.com"
 EMAIL_HOST_PASSWORD="Larios501"
 EMAIL_USE_TLS=True
