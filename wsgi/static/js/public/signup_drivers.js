@@ -24,71 +24,32 @@ function list_radios(){
 
 function enviar() {
 
-    var checks=$('#checkboxes .fa-check-square');
-
-    var radio_id=$('#radio').val();
-
-    var features="";
-
-    checks.each(function(){
-        features+=$(this).attr('id')+","
-    });
-
-    var lang=$('body').attr('data-lang');
-
-
-
+    var tarifa_id=$('#radio').val();
     var datainput = {
-        nif: $('#nif').val(),
-        num_licence: $('#licencia').val(),
-        name_owner: $('#nombre').val(),
-        surname_owner: $('#apellidos').val(),
-        address: $('#direccion').val(),
+        email: $('#email').val(),
         password: $('#password').val(),
-        locality: $('#localidad').val(),
-        postal_code: $('#cp').val(),
-        province: $('#provincia').val(),
-        email_owner: $('#email').val(),
-        phone_owner: $('#movil').val(),
-        num_plate: $('#matricula').val(),
-        car_brand: $('#marca').val(),
-        car_model: $('#modelo').val(),
-		features:features,
-        email: $('#t_email').val(),
-        name: $('#t_nombre').val(),
-        surname: $('#t_apellidos').val(),
-        phone: $('#t_movil').val(),
-        prefix: prefix,
-        device_model: $('#t_modelo').val(),
-        radio_id:radio_id
+        name: $('#nombre').val(),
+        surname: $('#apellidos').val(),
+        phone: $('#movil').val(),
+        nif: $('#nif').val(),
+        birthdate: $('#birthdate').val(),
+        rate_id:tarifa_id
     };
 
 	$('#enviar').html('<i class="icon-spinner icon-spin"></i> Enviando');
 
-    $.getJSON(api_url+'drivers/add?callback=?',datainput,function(data){
+    $.getJSON(api_url+'customers/add?callback=?',datainput,function(data){
 
         if(data.status=='success'){
 
             $('#nif').val('');
-            $('#licencia').val('');
             $('#nombre').val('');
             $('#apellidos').val('');
-            $('#direccion').val('');
-            $('#localidad').val('');
             $('#password').val('');
-            $('#cp').val('');
-            $('#provincia').val('');
             $('#email').val('');
             $('#movil').val('');
-            $('#matricula').val('');
-            $('#marca').val('');
-            $('#modelo').val('');
-            $('#t_email').val('');
-            $('#t_nombre').val('');
-            $('#t_napellidos').val('');
-            $('#t_movil').val('');
-            $('#t_modelo').val('');
-
+            $('#birthdate').val('');
+            
             $('#nuevo_taxista').empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-smile-o"></i></div><div class="text">¡YA ESTAS REGISTRADO!<br> Descarga la APP AHORA y nos pondremos en contacto contigo para activarla.</div></div>');
             var content_botonera=$('<div></div>').attr({'class':'download_content'}); $('#nuevo_taxista').append(content_botonera);
             var botonera=$('<div></div>').attr({'class':'botonera'}); content_botonera.append(botonera);
@@ -108,23 +69,8 @@ function enviar() {
             if (message == 'name_missed') warning = 'Falta el nombre del usuario';
             if (message == 'surname_missed') warning = 'Falta el apellido del usuario';
             if (message == 'phone_missed') warning = 'Falta el número de teléfono del usuario';
-
-            if (message == 'owner_name_missed') warning = 'Falta el nombre del dueño de la licencia';
-            if (message == 'owner_surname_missed') warning = 'Falta el apellido del dueño de la licencia';
-            if (message == 'owner_email_missed') warning = 'Falta el email del dueño de la licencia';
-            if (message == 'owner_nif_missed') warning = 'Falta el NIF del dueño de la licencia';
-            if (message == 'nif_missed') warning = 'Falta el NIF del dueño de la licencia';
-            if (message == 'owner_phone_missed') warning = 'Falta el teléfono del dueño de la licencia';
-            if (message == 'owner_address_missed') warning = 'Falta la dirección del dueño de la licencia';
-            if (message == 'owner_postal_code_missed') warning = 'Falta el código postal del dueño de la licencia';
-            if (message == 'owner_locality_missed') warning = 'Falta la localidad del dueño de la licencia';
-            if (message == 'owner_province_missed') warning = 'Falta la provincia del dueño de la licencia';
-
-            if (message == 'licence_num_licence_missed') warning = 'Falta el número de la licencia';
-            if (message == 'num_licence_missed') warning = 'Falta el número de la licencia';
-            if (message == 'licence_num_plate_missed') warning = 'Falta el número de la matrícula';
-            if (message == 'licence_car_brand_missed') warning = 'Falta la marca del vehículo';
-            if (message == 'licence_car_model_missed') warning = 'Falta el modelo del vehículo';
+            if (message == 'nif_missed') warning = 'Falta el NIF';
+            if (message == 'rate_id_missed') warning = 'Falta seleccionar una tarifa';
             launch_alert(warning,'warning');
         }
 
