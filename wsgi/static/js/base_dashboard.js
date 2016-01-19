@@ -15,7 +15,6 @@ var myrole=false;
 function status() {
 	var parametros=''
 	var pass = true;
-	console.log('1111111111111111111111111111111111');
 	
 	$.getJSON( api_url+'auth/status?callback=?', parametros, function(data){
 		if(data.status=='success' && data.response=='logged'){
@@ -36,7 +35,7 @@ function logout() {
 	$.getJSON( api_url+'auth/logout?callback=?', '', function(data){
 		if(data.status=='success' || data.response=='not_logged'){
 			$.jCookie('U_Super',null);
-			window.location=base_url;
+			//window.location=base_url;
 		}
 		else launch_alert('<i class="fa fa-frown-o"></i> Error al desconectar','warning')
 	});
@@ -55,7 +54,6 @@ function tokin(token) {
 function identify(role) {
 	switch(role){
 		case 'U_Super': 		var method_url=api_url+'auth/get?callback=?';
-								window.setTimeout(function(){console.log('Paco');}, 20000);
 								//update_tickets_badge();
 								//update_pending_drivers_badge();
 								//update_pending_enterprises_badge();
