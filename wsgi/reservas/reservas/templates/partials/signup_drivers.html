@@ -1,13 +1,13 @@
 {% load i18n %}
 
 <div id="nuevo_taxista" class="container">
-
+	<br>
     <h3 class="">Selecciona tu tarifa</h3>
     <div id="select_radio">
         <select name="radio" id="radio"></select>
     </div>
 
-	<form id="form_driver" class="form-inline oculto" role="form">
+	<form id="form_driver" class="form-inline" role="form">
 
         <h3 class="">Datos de usuario</h3>
 
@@ -49,10 +49,14 @@
         <br/>
         <div class="row">
             <div class="form-group  col-sm-12">
-	    		Fecha nacimiento: <input type="date" name="birthdate" step="1" min="1800-01-01" max="2016-12-31" value="2016-01-01">
+	    		<label for="Nacimiento">Fecha de nacimiento</label>
+	    		<input type="date" name="birthdate" step="1" min="1800-01-01" max="2016-12-31" value="2016-01-01">
 	  		</div>
         </div>
-
+        <br><br>
+            <center>
+                <div id="enviar" class="btn btn-default" onclick="enviar();">ENVIAR</div>
+            </center>
 		
         <br>
 
