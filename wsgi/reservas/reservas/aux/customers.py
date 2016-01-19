@@ -3,7 +3,7 @@ from reservas.models import *
 from reservas.aux.general import *
 from reservas.aux.strings import *
 
-def create_customer(data,auth):
+def create_customer(data,auth,rate):
     try:
         customer=U_Customers()
         customer.auth=auth
