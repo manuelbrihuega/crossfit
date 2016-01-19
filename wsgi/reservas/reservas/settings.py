@@ -89,9 +89,9 @@ PASSWORD_HASHERS = (
 )
 
 
-'''
-       Root User: adminqdCT4kk
-   Root Password: WfqmJhVeEqpv
-   Database Name: crossfit
-
-Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/'''
+#Configuramos variables para envio de email.
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT=465
+EMAIL_HOST_USER="idearioventures.developers@gmail.com"
+EMAIL_HOST_PASSWORD="Larios501"
+EMAIL_USE_TLS=True

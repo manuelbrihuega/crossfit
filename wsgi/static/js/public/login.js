@@ -30,7 +30,7 @@ function signin() {
 		
 		}
 		else{
-            if(data.response == 'not_activated') window.location=base_url+'/validate_driver/'+data.data.token;
+            if(data.response == 'not_activated') login_alert('Usuario no validado');
             else login_alert(data.response);
         }
 		

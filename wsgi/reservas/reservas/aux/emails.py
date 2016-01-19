@@ -15,41 +15,11 @@ def send_email(content,subject,emails,title, sender=None):
     msg.send()
     print 'OK'
     
-    
-# ALL SHIPMENTS EMAILS
-def send_email_invoice(invoice_id, email):
-    """Send an email with invoice"""
-    invoice = Invoices.objects.get(id=invoice_id)
-    months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-    month = months[invoice.month-1]
-    year = invoice.year
-    url = "http://api.taxible.com/invoices/"+str(invoice.id)+str(invoice)+".pdf"
-    content = render_to_string("emails/send_invoice.html", {'url':url, 'month':month, 'year':year})
-    if email == '':
-        send_email('La factura '+url+' no se ha enviado correctamente ya que el email de destino no existe.','Factura '+str(month)+' '+str(year)+' NO ENVIADA', ['soporte@taxible.com'],'Factura '+str(month)+' '+str(year)+' NO ENVIADA','Taxible Administration <admon@taxibleapp.com>')
-    else:
-        send_email(content,'Factura '+str(month)+' '+str(year), [email],'Factura '+str(month)+' '+str(year),'Taxible Administration <admon@taxibleapp.com>')
-    
-
-def send_email_autoinvoice(autoinvoice_id, email):
-    """Send an email with invoice"""
-    autoinvoice = Autoinvoices.objects.get(id=autoinvoice_id)
-    months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-    month = months[autoinvoice.month-1]
-    year = autoinvoice.year
-    url = "http://api.taxible.com/invoices/"+str(autoinvoice.id)+str(autoinvoice)+".pdf"
-    content = render_to_string("emails/send_autoinvoice.html", {'url':url, 'month':month, 'year':year})
-    if email == '':
-        send_email('La autofactura '+url+' no se ha enviado correctamente ya que el email de destino no existe.','Autofactura '+str(month)+' '+str(year)+' NO ENVIADA', ['soporte@taxible.com'],'Autofactura '+str(month)+' '+str(year)+' NO ENVIADA','Taxible Administration <admon@taxibleapp.com>')
-    else:
-        send_email(content,'Factura '+str(month)+' '+str(year), [email],'Factura '+str(month)+' '+str(year),'Taxible Administration <admon@taxibleapp.com>')
-    
 
 def send_email_restorepass(url,email):
     """Send an email to restore the pass"""
     content = render_to_string("emails/restorepass.html", {'url':url})
     send_email(content,'Cambio de contraseña', [email],'CAMBIO DE CONTRASEÑA','Taxible Support <soporte@taxible.com>')
-
 
 
 def send_email_banned_user(email,name):
@@ -74,70 +44,20 @@ def send_email_tradicional_radio_disconnected(radio_name):
     send_email(content,'Radio desconectada', ['soporte@taxible.com', 'info@taxible.com'],'RADIO DESCONECTADA','Taxible Support <soporte@taxible.com>')
     
 
-
-def send_email_corporate_code_passenger(passenger_id, country_code):
-    """Send an email with corporate code"""
-    from api.models import U_Passengers
+def send_email_new_customer(customer_id):
+    """Send an email when a customer is created"""
+    from reservas.models import U_Customers
     try:
-        passenger=U_Passengers.objects.get(id=passenger_id)
-        email = get_email_passengers(country_code)
-        name = passenger.auth.name if passenger.auth.name else ''
-        content = render_to_string("emails/corporate_code_passenger.html",{'corporate_code':passenger.corporate_code})
-        send_email(content,'Código corporativo', [passenger.auth.email],'Hola '+name,'Taxible <'+email+'>')
-    except:
-        pass
-    
-def send_email_new_passenger(passenger_id, country_code):
-    """Send an email when a passenger is created"""
-    from api.models import U_Passengers
-    try:
-        passenger=U_Passengers.objects.get(id=passenger_id)
-        email = get_email_passengers(country_code)
-        name = passenger.auth.name if passenger.auth.name else ''
-        content = render_to_string("emails/new_passenger.html",{'email':email})
-        send_email(content,'Bienvenido', [passenger.auth.email],'Hola '+name,'Taxible <'+email+'>')
-    except:
-        pass
-
-def send_email_new_employee(passenger_id, country_code, passwd, emailuser):
-    """Send an email when a employee is created"""
-    from api.models import U_Passengers
-    try:
-        passenger=U_Passengers.objects.get(id=passenger_id)
-        email = get_email_passengers(country_code)
-        name = passenger.auth.name if passenger.auth.name else ''
-        content = render_to_string("emails/new_employee.html",{'email':email, 'pass':passwd, 'emailuser':emailuser})
-        send_email(content,'Bienvenido', [passenger.auth.email],'Hola '+name,'Taxible <'+email+'>')
-    except:
-        pass
-
-def send_email_new_change_employee(passenger_id, country_code, emailuser):
-    """Send an email when a employee is created"""
-    from api.models import U_Passengers
-    try:
-        passenger=U_Passengers.objects.get(id=passenger_id)
-        email = get_email_passengers(country_code)
-        name = passenger.auth.name if passenger.auth.name else ''
-        content = render_to_string("emails/new_change_employee.html",{'email':email, 'emailuser':emailuser})
-        send_email(content,'Bienvenido', [passenger.auth.email],'Hola '+name,'Taxible <'+email+'>')
-    except:
-        pass
-
-
-def send_email_new_driver(driver_id):
-    """Send an email when a driver is created"""
-    from api.models import U_Drivers
-    try:
-        driver=U_Drivers.objects.get(id=driver_id)
+        customer=U_Customers.objects.get(id=customer_id)
         content = render_to_string("emails/new_driver.html",
-                                   {'name':driver.auth.name,
-                                    'token':driver.auth.token,
-                                  'radio':driver.licence.owner.radio.city if driver.licence.owner.radio else driver.licence.owner.locality})
-        send_email(content,'Estás a un paso de formar parte de Taxible', [driver.auth.email],'¡Estás a un paso de formar parte de Taxible! ','Taxible Taxistas <taxistas@taxible.com>')
+                                   {'name':customer.auth.name,
+                                    'token':customer.auth.token,
+                                  'tarifa':customer.rate.name})
+        send_email(content,'Bienvenido al sistema de reservas CrossFit Jerez', [customer.auth.email],'Bienvenido al sistema de reservas CrossFit Jerez ','CrossFit Jerez TEAM <crossfitjerez@hotmail.com>')
     except:
         pass
 
-def send_email_new_driver_info(driver_id):
+'''def send_email_new_driver_info(driver_id):
     """Send an email when a driver is created"""
     from api.models import U_Drivers
     try:
@@ -285,4 +205,4 @@ def send_email_new_enterprise_new_radio(enterprise_id):
                                   'radio':enterprise.position.location.locality if enterprise.position else ''})
         send_email(content,'Gracias por tu interés', [enterprise.auth.email],'¡Gracias por tu interés! ','Taxible Empresas <empresas@taxible.com>')
     except:
-        pass
+        pass'''
