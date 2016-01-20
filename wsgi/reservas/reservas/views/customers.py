@@ -55,6 +55,7 @@ def add(request):
     return APIResponse(request,data)
 
 
+
 def search(request):
     """
     Searches a customer by its name, surname or email
@@ -71,7 +72,6 @@ def search(request):
             user,auth = get_user_and_auth(request.session['auth_id'])
             words = str(request.GET['lookup']).split()
             counter = 0
-            
             for word in words:
                 if counter == 0:
 					items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
