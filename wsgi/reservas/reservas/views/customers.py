@@ -71,11 +71,12 @@ def search(request):
             user,auth = get_user_and_auth(request.session['auth_id'])
             words = str(request.GET['lookup']).split()
             counter = 0
+            
             for word in words:
                 if counter == 0:
-                	items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
+					items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
 				elif counter == 1:
-                	items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
+					items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
                 counter = 1
             for item in items:
                 list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
