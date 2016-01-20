@@ -59,10 +59,10 @@ def search(request):
     """
     Searches a customer by its name, surname or email
     """
-	if 'auth_id' not in request.session:
-		data=json.dumps({'status':'failed','response':'not_logged'})
-	if not have_permission(request.session['auth_id'],'search_customers'):
-		data=json.dumps({'status':'failed','response':'unauthorized_search_customers'})
+    if 'auth_id' not in request.session:
+        data=json.dumps({'status':'failed','response':'not_logged'})
+    if not have_permission(request.session['auth_id'],'search_customers'):
+        data=json.dumps({'status':'failed','response':'unauthorized_search_customers'})
 	if not validate_parameter(request.GET,'lookup'):
 		data=json.dumps({'status': 'failed', 'response':'lookup_missed'})
 	else:
