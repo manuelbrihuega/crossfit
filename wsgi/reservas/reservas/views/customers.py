@@ -74,7 +74,7 @@ def search(request):
             for word in words:
                 if counter == 0:
                 	items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
-				if counter == 1:
+				elif counter == 1:
                 	items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
                 counter = 1
             for item in items:
