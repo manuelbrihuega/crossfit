@@ -5,7 +5,7 @@ function get_content() {
     	$.getScript(media_url+'js/aux/drivers.js'),
     	$.getScript(media_url+'js/aux/journeys.js'),
     	$.getScript(media_url+'js/aux/enterprises.js'),
-    	$.getScript(media_url+'js/aux/passengers.js'),
+    	$.getScript(media_url+'js/aux/clientes.js'),
     	$.getScript(media_url+'js/aux/modals.js'),
     	$.getScript(media_url+'js/aux/date.js'),
         $.ready.promise()

@@ -90,7 +90,7 @@ function select_content() {
 
 
 	switch (section) {
-		case 'dashboard': 			if(role=='U_Customers') javascript='dashboard/passenger.js';
+		case 'dashboard': 			if(role=='U_Customers') javascript='dashboard/clientes.js';
 									if(role=='U_Super') javascript='dashboard/super.js';
 									break;
 
