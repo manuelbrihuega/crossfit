@@ -12,6 +12,7 @@ from reservas.aux.customers import *
 from reservas.aux.general import *
 from reservas.aux.strings import *
 from reservas.aux.auth import *
+from reservas.aux.tasks import *
 #from api.aux.radios import *
 
 @transaction.atomic
