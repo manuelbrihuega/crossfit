@@ -55,7 +55,6 @@ def add(request):
     return APIResponse(request,data)
 
 
-
 def search(request):
     """
     Searches a customer by its name, surname or email
@@ -75,9 +74,9 @@ def search(request):
             for word in words:
                 if counter == 0:
 					items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
+					counter = 1
 				elif counter == 1:
 					items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
-                counter = 1
             for item in items:
                 list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
             data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
