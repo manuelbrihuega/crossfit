@@ -64,9 +64,9 @@ def employees(request):
     content = RequestContext(request,{'section':'employees','css':['partials/enterprises.css']})
     return HttpResponse(template.render(content))    
 
-def passengers(request):
+def clientes(request):
     template = loader.get_template('completes/base_dashboard.html')
-    content = RequestContext(request,{'section':'passengers','css':['partials/modals.css']})
+    content = RequestContext(request,{'section':'clientes','css':['partials/modals.css']})
     return HttpResponse(template.render(content))    
 
 def call(request):

@@ -123,8 +123,7 @@ function select_content() {
 									if(role=='U_Delegations') javascript='enterprises/super.js';
 									break;
 
-		case 'passengers': 			if(role=='U_Super') javascript='passengers/super.js';
-									if(role=='U_Delegations') javascript='passengers/super.js';
+		case 'clientes': 			if(role=='U_Super') javascript='clientes/super.js';
 									break;
 
 		case 'call': 				if(role=='U_Super') javascript='operators/super.js';

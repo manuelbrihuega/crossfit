@@ -93,8 +93,8 @@ def employees_admin_enterprise(request):
     content = RequestContext(request)
     return HttpResponse(template.render(content))    
 
-def passengers_super(request):
-    template = loader.get_template('partials/passengers_super.html')
+def clientes_super(request):
+    template = loader.get_template('partials/clientes_super.html')
     content = RequestContext(request)
     return HttpResponse(template.render(content))    
 
