@@ -37,7 +37,7 @@ if($('#password').val()==$('#password_repeat').val()){
         rate_id:tarifa_id
     };
 
-	$('#enviar').html('<i class="icon-spinner icon-spin"></i> Enviando');
+	$('#enviar').html('<i class="fa fa-cog fa-spin"></i> Enviando');
 
     $.getJSON(api_url+'customers/add?callback=?',datainput,function(data){
 
