@@ -22,5 +22,5 @@ def create_customer(data,auth,rate):
 
         return {'status':'success','response':customer}
 
-    except:
-        return {'status':'failed','response':'customer_not_created'}
+    except Exception as e:
+        return {'status':'failed','response':e.args[0]}

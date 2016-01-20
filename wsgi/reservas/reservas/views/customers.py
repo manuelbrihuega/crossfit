@@ -36,7 +36,7 @@ def add(request):
                 if r_customer['status']=='failed':
                 	raise Exception(r_customer['response'])
                 else:
-                	#add_task(datetime.utcnow(),'send_email_new_customer_task(customer_id='+str(r_customer['response'].id)+')')
+                	add_task(datetime.utcnow(),'send_email_new_customer_task(customer_id='+str(r_customer['response'].id)+')')
                 	data=json.dumps({'status':'success','response':'created','data':{'auth_id':result_auth['response'].id,'customer_id':r_customer['response'].id}})
             else:
                 raise Exception(result_auth['response'])
