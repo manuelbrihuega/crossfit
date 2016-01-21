@@ -55,6 +55,51 @@ def add(request):
     return APIResponse(request,data)
 
 
+@transaction.atomic
+def add_super(request):
+    """
+    Creates a customer.
+    """
+    if 'auth_id' not in request.session:
+        data=json.dumps({'status':'failed','response':'not_logged'})
+    if not have_permission(request.session['auth_id'],'add_customer_super'):
+        data=json.dumps({'status':'failed','response':'unauthorized_add_customer_super'})
+    else:
+        try:
+            params=['birthdate','nif','name','surname','password','email','phone','rate_id','vip','paid','validated','prueba']
+            for param in params:
+                if not validate_parameter(request.GET,param):
+                    raise Exception(param+'_missed')
+
+            with transaction.atomic():
+                if request.GET['rate_id']!='-1':
+                    rate=Rates.objects.get(id=request.GET['rate_id'])
+                else:
+                	raise Exception('rate_missed')
+                result_auth=create_auth(request.GET,'U_Customers',request.GET['validated'])
+                if result_auth['status']=="success":
+                    r_customer=create_customer_super(request.GET,result_auth['response'],rate)
+                    if r_customer['status']=='failed':
+                    	raise Exception(r_customer['response'])
+                    else:
+                    	add_task(datetime.utcnow(),'send_email_new_customer_task(customer_id='+str(r_customer['response'].id)+')')
+                    	data=json.dumps({'status':'success','response':'created','data':{'auth_id':result_auth['response'].id,'customer_id':r_customer['response'].id}})
+                else:
+                    raise Exception(result_auth['response'])
+
+        except Rates.DoesNotExist:
+            raise Exception('rate_not_found')
+
+        except Exception as e:
+            data = json.dumps({
+                'status':'failed',
+                'response': e.args[0]
+            })
+
+
+    return APIResponse(request,data)
+
+
 def search(request):
     """
     Searches a customer by its name, surname or email
@@ -85,4 +130,3 @@ def search(request):
             data=json.dumps({'status': 'failed', 'response':'customer_not_found'})
     
     return APIResponse(request,data)
-    

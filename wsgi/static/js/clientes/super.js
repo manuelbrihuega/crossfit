@@ -11,6 +11,7 @@ function get_content() {
 						var role = $('body').attr('data-role');
 						loadRates();
 						getPassengersStats();
+						active_new_customer_form();
 						if (!Modernizr.inputtypes.date) {
     						$('input[type=date]').datepicker();
     						$('input[type=date]').css('border-bottom','1px solid lightgray');
@@ -85,4 +86,73 @@ function searchPassengers() {
 	});
 }
 
+function active_new_customer_form() {
+	$('#new_customer_form').submit(false).submit(function(e){
+		new_customer();
+		return false;
+	});
+}
 
+function new_customer() {
+	var name=$('#new_customer_name').val();
+	var surname=$('#new_customer_surname').val();
+	var nif=$('#new_customer_nif').val();
+	var phone=$('#new_customer_phone').val();
+	var email=$('#new_customer_email').val();
+	var password=$('#new_customer_password').val();
+	var passwordrepeat=$('#new_customer_passwordrepeat').val();
+	var birthdate=$('#new_customer_birthdate').val();
+	var rate_id=$('#customer_rate').val();
+	var validado=$('#new_customer_validated').val();
+	var pagado=$('#new_customer_paid').val();
+	var vip=$('#new_customer_vip').val();
+	var prueba=$('#new_customer_prueba').val();
+	if (name.length>0){
+		if (surname.length>0){
+			if (nif.length>0){
+				if (phone.length>0){
+					if (email.length>0){
+						if (password.length>0){
+							if(password==passwordrepeat){
+								if(birthdate.length>0){
+									if(rate_id!=-1){
+											$.getJSON(api_url+'customers/add_super?callback=?', {name:name, 
+																							surname:surname,
+																							nif:nif,
+																							phone:phone,
+																							email:email,
+																							birthdate:birthdate,
+																							rate_id:rate_id,
+																							password:password,
+																							vip:vip,
+																							paid:pagado,
+																							validated:validado,
+																							prueba:prueba}, function(data){
+																								
+												if(data.status=='success'){
+													show_new();
+													launch_alert('<i class="fa fa-smile-o"></i> Cliente creado','');
+												}
+												else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+											});
+											
+										}
+										else launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar la tarifa','warning');
+									}
+									else launch_alert('<i class="fa fa-frown-o"></i> Debes introducir la fecha de nacimiento','warning');
+								}
+								else launch_alert('<i class="fa fa-frown-o"></i> Las contraseñas no coinciden','warning');			
+							}
+							else launch_alert('<i class="fa fa-frown-o"></i> Debes introducir una contraseña','warning');	
+						}
+						else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir un email','warning');	
+					}
+					else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir un teléfono','warning');
+				}
+				else launch_alert('<i class="fa fa-frown-o"></i> Debes introducir un DNI','warning');
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir los apellidos','warning');
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el nombre','warning');
+	
+}
