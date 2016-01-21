@@ -19,25 +19,4 @@ jQuery(function($){
                 yearSuffix: ''};
         $.datepicker.setDefaults($.datepicker.regional['es']);
         
-        
-        
-        
-        $.timepicker.regional['es'] = {
-        	timeOnlyTitle: 'Selecciona hora',
-        	timeText: 'Hora',
-        	hourText: 'Horas',
-        	minuteText: 'Minutos',
-        	secondText: 'Секунды',
-        	millisecText: 'Миллисекунды',
-        	timezoneText: 'Часовой пояс',
-        	currentText: 'Ahora',
-        	closeText: 'Закрыть',
-        	timeFormat: 'HH:mm',
-        	amNames: ['AM', 'A'],
-        	pmNames: ['PM', 'P'],
-        	isRTL: false
-        };
-        $.timepicker.setDefaults($.timepicker.regional['es']);
-        
-        
 });
