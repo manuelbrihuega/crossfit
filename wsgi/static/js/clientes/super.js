@@ -11,6 +11,9 @@ function get_content() {
 						var role = $('body').attr('data-role');
 						
 						getPassengersStats();
+						if (!Modernizr.inputtypes.date) {
+    						$('input[type=date]').datepicker();
+						}
 					});
 				});
 			});

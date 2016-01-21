@@ -1,6 +1,9 @@
 $(document).ready(function(){
 
     list_radios();
+    if (!Modernizr.inputtypes.date) {
+        $('input[type=date]').datepicker();
+    }
 });
 
 var prefix=34;
