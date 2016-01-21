@@ -113,6 +113,7 @@ def search(request):
         data=json.dumps({'status': 'failed', 'response':'lookup_missed'})
     else:
         try:
+            filtro = request.GET['filtro']
             list_customers=[]
             user,auth = get_user_and_auth(request.session['auth_id'])
             if request.GET['lookup']!='*':
@@ -120,13 +121,30 @@ def search(request):
                 counter = 0
                 for word in words:
                     if counter == 0:
-                        items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
+                    	if filtro=='todos':
+                            items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
+                        elif filtro=='pagados':
+                            items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word),Q(paid=True))
+                        elif filtro=='nopagados':
+                            items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word),Q(paid=False))
+                        elif filtro=='validados':
+                            items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word),Q(validated=True))
+                        elif filtro=='novalidados':
+                            items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word),Q(validated=False))
                         counter = 1
                     elif counter == 1:
-                        items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
-            
+                    	if filtro=='todos':
+                            items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
+                        elif filtro=='pagados':
+                            items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word),Q(paid=True))
+                        elif filtro=='nopagados':
+                            items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word),Q(paid=False))
+                        elif filtro=='validados':
+                            items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word),Q(validated=True))
+                        elif filtro=='novalidados':
+                            items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word),Q(validated=False))
                 for item in items:
-                    list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
+                    list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid})
                 data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
             else:
                 items=U_Customers.objects.all()

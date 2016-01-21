@@ -36,15 +36,36 @@ function show_new() {
 }
 
 function getPassengersStats() {
-	var input = $('<input>').attr({'id':'input_search_passenger','class':'superinput', 'type':'text', 'placeholder':'Ej. Nombre, apellidos, email, etc.'}); $('#submain').html(input);
+	var filtros = '<div style="overflow:auto;"><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="todos" value="Todos" id="todos" checked="checked">Todos</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="pagado" id="pagados" value="Pagados" checked="">Han pagado</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="nopagado" id="nopagados" value="No pagados" checked="">No han pagado</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" id="validados" name="validado" value="Validados" checked="">Validados</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" id="novalidados" name="novalidado" value="No validados" checked="">No validados</div></div>';
+	var input = $('<input>').attr({'style':'float: left; margin-right: 20px;','id':'input_search_passenger','class':'superinput', 'type':'text', 'placeholder':'Ej. Nombre, apellidos, email, etc.'}); $('#submain').html(input+filtros);
 	input.focus();
 	input.bind({
 		keypress: function(e) {
 			var code = e.keyCode || e.which;
-			if(code == 13) searchPassengers();
+			if(code == 13){ 
+				if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false); }
+				if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false); }
+				if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false); }
+				if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false); }
+				if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true); }
+			}
 		}
 	});
-
+	$( "#todos" ).click(function() {
+  		searchPassengers(true,false,false,false,false);
+	});
+	$( "#pagados" ).click(function() {
+  		searchPassengers(false,true,false,false,false);
+	});
+	$( "#nopagados" ).click(function() {
+  		searchPassengers(false,false,true,false,false);
+	});
+	$( "#validados" ).click(function() {
+  		searchPassengers(false,false,false,true,false);
+	});
+	$( "#novalidados" ).click(function() {
+  		searchPassengers(false,false,false,false,true);
+	});
 	var results = $('<div></div>').attr({'class':'passengers_md_list sublista row', 'id':'results'}).css('margin-top','30px'); $('#submain').append(results);
 	var stats = $('<div></div>').attr({'class':'passengers_stats', 'id':'stats'}).css('margin-top','30px'); $('#submain').append(stats);
 	//stats.html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-bar-chart-o"></i></div><div class="text">No hay clientes para tu búsqueda</div></div>');
@@ -68,12 +89,32 @@ function loadRates() {
 	});
 }
 
-function searchPassengers() {
+// falta llamar a searchpasanger cuando hagamo click en cada filtro
+
+function searchPassengers(todos,pagados,nopagados,validados,novalidados) {
 	var string = $('#input_search_passenger').val();
+	if(string.empty()){
+		string="*";
+	}
 	var wrapper = $('#results');
 	var wr = $('#stats');
+	if(todos){
+		var filtro='todos';
+	}
+	if(pagados){
+		var filtro='pagados';
+	}
+	if(nopagados){
+		var filtro='nopagados';
+	}
+	if(validados){
+		var filtro='validados';
+	}
+	if(novalidados){
+		var filtro='novalidados';
+	}
 	wrapper.empty();
-	$.getJSON(api_url+'customers/search?callback=?', {lookup:string}, function(data){
+	$.getJSON(api_url+'customers/search?callback=?', {lookup:string,filtro:filtro}, function(data){
 		////console.log(data.data)
 		if(data.status=='success'){
 
@@ -93,7 +134,7 @@ function initialsearch() {
 	var wrapper = $('#results');
 	var wr = $('#stats');
 	wrapper.empty();
-	$.getJSON(api_url+'customers/search?callback=?', {lookup:string}, function(data){
+	$.getJSON(api_url+'customers/search?callback=?', {lookup:string, filtros:'todos'}, function(data){
 		////console.log(data.data)
 		if(data.status=='success'){
 
