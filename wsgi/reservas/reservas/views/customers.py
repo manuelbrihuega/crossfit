@@ -76,7 +76,8 @@ def add_super(request):
                     rate=Rates.objects.get(id=request.GET['rate_id'])
                 else:
                 	raise Exception('rate_missed')
-                result_auth=create_auth(request.GET,'U_Customers',getBoolValue(request.GET['validated']))
+                resl=getBoolValue(request.GET['validated'])
+                result_auth=create_auth(request.GET,'U_Customers',resl)
                 if result_auth['status']=="success":
                     r_customer=create_customer_super(request.GET,result_auth['response'],rate)
                     if r_customer['status']=='failed':

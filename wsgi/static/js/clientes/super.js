@@ -10,7 +10,7 @@ function get_content() {
 
 						var role = $('body').attr('data-role');
 						loadRates();
-						getPassengersStats();
+						//getPassengersStats();
 						active_new_customer_form();
 						initialsearch();
 						if (!Modernizr.inputtypes.date) {
