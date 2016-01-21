@@ -1,5 +1,5 @@
 <div id="passenger_profile">
-	<h3>Datos de pasajero  <span class="linkable edit_passenger_button" onclick="edit_passenger();"><i class="fa fa-floppy-o"></i></span></h3>
+	<h3>Datos de cliente  <span class="linkable edit_passenger_button" onclick="edit_passenger();"><i class="fa fa-floppy-o"></i></span></h3>
 	<form role="form">
 		<div class="row">
 			<div class="form-group col-md-2">
@@ -10,23 +10,48 @@
 		  	<div class="form-group col-md-2">
 		    	<input type="text" class="form-control" id="passenger_surname" placeholder="Apellidos">
 		  	</div>
-		  	<div class="form-group col-md-3">
+		  	<div class="form-group col-md-2">
 		    	<input type="email" class="form-control" id="passenger_email" placeholder="Email">
 		  	</div>
 		  	<div class="form-group col-md-2">
 		    	<input type="password" class="form-control" id="passenger_password" value="" placeholder="Contraseña">
 		  	</div>
-		  	<div class="form-group col-md-1">
-		    	<input type="text" class="form-control" id="passenger_prefix" placeholder="Prefijo">
+		  	<div class="form-group col-md-2">
+		    	<input type="text" class="form-control" id="passenger_nif" placeholder="DNI">
 		  	</div>
 		  	<div class="form-group col-md-2">
 		    	<input type="text" class="form-control" id="passenger_phone" placeholder="Teléfono">
 		  	</div>
 		</div>
+		<div class="row">
+			<div class="form-group col-md-2">
+		    	<select class="form-control" id="passenger_rate_id">
+		    		<option value="-1">-</option>
+		    	</select>
+		  	</div>
+		  	<div class="form-group col-md-3">
+		  		<input type="date" id="passenger_birthdate" placeholder="Fecha de nacimiento">
+		  	</div>
+		  	<div class="form-group col-md-2">
+		  		<input type="text" id="passenger_credit_wod" placeholder="Crédito WOD">
+		  	</div>
+		  	<div class="form-group col-md-2">
+		  		<input type="text" id="passenger_credit_box" placeholder="Crédito BOX">
+		  	</div>
+		  	<div class="form-group col-md-1">
+		  		<label><input type="checkbox" id="passenger_paid"> Pagado</label>
+		  	</div>
+		  	<div class="form-group col-md-1">
+		  		<label><input type="checkbox" id="passenger_test_user"> Prueba</label>
+		  	</div>
+		  	<div class="form-group col-md-1">
+		  		<label><input type="checkbox" id="passenger_vip"> VIP</label>
+		  	</div>
+		  	<div class="form-group col-md-1">
+		  		<label><input type="checkbox" id="passenger_validated"> Validado</label>
+		  	</div>
+
+		</div>
 	</form><br>
 
-	<h3>Últimas Carreras</h3>
-	<div id="passenger_detail_journeys" class="journeys">
-		<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>
-	</div>
 </div>

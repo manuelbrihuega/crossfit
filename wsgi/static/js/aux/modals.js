@@ -917,6 +917,18 @@ function modal_user_details(auth_id) {
 	});			
 }
 
+function loadRates(){
+	$.getJSON(api_url+'tarifas/list_all?callback=?', {}, function(data){
+        var list_tarifas=[];
+        if(data.status=='success') list_tarifas=data.data.rates;
+        var select=$('#passenger_rate_id');
+        for(var i=0;i<list_tarifas.length;i++){
+            id=list_tarifas[i].id;
+            nombres=list_tarifas[i].name;
+            var option=$('<option></option>').attr({'value':list_tarifas[i].id, 'data-credit-box':list_tarifas[i].credit_box, 'data-credit-wod':list_tarifas[i].credit_wod}).text(list_tarifas[i].name+" ("+list_tarifas[i].price+" €)"); select.append(option);
+        }
+    });
+}
 
 function modal_passenger_details(passenger_id) {
 	var mymodal=newModal('passenger_details_modal',true, true);
@@ -926,7 +938,7 @@ function modal_passenger_details(passenger_id) {
 	mymodal.modal('show');
 	
 	
-	$.getJSON( api_url+'passengers/get_foreign?callback=?', {passenger_id:passenger_id}, function(data){
+	$.getJSON( api_url+'customers/get_foreign?callback=?', {customer_id:passenger_id}, function(data){
 		if(data.status=='success'){
 			var body = $('<div></div>').attr({'id':'passenger_details_wrapper'});
 			$.post(base_url+'/partials/modal_passenger_details', function(template, textStatus, xhr) {
@@ -938,41 +950,37 @@ function modal_passenger_details(passenger_id) {
 				$('#passenger_name').val(data.data.auth_profile.name);
 				$('#passenger_surname').val(data.data.auth_profile.surname);
 				$('#passenger_email').val(data.data.auth_profile.email);
-				$('#passenger_prefix').val(data.data.auth_profile.prefix);
+				loadRates();
+				$('#passenger_rate_id> option[value="'+data.data.customer_profile.rate_id+'"]').attr('selected', 'selected');
 				$('#passenger_phone').val(data.data.auth_profile.phone);
+
 				
-				$.getJSON( api_url+'passengers/last_journeys_foreign?callback=?', {passenger_id:passenger_id, offset:local_offset}, function(data){
-					if(data.status=='success'){
-						
-						var table_wrapper=$('<div></div>').attr('class','table-responsive'); $('#passenger_detail_journeys').html(table_wrapper);
-							var table=$('<table></table>').attr('class','table  table-condensed'); table_wrapper.append(table);
-								var thead=$('<thead></thead>'); table.append(thead);
-									var tr=$('<tr></tr>'); thead.append(tr);
-										var th=$('<th></th>').text('Fecha'); tr.append(th);
-										var th=$('<th></th>').text('Dirección'); tr.append(th);
-										var th=$('<th></th>').text('Taxista'); tr.append(th);
-										var th=$('<th></th>').text('Precio'); tr.append(th);
-										var th=$('<th></th>').text('Distancia'); tr.append(th);
-										var th=$('<th></th>').text('Duración'); tr.append(th);
-		
-								var tbody=$('<tbody></tbody>'); table.append(tbody);
-								
-								$.each(data.data.journeys, function(index, journey) {
-									
-									var tr=$('<tr></tr>').attr({'class':journey.status, 'data-id':journey.id}); tbody.append(tr);
-											var td=$('<td></td>').text(journey.date_depart); tr.append(td);
-											var td=$('<td></td>').text(journey.origin); tr.append(td);
-											var td=$('<td></td>').text(journey.driver); tr.append(td);
-											var td=$('<td></td>').text(price_to_string(journey.price,journey.currency)); tr.append(td);
-											var td=$('<td></td>').text(distance_to_string(journey.distance)); tr.append(td);
-											var td=$('<td></td>').text(duration_to_string(journey.duration)); tr.append(td);
-									
-								});
-						
-						
-					}
-					else $('#passenger_detail_journeys').html('<center><i class="fa fa-frown-o"></i> Error al obtener carreras del usuario</center>');
-				});
+				$('#passenger_nif').val(data.data.customer_profile.nif);
+				$('#passenger_birthdate').val(data.data.customer_profile.birthdate);
+				$('#passenger_credit_wod').val(data.data.customer_profile.credit_wod);
+				$('#passenger_credit_box').val(data.data.customer_profile.credit_box);
+
+				if(data.data.customer_profile.paid){
+					$( "#passenger_paid" ).prop( "checked", true );
+				}else{
+					$( "#passenger_paid" ).prop( "checked", false );
+				}
+				if(data.data.customer_profile.test_user){
+					$( "#passenger_test_user" ).prop( "checked", true );
+				}else{
+					$( "#passenger_test_user" ).prop( "checked", false );
+				}
+				if(data.data.customer_profile.vip){
+					$( "#passenger_vip" ).prop( "checked", true );
+				}else{
+					$( "#passenger_vip" ).prop( "checked", false );
+				}
+				if(data.data.customer_profile.validated){
+					$( "#passenger_validated" ).prop( "checked", true );
+				}else{
+					$( "#passenger_validated" ).prop( "checked", false );
+				}
+				
 				
 				
 				var footer = $('<div></div>').attr({'id':'passenger_details_footer'});

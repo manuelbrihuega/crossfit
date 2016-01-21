@@ -6,7 +6,8 @@ urlpatterns = patterns('',
    
     #BACKEND
     url(r'^dashboard$', 'reservas.views.dashboard.dashboard'),
-     url(r'^api/customers/search$', 'reservas.views.customers.search'),
+    url(r'^api/customers/search$', 'reservas.views.customers.search'),
+    url(r'^api/customers/get_foreign$', 'reservas.views.customers.get_foreign'),
     url(r'^api/tarifas/list_all$', 'reservas.views.tarifas.list_all'),
     url(r'^api/customers/add$', 'reservas.views.customers.add'),
     url(r'^api/customers/add_super$', 'reservas.views.customers.add_super'),

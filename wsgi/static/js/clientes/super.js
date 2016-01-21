@@ -185,6 +185,7 @@ function new_customer() {
 													$('#new_customer_prueba').prop( "checked", false );
 													$('#botonenviar').html('ENVIAR');
 													launch_alert('<i class="fa fa-smile-o"></i> Cliente creado','');
+													initialsearch();
 												}
 												else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 											});
