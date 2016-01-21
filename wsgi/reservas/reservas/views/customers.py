@@ -147,7 +147,16 @@ def search(request):
                     list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid})
                 data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
             else:
-                items=U_Customers.objects.all()
+            	if filtro=='todos':
+                    items=U_Customers.objects.all()
+                elif filtro=='pagados':
+                    items=U_Customers.objects.filter(Q(paid=1))
+                elif filtro=='nopagados':
+                    items=U_Customers.objects.filter(Q(paid=0))
+                elif filtro=='validados':
+                    items=U_Customers.objects.filter(Q(validated=1))
+                elif filtro=='novalidados':
+                    items=U_Customers.objects.filter(Q(validated=0))
                 for item in items:
                     list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
                 data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
