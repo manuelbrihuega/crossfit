@@ -104,24 +104,24 @@ function new_customer() {
 	var birthdate=$('#new_customer_birthdate').val();
 	var rate_id=$('#customer_rate').val();
 	if($('#new_customer_validated').is(':checked')){
-		var validado=true;
+		var validado=1;
 	}else{
-		var validado=false;
+		var validado=0;
 	}
 	if($('#new_customer_paid').is(':checked')){
-		var pagado=true;
+		var pagado=1;
 	}else{
-		var pagado=false;
+		var pagado=0;
 	}
 	if($('#new_customer_vip').is(':checked')){
-		var vip=true;
+		var vip=1;
 	}else{
-		var vip=false;
+		var vip=0;
 	}
 	if($('#new_customer_prueba').is(':checked')){
-		var prueba=true;
+		var prueba=1;
 	}else{
-		var prueba=false;
+		var prueba=0;
 	}
 	if (name.length>0){
 		if (surname.length>0){
