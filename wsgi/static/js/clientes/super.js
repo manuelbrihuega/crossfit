@@ -13,6 +13,7 @@ function get_content() {
 						getPassengersStats();
 						if (!Modernizr.inputtypes.date) {
     						$('input[type=date]').datepicker();
+    						$('input[type=date]').css('border-bottom','1px solid');
 						}
 					});
 				});
