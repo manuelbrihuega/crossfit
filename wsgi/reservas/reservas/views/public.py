@@ -116,7 +116,7 @@ def taxistas(request):
         'content':render_to_string('partials/signup_drivers.html', {'lang':lang, 'media':getMediaPath(request)}),
         'title':_('SISTEMA DE RESERVAS | CrossFit Jerez'),
         'css':['partials/coolform.css','partials/signup_driver.css'],
-        'javascript':['public/signup_drivers.js','lib/modernizr-custom.js','lib/jquery-ui-1.10.4.custom.min.js','lib/jquery.ui.datepicker.js'],
+        'javascript':['public/signup_drivers.js','lib/modernizr-custom.js','lib/jquery-ui-1.10.4.custom.min.js','lib/jquery.ui.datepicker.es.js'],
         'lang':lang,
     })
     return HttpResponse(template.render(content))
