@@ -34,17 +34,17 @@ def create_customer_super(data,auth,rate):
         customer.credit_wod=rate.credit_wod
         customer.credit_box=rate.credit_box
         if validate_parameter(data,'paid'):
-            customer.paid=data["paid"]
+            customer.paid=getBoolValue(data["paid"])
         if validate_parameter(data,'vip'):
-            customer.vip=data["vip"]
+            customer.vip=getBoolValue(data["vip"])
         if validate_parameter(data,'prueba'):
-            customer.test_user=data["prueba"]
+            customer.test_user=getBoolValue(data["prueba"])
         if validate_parameter(data,'validated'):
-            customer.validated=data["validated"]
+            customer.validated=getBoolValue(data["validated"])
         if validate_parameter(data,'birthdate'):
-            customer.birthdate=data["birthdate"]
+            customer.birthdate=getBoolValue(data["birthdate"])
         if validate_parameter(data,'nif'):
-            customer.nif=data["nif"]
+            customer.nif=getBoolValue(data["nif"])
         customer.save()
 
         return {'status':'success','response':customer}

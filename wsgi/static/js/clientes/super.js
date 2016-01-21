@@ -12,6 +12,7 @@ function get_content() {
 						loadRates();
 						getPassengersStats();
 						active_new_customer_form();
+						initialsearch();
 						if (!Modernizr.inputtypes.date) {
     						$('input[type=date]').datepicker();
     						$('input[type=date]').css('border-bottom','1px solid lightgray');
@@ -70,6 +71,7 @@ function loadRates() {
 function searchPassengers() {
 	var string = $('#input_search_passenger').val();
 	var wrapper = $('#results');
+	var wr = $('#stats');
 	wrapper.empty();
 	$.getJSON(api_url+'customers/search?callback=?', {lookup:string}, function(data){
 		////console.log(data.data)
@@ -80,9 +82,29 @@ function searchPassengers() {
 					draw_passenger_sm(passenger, wrapper);
 				});
 			}
-			else wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado pasajeros</div></div>');
+			else{ wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado pasajeros</div></div>');}
 		}
-		else super_error('Search failure');
+		else { wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado pasajeros</div></div>');}
+	});
+}
+
+function initialsearch() {
+	var string = '*';
+	var wrapper = $('#results');
+	var wr = $('#stats');
+	wrapper.empty();
+	$.getJSON(api_url+'customers/search?callback=?', {lookup:string}, function(data){
+		////console.log(data.data)
+		if(data.status=='success'){
+
+			if(data.data.list.length>0){
+				$.each(data.data.list, function(index, passenger) {
+					draw_passenger_sm(passenger, wrapper);
+				});
+			}
+			else{ wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado pasajeros</div></div>');}
+		}
+		else { wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado pasajeros</div></div>');}
 	});
 }
 

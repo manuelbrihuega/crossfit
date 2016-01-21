@@ -76,7 +76,7 @@ def add_super(request):
                     rate=Rates.objects.get(id=request.GET['rate_id'])
                 else:
                 	raise Exception('rate_missed')
-                result_auth=create_auth(request.GET,'U_Customers',request.GET['validated'])
+                result_auth=create_auth(request.GET,'U_Customers',getBoolValue(request.GET['validated']))
                 if result_auth['status']=="success":
                     r_customer=create_customer_super(request.GET,result_auth['response'],rate)
                     if r_customer['status']=='failed':
@@ -114,18 +114,24 @@ def search(request):
         try:
             list_customers=[]
             user,auth = get_user_and_auth(request.session['auth_id'])
-            words = str(request.GET['lookup']).split()
-            counter = 0
-            for word in words:
-                if counter == 0:
-                    items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
-                    counter = 1
-                elif counter == 1:
-                    items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
+            if request.GET['lookup']!='*':
+                words = str(request.GET['lookup']).split()
+                counter = 0
+                for word in words:
+                    if counter == 0:
+                        items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
+                        counter = 1
+                    elif counter == 1:
+                        items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word))
             
-            for item in items:
-                list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
-            data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
+                for item in items:
+                    list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
+                data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
+            else:
+                items=U_Customers.objects.all()
+                for item in items:
+                    list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
+                data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
         except:
             data=json.dumps({'status': 'failed', 'response':'customer_not_found'})
     
