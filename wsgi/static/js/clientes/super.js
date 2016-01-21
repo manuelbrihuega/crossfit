@@ -36,7 +36,7 @@ function show_new() {
 }
 
 function getPassengersStats() {
-	var filtros = '<div style="overflow:auto;"><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="todos" value="Todos" id="todos" checked>Todos</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="pagado" id="pagados" value="Pagados">Han pagado</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="nopagado" id="nopagados" value="No pagados">No han pagado</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" id="validados" name="validado" value="Validados">Validados</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" id="novalidados" name="novalidado" value="No validados">No validados</div></div>';
+	var filtros = '<div style="overflow:auto;"><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="filtro" value="Todos" id="todos" checked>Todos</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="filtro" id="pagados" value="Pagados">Han pagado</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="filtro" id="nopagados" value="No pagados">No han pagado</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" id="validados" name="filtro" value="Validados">Validados</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" id="novalidados" name="filtro" value="No validados">No validados</div></div>';
 	var input = $('<input>').attr({'style':'float: left; margin-right: 20px;','id':'input_search_passenger','class':'superinput', 'type':'text', 'placeholder':'Ej. Nombre, apellidos, email, etc.'}); $('#submain').html(input); $('#submain').append(filtros);
 
 	input.focus();
@@ -94,7 +94,7 @@ function loadRates() {
 
 function searchPassengers(todos,pagados,nopagados,validados,novalidados) {
 	var string = $('#input_search_passenger').val();
-	if(string.empty()){
+	if(string==""){
 		string="*";
 	}
 	var wrapper = $('#results');
