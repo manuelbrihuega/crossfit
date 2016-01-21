@@ -3,6 +3,11 @@ $(document).ready(function(){
     list_radios();
     if (!Modernizr.inputtypes.date) {
         $('input[type=date]').datepicker();
+        $('input[type=date]').css('border-bottom','1px solid lightgray');
+        $('#ui-datepicker-div').css('background-color','white');
+        $('#ui-datepicker-div').css('border','1px solid lightgray');
+        $('#ui-datepicker-div').css('padding','15px');
+        $('#ui-datepicker-div').css('border-radius','8px');
     }
 });
 

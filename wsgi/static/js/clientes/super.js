@@ -9,17 +9,28 @@ function get_content() {
 						$('#submain').html('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
 
 						var role = $('body').attr('data-role');
-						
+						loadRates();
 						getPassengersStats();
 						if (!Modernizr.inputtypes.date) {
     						$('input[type=date]').datepicker();
-    						$('input[type=date]').css('border-bottom','1px solid');
+    						$('input[type=date]').css('border-bottom','1px solid lightgray');
+    						$('#ui-datepicker-div').css('background-color','white');
+        					$('#ui-datepicker-div').css('border','1px solid lightgray');
+        					$('#ui-datepicker-div').css('padding','15px');
+        					$('#ui-datepicker-div').css('border-radius','8px');
 						}
 					});
 				});
 			});
 		});
 	
+}
+
+function show_new() {
+	if($('#new_customer_wrapper').css('display')=='none'){
+		$('#new_customer_wrapper').slideDown();
+	}
+	else $('#new_customer_wrapper').slideUp();
 }
 
 function getPassengersStats() {
@@ -34,11 +45,26 @@ function getPassengersStats() {
 
 	var results = $('<div></div>').attr({'class':'passengers_md_list sublista row', 'id':'results'}).css('margin-top','30px'); $('#submain').append(results);
 	var stats = $('<div></div>').attr({'class':'passengers_stats', 'id':'stats'}).css('margin-top','30px'); $('#submain').append(stats);
-	stats.html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-bar-chart-o"></i></div><div class="text">AQUI VAN LAS ESTADISTICAS DE LOS CLIENTES</div></div>');
+	stats.html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-bar-chart-o"></i></div><div class="text">No hay clientes para tu búsqueda</div></div>');
 
 }
 
+function loadRates() {
+	var select = $('#customer_rate');
+	$.getJSON(api_url+'tarifas/list_all?callback=?', {}, function(data){
+		////console.log(data.data)
+		if(data.status=='success'){
+			var list_tarifas=data.data.rates;
+			for(var i=0;i<list_tarifas.length;i++){
+            	id=list_tarifas[i].id;
+            	nombres=list_tarifas[i].name;
+            	var option=$('<option></option>').attr({'value':list_tarifas[i].id, 'data-credit-box':list_tarifas[i].credit_box, 'data-credit-wod':list_tarifas[i].credit_wod}).text(list_tarifas[i].name+" ("+list_tarifas[i].price+" €)"); select.append(option);
+        	}
 
+		}
+		else super_error('Search failure');
+	});
+}
 
 function searchPassengers() {
 	var string = $('#input_search_passenger').val();
