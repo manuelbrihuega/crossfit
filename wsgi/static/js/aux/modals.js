@@ -917,7 +917,7 @@ function modal_user_details(auth_id) {
 	});			
 }
 
-function loadRates(){
+function loadRatesDos(){
 	$.getJSON(api_url+'tarifas/list_all?callback=?', {}, function(data){
         var list_tarifas=[];
         if(data.status=='success') list_tarifas=data.data.rates;
@@ -950,7 +950,7 @@ function modal_passenger_details(passenger_id) {
 				$('#passenger_name').val(data.data.auth_profile.name);
 				$('#passenger_surname').val(data.data.auth_profile.surname);
 				$('#passenger_email').val(data.data.auth_profile.email);
-				loadRates();
+				loadRatesDos();
 				$('#passenger_rate_id> option[value="'+data.data.customer_profile.rate_id+'"]').attr('selected', 'selected');
 				$('#passenger_phone').val(data.data.auth_profile.phone);
 
