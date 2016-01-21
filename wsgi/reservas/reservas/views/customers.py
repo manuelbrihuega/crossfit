@@ -150,7 +150,7 @@ def get_foreign(request):
                     customer=U_Customers.objects.get(id=request.GET['customer_id'])
                     if customer:
                         auth_profile=get_profile(customer.auth_id)
-                        customer_profile={'id':customer.id, 'nif':customer.nif, 'birthdate':customer.birthdate, 'credit_wod':customer.credit_wod, 'credit_box':customer.credit_box, 'paid':customer.paid, 'vip':customer.vip, 'validated':customer.validated, 'test_user':customer.test_user, 'rate_id':customer.rate_id}
+                        customer_profile={'id':customer.id, 'nif':customer.nif, 'birthdate':get_string_from_date(local_date(customer.birthdate,2)), 'credit_wod':customer.credit_wod, 'credit_box':customer.credit_box, 'paid':customer.paid, 'vip':customer.vip, 'validated':customer.validated, 'test_user':customer.test_user, 'rate_id':customer.rate_id}
                         data=json.dumps({'status':'success','response':'customer_profile','data':{'auth_profile':auth_profile,
                                                                                                    'customer_profile':customer_profile
                                                                                                    }})
