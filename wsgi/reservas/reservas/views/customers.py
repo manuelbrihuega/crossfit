@@ -157,8 +157,8 @@ def get_foreign(request):
                     else:
                         data=json.dumps({'status': 'failed', 'response':'customer_not_found'})
 
-                except:
-                    data=json.dumps({'status': 'failed', 'response':'customer_not_found'})
+                except Exception as e:
+                    data=json.dumps({'status': 'failed', 'response':e.args[0]})
             else:
                 data=json.dumps({'status': 'failed', 'response':'customer_id_missed'})
         else:
