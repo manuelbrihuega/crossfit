@@ -965,7 +965,7 @@ function modal_passenger_details(passenger_id) {
 				var year=fechados[0];
 				var mes=fechados[1];
 				var dia=fechados[2];
-				$('#passenger_birthdate').val(dia+"/"+mes+"/"+year);
+				$('#passenger_birthdate').val(year+"-"+mes+"-"+dia);
 				$('#passenger_credit_wod').val(data.data.customer_profile.credit_wod);
 				$('#passenger_credit_box').val(data.data.customer_profile.credit_box);
 
@@ -1009,10 +1009,10 @@ function modal_passenger_details(passenger_id) {
 				var unban_button = $('<button></button>').attr({'type':'button','class':'unban btn btn-default'}).text('DESBANEAR'); group.append(unban_button);
 				unban_button.click(function(){ unban(data.data.auth_profile.auth_id); });
 				
-				var activate = $('<button></button>').attr({'type':'button','class':'activate btn btn-default'}).text('ACTIVAR'); group.append(activate);
+				var activate = $('<button></button>').attr({'type':'button','class':'activate btn btn-default'}).text('VALIDAR'); group.append(activate);
 				activate.click(function(){ activate(data.data.auth_profile.auth_id); });
 				
-				var deactivate = $('<button></button>').attr({'type':'button','class':'deactivate btn btn-default'}).text('DESACTIVAR'); group.append(deactivate);
+				var deactivate = $('<button></button>').attr({'type':'button','class':'deactivate btn btn-default'}).text('INVALIDAR'); group.append(deactivate);
 				deactivate.click(function(){ deactivate(data.data.auth_profile.auth_id); });
 				
 				var delete_passenger_button = $('<button></button>').attr({'type':'button','class':'btn btn-default'}).text('ELIMINAR'); group.append(delete_passenger_button);
