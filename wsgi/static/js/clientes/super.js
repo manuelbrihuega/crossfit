@@ -135,7 +135,7 @@ function initialsearch() {
 	var wrapper = $('#results');
 	var wr = $('#stats');
 	wrapper.empty();
-	$.getJSON(api_url+'customers/search?callback=?', {lookup:string, filtros:'todos'}, function(data){
+	$.getJSON(api_url+'customers/search?callback=?', {lookup:string, filtro:'todos'}, function(data){
 		////console.log(data.data)
 		if(data.status=='success'){
 
