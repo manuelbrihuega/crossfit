@@ -917,7 +917,7 @@ function modal_user_details(auth_id) {
 	});			
 }
 
-function loadRatesDos(){
+function loadRatesDos(rate_id){
 	$.getJSON(api_url+'tarifas/list_all?callback=?', {}, function(data){
         var list_tarifas=[];
         if(data.status=='success') list_tarifas=data.data.rates;
@@ -925,7 +925,12 @@ function loadRatesDos(){
         for(var i=0;i<list_tarifas.length;i++){
             id=list_tarifas[i].id;
             nombres=list_tarifas[i].name;
-            var option=$('<option></option>').attr({'value':list_tarifas[i].id, 'data-credit-box':list_tarifas[i].credit_box, 'data-credit-wod':list_tarifas[i].credit_wod}).text(list_tarifas[i].name+" ("+list_tarifas[i].price+" €)"); select.append(option);
+            if(rate_id==list_tarifas[i].id){
+            	var option=$('<option></option>').attr({'selected':'selected','value':list_tarifas[i].id, 'data-credit-box':list_tarifas[i].credit_box, 'data-credit-wod':list_tarifas[i].credit_wod}).text(list_tarifas[i].name+" ("+list_tarifas[i].price+" €)"); select.append(option);
+            }else{
+            	var option=$('<option></option>').attr({'value':list_tarifas[i].id, 'data-credit-box':list_tarifas[i].credit_box, 'data-credit-wod':list_tarifas[i].credit_wod}).text(list_tarifas[i].name+" ("+list_tarifas[i].price+" €)"); select.append(option);
+            }
+            
         }
     });
 }
@@ -950,13 +955,17 @@ function modal_passenger_details(passenger_id) {
 				$('#passenger_name').val(data.data.auth_profile.name);
 				$('#passenger_surname').val(data.data.auth_profile.surname);
 				$('#passenger_email').val(data.data.auth_profile.email);
-				loadRatesDos();
-				$('#passenger_rate_id> option[value="'+data.data.customer_profile.rate_id+'"]').attr('selected', 'selected');
+				loadRatesDos(data.data.customer_profile.rate_id);
 				$('#passenger_phone').val(data.data.auth_profile.phone);
 
 				
 				$('#passenger_nif').val(data.data.customer_profile.nif);
-				$('#passenger_birthdate').val(data.data.customer_profile.birthdate);
+				var fecha=data.data.customer_profile.birthdate.split(" ");
+				var fechados=fecha[0].split("-");
+				var year=fechados[0];
+				var mes=fechados[1];
+				var dia=fechados[2];
+				$('#passenger_birthdate').val(dia+"/"+mes+"/"+year);
 				$('#passenger_credit_wod').val(data.data.customer_profile.credit_wod);
 				$('#passenger_credit_box').val(data.data.customer_profile.credit_box);
 
