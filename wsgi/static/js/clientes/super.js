@@ -132,6 +132,7 @@ function new_customer() {
 							if(password==passwordrepeat){
 								if(birthdate.length>0){
 									if(rate_id!=-1){
+											$('#botonenviar').html('<i class="fa fa-cog fa-spin"></i> ENVIANDO');
 											$.getJSON(api_url+'customers/add_super?callback=?', {name:name, 
 																							surname:surname,
 																							nif:nif,
@@ -147,6 +148,20 @@ function new_customer() {
 																								
 												if(data.status=='success'){
 													show_new();
+													$('#new_customer_name').val('');
+													$('#new_customer_surname').val('');
+													$('#new_customer_nif').val('');
+													$('#new_customer_phone').val('');
+													$('#new_customer_email').val('');
+													$('#new_customer_password').val('');
+													$('#new_customer_passwordrepeat').val('');
+													$('#new_customer_birthdate').val('');
+													$('#customer_rate').val('-1');
+													$('#new_customer_validated').prop( "checked", false );
+													$('#new_customer_paid').prop( "checked", false );
+													$('#new_customer_vip').prop( "checked", false );
+													$('#new_customer_prueba').prop( "checked", false );
+													$('#botonenviar').html('ENVIAR');
 													launch_alert('<i class="fa fa-smile-o"></i> Cliente creado','');
 												}
 												else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
