@@ -10,7 +10,7 @@ function get_content() {
 
 						var role = $('body').attr('data-role');
 						loadRates();
-						//getPassengersStats();
+						getPassengersStats();
 						active_new_customer_form();
 						initialsearch();
 						if (!Modernizr.inputtypes.date) {
@@ -47,7 +47,7 @@ function getPassengersStats() {
 
 	var results = $('<div></div>').attr({'class':'passengers_md_list sublista row', 'id':'results'}).css('margin-top','30px'); $('#submain').append(results);
 	var stats = $('<div></div>').attr({'class':'passengers_stats', 'id':'stats'}).css('margin-top','30px'); $('#submain').append(stats);
-	stats.html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-bar-chart-o"></i></div><div class="text">No hay clientes para tu búsqueda</div></div>');
+	//stats.html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-bar-chart-o"></i></div><div class="text">No hay clientes para tu búsqueda</div></div>');
 
 }
 
