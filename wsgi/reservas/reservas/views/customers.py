@@ -124,156 +124,156 @@ def search(request):
                     if order=='nombreDESC':
                         if counter == 0:
                             if filtro=='todos':
-                                items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('name')
+                                items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('auth__name')
                             elif filtro=='pagados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('name')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('auth__name')
                             elif filtro=='nopagados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('name')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('auth__name')
                             elif filtro=='validados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('name')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('auth__name')
                             elif filtro=='novalidados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('name')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('auth__name')
                             counter = 1
                         elif counter == 1:
                     	    if filtro=='todos':
-                                items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('name')
+                                items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('auth__name')
                             elif filtro=='pagados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('name')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('auth__name')
                             elif filtro=='nopagados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('name')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('auth__name')
                             elif filtro=='validados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('name')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('auth__name')
                             elif filtro=='novalidados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('name')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('auth__name')
                     elif order=='nombreASC':
                         if counter == 0:
                             if filtro=='todos':
-                                items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-name')
+                                items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-auth__name')
                             elif filtro=='pagados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-name')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-auth__name')
                             elif filtro=='nopagados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('-name')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('-auth__name')
                             elif filtro=='validados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('-name')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('-auth__name')
                             elif filtro=='novalidados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-name')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-auth__auth__name')
                             counter = 1
                         elif counter == 1:
                             if filtro=='todos':
-                                items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-name')
+                                items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-auth__name')
                             elif filtro=='pagados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-name')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-auth__name')
                             elif filtro=='nopagados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('-name')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('-auth__name')
                             elif filtro=='validados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('-name')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('-auth__name')
                             elif filtro=='novalidados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-name')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-auth__name')
                     elif order=='apellidosDESC':
                         if counter == 0:
                             if filtro=='todos':
-                                items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('surname')
+                                items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('auth__surname')
                             elif filtro=='pagados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('surname')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('auth__surname')
                             elif filtro=='nopagados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('surname')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('auth__surname')
                             elif filtro=='validados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('surname')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('auth__surname')
                             elif filtro=='novalidados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('surname')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('auth__surname')
                             counter = 1
                         elif counter == 1:
                             if filtro=='todos':
-                                items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('surname')
+                                items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('auth__surname')
                             elif filtro=='pagados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('surname')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('auth__surname')
                             elif filtro=='nopagados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('surname')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('auth__surname')
                             elif filtro=='validados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('surname')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('auth__surname')
                             elif filtro=='novalidados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('surname')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('auth__surname')
                     elif order=='apellidosASC':
                         if counter == 0:
                             if filtro=='todos':
-                                items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-surname')
+                                items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-auth__surname')
                             elif filtro=='pagados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-surname')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-auth__surname')
                             elif filtro=='nopagados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('-surname')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('-auth__surname')
                             elif filtro=='validados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('-surname')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('-auth__surname')
                             elif filtro=='novalidados':
-                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-surname')
+                                items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-auth__surname')
                             counter = 1
                         elif counter == 1:
                             if filtro=='todos':
-                                items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-surname')
+                                items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-auth__surname')
                             elif filtro=='pagados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-surname')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-auth__surname')
                             elif filtro=='nopagados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('-surname')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=0)).order_by('-auth__surname')
                             elif filtro=='validados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('-surname')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=1)).order_by('-auth__surname')
                             elif filtro=='novalidados':
-                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-surname')
+                                items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-auth__surname')
                 for item in items:
                     list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid})
                 data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
             else:
             	if order=='nombreDESC':
                     if filtro=='todos':
-                        items=U_Customers.objects.all().order_by('name')
+                        items=U_Customers.objects.all().order_by('auth__name')
                     elif filtro=='pagados':
-                        items=U_Customers.objects.filter(Q(paid=1)).order_by('name')
+                        items=U_Customers.objects.filter(Q(paid=1)).order_by('auth__name')
                     elif filtro=='nopagados':
-                        items=U_Customers.objects.filter(Q(paid=0)).order_by('name')
+                        items=U_Customers.objects.filter(Q(paid=0)).order_by('auth__name')
                     elif filtro=='validados':
-                        items=U_Customers.objects.filter(Q(validated=1)).order_by('name')
+                        items=U_Customers.objects.filter(Q(validated=1)).order_by('auth__name')
                     elif filtro=='novalidados':
-                        items=U_Customers.objects.filter(Q(validated=0)).order_by('name')
+                        items=U_Customers.objects.filter(Q(validated=0)).order_by('auth__name')
                     for item in items:
                         list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
                 elif order=='nombreASC':
                     if filtro=='todos':
-                        items=U_Customers.objects.all().order_by('-name')
+                        items=U_Customers.objects.all().order_by('-auth__name')
                     elif filtro=='pagados':
-                        items=U_Customers.objects.filter(Q(paid=1)).order_by('-name')
+                        items=U_Customers.objects.filter(Q(paid=1)).order_by('-auth__name')
                     elif filtro=='nopagados':
-                        items=U_Customers.objects.filter(Q(paid=0)).order_by('-name')
+                        items=U_Customers.objects.filter(Q(paid=0)).order_by('-auth__name')
                     elif filtro=='validados':
-                        items=U_Customers.objects.filter(Q(validated=1)).order_by('-name')
+                        items=U_Customers.objects.filter(Q(validated=1)).order_by('-auth__name')
                     elif filtro=='novalidados':
-                        items=U_Customers.objects.filter(Q(validated=0)).order_by('-name')
+                        items=U_Customers.objects.filter(Q(validated=0)).order_by('-auth__name')
                     for item in items:
                         list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
                 elif order=='apellidosDESC':
                     if filtro=='todos':
-                        items=U_Customers.objects.all().order_by('surname')
+                        items=U_Customers.objects.all().order_by('auth__surname')
                     elif filtro=='pagados':
-                        items=U_Customers.objects.filter(Q(paid=1)).order_by('surname')
+                        items=U_Customers.objects.filter(Q(paid=1)).order_by('auth__surname')
                     elif filtro=='nopagados':
-                        items=U_Customers.objects.filter(Q(paid=0)).order_by('surname')
+                        items=U_Customers.objects.filter(Q(paid=0)).order_by('auth__surname')
                     elif filtro=='validados':
-                        items=U_Customers.objects.filter(Q(validated=1)).order_by('surname')
+                        items=U_Customers.objects.filter(Q(validated=1)).order_by('auth__surname')
                     elif filtro=='novalidados':
-                        items=U_Customers.objects.filter(Q(validated=0)).order_by('surname')
+                        items=U_Customers.objects.filter(Q(validated=0)).order_by('auth__surname')
                     for item in items:
                         list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
                 elif order=='apellidosASC':
                     if filtro=='todos':
-                        items=U_Customers.objects.all().order_by('-surname')
+                        items=U_Customers.objects.all().order_by('-auth__surname')
                     elif filtro=='pagados':
-                        items=U_Customers.objects.filter(Q(paid=1)).order_by('-surname')
+                        items=U_Customers.objects.filter(Q(paid=1)).order_by('-auth__surname')
                     elif filtro=='nopagados':
-                        items=U_Customers.objects.filter(Q(paid=0)).order_by('-surname')
+                        items=U_Customers.objects.filter(Q(paid=0)).order_by('-auth__surname')
                     elif filtro=='validados':
-                        items=U_Customers.objects.filter(Q(validated=1)).order_by('-surname')
+                        items=U_Customers.objects.filter(Q(validated=1)).order_by('-auth__surname')
                     elif filtro=='novalidados':
-                        items=U_Customers.objects.filter(Q(validated=0)).order_by('-surname')
+                        items=U_Customers.objects.filter(Q(validated=0)).order_by('-auth__surname')
                     for item in items:
                         list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
