@@ -2,6 +2,7 @@ from reservas.models import *
 
 from reservas.aux.general import *
 from reservas.aux.strings import *
+from reservas.aux.auth import *
 
 def create_customer(data,auth,rate):
     try:
