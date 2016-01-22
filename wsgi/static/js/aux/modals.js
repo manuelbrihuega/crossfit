@@ -1332,7 +1332,11 @@ function delete_passenger(passenger_id) {
 				$('#passenger_details_modal').modal('hide');
 				
 				// CALLABACKS
-				if ( typeof searchPassengers == 'function' ) { searchPassengers(); 	}
+				if ( typeof searchPassengers == 'function' ) { if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false,order); }
+		if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false,order); }
+		if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false,order); }
+		if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false,order); }
+		if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,order); }	}
 			}
 			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 		});
