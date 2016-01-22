@@ -268,7 +268,7 @@ function restoreRadioViewer() {
 function ban(auth_id) {
 	$.getJSON(api_url+'auth/ban?callback=?',{id:auth_id}, function(data){
 		if(data.status=='success'){
-			launch_alert('<i class="fa fa-smile-o"></i> Usuario baneado','');
+			launch_alert('<i class="fa fa-smile-o"></i> Cliente baneado','');
 			var footer = $('.modal-footer').find('.unbanned');
 			footer.removeClass('unbanned').addClass('banned');
 		}
@@ -279,7 +279,7 @@ function ban(auth_id) {
 function unban(auth_id) {
 	$.getJSON(api_url+'auth/unban?callback=?',{id:auth_id}, function(data){
 		if(data.status=='success'){
-			launch_alert('<i class="fa fa-smile-o"></i> Usuario un-baneado','');
+			launch_alert('<i class="fa fa-smile-o"></i> Cliente un-baneado','');
 			var footer = $('.modal-footer').find('.banned');
 			footer.removeClass('banned').addClass('unbanned');
 		}
@@ -290,12 +290,11 @@ function unban(auth_id) {
 function activate(auth_id) {
 	$.getJSON(api_url+'auth/activate?callback=?',{id:auth_id}, function(data){
 		if(data.status=='success'){
-			launch_alert('<i class="fa fa-smile-o"></i> Usuario activado','');
+			launch_alert('<i class="fa fa-smile-o"></i> Cliente validado','');
 			var footer = $('.modal-footer').find('.inactive');
 			footer.removeClass('inactive').addClass('active');
-			if ( typeof load_pending_drivers == 'function' ) { load_pending_drivers(); 	}
 		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al activar','warning');
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al validar','warning');
 	});
 }
 
@@ -314,9 +313,15 @@ function activate_driver(auth_id) {
 
 
 function deactivate(auth_id) {
-	// body...
+	$.getJSON(api_url+'auth/deactivate?callback=?',{id:auth_id}, function(data){
+		if(data.status=='success'){
+			launch_alert('<i class="fa fa-smile-o"></i> Cliente invalidado','');
+			var footer = $('.modal-footer').find('.inactive');
+			footer.removeClass('inactive').addClass('active');
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al invalidar','warning');
+	});
 }
-
 // BADGES
 
 function update_tickets_badge() {

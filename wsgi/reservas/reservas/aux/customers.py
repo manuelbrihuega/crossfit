@@ -45,3 +45,59 @@ def create_customer_super(data,auth,rate):
 
     except Exception as e:
         return {'status':'failed','response':e.args[0]}
+
+
+def edit_customer(auth_id,data,rate):
+    customer=get_user(auth_id)
+    auth=Auth.objects.get(id=auth_id)
+    found = False
+    changed = False
+    if customer:
+        if validate_parameter(data,'credit_wod'):
+            found=True
+            if customer.credit_wod!=data['credit_wod']:
+                changed=True
+                customer.credit_wod=data['credit_wod']
+        if validate_parameter(data,'credit_box'):
+            found=True
+            if customer.credit_box!=data['credit_box']:
+                changed=True
+                customer.credit_box=data['credit_box']
+        if validate_parameter(data,'birthdate'):
+            found=True
+            if customer.birthdate!=data['birthdate']:
+                changed=True
+                customer.birthdate=data['birthdate']
+        if validate_parameter(data,'nif'):
+            found=True
+            if customer.nif!=data['nif']:
+                changed=True
+                customer.nif=data['nif']
+        if validate_parameter(data,'paid'):
+            found=True
+            if customer.paid!=data['paid']:
+                changed=True
+                customer.paid=data['paid']
+        if validate_parameter(data,'vip'):
+            found=True
+            if customer.vip!=data['vip']:
+                changed=True
+                customer.vip=data['vip']
+        if validate_parameter(data,'test_user'):
+            found=True
+            if customer.test_user!=data['test_user']:
+                changed=True
+                customer.test_user=data['test_user']
+        if not found:
+            return {'status':'failed','response':'parameter_not_found'}
+
+        elif not changed:
+            return {'status':'failed','response':'nothing_changed'}
+
+        else:
+            customer.rate = rate
+            customer.save()
+            return {'status':'success','response':'changed'}
+
+    else:
+        return {'status':'failed','response':'not_customer'}

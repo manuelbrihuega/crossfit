@@ -311,3 +311,57 @@ def get_foreign(request):
         data=json.dumps({'status': 'failed', 'response':'not_logged'})
 
     return APIResponse(request,data)
+
+
+def edit_foreign(request):
+    """
+    Edits a passenger profile
+    """
+    if 'auth_id' not in request.session:
+        data=json.dumps({'status': 'failed', 'response':'not_logged'})
+
+    if not have_permission(request.session['auth_id'],'edit_foreign_customer'):
+        data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_foreign_customer'})
+
+    if not validate_parameter(request.GET,'id'):
+        data=json.dumps({'status': 'failed', 'response':'id_missed'})
+    else:
+        try:
+            customer=U_Customers.objects.get(id=request.GET['id'])
+            result_auth=edit_auth(customer.auth_id,request.GET)
+            rate=Rates.objects.get(id=request.GET['rate_id'])
+            result_customer=edit_customer(customer.auth_id,request.GET,rate)
+            if result_auth['status']=='success':
+                data=json.dumps({'status':'success','response':'auth_modified'})
+            else:
+                if result_customer['status']=='success':
+                    data=json.dumps({'status':'success','response':'customer_modified'})
+                else:
+                    data=json.dumps({'status':'failed','response':result_customer['response']})
+        except Exception, e:
+            data=json.dumps({'status': 'failed', 'response':'customer_not_found'})
+
+    return APIResponse(request,data)
+
+def delete(request):
+    """
+    Deletes a customer and all related info
+    """
+    if 'auth_id' in request.session:
+        if have_permission(request.session['auth_id'],'delete_customer'):
+            if validate_parameter(request.GET,'id'):
+                try:
+                    customer=U_Customers.objects.get(id=request.GET['id'])
+                    result=delete_auth(customer.auth.id)
+                    data=json.dumps(result)
+
+                except:
+                    data=json.dumps({'status': 'failed', 'response':'customer_not_found'})
+            else:
+                data=json.dumps({'status': 'failed', 'response':'id_missed'})
+        else:
+            data=json.dumps({'status':'failed','response':'unauthorized_delete_customer'})
+    else:
+        data=json.dumps({'status':'failed','response':'not_logged'})
+
+    return APIResponse(request,data)

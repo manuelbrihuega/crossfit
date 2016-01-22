@@ -343,6 +343,9 @@ def activate(request):
                     else:
                         auth.active=True
                         auth.save()
+                        customer=U_Customers.objects.get(auth=auth)
+                        customer.validated=True
+                        customer.save()
                         data=json.dumps({'status':'success','response':'auth_activated'})
                 except:
                     data=json.dumps({'status': 'failed', 'response':'auth_not_found'})
@@ -370,6 +373,9 @@ def deactivate(request):
                     if auth.active:
                         auth.active=False
                         auth.save()
+                        customer=U_Customers.objects.get(auth=auth)
+                        customer.validated=False
+                        customer.save()
                         delete_session(auth.id)
                         data=json.dumps({'status':'success','response':'auth_deactivated'})
                     else:

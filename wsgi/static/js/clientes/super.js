@@ -71,7 +71,7 @@ function getPassengersStats() {
   		searchPassengers(false,false,false,false,true,order);
 	});
 	$( "#ordernombre" ).click(function() {
-		$( "#orderapellidos" ).html('■ Apellidos');
+		$( "#orderapellidos" ).html('  Apellidos');
   		if($( "#ordernombre" ).attr('data')=='nombreDESC'){
   			order='nombreASC';
   			$( "#ordernombre" ).attr('data','nombreASC');
@@ -88,7 +88,7 @@ function getPassengersStats() {
 		if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,order); }
 	});
 	$( "#orderapellidos" ).click(function() {
-		$( "#ordernombre" ).html('■ Nombre');
+		$( "#ordernombre" ).html('  Nombre');
   		if($( "#orderapellidos" ).attr('data')=='apellidosDESC'){
   			order='apellidosASC';
   			$( "#orderapellidos" ).attr('data','apellidosASC');

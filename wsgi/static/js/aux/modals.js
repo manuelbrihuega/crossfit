@@ -1256,17 +1256,16 @@ function modal_passenger_details_operator(passenger_id) {
 }
 
 function delete_passenger(passenger_id) {
-	var confirmacion=confirm('¿Seguro que quieres eliminar el pasajero?');
+	var confirmacion=confirm('¿Seguro que quieres eliminar el cliente?');
 	if (confirmacion==true)
 	{
-		$.getJSON(api_url+'passengers/delete?callback=?', {id:passenger_id}, function(data){
+		$.getJSON(api_url+'customers/delete?callback=?', {id:passenger_id}, function(data){
 			if(data.status=='success'){
-				launch_alert('<i class="fa fa-smile-o"></i> Pasajero eliminado','');
+				launch_alert('<i class="fa fa-smile-o"></i> Cliente eliminado','');
 				$('#passenger_details_modal').modal('hide');
 				
 				// CALLABACKS
 				if ( typeof searchPassengers == 'function' ) { searchPassengers(); 	}
-                if ( typeof globalSearch == 'function' ) { globalSearch(); 	}
 			}
 			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 		});
@@ -2061,25 +2060,46 @@ function edit_passenger() {
 	var surname = $('#passenger_surname').val();
 	var email = $('#passenger_email').val();
 	var password = $('#passenger_password').val();
-	var prefix = $('#passenger_prefix').val();
+	var nif = $('#passenger_nif').val();
 	var phone = $('#passenger_phone').val();
-	//var os = $('#driver_so').val();
-	//var device_model = $('#driver_device_model').val();
+	var rate_id = $('#passenger_rate_id').val();
+	var birthdate = $('#passenger_birthdate').val();
+	var credit_wod = $('#passenger_credit_wod').val();
+	var credit_box = $('#passenger_credit_box').val();
+	var paid = 0;
+	var test_user = 0;
+	var vip = 0;
+	if($('#passenger_paid').is(':checked')){ 
+		paid = 1;
+	}
+	if($('#passenger_test_user').is(':checked')){ 
+		test_user = 1;
+	}	    	
+	if($('#passenger_vip').is(':checked')){ 
+		vip = 1;
+	}	    	
 	var save_button = $('.edit_passenger_button');
 	if (name.length>0){
-		if (email.length>0){
-			save_button.html('<i class="fa fa-cog fa-spin"></i>');
-			var params = {id:id,name:name,surname:surname,email:email,prefix:prefix,phone:phone};
-			if (password.length>0) params['password']=password;
-			$.getJSON(api_url+'passengers/edit_foreign?callback=?', params, function(data){
-				if(data.status=='success'){
-					launch_alert('<i class="fa fa-smile-o"></i> Pasajero guardado','');
-				}
-				else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
-				save_button.html('<i class="fa fa-floppy-o"></i>');
-			});
-			
-		}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el email','warning');
+		if (surname.length>0){
+			if (email.length>0){
+				if (nif.length>0){
+					if (phone.length>0){
+						if (birthdate.length>0){
+							save_button.html('<i class="fa fa-cog fa-spin"></i>');
+							var params = {id:id,name:name,surname:surname,email:email,nif:nif,phone:phone,rate_id:rate_id,birthdate:birthdate, credit_wod:credit_wod, credit_box:credit_box, paid:paid, test_user:test_user, vip:vip};
+							if (password.length>0) params['password']=password;
+							$.getJSON(api_url+'customers/edit_foreign?callback=?', params, function(data){
+								if(data.status=='success'){
+									launch_alert('<i class="fa fa-smile-o"></i> Cliente guardado','');
+								}
+								else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+								save_button.html('<i class="fa fa-floppy-o"></i>');
+							});
+						}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir la fecha de nacimiento','warning');
+					}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el teléfono','warning');
+				}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el DNI','warning');	
+			}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el email','warning');
+		}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir los apellidos','warning');
 	}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el nombre','warning');
 }
 
