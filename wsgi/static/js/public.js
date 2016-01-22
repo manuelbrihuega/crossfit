@@ -29,6 +29,23 @@ function loadLocation() {
     }
 }
 
+function lanzarModalRestore(){
+    var mymodal=newModal('modal_passengers_download',true, false);
+    mymodal.find('.modal-dialog');
+    modalAddTitle(mymodal,'');
+    var body=$('<div></div>').attr('class','home');
+    var h1 = $('<h1></h1>').text('DESCARGAR APP'); body.append(h1);
+    var h3 = $('<h3></h3>').text('ELIGE TU SISTEMA OPERATIVO'); body.append(h3);
+    var botonera=$('<div></div>').attr({'class':'botonera'}); body.append(botonera);
+    var link = $('<a>').attr({'href':'https://itunes.apple.com/es/app/taxible/id602835004?mt=8'}); botonera.append(link);
+    var button = $('<div></div>').attr({'class':'download spritehome sphome_app_store'}); link.append(button);
+    var link = $('<a>').attr({'href':'https://play.google.com/store/apps/details?id=com.idearioventures.taxible&hl=es'}); botonera.append(link);
+    var button = $('<div></div>').attr({'class':'download spritehome sphome_google_play'}); link.append(button);
+    modalAddBody(mymodal,body);
+
+
+    mymodal.modal('show');
+}
 
 function setLang(lang,reload) {
 	$.post(base_url+'/ajax/set_lang', {country_code:lang}, function(data, textStatus, xhr) {
