@@ -81,9 +81,9 @@ def edit_customer(auth_id,data,rate):
             return {'status':'failed','response':'nothing_changed'}
 
         else:
-            customer.paid=data['paid']
-            customer.vip=data['vip']
-            customer.test_user=data['test_user']
+            customer.paid=getBoolValue(data['paid'])
+            customer.vip=getBoolValue(data['vip'])
+            customer.test_user=getBoolValue(data['test_user'])
             customer.rate = rate
             customer.save()
             return {'status':'success','response':'changed'}
