@@ -277,8 +277,8 @@ def search(request):
                     for item in items:
                         list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
-        except:
-            data=json.dumps({'status': 'failed', 'response':'customer_not_found'})
+        except Exception as e:
+            data=json.dumps({'status': 'failed', 'response':e.args[0]})
     
     return APIResponse(request,data)
 
