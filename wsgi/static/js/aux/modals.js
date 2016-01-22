@@ -935,6 +935,42 @@ function loadRatesDos(rate_id){
     });
 }
 
+function ban(auth_id) {
+	$.getJSON(api_url+'auth/ban?callback=?',{id:auth_id}, function(data){
+		if(data.status=='success'){
+			launch_alert('<i class="fa fa-smile-o"></i> Cliente baneado','');
+			var footer = $('.modal-footer').find('.unbanned');
+			footer.removeClass('unbanned').addClass('banned');
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al banear','warning');
+	});
+}
+
+function unban(auth_id) {
+	$.getJSON(api_url+'auth/unban?callback=?',{id:auth_id}, function(data){
+		if(data.status=='success'){
+			launch_alert('<i class="fa fa-smile-o"></i> Cliente un-baneado','');
+			var footer = $('.modal-footer').find('.banned');
+			footer.removeClass('banned').addClass('unbanned');
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al un-banear','warning');
+	});
+}
+
+function activate(auth_id) {
+	$.getJSON(api_url+'auth/activate?callback=?',{id:auth_id}, function(data){
+		if(data.status=='success'){
+			launch_alert('<i class="fa fa-smile-o"></i> Cliente validado','');
+			var footer = $('.modal-footer').find('.inactive');
+			footer.removeClass('inactive').addClass('active');
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al validar','warning');
+	});
+}
+
+
+
+
 
 function modal_passenger_details(passenger_id) {
 	var mymodal=newModal('passenger_details_modal',true, true);
@@ -1004,22 +1040,14 @@ function modal_passenger_details(passenger_id) {
 				if(myrole=='U_Super'){
 				var group = $('<div></div>').attr({'class':'btn-group'}); footer.append(group);
 				
+				var ban_button = $('<button></button>').attr({'type':'button','class':'ban btn btn-default'}).text('BANEAR'); group.append(ban_button);
+				ban_button.click(function(){ ban(data.data.auth_profile.auth_id); });
 				
+				var unban_button = $('<button></button>').attr({'type':'button','class':'unban btn btn-default'}).text('DESBANEAR'); group.append(unban_button);
+				unban_button.click(function(){ unban(data.data.auth_profile.auth_id); });
 				
 				var activate = $('<button></button>').attr({'type':'button','class':'activate btn btn-default'}).text('VALIDAR'); group.append(activate);
-				activate.click(function(){
-					activate.html('<i class="fa fa-cog fa-spin"></i>'); 
-					$.getJSON(api_url+'auth/activate?callback=?',{id:data.data.auth_profile.auth_id}, function(data){
-						if(data.status=='success'){
-							activate.html('INVALIDAR');
-							activate..attr({'type':'button','class':'deactivate btn btn-default'});
-							launch_alert('<i class="fa fa-smile-o"></i> Cliente validado','');
-							var footer = $('.modal-footer').find('.inactive');
-							footer.removeClass('inactive').addClass('active');
-						}
-						else launch_alert('<i class="fa fa-frown-o"></i> Error al validar','warning');
-					});
-				});
+				activate.click(function(){ activate(data.data.auth_profile.auth_id); });
 				
 				var deactivate = $('<button></button>').attr({'type':'button','class':'deactivate btn btn-default'}).text('INVALIDAR'); group.append(deactivate);
 				deactivate.click(function(){ 
