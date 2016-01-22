@@ -71,6 +71,7 @@ function getPassengersStats() {
   		searchPassengers(false,false,false,false,true,order);
 	});
 	$( "#ordernombre" ).click(function() {
+		$( "#orderapellidos" ).html('■ Apellidos');
   		if($( "#ordernombre" ).attr('data')=='nombreDESC'){
   			order='nombreASC';
   			$( "#ordernombre" ).attr('data','nombreASC');
@@ -87,6 +88,7 @@ function getPassengersStats() {
 		if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,order); }
 	});
 	$( "#orderapellidos" ).click(function() {
+		$( "#ordernombre" ).html('■ Nombre');
   		if($( "#orderapellidos" ).attr('data')=='apellidosDESC'){
   			order='apellidosASC';
   			$( "#orderapellidos" ).attr('data','apellidosASC');
@@ -262,7 +264,11 @@ function new_customer() {
 													$('#new_customer_prueba').prop( "checked", false );
 													$('#botonenviar').html('ENVIAR');
 													launch_alert('<i class="fa fa-smile-o"></i> Cliente creado','');
-													initialsearch();
+													if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false,order); }
+														if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false,order); }
+														if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false,order); }
+														if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false,order); }
+														if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,order); }
 												}
 												else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 											});
