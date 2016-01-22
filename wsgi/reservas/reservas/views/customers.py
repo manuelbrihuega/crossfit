@@ -121,9 +121,9 @@ def search(request):
                 words = str(request.GET['lookup']).split()
                 counter = 0
                 for word in words:
-                	if order=='nombreDESC':
+                    if order=='nombreDESC':
                         if counter == 0:
-                    	    if filtro=='todos':
+                            if filtro=='todos':
                                 items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('name')
                             elif filtro=='pagados':
                                 items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('name')
@@ -147,7 +147,7 @@ def search(request):
                                 items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('name')
                     elif order=='nombreASC':
                         if counter == 0:
-                    	    if filtro=='todos':
+                            if filtro=='todos':
                                 items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-name')
                             elif filtro=='pagados':
                                 items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-name')
@@ -159,7 +159,7 @@ def search(request):
                                 items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-name')
                             counter = 1
                         elif counter == 1:
-                    	    if filtro=='todos':
+                            if filtro=='todos':
                                 items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-name')
                             elif filtro=='pagados':
                                 items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-name')
@@ -171,7 +171,7 @@ def search(request):
                                 items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-name')
                     elif order=='apellidosDESC':
                         if counter == 0:
-                    	    if filtro=='todos':
+                            if filtro=='todos':
                                 items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('surname')
                             elif filtro=='pagados':
                                 items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('surname')
@@ -183,7 +183,7 @@ def search(request):
                                 items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('surname')
                             counter = 1
                         elif counter == 1:
-                    	    if filtro=='todos':
+                            if filtro=='todos':
                                 items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('surname')
                             elif filtro=='pagados':
                                 items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('surname')
@@ -195,7 +195,7 @@ def search(request):
                                 items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('surname')
                     elif order=='apellidosASC':
                         if counter == 0:
-                    	    if filtro=='todos':
+                            if filtro=='todos':
                                 items=U_Customers.objects.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-surname')
                             elif filtro=='pagados':
                                 items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-surname')
@@ -207,7 +207,7 @@ def search(request):
                                 items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-surname')
                             counter = 1
                         elif counter == 1:
-                    	    if filtro=='todos':
+                            if filtro=='todos':
                                 items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('-surname')
                             elif filtro=='pagados':
                                 items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('-surname')
@@ -222,7 +222,7 @@ def search(request):
                 data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
             else:
             	if order=='nombreDESC':
-            	    if filtro=='todos':
+                    if filtro=='todos':
                         items=U_Customers.objects.all().order_by('name')
                     elif filtro=='pagados':
                         items=U_Customers.objects.filter(Q(paid=1)).order_by('name')
