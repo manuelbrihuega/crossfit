@@ -1047,14 +1047,28 @@ function modal_passenger_details(passenger_id) {
 				unban_button.click(function(){ unban(data.data.auth_profile.auth_id); });
 				
 				var activate = $('<button></button>').attr({'type':'button','class':'activate btn btn-default'}).text('VALIDAR'); group.append(activate);
-				activate.click(function(){ activate(data.data.auth_profile.auth_id); });
+				activate.click(function(){ 
+					activate.html('<i class="fa fa-cog fa-spin"></i>');
+					$.getJSON(api_url+'auth/activate?callback=?',{id:data.data.auth_profile.auth_id}, function(data){
+						if(data.status=='success'){
+							activate.html('INVALIDAR');
+							activate.attr({'type':'button','class':'deactivate btn btn-default'});
+							launch_alert('<i class="fa fa-smile-o"></i> Cliente validado','');
+							var footer = $('.modal-footer').find('.inactive');
+							footer.removeClass('inactive').addClass('active');
+						}
+						else launch_alert('<i class="fa fa-frown-o"></i> Error al validar','warning');
+					});
+
+				});
 				
 				var deactivate = $('<button></button>').attr({'type':'button','class':'deactivate btn btn-default'}).text('INVALIDAR'); group.append(deactivate);
 				deactivate.click(function(){ 
 					deactivate.html('<i class="fa fa-cog fa-spin"></i>');
 					$.getJSON(api_url+'auth/deactivate?callback=?',{id:data.data.auth_profile.auth_id}, function(data){
 						if(data.status=='success'){
-							deactivate.html('INVALIDAR');
+							deactivate.html('VALIDAR');
+							deactivate.attr({'type':'button','class':'activate btn btn-default'});
 							launch_alert('<i class="fa fa-smile-o"></i> Cliente invalidado','');
 							var footer = $('.modal-footer').find('.inactive');
 							footer.removeClass('inactive').addClass('active');
