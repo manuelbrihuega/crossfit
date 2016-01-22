@@ -1050,7 +1050,19 @@ function modal_passenger_details(passenger_id) {
 				activate.click(function(){ activate(data.data.auth_profile.auth_id); });
 				
 				var deactivate = $('<button></button>').attr({'type':'button','class':'deactivate btn btn-default'}).text('INVALIDAR'); group.append(deactivate);
-				deactivate.click(function(){ deactivate(data.data.auth_profile.auth_id); });
+				deactivate.click(function(){ 
+					deactivate.html('<i class="fa fa-cog fa-spin"></i>');
+					$.getJSON(api_url+'auth/deactivate?callback=?',{id:data.data.auth_profile.auth_id}, function(data){
+						if(data.status=='success'){
+							deactivate.html('INVALIDAR');
+							launch_alert('<i class="fa fa-smile-o"></i> Cliente invalidado','');
+							var footer = $('.modal-footer').find('.inactive');
+							footer.removeClass('inactive').addClass('active');
+						}
+						else launch_alert('<i class="fa fa-frown-o"></i> Error al invalidar','warning');
+					});
+
+				});
 				
 				var delete_passenger_button = $('<button></button>').attr({'type':'button','class':'btn btn-default'}).text('ELIMINAR'); group.append(delete_passenger_button);
 				delete_passenger_button.click(function(){ delete_passenger(passenger_id); });
@@ -2092,16 +2104,6 @@ function edit_touroperator() {
 	}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el nombre','warning');
 }
 
-function deactivate(auth_id) {
-	$.getJSON(api_url+'auth/deactivate?callback=?',{id:auth_id}, function(data){
-		if(data.status=='success'){
-			launch_alert('<i class="fa fa-smile-o"></i> Cliente invalidado','');
-			var footer = $('.modal-footer').find('.inactive');
-			footer.removeClass('inactive').addClass('active');
-		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al invalidar','warning');
-	});
-}
 
 function edit_passenger() {
 	var id = $('#passenger_id').val();
