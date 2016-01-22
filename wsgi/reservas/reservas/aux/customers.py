@@ -74,21 +74,6 @@ def edit_customer(auth_id,data,rate):
             if customer.nif!=data['nif']:
                 changed=True
                 customer.nif=data['nif']
-        if validate_parameter(data,'paid'):
-            found=True
-            if customer.paid!=data['paid']:
-                changed=True
-                customer.paid=data['paid']
-        if validate_parameter(data,'vip'):
-            found=True
-            if customer.vip!=data['vip']:
-                changed=True
-                customer.vip=data['vip']
-        if validate_parameter(data,'test_user'):
-            found=True
-            if customer.test_user!=data['test_user']:
-                changed=True
-                customer.test_user=data['test_user']
         if not found:
             return {'status':'failed','response':'parameter_not_found'}
 
@@ -96,6 +81,9 @@ def edit_customer(auth_id,data,rate):
             return {'status':'failed','response':'nothing_changed'}
 
         else:
+            customer.paid=data['paid']
+            customer.vip=data['vip']
+            customer.test_user=data['test_user']
             customer.rate = rate
             customer.save()
             return {'status':'success','response':'changed'}
