@@ -29,7 +29,7 @@ def login(request):
         'content':render_to_string('partials/public_login.html', {'lang':lang, 'media':getMediaPath(request)}),
         'title':_('SISTEMA DE RESERVAS | CrossFit Jerez'),
         'css':['partials/coolform.css'],
-        'javascript':['public/login.js'],
+        'javascript':['public/login.js','aux/modals.js'],
         'lang':lang,
     })
     return HttpResponse(template.render(content))
