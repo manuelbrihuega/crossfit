@@ -34,15 +34,9 @@ function lanzarModalRestore(){
     mymodal.find('.modal-dialog');
     modalAddTitle(mymodal,'');
     var body=$('<div></div>').attr('class','home');
-    var h1 = $('<h1></h1>').text('DESCARGAR APP'); body.append(h1);
-    var h3 = $('<h3></h3>').text('ELIGE TU SISTEMA OPERATIVO'); body.append(h3);
-    var botonera=$('<div></div>').attr({'class':'botonera'}); body.append(botonera);
-    var link = $('<a>').attr({'href':'https://itunes.apple.com/es/app/taxible/id602835004?mt=8'}); botonera.append(link);
-    var button = $('<div></div>').attr({'class':'download spritehome sphome_app_store'}); link.append(button);
-    var link = $('<a>').attr({'href':'https://play.google.com/store/apps/details?id=com.idearioventures.taxible&hl=es'}); botonera.append(link);
-    var button = $('<div></div>').attr({'class':'download spritehome sphome_google_play'}); link.append(button);
+    body.html('<h1>RESTAURAR CONTRASEÑA</h1><h3 style="text-transform: none;">Si no recuerdas tu contraseña introduce el email con el que te registraste en el sistema y pulsa en restaurar, te enviaremos una nueva contraseña que podrás cambiar más tarde desde tu perfil </h3>
+<input type="text" class="form-control" placeholder="Introduce tu email" id="email" name="email" style="width: 300px; margin-top: 29px; margin-left: auto; margin-right: auto;"><div class="botonera" style="margin-top: 18px; margin-bottom: 37px;"><div style="text-align:center;"><button id="botonenviar" type="submit" class="btn btn-warning">RESTAURAR</button></div></div>');
     modalAddBody(mymodal,body);
-
 
     mymodal.modal('show');
 }
