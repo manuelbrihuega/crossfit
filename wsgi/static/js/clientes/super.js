@@ -1,3 +1,5 @@
+var order='nombreDESC';
+
 function get_content() {
 	
 		$.getScript(media_url+'js/aux/date.js', function(){
@@ -36,36 +38,69 @@ function show_new() {
 }
 
 function getPassengersStats() {
+	var ordenes = '<div style="margin-top: 18px;"><span id="ordernombre" data="nombreDESC" style="margin-right: 15px; cursor: pointer;">▼ Nombre</span><span id="orderapellidos" data="apellidosDESC" style="cursor: pointer;">▼ Apellidos</span></div>';
 	var filtros = '<div style="overflow:auto;"><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="filtro" value="Todos" id="todos" checked>Todos</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="filtro" id="pagados" value="Pagados">Han pagado</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="filtro" id="nopagados" value="No pagados">No han pagado</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" id="validados" name="filtro" value="Validados">Validados</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" id="novalidados" name="filtro" value="No validados">No validados</div></div>';
-	var input = $('<input>').attr({'style':'float: left; margin-right: 20px;','id':'input_search_passenger','class':'superinput', 'type':'text', 'placeholder':'Ej. Nombre, apellidos, email, etc.'}); $('#submain').html(input); $('#submain').append(filtros);
+	var input = $('<input>').attr({'style':'float: left; margin-right: 20px;','id':'input_search_passenger','class':'superinput', 'type':'text', 'placeholder':'Ej. Nombre, apellidos, email, etc.'}); $('#submain').html(input); $('#submain').append(filtros); $('#submain').append(ordenes);
 
 	input.focus();
 	input.bind({
 		keypress: function(e) {
 			var code = e.keyCode || e.which;
 			if(code == 13){ 
-				if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false); }
-				if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false); }
-				if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false); }
-				if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false); }
-				if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true); }
+				if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false,order); }
+				if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false,order); }
+				if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false,order); }
+				if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false,order); }
+				if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,order); }
 			}
 		}
 	});
 	$( "#todos" ).click(function() {
-  		searchPassengers(true,false,false,false,false);
+  		searchPassengers(true,false,false,false,false,order);
 	});
 	$( "#pagados" ).click(function() {
-  		searchPassengers(false,true,false,false,false);
+  		searchPassengers(false,true,false,false,false,order);
 	});
 	$( "#nopagados" ).click(function() {
-  		searchPassengers(false,false,true,false,false);
+  		searchPassengers(false,false,true,false,false,order);
 	});
 	$( "#validados" ).click(function() {
-  		searchPassengers(false,false,false,true,false);
+  		searchPassengers(false,false,false,true,false,order);
 	});
 	$( "#novalidados" ).click(function() {
-  		searchPassengers(false,false,false,false,true);
+  		searchPassengers(false,false,false,false,true,order);
+	});
+	$( "#ordernombre" ).click(function() {
+  		if($( "#ordernombre" ).attr('data')=='nombreDESC'){
+  			order='nombreASC';
+  			$( "#ordernombre" ).attr('data','nombreASC');
+  			$( "#ordernombre" ).html('▲ Nombre');
+  		}else{
+  			order='nombreDESC';
+  			$( "#ordernombre" ).attr('data','nombreDESC');
+  			$( "#ordernombre" ).html('▼ Nombre');
+  		}
+  		if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false,order); }
+		if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false,order); }
+		if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false,order); }
+		if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false,order); }
+		if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,order); }
+	});
+	$( "#orderapellidos" ).click(function() {
+  		if($( "#orderapellidos" ).attr('data')=='apellidosDESC'){
+  			order='apellidosASC';
+  			$( "#orderapellidos" ).attr('data','apellidosASC');
+  			$( "#orderapellidos" ).html('▲ Apellidos');
+  		}else{
+  			order='apellidosDESC';
+  			$( "#orderapellidos" ).attr('data','apellidosDESC');
+  			$( "#orderapellidos" ).html('▼ Apellidos');
+  		}
+  		if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false,order); }
+		if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false,order); }
+		if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false,order); }
+		if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false,order); }
+		if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,order); }
 	});
 	var results = $('<div></div>').attr({'class':'passengers_md_list sublista row', 'id':'results'}).css('margin-top','30px'); $('#submain').append(results);
 	var stats = $('<div></div>').attr({'class':'passengers_stats', 'id':'stats'}).css('margin-top','30px'); $('#submain').append(stats);
@@ -92,7 +127,7 @@ function loadRates() {
 
 // falta llamar a searchpasanger cuando hagamo click en cada filtro
 
-function searchPassengers(todos,pagados,nopagados,validados,novalidados) {
+function searchPassengers(todos,pagados,nopagados,validados,novalidados,order) {
 	var string = $('#input_search_passenger').val();
 	if(string==""){
 		string="*";
@@ -115,7 +150,7 @@ function searchPassengers(todos,pagados,nopagados,validados,novalidados) {
 		var filtro='novalidados';
 	}
 	wrapper.empty();
-	$.getJSON(api_url+'customers/search?callback=?', {lookup:string,filtro:filtro}, function(data){
+	$.getJSON(api_url+'customers/search?callback=?', {lookup:string,filtro:filtro,order:order}, function(data){
 		////console.log(data.data)
 		if(data.status=='success'){
 
@@ -135,7 +170,7 @@ function initialsearch() {
 	var wrapper = $('#results');
 	var wr = $('#stats');
 	wrapper.empty();
-	$.getJSON(api_url+'customers/search?callback=?', {lookup:string, filtro:'todos'}, function(data){
+	$.getJSON(api_url+'customers/search?callback=?', {lookup:string, filtro:'todos', order:'nombreDESC'}, function(data){
 		////console.log(data.data)
 		if(data.status=='success'){
 
