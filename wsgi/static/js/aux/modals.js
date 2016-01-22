@@ -1051,6 +1051,7 @@ function modal_passenger_details(passenger_id) {
 					activate.html('<i class="fa fa-cog fa-spin"></i>');
 					$.getJSON(api_url+'auth/activate?callback=?',{id:data.data.auth_profile.auth_id}, function(data){
 						if(data.status=='success'){
+							activate.html('VALIDAR');
 							launch_alert('<i class="fa fa-smile-o"></i> Cliente validado','');
 							var footer = $('.modal-footer').find('.inactive');
 							footer.removeClass('inactive').addClass('active');
@@ -1065,6 +1066,7 @@ function modal_passenger_details(passenger_id) {
 					deactivate.html('<i class="fa fa-cog fa-spin"></i>');
 					$.getJSON(api_url+'auth/deactivate?callback=?',{id:data.data.auth_profile.auth_id}, function(data){
 						if(data.status=='success'){
+							deactivate.html('INVALIDAR');
 							launch_alert('<i class="fa fa-smile-o"></i> Cliente invalidado','');
 							var footer = $('.modal-footer').find('.inactive');
 							footer.removeClass('inactive').addClass('active');
