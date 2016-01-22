@@ -1054,8 +1054,7 @@ function modal_passenger_details(passenger_id) {
 					deactivate.html('<i class="fa fa-cog fa-spin"></i>');
 					$.getJSON(api_url+'auth/deactivate?callback=?',{id:data.data.auth_profile.auth_id}, function(data){
 						if(data.status=='success'){
-							deactivate.html('VALIDAR');
-							deactivate..attr({'type':'button','class':'activate btn btn-default'});
+							deactivate.html('INVALIDAR');
 							launch_alert('<i class="fa fa-smile-o"></i> Cliente invalidado','');
 							var footer = $('.modal-footer').find('.inactive');
 							footer.removeClass('inactive').addClass('active');
