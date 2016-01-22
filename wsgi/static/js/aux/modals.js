@@ -1004,35 +1004,7 @@ function modal_passenger_details(passenger_id) {
 				if(myrole=='U_Super'){
 				var group = $('<div></div>').attr({'class':'btn-group'}); footer.append(group);
 				
-				var ban_button = $('<button></button>').attr({'type':'button','class':'ban btn btn-default'}).text('BANEAR'); group.append(ban_button);
-				ban_button.click(function(){  
-					ban_button.html('<i class="fa fa-cog fa-spin"></i>'); 
-					$.getJSON(api_url+'auth/ban?callback=?',{id:data.data.auth_profile.auth_id}, function(data){
-						if(data.status=='success'){
-							ban_button.html('UN-BANEAR');
-							ban_button.attr({'type':'button','class':'unban btn btn-default'});
-							launch_alert('<i class="fa fa-smile-o"></i> Cliente baneado','');
-							var footer = $('.modal-footer').find('.unbanned');
-							footer.removeClass('unbanned').addClass('banned');
-						}
-						else launch_alert('<i class="fa fa-frown-o"></i> Error al banear','warning');
-					});
-				});
 				
-				var unban_button = $('<button></button>').attr({'type':'button','class':'unban btn btn-default'}).text('DESBANEAR'); group.append(unban_button);
-				unban_button.click(function(){  
-					$.getJSON(api_url+'auth/unban?callback=?',{id:data.data.auth_profile.auth_id}, function(data){
-						unban_button.html('<i class="fa fa-cog fa-spin"></i>'); 
-						if(data.status=='success'){
-							unban_button.html('BANEAR');
-							unban_button.attr({'type':'button','class':'ban btn btn-default'});
-							launch_alert('<i class="fa fa-smile-o"></i> Cliente un-baneado','');
-							var footer = $('.modal-footer').find('.banned');
-							footer.removeClass('banned').addClass('unbanned');
-						}
-						else launch_alert('<i class="fa fa-frown-o"></i> Error al un-banear','warning');
-					});
-				});
 				
 				var activate = $('<button></button>').attr({'type':'button','class':'activate btn btn-default'}).text('VALIDAR'); group.append(activate);
 				activate.click(function(){
