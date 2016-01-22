@@ -265,38 +265,7 @@ function restoreRadioViewer() {
 }
 
 // AUTH
-function ban(auth_id) {
-	$.getJSON(api_url+'auth/ban?callback=?',{id:auth_id}, function(data){
-		if(data.status=='success'){
-			launch_alert('<i class="fa fa-smile-o"></i> Cliente baneado','');
-			var footer = $('.modal-footer').find('.unbanned');
-			footer.removeClass('unbanned').addClass('banned');
-		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al banear','warning');
-	});
-}
 
-function unban(auth_id) {
-	$.getJSON(api_url+'auth/unban?callback=?',{id:auth_id}, function(data){
-		if(data.status=='success'){
-			launch_alert('<i class="fa fa-smile-o"></i> Cliente un-baneado','');
-			var footer = $('.modal-footer').find('.banned');
-			footer.removeClass('banned').addClass('unbanned');
-		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al un-banear','warning');
-	});
-}
-
-function activate(auth_id) {
-	$.getJSON(api_url+'auth/activate?callback=?',{id:auth_id}, function(data){
-		if(data.status=='success'){
-			launch_alert('<i class="fa fa-smile-o"></i> Cliente validado','');
-			var footer = $('.modal-footer').find('.inactive');
-			footer.removeClass('inactive').addClass('active');
-		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al validar','warning');
-	});
-}
 
 function activate_driver(auth_id) {
 	$.getJSON(api_url+'drivers/activate?callback=?',{id:auth_id}, function(data){
@@ -312,16 +281,7 @@ function activate_driver(auth_id) {
 
 
 
-function deactivate(auth_id) {
-	$.getJSON(api_url+'auth/deactivate?callback=?',{id:auth_id}, function(data){
-		if(data.status=='success'){
-			launch_alert('<i class="fa fa-smile-o"></i> Cliente invalidado','');
-			var footer = $('.modal-footer').find('.inactive');
-			footer.removeClass('inactive').addClass('active');
-		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al invalidar','warning');
-	});
-}
+
 // BADGES
 
 function update_tickets_badge() {
