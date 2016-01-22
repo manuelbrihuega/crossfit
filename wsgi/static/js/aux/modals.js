@@ -968,16 +968,7 @@ function activate(auth_id) {
 	});
 }
 
-function deactivate(auth_id) {
-	$.getJSON(api_url+'auth/deactivate?callback=?',{id:auth_id}, function(data){
-		if(data.status=='success'){
-			launch_alert('<i class="fa fa-smile-o"></i> Cliente invalidado','');
-			var footer = $('.modal-footer').find('.inactive');
-			footer.removeClass('inactive').addClass('active');
-		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al invalidar','warning');
-	});
-}
+
 
 
 
@@ -2101,6 +2092,16 @@ function edit_touroperator() {
 	}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el nombre','warning');
 }
 
+function deactivate(auth_id) {
+	$.getJSON(api_url+'auth/deactivate?callback=?',{id:auth_id}, function(data){
+		if(data.status=='success'){
+			launch_alert('<i class="fa fa-smile-o"></i> Cliente invalidado','');
+			var footer = $('.modal-footer').find('.inactive');
+			footer.removeClass('inactive').addClass('active');
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al invalidar','warning');
+	});
+}
 
 function edit_passenger() {
 	var id = $('#passenger_id').val();
