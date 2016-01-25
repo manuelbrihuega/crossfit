@@ -1104,6 +1104,61 @@ function modal_passenger_details(passenger_id) {
 
 
 
+function showTarifa(tarifa_id) {
+	var mymodal=newModal('tarifa_details_modal',true, true);
+	modalAddTitle(mymodal,'');
+	doModalBigger(mymodal);
+	modalAddBody(mymodal,'<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
+	mymodal.modal('show');
+	
+	
+	$.getJSON( api_url+'rates/get_foreign?callback=?', {id:tarifa_id}, function(data){
+		if(data.status=='success'){
+			var body = $('<div></div>').attr({'id':'passenger_details_wrapper'});
+			$.post(base_url+'/partials/modal_tarifa_details', function(template, textStatus, xhr) {
+				body.html(template);
+				modalAddBody(mymodal,body);
+				
+				$('#tarifa_id').val(data.data.rate.id);
+				$('#tarifa_name').val(data.data.rate.name);
+				$('#tarifa_price').val(data.data.rate.price);
+				$('#tarifa_credit_wod').val(data.data.rate.credit_wod);
+				$('#tarifa_credit_box').val(data.data.rate.credit_box);
+				$('#tarifa_observations').val(data.data.rate.observations);
+				
+				
+				
+				
+				var footer = $('<div></div>').attr({'id':'passenger_details_footer'});
+				
+				
+				if(myrole=='U_Super'){
+				var group = $('<div></div>').attr({'class':'btn-group'}); footer.append(group);
+				
+				var delete_passenger_button = $('<button></button>').attr({'type':'button','class':'btn btn-default'}).text('ELIMINAR'); group.append(delete_passenger_button);
+				delete_passenger_button.click(function(){ delete_tarifa(tarifa_id); });
+				
+				}
+				modalAddFooter(mymodal,footer);
+				
+			});
+			
+			
+			
+			
+			
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del pasajero','warning')
+	});
+	
+
+	
+}
+
+
+
+
+
 function modal_passenger_details_enterprise(passenger_id) {
 	var mymodal=newModal('passenger_details_modal',true, true);
 	modalAddTitle(mymodal,'');
@@ -1343,6 +1398,23 @@ function delete_passenger(passenger_id) {
 
 	}
 }
+
+function delete_tarifa(tarifa_id) {
+	var confirmacion=confirm('¿Seguro que quieres eliminar la tarifa?');
+	if (confirmacion==true)
+	{
+		$.getJSON(api_url+'rates/delete?callback=?', {id:tarifa_id}, function(data){
+			if(data.status=='success'){
+				launch_alert('<i class="fa fa-smile-o"></i> Tarifa eliminada','');
+				$('#tarifa_details_modal').modal('hide');
+				searchRates();
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+		});
+
+	}
+}
+
 
 function delete_faq(faq_id) {
 	var confirmacion=confirm('¿Seguro que quieres eliminar la FAQ?');
@@ -2173,6 +2245,36 @@ function edit_passenger() {
 		}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir los apellidos','warning');
 	}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el nombre','warning');
 }
+
+
+function edit_tarifa() {
+	var id = $('#tarifa_id').val();
+	var name = $('#tarifa_name').val();
+	var price = $('#tarifa_price').val();
+	var credit_wod = $('#tarifa_credit_wod').val();
+	var credit_box = $('#tarifa_credit_box').val();
+	var observations = $('#tarifa_observations').val();
+	var save_button = $('.edit_tarida_button');
+	if (name.length>0){
+		if (price.length>0){
+			if (credit_wod.length>0){
+				if (credit_box.length>0){
+						save_button.html('<i class="fa fa-cog fa-spin"></i>');
+						var params = {id:id,name:name,price:price,credit_wod:credit_wod,credit_box:credit_box};
+							if (observations.length>0) params['observations']=observations;
+							$.getJSON(api_url+'rates/edit_foreign?callback=?', params, function(data){
+								if(data.status=='success'){
+									launch_alert('<i class="fa fa-smile-o"></i> Tarifa guardada','');
+								}
+								else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+								save_button.html('<i class="fa fa-floppy-o"></i>');
+							});
+				}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el crédito para BOX','warning');	
+			}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el crédito para WOD','warning');
+		}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el precio','warning');
+	}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el nombre','warning');
+}
+
 
 function download_document(){
     var token = $('#driver_token').val();

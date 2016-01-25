@@ -325,6 +325,11 @@ def modal_passenger_details(request):
     content = RequestContext(request)
     return HttpResponse(template.render(content))     
 
+def modal_tarifa_details(request):
+    template = loader.get_template('partials/modal_tarifa_details.html')
+    content = RequestContext(request)
+    return HttpResponse(template.render(content))
+
 def modal_passenger_details_enterprise(request):
     template = loader.get_template('partials/modal_passenger_details_enterprise.html')
     content = RequestContext(request)

@@ -115,6 +115,99 @@ def add(request):
 
     return APIResponse(request,data)
 
+
+def get_foreign(request):
+    """
+    Get foreign rate info
+    """
+    if 'auth_id' in request.session:
+        if have_permission(request.session['auth_id'],'get_foreign_rate'):
+            if validate_parameter(request.GET,'id'):
+                try:
+                    rate=Rates.objects.get(id=request.GET['id'])
+                    rate_profile={'id':rate.id,
+                                        'name':rate.name,
+                                        'price':rate.price,
+                                        'credit_wod':rate.credit_wod,
+                                        'credit_box':rate.credit_box,
+                                        'observations':rate.observations}
+                    data=json.dumps({'status':'success','response':'get_rate','data':{'rate':rate_profile,}})
+                except:
+                    data=json.dumps({'status':'failed','response':'rate_not_found'})
+            else:
+                data=json.dumps({'status':'failed','response':'id_missed'})
+        else:
+            data=json.dumps({'status':'failed','response':'unauthorized_list_all_rates'})
+    else:
+        data=json.dumps({'status':'failed','response':'not_logged'})
+    return APIResponse(request,data)
+
+
+def delete(request):
+    """
+    Delete rate
+    """
+    
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+
+        if not have_permission(request.session['auth_id'], 'delete_rate'):
+            raise Exception('unauthorized_delete_rate')
+
+        if not validate_parameter(request.GET, 'rate_id'):
+            raise Exception('rate_id_missed')
+
+        user,auth = get_user_and_auth(request.session['auth_id'])
+        
+        rate=Rates.objects.get(id=request.GET['rate_id'])
+            
+        rate.delete()
+        
+        data = json.dumps( { 'status': 'success', 'response': 'rate_deleted'} )
+       
+    except Rates.DoesNotExist:
+        data = json.dumps({'status': 'failed', 'response': 'rate_not_found'})
+
+    except Exception as e:
+        data = json.dumps({
+            'status':'failed',
+            'response': e.args[0]
+        })
+
+    return APIResponse(request=request, data=data)
+
+
+def edit_foreign(request):
+    """
+    Edits a rate
+    """
+    if 'auth_id' in request.session:
+        if have_permission(request.session['auth_id'],'edit_foreign_rate'):
+            for field in ('name','price','credit_wod','credit_box'):
+            if not validate_parameter(request.GET, field):
+                raise Exception(field+'_missed')
+            try:
+                rate=Rates.objects.get(id=request.GET['id'])
+                rate.name=request.GET['name']
+                rate.price=request.GET['price']
+                rate.credit_wod=request.GET['credit_wod']
+                rate.credit_box=request.GET['credit_box']
+                if validate_parameter(request.GET,'observations'):
+                    rate.observations=request.GET['observations']
+                rate.save()
+                data=json.dumps({'status':'success','response':'rate_modified'})
+            except:
+                data=json.dumps({'status': 'failed', 'response':'rate_not_found'})
+           
+        else:
+            data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_foreign_rate'})
+    else:
+        data=json.dumps({'status': 'failed', 'response':'not_logged'})
+
+    return APIResponse(request,data)
+
+
 '''
 def get(request):
     """
