@@ -2266,6 +2266,7 @@ function edit_tarifa() {
 								if(data.status=='success'){
 									launch_alert('<i class="fa fa-smile-o"></i> Tarifa guardada','');
 									$('#tarifa_details_modal').modal('hide');
+									searchRates();
 								}
 								else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 								save_button.html('<i class="fa fa-floppy-o"></i>');
