@@ -11,7 +11,6 @@ function get_content() {
 			$('#main').html(template);
 			active_new_enterprise_form();
 			startSearch();
-			getEnterprisesList();
 		});
     });
 
@@ -53,10 +52,12 @@ function searchRates() {
 	wrapper.empty();
 	//$('#headertarifas').append('<i class="fa fa-cog fa-spin"></i>');
 	$('.waiting').show();
+	$('.table-responsive').hide();
 	$.getJSON(api_url+'rates/search?callback=?', {lookup:string}, function(data){
 		if(data.status=='success'){
 			//$('#headertarifas').html('Tarifas');
 			$('.waiting').hide();
+			$('.table-responsive').show();
 			if(data.data.length>0){
 				$.each(data.data, function(index, rate) {
 					$('#tableweybody').append('<tr data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');	
