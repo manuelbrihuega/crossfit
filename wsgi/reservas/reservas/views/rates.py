@@ -185,8 +185,8 @@ def edit_foreign(request):
     if 'auth_id' in request.session:
         if have_permission(request.session['auth_id'],'edit_foreign_rate'):
             for field in ('name','price','credit_wod','credit_box'):
-            if not validate_parameter(request.GET, field):
-                raise Exception(field+'_missed')
+                if not validate_parameter(request.GET, field):
+                    raise Exception(field+'_missed')
             try:
                 rate=Rates.objects.get(id=request.GET['id'])
                 rate.name=request.GET['name']
