@@ -11,7 +11,6 @@ function get_content() {
 			$('#main').html(template);
 			active_new_enterprise_form();
 			startSearch();
-			loadPending();
 			getEnterprisesList();
 		});
     });
@@ -26,6 +25,7 @@ function active_new_enterprise_form() {
 	
 	$.getJSON(api_url+'rates/list_all?callback=?', '', function(data){
 		if(data.status=='success'){
+			$('.waiting').hide();
 			$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito BOX</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
 			$.each(data.data, function(index, rate) {
 				$('#tableweybody').append('<tr data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');
@@ -51,10 +51,12 @@ function searchRates() {
 	var string = $('#enterprises_search').val();
 	var wrapper = $('#tablewey');
 	wrapper.empty();
-	$('#headertarifas').append('<i class="fa fa-cog fa-spin"></i>');
+	//$('#headertarifas').append('<i class="fa fa-cog fa-spin"></i>');
+	$('.waiting').show();
 	$.getJSON(api_url+'rates/search?callback=?', {lookup:string}, function(data){
 		if(data.status=='success'){
-			$('#headertarifas').html('Tarifas');
+			//$('#headertarifas').html('Tarifas');
+			$('.waiting').hide();
 			if(data.data.length>0){
 				$.each(data.data, function(index, rate) {
 					$('#tableweybody').append('<tr data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');	

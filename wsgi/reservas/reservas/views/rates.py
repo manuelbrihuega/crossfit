@@ -4,14 +4,14 @@ from django.http import HttpResponse
 import json
 from django.db.models import Q
 
-from api.models import *
+from reservas.models import *
 
-from api.aux.auth import *
+from reservas.aux.auth import *
 #from api.aux.rates import *
-from api.aux.permissions import *
-from api.aux.general import *
-from api.aux.tasks import add_task
-from api.aux.date import *
+from reservas.aux.permissions import *
+from reservas.aux.general import *
+from reservas.aux.tasks import add_task
+from reservas.aux.date import *
 
 
 def list_all(request):
