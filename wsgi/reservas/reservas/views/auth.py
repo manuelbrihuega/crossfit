@@ -10,6 +10,8 @@ from reservas.aux.permissions import *
 from reservas.aux.general import *
 from reservas.aux.emails import *
 from reservas.aux.tasks import *
+from django.template.loader import render_to_string
+from django.template import RequestContext, loader
 
 
 def default(request):
@@ -17,6 +19,41 @@ def default(request):
     data=json.dumps({'status': 'failed', 'response':'[auth] works'})
     return APIResponse(request,data)
 
+def restorepassview(request,token):
+    try:
+        auth=Auth.objects.get(token=token)
+        status = 'success' if auth else 'failed'
+    except:
+        status='failed'
+
+    template = loader.get_template('restorepass.html')
+    content = RequestContext(request,{ 'token':token, 'status':status })
+    return HttpResponse(template.render(content))
+
+def edit_password(request):
+    """
+    Edit password
+    """
+    if validate_parameter(request.GET,'token'):
+        if validate_parameter(request.GET,'newpass'):
+            if len(request.GET['newpass']) > 4:
+                try:
+                    auth = Auth.objects.get(token=request.GET['token'])
+                    auth.password=create_password(request.GET['newpass'])
+                    auth.save()
+                    data = json.dumps({'status':'success','response':'password_changed'})
+                except Auth.DoesNotExist:
+                    data = json.dumps({'status': 'failed', 'response': 'invalid_token'})
+                except Exception as e:
+                    data=json.dumps({'status':'failed','response': 'auth_model_failure:'})
+            else:
+                data=json.dumps({'status':'failed','response':'newpass_short'})
+        else:
+            data=json.dumps({'status':'failed','response':'newpass_missed'})
+    else:
+        data=json.dumps({'status':'failed','response':'token_missed'})
+
+    return APIResponse(request,data)
 
 
 def login(request):

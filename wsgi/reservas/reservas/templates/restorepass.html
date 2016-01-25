@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<link href='//cdn.jsdelivr.net/animatecss/0.1/animate.min.css' rel='stylesheet' type='text/css'>
+	<style type="text/css" media="screen">
+		html { margin: 0; height: 100%; background-color: #000;}
+		body {  -webkit-font-smoothing: antialiased; font-family: Arial !important; height: 100%;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;background-color: #000;background: center top fixed url(http://crossfit-reservasjerez.rhcloud.com/static/img/i18n/level1_bg_lg_es.jpg) no-repeat; color: #fff;}
+		#content{margin-top: 100px;text-align: center;}
+		#content h3{color: #FFF;font-weight: 400;font-size: 31px;margin: 10px 0px 0px 0px;padding: 0px;text-shadow: 0px 0px 5px #666;filter: dropshadow(color=#666, offx=0, offy=0);}
+		#new_pass{margin: 30px auto;height: 40px;line-height: 40px;font-size: 30px; vertical-align: middle; outline: none;border:none !important;  box-shadow:none !important; border-radius: 0px;}
+		#content .boton_gratis{background-color: #FDB700;border-radius: 0px;font-family: Arial;font-weight: 600;font-size: 14px;padding: 6px 15px;margin-bottom: 5px;}
+		#mensaje{margin: 30px 0px; background-color: rgba(0,0,0,0.5); padding: 5px; display: none;}
+		#mensaje.error{background-color: rgba(152,0,10,0.5);}
+		#mensaje.success{background-color:rgba(72, 166, 195,0.5);}
+	</style>
+	<title>SISTEMA DE RESERVAS | CROSSFIT JEREZ</title>
+</head>
+
+<body>
+	
+	<div class="container">
+		<div id="content" class="row">
+			<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 ">
+				
+				{% if status == 'success' %}
+					<h3>Nueva contraseña</h3>
+					<form role="form" id="formulario">
+						<div class="form-group">
+							<input type="hidden" value="{{token}}" id="token">
+					    	<input type="password" class="form-control" id="new_pass">
+					  	</div>
+						<div id="mensaje" class="error"></div>
+						<button id="botonenviar" type="submit" class="boton_gratis btn btn-warning ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">GUARDAR</button>
+					</form>
+				{% else %}
+					<h3>ERROR</h3>
+					<div id="mensaje" class="error" style="display:block;">Token inválido</div>
+				{% endif %}
+				
+				
+				
+			</div>
+		</div>
+	</div>
+	
+
+			
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+		    $('#formulario').submit(function(e){
+				var token = $('#token').val();
+				var newpass = $('#new_pass').val();
+				
+				if(newpass.length>4) envia(newpass,token);
+				else error('Debe contener al menos 5 caracteres');
+				return false;
+		    });
+		});
+		
+		function envia(newpass,token) {
+		    $('#botonenviar').show().addClass('animated').addClass('fadeOutDown');
+			$('#botonenviar').one('webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd', function(){
+				$('#botonenviar').removeClass('animated').removeClass('fadeOutDown').hide();
+			});
+			
+			$('#mensaje').removeClass().html('<i class="fa fa-refresh fa-spin"></i> Enviando');
+			anima($('#mensaje'),'fadeInDown');
+			
+			$.getJSON('../api/auth/edit_password', {token:token, newpass:newpass}, function(json, textStatus) {
+				if(json.status=='success'){
+					$('#mensaje').removeClass().addClass('success').html('<i class="fa fa-thumbs-up"></i> Contraseña cambiada');
+					setTimeout(function(){ window.location = "http://crossfit-reservasjerez.rhcloud.com/" },2000);
+				}
+				else{
+					$('#mensaje').removeClass().addClass('error').html('<i class="fa fa-thumbs-up"></i> Contraseña cambiada');
+				}
+			});
+			
+		}
+		
+		function error(cadena) {
+			$('#mensaje').removeClass().addClass('error').text(cadena);
+			anima($('#mensaje'),'fadeInDown');
+			
+			if($('#botonenviar').css('display')=='none'){
+				anima($('#botonenviar'),'fadeInDown');
+			}
+		}
+		
+		function anima(elemento,animacion) {
+		    elemento.show().addClass('animated').addClass(animacion);
+	
+			elemento.one('webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd', function(){
+				elemento.removeClass('animated').removeClass(animacion);
+			});
+
+		}
+	</script>
+
+</body>
+</html>
+			

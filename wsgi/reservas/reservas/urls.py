@@ -163,6 +163,7 @@ urlpatterns = patterns('',
     url(r'^ajax/get_files_driver$', 'reservas.views.ajax.get_files_driver'),
 
     #PUBLIC
+    url(r'^restorepass/(?P<token>\w+)$', 'reservas.views.auth.restorepassview'),
     url(r'^test$', 'reservas.views.public.test'),
     url(r'^login$', 'reservas.views.public.login'),
     url(r'^button$', 'reservas.views.public.button'),
