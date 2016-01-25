@@ -104,7 +104,7 @@ def add(request):
         rate.price=request.GET['price']
         rate.credit_wod=request.GET['credit_wod']
         rate.credit_box=request.GET['credit_box']
-        if validate_parameter(request.GET['observations']):
+        if validate_parameter(request.GET,'observations'):
             rate.observations=request.GET['observations']
         rate.save()
         

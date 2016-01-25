@@ -98,6 +98,7 @@ function new_enterprise() {
 		if (price.length>0){
 			if (credit_wod.length>0){
 				if (credit_box.length>0){
+					$('#botonadd').html('<i class="fa fa-cog fa-spin"></i>');
 					$.getJSON(api_url+'rates/add?callback=?', { name:name, 
 																price:price,
 																credit_wod:credit_wod,
@@ -105,6 +106,7 @@ function new_enterprise() {
 																observations:observations}, function(data){
 																								
 												if(data.status=='success'){
+													$('#botonadd').html('Enviar');
 													show_new();
 													launch_alert('<i class="fa fa-smile-o"></i> Tarifa creada','');
 													searchRates();
