@@ -119,8 +119,7 @@ function select_content() {
 									if(role=='U_Delegations') javascript='users/super.js';
 									break;
 
-		case 'enterprises': 		if(role=='U_Super') javascript='enterprises/super.js';
-									if(role=='U_Delegations') javascript='enterprises/super.js';
+		case 'tarifas': 		if(role=='U_Super') javascript='tarifas/super.js';
 									break;
 
 		case 'clientes': 			if(role=='U_Super') javascript='clientes/super.js';

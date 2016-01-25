@@ -1,0 +1,59 @@
+<div class="buttons_tools pull-right">
+	<div class="item" onclick="show_new();"><!-- Nueva --> 
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>
+</div>
+
+<h1 id="headertarifas" class="page-header">Tarifas</h1>
+
+<div id="new_enterprise_wrapper">
+	<h3 class="sub-header">Nueva tarifa</h3>
+	<form id="new_enterprise_form" role="form">
+		<div class="row">
+			<div class="col-md-10"><input type="text" class="form-control" id="new_tarifa_name" placeholder="Nombre"></div>
+		  	<div class="col-md-2"><input type="text" class="form-control" id="new_tarifa_price" placeholder="Precio"></div>
+		</div><br>
+		<div class="row">
+			<div class="col-md-8"><input type="text" class="form-control" id="new_tarifa_observations" placeholder="Observaciones"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="new_tarifa_credit_wod" placeholder="Créditos WOD"></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="new_tarifa_credit_box" placeholder="Créditos BOX"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-default">Enviar</button>
+		  	</div>
+		</div><br>
+		
+		<br>
+		
+		
+		
+	</form>
+</div>
+<div id="submain">
+	<input class="superinput" type="text" placeholder="Ej. Nombre, observaciones..." id="enterprises_search">
+	<div class="panel-group animated fadeInDown" id="enterprises_accordion">
+		<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>
+
+
+		<div class="table-responsive">
+			<table id="tablewey" class="table  table-condensed">
+				<!--<thead><tr><th>Fecha</th><th>Dirección</th><th>Taxista</th><th>Precio</th><th>Distancia</th><th>Duración</th></tr></thead>
+				<tbody>
+					<tr class="canceled" data-id="13554">
+						<td>2014-04-29 17:17:28</td>
+						<td>Calle Horno, 11500 El Puerto de Santa María, Cádiz, España</td>
+						<td>--</td>
+						<td>EUR 0</td>
+						<td></td><td></td></tr><tr class="canceled" data-id="13549"><td>2014-04-29 16:47:00</td><td>Calle Horno, 11500 El Puerto de Santa María, Cádiz, España</td><td>José Antonio Alcalá Carrera</td><td>EUR 0</td><td></td><td></td></tr>
+				</tbody>-->
+			</table>
+		</div>
+
+
+
+	</div>
+</div>

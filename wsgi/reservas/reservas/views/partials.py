@@ -73,8 +73,8 @@ def journeys_operator(request):
     content = RequestContext(request)
     return HttpResponse(template.render(content))  
 
-def enterprises_super(request):
-    template = loader.get_template('partials/enterprises_super.html')
+def tarifas_super(request):
+    template = loader.get_template('partials/tarifas_super.html')
     content = RequestContext(request)
     return HttpResponse(template.render(content))    
 
