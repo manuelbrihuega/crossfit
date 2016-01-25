@@ -46,10 +46,11 @@ function setLang(lang,reload) {
 		var res=$.parseJSON(data);
         if(res.status=="success" && reload) location.reload();
 		load_progress(1);
-	});
+	});F
 }
 
 function restaurarPass(){
+    var email = $('#email').val();
     $.getJSON(api_url+'auth/restorepass?callback=?', {
                 email:email
                 }, function(data){
