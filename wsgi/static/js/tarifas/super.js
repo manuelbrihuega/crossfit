@@ -5,12 +5,15 @@ function get_content() {
 		$.getScript(media_url+'js/aux/date.js'),
         $.getScript(media_url+'js/aux/modals.js'),
         $.getScript(media_url+'js/lib/sha1.js'),
+        $.getScript(media_url+'js/lib/jquery-latest.js'),
+        $.getScript(media_url+'js/lib/jquery.tablesorter.min.js'),
         $.ready.promise()
     ).then(function(){
 		$.post('partials/tarifas_super', function(template, textStatus, xhr) {
 			$('#main').html(template);
 			active_new_enterprise_form();
 			startSearch();
+			$('#tablewey').tablesorter(); 
 		});
     });
 
