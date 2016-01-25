@@ -19,7 +19,7 @@ def send_email(content,subject,emails,title, sender=None):
 def send_email_restorepass(url,email):
     """Send an email to restore the pass"""
     content = render_to_string("emails/restorepass.html", {'url':url})
-    send_email(content,'Cambio de contraseña', [email],'CAMBIO DE CONTRASEÑA','Taxible Support <soporte@taxible.com>')
+    send_email(content,'Cambio de contraseña', [email],'CAMBIO DE CONTRASEÑA','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
 
 
 def send_email_banned_user(email,name):
@@ -53,7 +53,7 @@ def send_email_new_customer(customer_id):
                                    {'name':customer.auth.name,
                                     'token':customer.auth.token,
                                   'tarifa':customer.rate.name})
-        send_email(content,'Bienvenido al sistema de reservas CrossFit Jerez', [customer.auth.email],'Bienvenido al sistema de reservas CrossFit Jerez ','CrossFit Jerez TEAM <crossfitjerez@hotmail.com>')
+        send_email(content,'Bienvenido al sistema de reservas CrossFit Jerez', [customer.auth.email],'Bienvenido al sistema de reservas CrossFit Jerez ','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
 

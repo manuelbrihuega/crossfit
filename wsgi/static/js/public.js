@@ -55,7 +55,7 @@ function restaurarPass(){
                 email:email
                 }, function(data){
                         if(data.status=='success'){
-                            launch_alert('<i class="fa fa-frown-o"></i> Cambiado correctamente','');
+                            launch_alert('<i class="fa fa-frown-o"></i> Contraseña restaurada, revise su correo electrónico','');
                             $('#modal_passengers_download').modal('hide');
                         }
                         else{

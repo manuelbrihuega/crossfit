@@ -35,6 +35,9 @@ def send_email_new_customer_info_task(customer_id):
     from reservas.aux.emails import send_email_new_customer_info
     send_email_new_customer_info(customer_id)
 
+def send_email_restorepass_task(url,email):
+    from api.aux.emails import send_email_restorepass
+    send_email_restorepass(url,email)
 
 ###############
 #   TELEGRAM  #
