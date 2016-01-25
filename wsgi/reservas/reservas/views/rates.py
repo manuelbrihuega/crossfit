@@ -62,7 +62,7 @@ def search(request):
             raise Exception('lookup_missed')
         
         user,auth = get_user_and_auth(request.session['auth_id'])   
-        if request.GET['lookup']=='':
+        if request.GET['lookup']=='*':
             rates=Rates.objects.all()   
         else:
             rates=Rates.objects.filter( Q(name__icontains=request.GET['lookup']) | Q(observations__icontains = request.GET['lookup']) )

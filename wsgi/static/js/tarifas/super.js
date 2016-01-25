@@ -48,7 +48,10 @@ function startSearch() {
 
 function searchRates() {
 	var string = $('#enterprises_search').val();
-	var wrapper = $('#tablewey');
+	var wrapper = $('#tableweybody');
+	if(string==''){
+		string='*';
+	}
 	wrapper.empty();
 	//$('#headertarifas').append('<i class="fa fa-cog fa-spin"></i>');
 	$('.waiting').show();
