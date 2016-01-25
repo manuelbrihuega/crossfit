@@ -110,6 +110,11 @@ function new_enterprise() {
 													show_new();
 													launch_alert('<i class="fa fa-smile-o"></i> Tarifa creada','');
 													searchRates();
+													$('#new_tarifa_name').val('');
+													$('#new_tarifa_price').val('');
+													$('#new_tarifa_credit_wod').val('');
+													$('#new_tarifa_credit_box').val('');
+													$('#new_tarifa_observations').val('');
 												}
 												else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 											});
