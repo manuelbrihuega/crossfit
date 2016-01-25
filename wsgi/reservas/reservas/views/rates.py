@@ -155,12 +155,12 @@ def delete(request):
         if not have_permission(request.session['auth_id'], 'delete_rate'):
             raise Exception('unauthorized_delete_rate')
 
-        if not validate_parameter(request.GET, 'rate_id'):
+        if not validate_parameter(request.GET, 'id'):
             raise Exception('rate_id_missed')
 
         user,auth = get_user_and_auth(request.session['auth_id'])
         
-        rate=Rates.objects.get(id=request.GET['rate_id'])
+        rate=Rates.objects.get(id=request.GET['id'])
             
         rate.delete()
         
