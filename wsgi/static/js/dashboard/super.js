@@ -1,10 +1,7 @@
 function get_content() {
 	
     $.when(
-    	$.getScript(media_url+'js/aux/radios.js'),
-    	$.getScript(media_url+'js/aux/drivers.js'),
-    	$.getScript(media_url+'js/aux/journeys.js'),
-    	$.getScript(media_url+'js/aux/enterprises.js'),
+    	$.getScript(media_url+'js/aux/tarifas.js'),
     	$.getScript(media_url+'js/aux/clientes.js'),
     	$.getScript(media_url+'js/aux/modals.js'),
     	$.getScript(media_url+'js/aux/date.js'),
@@ -12,13 +9,13 @@ function get_content() {
     ).then(function(){
 		$.post('partials/dashboard_super', function(template, textStatus, xhr) {
 			$('#main').html(template);
-			startSearch();
+			//startSearch();
 		});
     });
 
 }
 
-
+/*
 function startSearch() {
 	var input = $('#global_search');
 	input.focus();
@@ -182,5 +179,5 @@ function studyflag(flag) {
 	else $('#flag').html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">Sin resultados.</div></div>');
 	
 }
-
+*/
 
