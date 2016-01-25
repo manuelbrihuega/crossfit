@@ -93,7 +93,7 @@ def add(request):
         if not have_permission(request.session['auth_id'],'add_rate'):
             raise Exception('unauthorized_add_rate')
             
-        for field in ('name','price','credit_wod','credit_box', 'observations'):
+        for field in ('name','price','credit_wod','credit_box'):
             if not validate_parameter(request.GET, field):
                 raise Exception(field+'_missed')
         
@@ -104,7 +104,8 @@ def add(request):
         rate.price=request.GET['price']
         rate.credit_wod=request.GET['credit_wod']
         rate.credit_box=request.GET['credit_box']
-        rate.observations=request.GET['observations']
+        if validate_parameter(request.GET['observations']):
+            rate.observations=request.GET['observations']
         rate.save()
         
         data=json.dumps({'status':'success','response':'rate_created','data':{'id':rate.id}})
