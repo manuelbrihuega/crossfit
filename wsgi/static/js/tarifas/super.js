@@ -11,7 +11,6 @@ function get_content() {
 			$('#main').html(template);
 			active_new_enterprise_form();
 			startSearch();
-			$('#tablewey').tablesorter(); 
 		});
     });
 
@@ -30,6 +29,7 @@ function active_new_enterprise_form() {
 			$.each(data.data, function(index, rate) {
 				$('#tableweybody').append('<tr data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');
 			});
+			$('#tablewey').tablesorter(); 
 		}
 		else super_error('Delegations failure');
 	});
@@ -66,6 +66,7 @@ function searchRates() {
 				$.each(data.data, function(index, rate) {
 					$('#tableweybody').append('<tr data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');	
 				});
+				$('#tablewey').tablesorter(); 
 			}
 			else{
 				launch_alert('<i class="fa fa-frown-o"></i> No se han encontrado tarifas','warning');
