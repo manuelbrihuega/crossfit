@@ -1135,7 +1135,7 @@ function showTarifa(tarifa_id) {
 				if(myrole=='U_Super'){
 				var group = $('<div></div>').attr({'class':'btn-group'}); footer.append(group);
 				
-				var delete_passenger_button = $('<button></button>').attr({'type':'button','class':'btn btn-default'}).text('ELIMINAR'); group.append(delete_passenger_button);
+				var delete_passenger_button = $('<button></button>').attr({'type':'button','class':'btn btn-default', 'id':'botonremove'}).text('ELIMINAR'); group.append(delete_passenger_button);
 				delete_passenger_button.click(function(){ delete_tarifa(tarifa_id); });
 				
 				}
@@ -1403,8 +1403,10 @@ function delete_tarifa(tarifa_id) {
 	var confirmacion=confirm('¿Seguro que quieres eliminar la tarifa?');
 	if (confirmacion==true)
 	{
+		$('#botonremove').html('<i class="fa fa-cog fa-spin"></i>');
 		$.getJSON(api_url+'rates/delete?callback=?', {id:tarifa_id}, function(data){
 			if(data.status=='success'){
+				$('#botonremove').html('ELIMINAR');
 				launch_alert('<i class="fa fa-smile-o"></i> Tarifa eliminada','');
 				$('#tarifa_details_modal').modal('hide');
 				searchRates();

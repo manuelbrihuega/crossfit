@@ -134,7 +134,7 @@ function searchPassengers(todos,pagados,nopagados,validados,novalidados,order) {
 	if(string==""){
 		string="*";
 	}
-	var wrapper = $('#results');
+	var wrapper = $('#tablewey2');
 	var wr = $('#stats');
 	if(todos){
 		var filtro='todos';
@@ -152,10 +152,15 @@ function searchPassengers(todos,pagados,nopagados,validados,novalidados,order) {
 		var filtro='novalidados';
 	}
 	wrapper.empty();
+	$('.waiting').show();
+	$('.table-responsive').hide();
 	$.getJSON(api_url+'customers/search?callback=?', {lookup:string,filtro:filtro,order:order}, function(data){
 		////console.log(data.data)
 		if(data.status=='success'){
-
+			$('.waiting').hide();
+			$('.table-responsive').show();
+			$('#tablewey2').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>DNI</th><th>Teléfono</th><th>Email</th><th>Crédito WOD</th><th>Crédito BOX</th></tr></thead><tbody id="tableweybody2"></tbody>');
+			
 			if(data.data.list.length>0){
 				$.each(data.data.list, function(index, passenger) {
 					draw_passenger_sm(passenger, wrapper);
@@ -169,13 +174,19 @@ function searchPassengers(todos,pagados,nopagados,validados,novalidados,order) {
 
 function initialsearch() {
 	var string = '*';
-	var wrapper = $('#results');
+	var wrapper = $('#tablewey2');
 	var wr = $('#stats');
 	wrapper.empty();
+	$('.waiting').show();
+	$('.table-responsive').hide();
+			
 	$.getJSON(api_url+'customers/search?callback=?', {lookup:string, filtro:'todos', order:'nombreDESC'}, function(data){
 		////console.log(data.data)
 		if(data.status=='success'){
-
+			$('.waiting').hide();
+			$('.table-responsive').show();
+			$('#tablewey2').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>DNI</th><th>Teléfono</th><th>Email</th><th>Crédito WOD</th><th>Crédito BOX</th></tr></thead><tbody id="tableweybody2"></tbody>');
+			
 			if(data.data.list.length>0){
 				$.each(data.data.list, function(index, passenger) {
 					draw_passenger_sm(passenger, wrapper);
