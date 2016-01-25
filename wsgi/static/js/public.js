@@ -34,7 +34,7 @@ function lanzarModalRestore(){
     mymodal.find('.modal-dialog');
     modalAddTitle(mymodal,'');
     var body=$('<div></div>').attr('class','home');
-    body.html('<h1>RESTAURAR CONTRASEÑA</h1><h3 style="text-transform: none;">Si no recuerdas tu contraseña introduce el email con el que te registraste en el sistema y pulsa en restaurar, te enviaremos una nueva contraseña que podrás cambiar más tarde desde tu perfil </h3><input type="text" class="form-control" placeholder="Introduce tu email" id="email" name="email" style="width: 300px; margin-top: 29px; margin-left: auto; margin-right: auto;"><div class="botonera" style="margin-top: 18px; margin-bottom: 37px;"><div style="text-align:center;"><button style="background-color: #075a8f; border-color: #075a8f;" id="botonenviar" type="submit" onclick="restaurarPass();" class="btn btn-warning">RESTAURAR</button></div></div>');
+    body.html('<h1>RESTAURAR CONTRASEÑA</h1><h3 style="text-transform: none;">Si no recuerdas tu contraseña introduce el email con el que te registraste en el sistema y pulsa en restaurar, te enviaremos una nueva contraseña que podrás cambiar más tarde desde tu perfil </h3><input type="text" class="form-control" placeholder="Introduce tu email" id="emailrestore" name="email" style="width: 300px; margin-top: 29px; margin-left: auto; margin-right: auto;"><div class="botonera" style="margin-top: 18px; margin-bottom: 37px;"><div style="text-align:center;"><button style="background-color: #075a8f; border-color: #075a8f;" id="botonenviar" type="submit" onclick="restaurarPass();" class="btn btn-warning">RESTAURAR</button></div></div>');
     modalAddBody(mymodal,body);
 
     mymodal.modal('show');
@@ -50,7 +50,7 @@ function setLang(lang,reload) {
 }
 
 function restaurarPass(){
-    var email = $('#email').val();
+    var email = $('#emailrestore').val();
     $.getJSON(api_url+'auth/restorepass?callback=?', {
                 email:email
                 }, function(data){
