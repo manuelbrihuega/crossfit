@@ -37,6 +37,8 @@
     cursor: pointer;
     text-align:right;
     text-decoration:none;
+    -webkit-box-sizing: content-box !important;
+    box-sizing: content-box !important;
 }
 
 
