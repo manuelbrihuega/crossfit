@@ -21,12 +21,12 @@ function active_new_enterprise_form() {
 		new_enterprise();
 		return false;
 	});
-	
+	if($('#nohay').length){$('#nohay').hide();}
 	$.getJSON(api_url+'activities/list_all?callback=?', '', function(data){
 		if(data.status=='success'){
 			$('.waiting').hide();
 			if(data.data.length>0){
-				if($('#nohay').length){$('#nohay').hide();}
+				
 				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Crédito que consume de WOD</th><th>Crédito que consume de BOX</th><th>Aforo máximo</th><th>Aforo mínimo</th></tr></thead><tbody id="tableweybody"></tbody>');
 				$.each(data.data, function(index, activity) {
 					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showActividad('+activity.id+');" data-id="'+activity.id+'">'+'<td>'+activity.name+'</td>'+'<td>'+activity.credit_wod+'</td>'+'<td>'+activity.credit_box+'</td>'+'<td>'+activity.max_capacity+'</td>'+'<td>'+activity.min_capacity+'</td>'+'</tr>');
@@ -67,12 +67,13 @@ function searchActivities() {
 	//$('#headertarifas').append('<i class="fa fa-cog fa-spin"></i>');
 	$('.waiting').show();
 	$('.table-responsive').hide();
+	if($('#nohay').length){$('#nohay').hide();}
 	$.getJSON(api_url+'activities/search?callback=?', {lookup:string}, function(data){
 		if(data.status=='success'){
 			//$('#headertarifas').html('Tarifas');
 			$('.waiting').hide();
 			if(data.data.length>0){
-				if($('#nohay').length){$('#nohay').hide();}
+				
 				$('.table-responsive').show();
 				$.each(data.data, function(index, activity) {
 					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showActividad('+activity.id+');" data-id="'+activity.id+'">'+'<td>'+activity.name+'</td>'+'<td>'+activity.credit_wod+'</td>'+'<td>'+activity.credit_box+'</td>'+'<td>'+activity.max_capacity+'</td>'+'<td>'+activity.min_capacity+'</td>'+'</tr>');	
