@@ -9,6 +9,12 @@ function get_content() {
     ).then(function(){
 		$.post('partials/calendario_super', function(template, textStatus, xhr) {
 			$('#main').html(template);
+			$('#horaini').timepicker({
+    			showPeriodLabels: false,
+			});
+			$('#horafin').timepicker({
+    			showPeriodLabels: false,
+			});
 			//active_new_enterprise_form();
 			//startSearch();
 		});
