@@ -26,14 +26,14 @@ function active_new_enterprise_form() {
 		if(data.status=='success'){
 			$('.waiting').hide();
 			if(data.data.length>0){
-				if($('#nohay')){$('#nohay').hide();}
+				if($('#nohay').length){$('#nohay').hide();}
 				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Crédito que consume de WOD</th><th>Crédito que consume de BOX</th><th>Aforo máximo</th><th>Aforo mínimo</th></tr></thead><tbody id="tableweybody"></tbody>');
 				$.each(data.data, function(index, activity) {
 					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showActividad('+activity.id+');" data-id="'+activity.id+'">'+'<td>'+activity.name+'</td>'+'<td>'+activity.credit_wod+'</td>'+'<td>'+activity.credit_box+'</td>'+'<td>'+activity.max_capacity+'</td>'+'<td>'+activity.min_capacity+'</td>'+'</tr>');
 				});
 				$('#tablewey').tablesorter();
 			}else{
-				if($('#nohay')){
+				if($('#nohay').length){
 					$('#nohay').show();
 				}else{
 					$('#enterprises_accordion').append('<div id="nohay" class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado actividades</div></div>');
@@ -72,7 +72,7 @@ function searchActivities() {
 			//$('#headertarifas').html('Tarifas');
 			$('.waiting').hide();
 			if(data.data.length>0){
-				if($('#nohay')){$('#nohay').hide();}
+				if($('#nohay').length){$('#nohay').hide();}
 				$('.table-responsive').show();
 				$.each(data.data, function(index, activity) {
 					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showActividad('+activity.id+');" data-id="'+activity.id+'">'+'<td>'+activity.name+'</td>'+'<td>'+activity.credit_wod+'</td>'+'<td>'+activity.credit_box+'</td>'+'<td>'+activity.max_capacity+'</td>'+'<td>'+activity.min_capacity+'</td>'+'</tr>');	
@@ -80,7 +80,11 @@ function searchActivities() {
 				$('#tablewey').tablesorter(); 
 			}
 			else{
-				$('#enterprises_accordion').append('<div id="nohay" class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado actividades</div></div>');
+				if($('#nohay').length){
+					$('#nohay').show();
+				}else{
+					$('#enterprises_accordion').append('<div id="nohay" class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado actividades</div></div>');
+				}
 			}
 			
 		}

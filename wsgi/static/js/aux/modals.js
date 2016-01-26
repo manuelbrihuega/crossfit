@@ -1488,7 +1488,7 @@ function delete_actividad(actividad_id) {
 			if(data.status=='success'){
 				$('#botonremove').html('ELIMINAR');
 				launch_alert('<i class="fa fa-smile-o"></i> Actividad eliminada','');
-				$('#tarifa_details_modal').modal('hide');
+				$('#actividad_details_modal').modal('hide');
 				searchActivities();
 			}
 			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
