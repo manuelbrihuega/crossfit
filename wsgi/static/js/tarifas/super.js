@@ -21,15 +21,24 @@ function active_new_enterprise_form() {
 		new_enterprise();
 		return false;
 	});
-	
+	if($('#nohay').length){$('#nohay').hide();}
 	$.getJSON(api_url+'rates/list_all?callback=?', '', function(data){
 		if(data.status=='success'){
 			$('.waiting').hide();
-			$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito BOX</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
-			$.each(data.data, function(index, rate) {
-				$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');
-			});
-			$('#tablewey').tablesorter(); 
+			if(data.data.length>0){
+			
+				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito BOX</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
+				$.each(data.data, function(index, rate) {
+					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');
+				});
+				$('#tablewey').tablesorter();
+			}else{
+				if($('#nohay').length){
+					$('#nohay').show();
+				}else{
+					$('#enterprises_accordion').append('<div id="nohay" class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado tarifas</div></div>');
+				}
+			}  
 		}
 		else super_error('Delegations failure');
 	});
@@ -57,19 +66,25 @@ function searchRates() {
 	//$('#headertarifas').append('<i class="fa fa-cog fa-spin"></i>');
 	$('.waiting').show();
 	$('.table-responsive').hide();
+	if($('#nohay').length){$('#nohay').hide();}
 	$.getJSON(api_url+'rates/search?callback=?', {lookup:string}, function(data){
 		if(data.status=='success'){
 			//$('#headertarifas').html('Tarifas');
 			$('.waiting').hide();
-			$('.table-responsive').show();
 			if(data.data.length>0){
+				$('.table-responsive').show();
+				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito BOX</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
 				$.each(data.data, function(index, rate) {
 					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');	
 				});
 				$('#tablewey').tablesorter(); 
 			}
 			else{
-				launch_alert('<i class="fa fa-frown-o"></i> No se han encontrado tarifas','warning');
+				if($('#nohay').length){
+					$('#nohay').show();
+				}else{
+					$('#enterprises_accordion').append('<div id="nohay" class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado tarifas</div></div>');
+				}
 			}
 			
 		}
