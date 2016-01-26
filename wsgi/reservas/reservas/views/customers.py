@@ -218,7 +218,7 @@ def search(request):
                             elif filtro=='novalidados':
                                 items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-auth__surname')
                 for item in items:
-                    list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box})
+                    list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'validated':item.validated})
                 data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
             else:
             	if order=='nombreDESC':
@@ -233,7 +233,7 @@ def search(request):
                     elif filtro=='novalidados':
                         items=U_Customers.objects.filter(Q(validated=0)).order_by('auth__name')
                     for item in items:
-                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box})
+                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'validated':item.validated})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
                 elif order=='nombreASC':
                     if filtro=='todos':
@@ -247,7 +247,7 @@ def search(request):
                     elif filtro=='novalidados':
                         items=U_Customers.objects.filter(Q(validated=0)).order_by('-auth__name')
                     for item in items:
-                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box})
+                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'validated':item.validated})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
                 elif order=='apellidosDESC':
                     if filtro=='todos':
@@ -261,7 +261,7 @@ def search(request):
                     elif filtro=='novalidados':
                         items=U_Customers.objects.filter(Q(validated=0)).order_by('auth__surname')
                     for item in items:
-                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box})
+                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'validated':item.validated})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
                 elif order=='apellidosASC':
                     if filtro=='todos':
@@ -275,7 +275,7 @@ def search(request):
                     elif filtro=='novalidados':
                         items=U_Customers.objects.filter(Q(validated=0)).order_by('-auth__surname')
                     for item in items:
-                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box})
+                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'validated':item.validated})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
         except Exception as e:
             data=json.dumps({'status': 'failed', 'response':e.args[0]})

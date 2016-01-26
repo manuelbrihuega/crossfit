@@ -133,9 +133,9 @@ function searchPassengers(todos,pagados,nopagados,validados,novalidados,order) {
 					draw_passenger_sm(passenger, wrapper);
 				});
 			}
-			else{ wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado pasajeros</div></div>');}
+			else{ wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado clientes</div></div>');}
 		}
-		else { wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado pasajeros</div></div>');}
+		else { wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado clientes</div></div>');}
 	});
 }
 
@@ -159,9 +159,9 @@ function initialsearch() {
 					draw_passenger_sm(passenger, wrapper);
 				});
 			}
-			else{ wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado pasajeros</div></div>');}
+			else{ wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado clientes</div></div>');}
 		}
-		else { wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado pasajeros</div></div>');}
+		else { wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado clientes</div></div>');}
 	});
 }
 
