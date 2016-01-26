@@ -200,6 +200,8 @@ def edit_foreign(request):
                 activity.queue_capacity=request.GET['queue_capacity']
                 activity.credit_wod=request.GET['credit_wod']
                 activity.credit_box=request.GET['credit_box']
+                activity.max_capacity=request.GET['max_capacity']
+                activity.min_capacity=request.GET['min_capacity']
                 if validate_parameter(request.GET,'description'):
                     activity.description=request.GET['description']
                 activity.save()
