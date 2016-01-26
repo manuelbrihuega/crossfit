@@ -52,6 +52,11 @@ def users(request):
 def tarifas(request):
     template = loader.get_template('completes/base_dashboard.html')
     content = RequestContext(request,{'section':'tarifas','css':['partials/modals.css','partials/tarifas.css']})
+    return HttpResponse(template.render(content))
+
+def actividades(request):
+    template = loader.get_template('completes/base_dashboard.html')
+    content = RequestContext(request,{'section':'actividades','css':['partials/modals.css','partials/actividades.css']})
     return HttpResponse(template.render(content))    
 
 def enterprisesradio(request):

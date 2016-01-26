@@ -1158,7 +1158,7 @@ function showTarifa(tarifa_id) {
 			
 			
 		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del pasajero','warning')
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos de la tarifa','warning')
 	});
 	
 
@@ -1166,6 +1166,58 @@ function showTarifa(tarifa_id) {
 }
 
 
+function showActividad(actividad_id) {
+	var mymodal=newModal('actividad_details_modal',true, true);
+	modalAddTitle(mymodal,'');
+	doModalBigger(mymodal);
+	modalAddBody(mymodal,'<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
+	mymodal.modal('show');
+	
+	
+	$.getJSON( api_url+'activities/get_foreign?callback=?', {id:actividad_id}, function(data){
+		if(data.status=='success'){
+			var body = $('<div></div>').attr({'id':'actividad_details_wrapper'});
+			$.post(base_url+'/partials/modal_actividad_details', function(template, textStatus, xhr) {
+				body.html(template);
+				modalAddBody(mymodal,body);
+				
+				$('#actividad_id').val(data.data.activity.id);
+				$('#actividad_name').val(data.data.activity.name);
+				$('#actividad_description').val(data.data.activity.description);
+				$('#actividad_queue_capacity').val(data.data.activity.queue_capacity);
+				$('#actividad_credit_wod').val(data.data.activity.credit_wod);
+				$('#actividad_credit_box').val(data.data.activity.credit_box);
+				$('#actividad_max_capacity').val(data.data.activity.max_capacity);
+				$('#actividad_min_capacity').val(data.data.activity.min_capacity);
+				
+				
+				
+				
+				var footer = $('<div></div>').attr({'id':'actividad_details_footer'});
+				
+				
+				if(myrole=='U_Super'){
+				var group = $('<div></div>').attr({'class':'btn-group'}); footer.append(group);
+				
+				var delete_passenger_button = $('<button></button>').attr({'type':'button','class':'btn btn-default', 'id':'botonremove'}).text('ELIMINAR'); group.append(delete_passenger_button);
+				delete_passenger_button.click(function(){ delete_actividad(actividad_id); });
+				
+				}
+				modalAddFooter(mymodal,footer);
+				
+			});
+			
+			
+			
+			
+			
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos de la actividad','warning')
+	});
+	
+
+	
+}
 
 
 
@@ -1427,6 +1479,23 @@ function delete_tarifa(tarifa_id) {
 	}
 }
 
+function delete_actividad(actividad_id) {
+	var confirmacion=confirm('¿Seguro que quieres eliminar la actividad?');
+	if (confirmacion==true)
+	{
+		$('#botonremove').html('<i class="fa fa-cog fa-spin"></i>');
+		$.getJSON(api_url+'activities/delete?callback=?', {id:actividad_id}, function(data){
+			if(data.status=='success'){
+				$('#botonremove').html('ELIMINAR');
+				launch_alert('<i class="fa fa-smile-o"></i> Actividad eliminada','');
+				$('#tarifa_details_modal').modal('hide');
+				searchActivities();
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+		});
+
+	}
+}
 
 function delete_faq(faq_id) {
 	var confirmacion=confirm('¿Seguro que quieres eliminar la FAQ?');
@@ -2286,6 +2355,43 @@ function edit_tarifa() {
 				}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el crédito para BOX','warning');	
 			}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el crédito para WOD','warning');
 		}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el precio','warning');
+	}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el nombre','warning');
+}
+
+
+function edit_actividad() {
+	var id = $('#actividad_id').val();
+	var name = $('#actividad_name').val();
+	var description = $('#actividad_description').val();
+	var credit_wod = $('#actividad_credit_wod').val();
+	var credit_box = $('#actividad_credit_box').val();
+	var queue_capacity = $('#actividad_queue_capacity').val();
+	var max_capacity = $('#actividad_max_capacity').val();
+	var min_capacity = $('#actividad_min_capacity').val();
+	var save_button = $('.edit_tarifa_button');
+	if (name.length>0){
+		if (queue_capacity.length>0){
+			if (credit_wod.length>0){
+				if (credit_box.length>0){
+					if (max_capacity.length>0){
+						if (min_capacity.length>0){
+							save_button.html('<i class="fa fa-cog fa-spin"></i>');
+							var params = {id:id,name:name,queue_capacity:queue_capacity,credit_wod:credit_wod,credit_box:credit_box, max_capacity:max_capacity, min_capacity:min_capacity};
+							if (description.length>0) params['description']=description;
+							$.getJSON(api_url+'activities/edit_foreign?callback=?', params, function(data){
+								if(data.status=='success'){
+									launch_alert('<i class="fa fa-smile-o"></i> Actividad guardada','');
+									$('#actividad_details_modal').modal('hide');
+									searchActivities();
+								}
+								else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+								save_button.html('<i class="fa fa-floppy-o"></i>');
+							});
+						}else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar el aforo mínimo de la actividad','warning');
+					}else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar el aforo máximo de la actividad','warning');
+				}else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar el crédito para BOX que consume la actividad','warning');	
+			}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el crédito para WOD que consume la actividad','warning');
+		}else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar la capacidad de la cola','warning');
 	}else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el nombre','warning');
 }
 

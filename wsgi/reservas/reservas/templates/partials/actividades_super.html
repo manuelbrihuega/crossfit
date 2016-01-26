@@ -1,0 +1,64 @@
+<div class="buttons_tools pull-right">
+	<div class="item" onclick="show_new();"><!-- Nueva --> 
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>
+</div>
+
+<h1 id="headertarifas" class="page-header">Actividades</h1>
+
+<div id="new_enterprise_wrapper">
+	<h3 class="sub-header">Nueva actividad</h3>
+	<form id="new_enterprise_form" role="form">
+		<div class="row">
+			<div class="col-md-12"><input type="text" class="form-control" id="new_actividad_name" placeholder="Nombre"></div>
+		</div><br>
+		<div class="row">
+			<div class="col-md-12"><input type="text" class="form-control" id="new_actividad_description" placeholder="Descripción"></div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-4"><input type="text" class="form-control" id="new_actividad_credit_wod" placeholder="Créditos WOD"></div>
+			<div class="col-md-4"><input type="text" class="form-control" id="new_actividad_credit_box" placeholder="Créditos BOX"></div>
+			<div class="col-md-4"><input type="text" class="form-control" id="new_actividad_queue_capacity" placeholder="Aforo de la cola"></div>
+		</div><br>
+		<div class="row">
+			<div class="col-md-4"><input type="text" class="form-control" id="new_actividad_max_capacity" placeholder="Aforo máximo"></div>
+			<div class="col-md-4"><input type="text" class="form-control" id="new_actividad_min_capacity" placeholder="Aforo mínimo"></div>
+			<div class="col-md-2">
+				<button id="botonadd" type="submit" class="btn btn-default">Enviar</button>
+		  	</div>
+		</div><br>
+		
+		<br>
+		
+		
+		
+	</form>
+</div>
+<div id="submain">
+	<input class="superinput" type="text" placeholder="Ej. Nombre, observaciones..." id="enterprises_search">
+	<div class="panel-group animated fadeInDown" id="enterprises_accordion">
+		<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>
+
+
+		<div class="table-responsive" style="margin-top: 35px;">
+			<table id="tablewey" class="table table-condensed tablesorter">
+				<!--<thead><tr><th>Fecha</th><th>Dirección</th><th>Taxista</th><th>Precio</th><th>Distancia</th><th>Duración</th></tr></thead>
+				<tbody>
+					<tr class="canceled" data-id="13554">
+						<td>2014-04-29 17:17:28</td>
+						<td>Calle Horno, 11500 El Puerto de Santa María, Cádiz, España</td>
+						<td>--</td>
+						<td>EUR 0</td>
+						<td></td><td></td></tr><tr class="canceled" data-id="13549"><td>2014-04-29 16:47:00</td><td>Calle Horno, 11500 El Puerto de Santa María, Cádiz, España</td><td>José Antonio Alcalá Carrera</td><td>EUR 0</td><td></td><td></td></tr>
+				</tbody>-->
+			</table>
+		</div>
+
+
+
+	</div>
+</div>

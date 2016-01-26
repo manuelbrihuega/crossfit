@@ -76,6 +76,11 @@ def journeys_operator(request):
 def tarifas_super(request):
     template = loader.get_template('partials/tarifas_super.html')
     content = RequestContext(request)
+    return HttpResponse(template.render(content))
+
+def actividades_super(request):
+    template = loader.get_template('partials/actividades_super.html')
+    content = RequestContext(request)
     return HttpResponse(template.render(content))    
 
 def enterprisesradio_super(request):
@@ -327,6 +332,11 @@ def modal_passenger_details(request):
 
 def modal_tarifa_details(request):
     template = loader.get_template('partials/modal_tarifa_details.html')
+    content = RequestContext(request)
+    return HttpResponse(template.render(content))
+
+def modal_actividad_details(request):
+    template = loader.get_template('partials/modal_actividad_details.html')
     content = RequestContext(request)
     return HttpResponse(template.render(content))
 

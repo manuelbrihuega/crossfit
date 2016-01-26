@@ -122,6 +122,9 @@ function select_content() {
 		case 'tarifas': 		if(role=='U_Super') javascript='tarifas/super.js';
 									break;
 
+		case 'actividades': 		if(role=='U_Super') javascript='actividades/super.js';
+									break;
+
 		case 'clientes': 			if(role=='U_Super') javascript='clientes/super.js';
 									break;
 
