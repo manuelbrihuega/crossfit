@@ -38,9 +38,8 @@ function show_new() {
 }
 
 function getPassengersStats() {
-	var ordenes = '<div style="margin-top: 18px;"><span id="ordernombre" data="nombreDESC" style="margin-right: 15px; cursor: pointer;">▼ Nombre</span><span id="orderapellidos" data="apellidosDESC" style="cursor: pointer;">▼ Apellidos</span></div>';
 	var filtros = '<div style="overflow:auto;"><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="filtro" value="Todos" id="todos" checked>Todos</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="filtro" id="pagados" value="Pagados">Han pagado</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" name="filtro" id="nopagados" value="No pagados">No han pagado</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" id="validados" name="filtro" value="Validados">Validados</div><div style="margin-right: 14px;float: left;padding-top: 9px;"><input type="radio" id="novalidados" name="filtro" value="No validados">No validados</div></div>';
-	var input = $('<input>').attr({'style':'float: left; margin-right: 20px;','id':'input_search_passenger','class':'superinput', 'type':'text', 'placeholder':'Ej. Nombre, apellidos, email, etc.'}); $('#submain').html(input); $('#submain').append(filtros); $('#submain').append(ordenes);
+	var input = $('<input>').attr({'style':'float: left; margin-right: 20px;','id':'input_search_passenger','class':'superinput', 'type':'text', 'placeholder':'Ej. Nombre, apellidos, email, etc.'}); $('#submain').html(input); $('#submain').append(filtros);
 	$('#submain').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey2" class="table table-condensed tablesorter"></table></div>');
 	input.focus();
 	input.bind({
@@ -70,40 +69,8 @@ function getPassengersStats() {
 	$( "#novalidados" ).click(function() {
   		searchPassengers(false,false,false,false,true,order);
 	});
-	$( "#ordernombre" ).click(function() {
-		$( "#orderapellidos" ).html('  Apellidos');
-  		if($( "#ordernombre" ).attr('data')=='nombreDESC'){
-  			order='nombreASC';
-  			$( "#ordernombre" ).attr('data','nombreASC');
-  			$( "#ordernombre" ).html('▲ Nombre');
-  		}else{
-  			order='nombreDESC';
-  			$( "#ordernombre" ).attr('data','nombreDESC');
-  			$( "#ordernombre" ).html('▼ Nombre');
-  		}
-  		if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false,order); }
-		if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false,order); }
-		if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false,order); }
-		if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false,order); }
-		if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,order); }
-	});
-	$( "#orderapellidos" ).click(function() {
-		$( "#ordernombre" ).html('  Nombre');
-  		if($( "#orderapellidos" ).attr('data')=='apellidosDESC'){
-  			order='apellidosASC';
-  			$( "#orderapellidos" ).attr('data','apellidosASC');
-  			$( "#orderapellidos" ).html('▲ Apellidos');
-  		}else{
-  			order='apellidosDESC';
-  			$( "#orderapellidos" ).attr('data','apellidosDESC');
-  			$( "#orderapellidos" ).html('▼ Apellidos');
-  		}
-  		if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false,order); }
-		if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false,order); }
-		if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false,order); }
-		if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false,order); }
-		if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,order); }
-	});
+	
+	
 	var results = $('<div></div>').attr({'class':'passengers_md_list sublista row', 'id':'results'}).css('margin-top','30px'); $('#submain').append(results);
 	var stats = $('<div></div>').attr({'class':'passengers_stats', 'id':'stats'}).css('margin-top','30px'); $('#submain').append(stats);
 	//stats.html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-bar-chart-o"></i></div><div class="text">No hay clientes para tu búsqueda</div></div>');
