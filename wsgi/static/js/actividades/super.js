@@ -75,6 +75,7 @@ function searchActivities() {
 			if(data.data.length>0){
 				
 				$('.table-responsive').show();
+				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Crédito que consume de WOD</th><th>Crédito que consume de BOX</th><th>Aforo máximo</th><th>Aforo mínimo</th></tr></thead><tbody id="tableweybody"></tbody>');
 				$.each(data.data, function(index, activity) {
 					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showActividad('+activity.id+');" data-id="'+activity.id+'">'+'<td>'+activity.name+'</td>'+'<td>'+activity.credit_wod+'</td>'+'<td>'+activity.credit_box+'</td>'+'<td>'+activity.max_capacity+'</td>'+'<td>'+activity.min_capacity+'</td>'+'</tr>');	
 				});
