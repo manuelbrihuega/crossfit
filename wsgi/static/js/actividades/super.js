@@ -25,13 +25,15 @@ function active_new_enterprise_form() {
 	$.getJSON(api_url+'activities/list_all?callback=?', '', function(data){
 		if(data.status=='success'){
 			$('.waiting').hide();
-			$('#tablewey').html('<thead><tr><th>Nombre</th><th>Crédito WOD</th><th>Crédito BOX</th><th>Aforo máximo</th><th>Aforo mínimo</th></tr></thead><tbody id="tableweybody"></tbody>');
-			$.each(data.data, function(index, activity) {
-				$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showActividad('+activity.id+');" data-id="'+activity.id+'">'+'<td>'+activity.name+'</td>'+'<td>'+activity.credit_wod+'</td>'+'<td>'+activity.credit_box+'</td>'+'<td>'+activity.max_capacity+'</td>'+'<td>'+activity.min_capacity+'</td>'+'</tr>');
-			});
-			$('#tablewey').tablesorter(); 
+			if(data.data.length>0){
+				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Crédito que consume de WOD</th><th>Crédito que consume de BOX</th><th>Aforo máximo</th><th>Aforo mínimo</th></tr></thead><tbody id="tableweybody"></tbody>');
+				$.each(data.data, function(index, activity) {
+					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showActividad('+activity.id+');" data-id="'+activity.id+'">'+'<td>'+activity.name+'</td>'+'<td>'+activity.credit_wod+'</td>'+'<td>'+activity.credit_box+'</td>'+'<td>'+activity.max_capacity+'</td>'+'<td>'+activity.min_capacity+'</td>'+'</tr>');
+				});
+				$('#tablewey').tablesorter();
+			}else{$('#tablewey').html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado actividades</div></div>');} 
 		}
-		else super_error('Delegations failure');
+		else super_error('Activities failure');
 	});
 }
 
@@ -69,7 +71,7 @@ function searchActivities() {
 				$('#tablewey').tablesorter(); 
 			}
 			else{
-				launch_alert('<i class="fa fa-frown-o"></i> No se han encontrado actividades','warning');
+				wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado actividades</div></div>');
 			}
 			
 		}
