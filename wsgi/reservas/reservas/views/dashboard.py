@@ -54,6 +54,11 @@ def tarifas(request):
     content = RequestContext(request,{'section':'tarifas','css':['partials/modals.css','partials/tarifas.css']})
     return HttpResponse(template.render(content))
 
+def calendario(request):
+    template = loader.get_template('completes/base_dashboard.html')
+    content = RequestContext(request,{'section':'calendario','css':['partials/modals.css','partials/calendario.css']})
+    return HttpResponse(template.render(content))
+
 def actividades(request):
     template = loader.get_template('completes/base_dashboard.html')
     content = RequestContext(request,{'section':'actividades','css':['partials/modals.css','partials/actividades.css']})

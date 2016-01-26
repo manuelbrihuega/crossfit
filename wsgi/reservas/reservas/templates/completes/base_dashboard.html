@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css">
 	<link rel="stylesheet" href="{{ MEDIA }}css/base_dashboard.css">
 	<link rel="stylesheet" href="{{ MEDIA }}css/lib/tablesorter.css">
+	<link rel="stylesheet" href="{{ MEDIA }}css/lib/monthly.css">
 	
 	{% for style in css %} <link rel="stylesheet" href="{{ MEDIA }}css/{{ style }}"> {% endfor %}
 		
@@ -69,6 +70,7 @@
 						<li class="animatedX bounceInLeft super clientes"><a href="{{BASE_URL}}/clientes">Clientes</a></li>
 						<li class="animatedX bounceInLeft super digitaloperators"><a href="{{BASE_URL}}/digitaloperators">Operadoras digitales</a></li>
 						<!--<li class="animatedX bounceInLeft super call"><a href="{{BASE_URL}}/call">Taxible call</a></li>-->
+						<li class="animatedX bounceInLeft super calendario"><a href="{{BASE_URL}}/calendario">Calendario</a></li>
 						<li class="animatedX bounceInLeft super tarifas"><a href="{{BASE_URL}}/tarifas">Tarifas</a></li>
 						<li class="animatedX bounceInLeft super actividades"><a href="{{BASE_URL}}/actividades">Actividades</a></li>
 						<li class="animatedX bounceInLeft super delegation drivers"><a href="{{BASE_URL}}/drivers"><span id="badge_drivers" class="badge pull-right"></span>Info Web Taxistas</a></li>
@@ -122,6 +124,7 @@
 		var api_url='http://crossfit-reservasjerez.rhcloud.com/api/';
 	</script>
 	<script src="{{ MEDIA }}js/lib/jquery.tablesorter.min.js"></script>
+	<script src="{{ MEDIA }}js/lib/monthly.js"></script>
 	<script src="{{ MEDIA }}js/base_dashboard.js"></script>
 	<script src="{{ MEDIA }}js/aux/sorttable.js"></script>
 	<script src="{{ MEDIA }}js/lib/modernizr-custom.js"></script>
