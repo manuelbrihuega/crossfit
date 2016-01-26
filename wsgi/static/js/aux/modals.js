@@ -1057,6 +1057,11 @@ function modal_passenger_details(passenger_id) {
 							launch_alert('<i class="fa fa-smile-o"></i> Cliente validado','');
 							var footer = $('.modal-footer').find('.inactive');
 							footer.removeClass('inactive').addClass('active');
+							if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false,'nombreDESC'); }
+							if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false,'nombreDESC'); }
+							if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false,'nombreDESC'); }
+							if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false,'nombreDESC'); }
+							if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,'nombreDESC'); }
 						}
 						else launch_alert('<i class="fa fa-frown-o"></i> Error al validar','warning');
 					});
@@ -1074,6 +1079,11 @@ function modal_passenger_details(passenger_id) {
 							launch_alert('<i class="fa fa-smile-o"></i> Cliente invalidado','');
 							var footer = $('.modal-footer').find('.inactive');
 							footer.removeClass('inactive').addClass('active');
+							if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false,'nombreDESC'); }
+							if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false,'nombreDESC'); }
+							if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false,'nombreDESC'); }
+							if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false,'nombreDESC'); }
+							if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,'nombreDESC'); }
 						}
 						else launch_alert('<i class="fa fa-frown-o"></i> Error al invalidar','warning');
 					});
