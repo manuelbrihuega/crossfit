@@ -34,34 +34,34 @@
 		<div id="divpatron" style="display:none;">
 			<h3 class="sub-header">Día de la semana</h3>
 		<div class="row">
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="lunes">Lunes</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="martes">Martes</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="miercoles">Miércoles</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="jueves">Jueves</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="viernes">Viernes</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="sabado">Sábado</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="domingo">Domingo</div>
-			<div class="col-md-3"><input type="checkbox" class="form-control" id="todoslosdias">Todos los días</div>
+			<div class="col-md-1"><input type="checkbox" id="lunes"> Lunes</div>
+			<div class="col-md-1"><input type="checkbox" id="martes"> Martes</div>
+			<div class="col-md-1"><input type="checkbox" id="miercoles"> Miércoles</div>
+			<div class="col-md-1"><input type="checkbox" id="jueves"> Jueves</div>
+			<div class="col-md-1"><input type="checkbox" id="viernes"> Viernes</div>
+			<div class="col-md-1"><input type="checkbox" id="sabado"> Sábado</div>
+			<div class="col-md-1"><input type="checkbox" id="domingo"> Domingo</div>
+			<div class="col-md-3"><input type="checkbox" id="todoslosdias"> Todos los días</div>
 		</div>
 		<br>
 		<h3 class="sub-header">Mes</h3>
 		<div class="row">
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="enero">Enero</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="febrero">Febrero</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="marzo">Marzo</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="abril">Abril</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="mayo">Mayo</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="junio">Junio</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="julio">Julio</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="agosto">Agosto</div>
+			<div class="col-md-1"><input type="checkbox" id="enero"> Enero</div>
+			<div class="col-md-1"><input type="checkbox" id="febrero"> Febrero</div>
+			<div class="col-md-1"><input type="checkbox" id="marzo"> Marzo</div>
+			<div class="col-md-1"><input type="checkbox" id="abril"> Abril</div>
+			<div class="col-md-1"><input type="checkbox" id="mayo"> Mayo</div>
+			<div class="col-md-1"><input type="checkbox" id="junio"> Junio</div>
+			<div class="col-md-1"><input type="checkbox" id="julio"> Julio</div>
+			<div class="col-md-1"><input type="checkbox" id="agosto"> Agosto</div>
 		</div>
 		<br>
 		<div class="row">
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="septiembre">Septiembre</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="octubre">Octubre</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="noviembre">Noviembre</div>
-			<div class="col-md-1"><input type="checkbox" class="form-control" id="diciembre">Diciembre</div>
-			<div class="col-md-3"><input type="checkbox" class="form-control" id="todoslosmeses">Todos los meses</div>
+			<div class="col-md-1"><input type="checkbox" id="septiembre"> Septiembre</div>
+			<div class="col-md-1"><input type="checkbox" id="octubre"> Octubre</div>
+			<div class="col-md-1"><input type="checkbox" id="noviembre"> Noviembre</div>
+			<div class="col-md-1"><input type="checkbox" id="diciembre"> Diciembre</div>
+			<div class="col-md-3"><input type="checkbox" id="todoslosmeses"> Todos los meses</div>
 		</div>
 		</div>
 		
@@ -70,24 +70,10 @@
 	</form>
 </div>
 <div id="submain">
-	<input class="superinput" type="text" placeholder="Ej. Nombre, observaciones..." id="enterprises_search">
 	<div class="panel-group animated fadeInDown" id="enterprises_accordion">
 		<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>
 
-
-		<div class="table-responsive" style="margin-top: 35px;">
-			<table id="tablewey" class="table table-condensed tablesorter">
-				<!--<thead><tr><th>Fecha</th><th>Dirección</th><th>Taxista</th><th>Precio</th><th>Distancia</th><th>Duración</th></tr></thead>
-				<tbody>
-					<tr class="canceled" data-id="13554">
-						<td>2014-04-29 17:17:28</td>
-						<td>Calle Horno, 11500 El Puerto de Santa María, Cádiz, España</td>
-						<td>--</td>
-						<td>EUR 0</td>
-						<td></td><td></td></tr><tr class="canceled" data-id="13549"><td>2014-04-29 16:47:00</td><td>Calle Horno, 11500 El Puerto de Santa María, Cádiz, España</td><td>José Antonio Alcalá Carrera</td><td>EUR 0</td><td></td><td></td></tr>
-				</tbody>-->
-			</table>
-		</div>
+		<div class="monthly" id="mycalendar"></div>
 
 
 

@@ -46,6 +46,8 @@ function get_content() {
   				$('#divfecha').slideUp();
   				$('#divpatron').slideDown();
 			});
+			$('.waiting').hide();
+			$('#mycalendar').monthly();
 			//active_new_enterprise_form();
 			//startSearch();
 		});
@@ -203,34 +205,34 @@ function listarActividades() {
 }
 
 function restarHoras() {
-	if($('#horaini').length && $('#horafin').length){
-  var inicio=$('#horaini').val();
-  var fin=$('#horafin').val();
-  var inicioMinutos = parseInt(inicio.substr(3,2));
-  var inicioHoras = parseInt(inicio.substr(0,2));
-  
-  var finMinutos = parseInt(fin.substr(3,2));
-  var finHoras = parseInt(fin.substr(0,2));
+	if($('#horaini').val().length>0 && $('#horafin').val().length>0){
+		var inicio=$('#horaini').val();
+		var fin=$('#horafin').val();
+		var inicioMinutos = parseInt(inicio.substr(3,2));
+		var inicioHoras = parseInt(inicio.substr(0,2));
+		  
+		var finMinutos = parseInt(fin.substr(3,2));
+		var finHoras = parseInt(fin.substr(0,2));
 
-  var transcurridoMinutos = finMinutos - inicioMinutos;
-  var transcurridoHoras = finHoras - inicioHoras;
-  
-  if (transcurridoMinutos < 0) {
-    transcurridoHoras--;
-    transcurridoMinutos = 60 + transcurridoMinutos;
-  }
-  
-  var horas = transcurridoHoras.toString();
-  var minutos = transcurridoMinutos.toString();
-  
-  if (horas.length < 2) {
-    horas = "0"+horas;
-  }
-  
-  if (horas.length < 2) {
-    horas = "0"+horas;
-  }
-  
-  $('#duracion').val(horas+':'+minutos);
+		var transcurridoMinutos = finMinutos - inicioMinutos;
+		var transcurridoHoras = finHoras - inicioHoras;
+		  
+		if (transcurridoMinutos < 0) {
+		  transcurridoHoras--;
+		  transcurridoMinutos = 60 + transcurridoMinutos;
+		}
+		  
+		var horas = transcurridoHoras.toString();
+		var minutos = transcurridoMinutos.toString();
+		  
+		if (horas.length < 2) {
+		  horas = "0"+horas;
+		}
+		  
+		if (minutos.length < 2) {
+		  minutos = "0"+minutos;
+		}
+		  
+		$('#duracion').val(horas+':'+minutos);
 	}
 }
