@@ -9,6 +9,7 @@ function get_content() {
     ).then(function(){
 		$.post('partials/calendario_super', function(template, textStatus, xhr) {
 			$('#main').html(template);
+			listarActividades();
 			$('#horaini').timepicker({
     			showPeriodLabels: false,
     			hourText: 'Hora',
@@ -28,6 +29,22 @@ function get_content() {
 			});
 			$( "#horafin" ).change(function() {
   				restarHoras();
+			});
+			if (!Modernizr.inputtypes.date) {
+    			$('input[type=date]').datepicker();
+    			$('input[type=date]').css('border-bottom','1px solid lightgray');
+    			$('#ui-datepicker-div').css('background-color','white');
+        		$('#ui-datepicker-div').css('border','1px solid lightgray');
+        		$('#ui-datepicker-div').css('padding','15px');
+        		$('#ui-datepicker-div').css('border-radius','8px');
+			}
+			$( "#fechaconcreta" ).click(function() {
+				$('#divpatron').slideUp();
+  				$('#divfecha').slideDown();
+			});
+			$( "#fechapatron" ).click(function() {
+  				$('#divfecha').slideUp();
+  				$('#divpatron').slideDown();
 			});
 			//active_new_enterprise_form();
 			//startSearch();
@@ -168,7 +185,22 @@ function new_enterprise() {
 }
 
 
+function listarActividades() {
+	var select = $('#actividad');
+	$.getJSON(api_url+'activities/list_all?callback=?', {}, function(data){
+		////console.log(data.data)
+		if(data.status=='success'){
+			var list_tarifas=data.data;
+			for(var i=0;i<list_tarifas.length;i++){
+            	id=list_tarifas[i].id;
+            	nombres=list_tarifas[i].name;
+            	var option=$('<option></option>').attr({'value':list_tarifas[i].id}).text(list_tarifas[i].name); select.append(option);
+        	}
 
+		}
+		else super_error('Search failure');
+	});
+}
 
 function restarHoras() {
 	if($('#horaini').length && $('#horafin').length){

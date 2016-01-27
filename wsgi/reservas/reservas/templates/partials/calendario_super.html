@@ -15,21 +15,55 @@
 		<div class="row">
 			<div class="col-md-3"><label style="margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de inicio: </label><input style="width: 77px;" id="horaini" type="time" name="horaini"></div>
 		  	<div class="col-md-3"><label style="margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de fin: </label><input style="width: 77px;" id="horafin" type="time" name="horafin"></div>
-		  	<div class="col-md-3"><label style="margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Duración: </label><input style="width: 77px;" id="horafin" type="text" name="duracion" readonly></div>
+		  	<div class="col-md-3"><label style="margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Duración: </label><input style="width: 77px;" id="duracion" type="text" name="duracion" readonly></div>
 		</div><br>
+		<h3 class="sub-header">Actividad</h3>
 		<div class="row">
-			<div class="col-md-8"><input type="text" class="form-control" id="new_tarifa_observations" placeholder="Observaciones"></div>
-			<div class="col-md-2"><input type="text" class="form-control" id="new_tarifa_credit_wod" placeholder="Créditos WOD"></div>
-			<div class="col-md-2"><input type="text" class="form-control" id="new_tarifa_credit_box" placeholder="Créditos BOX"></div>
+			<div class="col-md-8">
+				<select id="actividad"></select>
+			</div>
 		</div>
 		<br>
 		<div class="row">
-			<div class="col-md-2">
-				<button id="botonadd" type="submit" class="btn btn-default">Enviar</button>
-		  	</div>
+			<div class="col-md-3"><input id="fechaconcreta" type="radio" name="fechaconcreta">Introducir una fecha concreta</div>
+			<div class="col-md-3"><input id="fechapatron" type="radio" name="fechaconcreta">Introducir un patrón de tiempo</div>
 		</div><br>
-		
+		<div class="row" id="divfecha" style="display:none;">
+			<div class="col-md-4"><input type="date" class="form-control" id="fecha" placeholder="Fecha"></div>
+		</div>
+		<div id="divpatron" style="display:none;">
+			<h3 class="sub-header">Día de la semana</h3>
+		<div class="row">
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="lunes">Lunes</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="martes">Martes</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="miercoles">Miércoles</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="jueves">Jueves</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="viernes">Viernes</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="sabado">Sábado</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="domingo">Domingo</div>
+			<div class="col-md-3"><input type="checkbox" class="form-control" id="todoslosdias">Todos los días</div>
+		</div>
 		<br>
+		<h3 class="sub-header">Mes</h3>
+		<div class="row">
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="enero">Enero</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="febrero">Febrero</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="marzo">Marzo</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="abril">Abril</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="mayo">Mayo</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="junio">Junio</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="julio">Julio</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="agosto">Agosto</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="septiembre">Septiembre</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="octubre">Octubre</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="noviembre">Noviembre</div>
+			<div class="col-md-1"><input type="checkbox" class="form-control" id="diciembre">Diciembre</div>
+			<div class="col-md-3"><input type="checkbox" class="form-control" id="todoslosmeses">Todos los meses</div>
+		</div>
+		</div>
 		
 		
 		
