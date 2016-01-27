@@ -50,6 +50,54 @@ function get_content() {
 			$('#mycalendar').monthly();
 			//active_new_enterprise_form();
 			//startSearch();
+			$( "#todoslosmeses" ).click(function() {
+  				if($('#todoslosmeses').is(":checked")){
+  					$('#enero').prop('checked','checked');
+  					$('#febrero').prop('checked','checked');
+  					$('#marzo').prop('checked','checked');
+  					$('#abril').prop('checked','checked');
+  					$('#mayo').prop('checked','checked');
+  					$('#junio').prop('checked','checked');
+  					$('#julio').prop('checked','checked');
+  					$('#agosto').prop('checked','checked');
+  					$('#septiembre').prop('checked','checked');
+  					$('#octubre').prop('checked','checked');
+  					$('#noviembre').prop('checked','checked');
+  					$('#diciembre').prop('checked','checked');
+  				}else{
+  					$('#enero').prop('checked','');
+  					$('#febrero').prop('checked','');
+  					$('#marzo').prop('checked','');
+  					$('#abril').prop('checked','');
+  					$('#mayo').prop('checked','');
+  					$('#junio').prop('checked','');
+  					$('#julio').prop('checked','');
+  					$('#agosto').prop('checked','');
+  					$('#septiembre').prop('checked','');
+  					$('#octubre').prop('checked','');
+  					$('#noviembre').prop('checked','');
+  					$('#diciembre').prop('checked','');
+  				}
+			});
+			$( "#todoslosdias" ).click(function() {
+  				if($('#todoslosdias').is(":checked")){
+  					$('#lunes').prop('checked','checked');
+  					$('#martes').prop('checked','checked');
+  					$('#miercoles').prop('checked','checked');
+  					$('#jueves').prop('checked','checked');
+  					$('#viernes').prop('checked','checked');
+  					$('#sabado').prop('checked','checked');
+  					$('#domingo').prop('checked','checked');
+  				}else{
+  					$('#lunes').prop('checked','');
+  					$('#martes').prop('checked','');
+  					$('#miercoles').prop('checked','');
+  					$('#jueves').prop('checked','');
+  					$('#viernes').prop('checked','');
+  					$('#sabado').prop('checked','');
+  					$('#domingo').prop('checked','');
+  				}
+			});
 		});
     });
 
