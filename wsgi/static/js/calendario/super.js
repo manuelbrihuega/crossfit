@@ -217,7 +217,7 @@ function new_horario() {
 					var d5 = viernes ? 1 : 0;
 					var d6 = sabado ? 1 : 0;
 					var d7 = domingo ? 1 : 0;
-					var cad_dias = lunes+','+martes+','+miercoles+','+jueves+','+viernes+','+sabado+','+domingo;
+					var cad_dias = d1+','+d2+','+d3+','+d4+','+d5+','+d6+','+d7;
 					var m1 = enero ? 1 : 0;
 					var m2 = febrero ? 1 : 0;
 					var m3 = marzo ? 1 : 0;
@@ -230,7 +230,7 @@ function new_horario() {
 					var m10 = octubre ? 1 : 0;
 					var m11 = noviembre ? 1 : 0;
 					var m12 = diciembre ? 1 : 0;
-					var cad_meses = enero+','+febrero+','+marzo+','+abril+','+mayo+','+junio+','+julio+','+agosto+','+septiembre+','+octubre+','+noviembre+','+diciembre;
+					var cad_meses = m1+','+m2+','+m3+','+m4+','+m5+','+m6+','+m7+','+m8+','+m9+','+m10+','+m11+','+m12;
 					if(horaini.length>0){
 						if(horafin.length>0){
 							if(duracion.length>0){
