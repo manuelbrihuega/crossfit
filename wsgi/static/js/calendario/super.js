@@ -30,6 +30,7 @@ function get_content() {
 			$( "#horafin" ).change(function() {
   				restarHoras();
 			});
+
 			if (!Modernizr.inputtypes.date) {
     			$('input[type=date]').datepicker();
     			$('input[type=date]').css('border-bottom','1px solid lightgray');
@@ -41,15 +42,23 @@ function get_content() {
 			$( "#fechaconcreta" ).click(function() {
 				$('#divpatron').slideUp();
   				$('#divfecha').slideDown();
+  				$('#marru').slideDown();
 			});
 			$( "#fechapatron" ).click(function() {
   				$('#divfecha').slideUp();
   				$('#divpatron').slideDown();
+  				$('#marru').slideDown();
 			});
 			$('.waiting').hide();
 			$('#mycalendar').monthly();
-			//active_new_enterprise_form();
+			active_new_enterprise_form();
 			//startSearch();
+			$( ".mes" ).click(function() {
+				$('#todoslosmeses').prop('checked','');
+			});
+			$( ".dia" ).click(function() {
+				$('#todoslosdias').prop('checked','');
+			});
 			$( "#todoslosmeses" ).click(function() {
   				if($('#todoslosmeses').is(":checked")){
   					$('#enero').prop('checked','checked');
@@ -105,79 +114,8 @@ function get_content() {
 
 function active_new_enterprise_form() {
 	$('#new_enterprise_form').submit(false).submit(function(e){
-		new_enterprise();
+		new_horario();
 		return false;
-	});
-	if($('#nohay').length){$('#nohay').hide();}
-	$.getJSON(api_url+'rates/list_all?callback=?', '', function(data){
-		if(data.status=='success'){
-			$('.waiting').hide();
-			if(data.data.length>0){
-			
-				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito BOX</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
-				$.each(data.data, function(index, rate) {
-					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');
-				});
-				$('#tablewey').tablesorter();
-			}else{
-				if($('#nohay').length){
-					$('#nohay').show();
-				}else{
-					$('#enterprises_accordion').append('<div id="nohay" class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado tarifas</div></div>');
-				}
-			}  
-		}
-		else super_error('Delegations failure');
-	});
-}
-
-function startSearch() {
-	var input = $('#enterprises_search');
-	input.focus();
-	input.bind({
-		keypress: function(e) {
-			var code = e.keyCode || e.which;
-			if(code == 13) searchRates();
-		}
-	});
-	
-}
-
-function searchRates() {
-	var string = $('#enterprises_search').val();
-	var wrapper = $('#tableweybody');
-	if(string==''){
-		string='*';
-	}
-	wrapper.empty();
-	//$('#headertarifas').append('<i class="fa fa-cog fa-spin"></i>');
-	$('.waiting').show();
-	$('.table-responsive').hide();
-	if($('#nohay').length){$('#nohay').hide();}
-	$.getJSON(api_url+'rates/search?callback=?', {lookup:string}, function(data){
-		if(data.status=='success'){
-			//$('#headertarifas').html('Tarifas');
-			$('.waiting').hide();
-			if(data.data.length>0){
-				$('.table-responsive').show();
-				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito BOX</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
-				$.each(data.data, function(index, rate) {
-					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');	
-				});
-				$('#tablewey').tablesorter(); 
-			}
-			else{
-				if($('#nohay').length){
-					$('#nohay').show();
-				}else{
-					$('#enterprises_accordion').append('<div id="nohay" class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado tarifas</div></div>');
-				}
-			}
-			
-		}
-		else{
-			launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
-		}
 	});
 }
 
@@ -192,45 +130,164 @@ function show_new() {
 
 
 
-function new_enterprise() {
-	var name=$('#new_tarifa_name').val();
-	var price=$('#new_tarifa_price').val();
-	var credit_wod=$('#new_tarifa_credit_wod').val();
-	var credit_box=$('#new_tarifa_credit_box').val();
-	var observations=$('#new_tarifa_observations').val();
-	if (name.length>0){
-		if (price.length>0){
-			if (credit_wod.length>0){
-				if (credit_box.length>0){
-					$('#botonadd').html('<i class="fa fa-cog fa-spin"></i>');
-					$.getJSON(api_url+'rates/add?callback=?', { name:name, 
-																price:price,
-																credit_wod:credit_wod,
-																credit_box:credit_box,
-																observations:observations}, function(data){
-																								
-												if(data.status=='success'){
-													$('#botonadd').html('Enviar');
-													show_new();
-													launch_alert('<i class="fa fa-smile-o"></i> Tarifa creada','');
-													searchRates();
-													$('#new_tarifa_name').val('');
-													$('#new_tarifa_price').val('');
-													$('#new_tarifa_credit_wod').val('');
-													$('#new_tarifa_credit_box').val('');
-													$('#new_tarifa_observations').val('');
-												}
-												else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
-											});
-											
-										}
-										else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el crédito para BOX','warning');
-									}
-									else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el crédito para WOD','warning');
-								}
-								else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el precio','warning');			
-							}
-							else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir un nombre para la tarifa','warning');	
+function new_horario() {
+	var horaini=$('#horaini').val();
+	var horafin=$('#horafin').val();
+	var duracion=$('#duracion').val();
+	var activity_id=$('#actividad').val();
+	if($('#fechaconcreta').is(":checked")){
+		var fecha = $('#fecha').val();
+		if(fecha.length>0){
+			if(horaini.length>0){
+				if(horafin.length>0){
+					if(duracion.length>0){
+						if(activity_id!=-1){
+							$('#botonadd').html('<i class="fa fa-cog fa-spin"></i>');
+							$.getJSON(api_url+'schedules/add_concrete?callback=?', { time_start:horaini, 
+																					 time_end:horafin,
+																					 duration:duracion,
+																					 activity_id:activity_id,
+																					 date:fecha}, function(data){
+																										
+								if(data.status=='success'){
+									$('#botonadd').html('Enviar');
+									show_new();
+									launch_alert('<i class="fa fa-smile-o"></i> Horario añadido','');
+									//searchRates();
+									$('#horaini').val('');
+									$('#horafin').val('');
+									$('#duracion').val('');
+									$('#activity_id').val('-1');
+									$('#fecha').val('');
+								}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');}
+							});
+						}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar una actividad','warning');}
+					}else{launch_alert('<i class="fa fa-frown-o"></i> El intervalo horario es erróneo','warning');}
+				}else{launch_alert('<i class="fa fa-frown-o"></i> Debes añadir una hora de fin para la actividad','warning');}
+			}else{launch_alert('<i class="fa fa-frown-o"></i> Debes añadir una hora de inicio para la actividad','warning');}
+		}else{launch_alert('<i class="fa fa-frown-o"></i> Debes añadir una fecha para la actividad','warning');}
+	}else{
+		if($('#fechapatron').is(":checked")){
+			var lunes = false;
+			var martes = false;
+			var miercoles = false;
+			var jueves = false;
+			var viernes = false;
+			var sabado = false;
+			var domingo = false;
+			if($('#lunes').is(":checked")){ lunes=true; }
+			if($('#martes').is(":checked")){ martes=true; }
+			if($('#miercoles').is(":checked")){ miercoles=true; }
+			if($('#jueves').is(":checked")){ jueves=true; }
+			if($('#viernes').is(":checked")){ viernes=true; }
+			if($('#sabado').is(":checked")){ sabado=true; }
+			if($('#domingo').is(":checked")){ domingo=true; }
+
+			var enero = false;
+			var febrero = false;
+			var marzo = false;
+			var abril = false;
+			var mayo = false;
+			var junio = false;
+			var julio = false;
+			var agosto = false;
+			var septiembre = false;
+			var octubre = false;
+			var noviembre = false;
+			var diciembre = false;
+			if($('#enero').is(":checked")){ enero=true; }
+			if($('#febrero').is(":checked")){ febrero=true; }
+			if($('#marzo').is(":checked")){ marzo=true; }
+			if($('#abril').is(":checked")){ abril=true; }
+			if($('#mayo').is(":checked")){ mayo=true; }
+			if($('#junio').is(":checked")){ junio=true; }
+			if($('#julio').is(":checked")){ julio=true; }
+			if($('#agosto').is(":checked")){ agosto=true; }
+			if($('#septiembre').is(":checked")){ septiembre=true; }
+			if($('#octubre').is(":checked")){ octubre=true; }
+			if($('#noviembre').is(":checked")){ noviembre=true; }
+			if($('#diciembre').is(":checked")){ diciembre=true; }
+			if(enero || febrero || marzo || abril || mayo || junio || julio || agosto || septiembre || octubre || noviembre || diciembre){
+				if(lunes || martes || miercoles || jueves || viernes || sabado || domingo){
+					var d1 = lunes ? 1 : 0;
+					var d2 = martes ? 1 : 0;
+					var d3 = miercoles ? 1 : 0;
+					var d4 = jueves ? 1 : 0;
+					var d5 = viernes ? 1 : 0;
+					var d6 = sabado ? 1 : 0;
+					var d7 = domingo ? 1 : 0;
+					var cad_dias = lunes+','+martes+','+miercoles+','+jueves+','+viernes+','+sabado+','+domingo;
+					var m1 = enero ? 1 : 0;
+					var m2 = febrero ? 1 : 0;
+					var m3 = marzo ? 1 : 0;
+					var m4 = abril ? 1 : 0;
+					var m5 = mayo ? 1 : 0;
+					var m6 = junio ? 1 : 0;
+					var m7 = julio ? 1 : 0;
+					var m8 = agosto ? 1 : 0;
+					var m9 = septiembre ? 1 : 0;
+					var m10 = octubre ? 1 : 0;
+					var m11 = noviembre ? 1 : 0;
+					var m12 = diciembre ? 1 : 0;
+					var cad_meses = enero+','+febrero+','+marzo+','+abril+','+mayo+','+junio+','+julio+','+agosto+','+septiembre+','+octubre+','+noviembre+','+diciembre;
+					if(horaini.length>0){
+						if(horafin.length>0){
+							if(duracion.length>0){
+								if(activity_id!=-1){
+									$('#botonadd').html('<i class="fa fa-cog fa-spin"></i>');
+									$.getJSON(api_url+'schedules/add_interval?callback=?', { time_start:horaini, 
+																						 time_end:horafin,
+																						 duration:duracion,
+																						 activity_id:activity_id,
+																						 monthly:cad_meses,
+																						 weekly:cad_dias}, function(data){
+																											
+										if(data.status=='success'){
+											$('#botonadd').html('Enviar');
+											show_new();
+											launch_alert('<i class="fa fa-smile-o"></i> Horario añadido','');
+											//searchRates();
+											$('#horaini').val('');
+											$('#horafin').val('');
+											$('#duracion').val('');
+											$('#activity_id').val('-1');
+											$('#lunes').prop('checked','');
+											$('#martes').prop('checked','');
+											$('#miercoles').prop('checked','');
+											$('#jueves').prop('checked','');
+											$('#viernes').prop('checked','');
+											$('#sabado').prop('checked','');
+											$('#domingo').prop('checked','');
+											$('#todoslosdias').prop('checked','');
+
+											$('#enero').prop('checked','');
+											$('#febrero').prop('checked','');
+											$('#marzo').prop('checked','');
+											$('#abril').prop('checked','');
+											$('#mayo').prop('checked','');
+											$('#junio').prop('checked','');
+											$('#julio').prop('checked','');
+											$('#agosto').prop('checked','');
+											$('#septiembre').prop('checked','');
+											$('#octubre').prop('checked','');
+											$('#noviembre').prop('checked','');
+											$('#diciembre').prop('checked','');
+											$('#todoslosmeses').prop('checked','');
+			
+										}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');}
+									});
+								}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar una actividad','warning');}
+							}else{launch_alert('<i class="fa fa-frown-o"></i> El intervalo horario es erróneo','warning');}
+						}else{launch_alert('<i class="fa fa-frown-o"></i> Debes añadir una hora de fin para la actividad','warning');}
+					}else{launch_alert('<i class="fa fa-frown-o"></i> Debes añadir una hora de inicio para la actividad','warning');}
+				}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar algun día de la semana para la actividad','warning');}
+			}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar algun mes para la actividad','warning');}
+
+
+
+
+		}		
+	}
 						
 }
 
@@ -269,7 +326,7 @@ function restarHoras() {
 		  transcurridoHoras--;
 		  transcurridoMinutos = 60 + transcurridoMinutos;
 		}
-		  
+		if(transcurridoMinutos >= 0 && transcurridoHoras >= 0){  
 		var horas = transcurridoHoras.toString();
 		var minutos = transcurridoMinutos.toString();
 		  
@@ -282,5 +339,6 @@ function restarHoras() {
 		}
 		  
 		$('#duracion').val(horas+':'+minutos);
+		}
 	}
 }

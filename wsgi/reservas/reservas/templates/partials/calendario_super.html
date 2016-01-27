@@ -20,7 +20,7 @@
 		<h3 class="sub-header">Actividad</h3>
 		<div class="row">
 			<div class="col-md-8">
-				<select id="actividad"></select>
+				<select id="actividad"><option value="-1">-------</option></select>
 			</div>
 		</div>
 		<br>
@@ -35,47 +35,46 @@
 		<div id="divpatron" style="display:none;">
 			<h3 class="sub-header">Día de la semana</h3>
 		<div class="row">
-			<div class="col-md-2"><input type="checkbox" id="lunes"> Lunes</div>
-			<div class="col-md-2"><input type="checkbox" id="martes"> Martes</div>
-			<div class="col-md-2"><input type="checkbox" id="miercoles"> Miércoles</div>
-			<div class="col-md-2"><input type="checkbox" id="jueves"> Jueves</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="lunes"> Lunes</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="martes"> Martes</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="miercoles"> Miércoles</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="jueves"> Jueves</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2"><input type="checkbox" id="viernes"> Viernes</div>
-			<div class="col-md-2"><input type="checkbox" id="sabado"> Sábado</div>
-			<div class="col-md-2"><input type="checkbox" id="domingo"> Domingo</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="viernes"> Viernes</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="sabado"> Sábado</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="domingo"> Domingo</div>
 			<div class="col-md-2"><input type="checkbox" id="todoslosdias"> Todos los días</div>
 		</div>
 		<br>
 		<h3 class="sub-header">Mes</h3>
 		<div class="row">
-			<div class="col-md-2"><input type="checkbox" id="enero"> Enero</div>
-			<div class="col-md-2"><input type="checkbox" id="febrero"> Febrero</div>
-			<div class="col-md-2"><input type="checkbox" id="marzo"> Marzo</div>
-			<div class="col-md-2"><input type="checkbox" id="abril"> Abril</div>
-			<div class="col-md-2"><input type="checkbox" id="mayo"> Mayo</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="enero"> Enero</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="febrero"> Febrero</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="marzo"> Marzo</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="abril"> Abril</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="mayo"> Mayo</div>
 		</div>
 		
 		<div class="row">
-			<div class="col-md-2"><input type="checkbox" id="junio"> Junio</div>
-			<div class="col-md-2"><input type="checkbox" id="julio"> Julio</div>
-			<div class="col-md-2"><input type="checkbox" id="agosto"> Agosto</div>
-			<div class="col-md-2"><input type="checkbox" id="septiembre"> Septiembre</div>
-			<div class="col-md-2"><input type="checkbox" id="octubre"> Octubre</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="junio"> Junio</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="julio"> Julio</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="agosto"> Agosto</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="septiembre"> Septiembre</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="octubre"> Octubre</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2"><input type="checkbox" id="noviembre"> Noviembre</div>
-			<div class="col-md-2"><input type="checkbox" id="diciembre"> Diciembre</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="noviembre"> Noviembre</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="diciembre"> Diciembre</div>
 			<div class="col-md-2"><input type="checkbox" id="todoslosmeses"> Todos los meses</div>
 		</div>
 		<br>
-		<div class="row">
+		</div>
+		<div class="row" id="marru" style="display:none;">
 			<div class="col-md-4">
 				<button id="botonadd" type="submit" class="btn btn-default">Enviar</button>
 		  	</div>
 		</div>
-		</div>
-		
 		
 		
 	</form>
