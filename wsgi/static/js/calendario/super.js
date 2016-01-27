@@ -134,6 +134,7 @@ function new_horario() {
 	var horaini=$('#horaini').val();
 	var horafin=$('#horafin').val();
 	var duracion=$('#duracion').val();
+	var duracionhide=$('#duracionhide').val();
 	var activity_id=$('#actividad').val();
 	if($('#fechaconcreta').is(":checked")){
 		var fecha = $('#fecha').val();
@@ -145,7 +146,7 @@ function new_horario() {
 							$('#botonadd').html('<i class="fa fa-cog fa-spin"></i>');
 							$.getJSON(api_url+'schedules/add_concrete?callback=?', { time_start:horaini, 
 																					 time_end:horafin,
-																					 duration:duracion,
+																					 duration:duracionhide,
 																					 activity_id:activity_id,
 																					 date:fecha}, function(data){
 																										
@@ -237,7 +238,7 @@ function new_horario() {
 									$('#botonadd').html('<i class="fa fa-cog fa-spin"></i>');
 									$.getJSON(api_url+'schedules/add_interval?callback=?', { time_start:horaini, 
 																						 time_end:horafin,
-																						 duration:duracion,
+																						 duration:duracionhide,
 																						 activity_id:activity_id,
 																						 monthly:cad_meses,
 																						 weekly:cad_dias}, function(data){
@@ -339,6 +340,8 @@ function restarHoras() {
 		}
 		  
 		$('#duracion').val(horas+':'+minutos);
+		var total = (transcurridoHoras*60)+transcurridoMinutos;
+		$('#duracionhide').val(total);
 		}
 	}
 }
