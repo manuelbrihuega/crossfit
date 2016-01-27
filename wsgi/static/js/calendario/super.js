@@ -11,9 +11,23 @@ function get_content() {
 			$('#main').html(template);
 			$('#horaini').timepicker({
     			showPeriodLabels: false,
+    			hourText: 'Hora',
+    			minuteText: 'Minutos',
+    			myPosition: 'left top',
+    			atPosition: 'left bottom' 
 			});
 			$('#horafin').timepicker({
     			showPeriodLabels: false,
+    			hourText: 'Hora',
+    			minuteText: 'Minutos',
+    			myPosition: 'left top',
+    			atPosition: 'left bottom'
+			});
+			$( "#horaini" ).change(function() {
+  				restarHoras();
+			});
+			$( "#horafin" ).change(function() {
+  				restarHoras();
 			});
 			//active_new_enterprise_form();
 			//startSearch();
@@ -151,4 +165,40 @@ function new_enterprise() {
 							}
 							else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir un nombre para la tarifa','warning');	
 						
+}
+
+
+
+
+function restarHoras() {
+	if($('#horaini').length && $('#horafin').length){
+  var inicio=$('#horaini').val();
+  var fin=$('#horafin').val();
+  var inicioMinutos = parseInt(inicio.substr(3,2));
+  var inicioHoras = parseInt(inicio.substr(0,2));
+  
+  var finMinutos = parseInt(fin.substr(3,2));
+  var finHoras = parseInt(fin.substr(0,2));
+
+  var transcurridoMinutos = finMinutos - inicioMinutos;
+  var transcurridoHoras = finHoras - inicioHoras;
+  
+  if (transcurridoMinutos < 0) {
+    transcurridoHoras--;
+    transcurridoMinutos = 60 + transcurridoMinutos;
+  }
+  
+  var horas = transcurridoHoras.toString();
+  var minutos = transcurridoMinutos.toString();
+  
+  if (horas.length < 2) {
+    horas = "0"+horas;
+  }
+  
+  if (horas.length < 2) {
+    horas = "0"+horas;
+  }
+  
+  $('#duracion').val(horas+':'+minutos);
+	}
 }

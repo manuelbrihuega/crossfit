@@ -41,6 +41,10 @@
     box-sizing: content-box !important;
 }
 
+.ui-timepicker{
+    font-size: 12px !important;
+    font-family: Arial !important;
+}
 
 /* buttons and button pane styling */
 .ui-timepicker .ui-timepicker-buttonpane {
