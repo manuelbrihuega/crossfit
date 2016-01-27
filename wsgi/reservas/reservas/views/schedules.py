@@ -90,8 +90,8 @@ def add_interval(request):
         cadmeses=request.GET['monthly'].split(',')
         cadsemana=request.GET['weekly'].split(',')
         while contador<=dias:
-            if cadmeses[fechaprincipal.month-1]==1:
-                if cadsemana[fechaprincipal.weekday()]==1:
+            if cadmeses[fechaprincipal.month-1]=='1':
+                if cadsemana[fechaprincipal.weekday()]=='1':
                     scheduleaux=Schedules()
                     scheduleaux.concrete=True
                     scheduleaux.date=fechaprincipal
