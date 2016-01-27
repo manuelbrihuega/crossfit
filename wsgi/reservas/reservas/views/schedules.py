@@ -79,6 +79,34 @@ def add_interval(request):
         schedule_time.schedule=schedule
         schedule_time.save()
 
+        from datetime import *
+        ahora=datetime.now()
+        ano=ahora.year
+        fechprox=datetime(ano+1,1,1)
+        queda=fechprox-ahora
+        dias=queda.days
+        contador=1
+        fechaprincipal=datetime.now()
+        cadmeses=request.GET['monthly'].split(',')
+        cadsemana=request.GET['weekly'].split(',')
+        while contador<=dias:
+            if cadmeses[fechaprincipal.month-1]==1:
+                if cadsemana[fechaprincipal.weekday()]==1:
+                    scheduleaux=Schedules()
+                    scheduleaux.concrete=True
+                    scheduleaux.date=fechaprincipal
+                    scheduleaux.activity=activity
+                    scheduleaux.save()
+                    schedule_timeaux=Schedules_times()
+                    schedule_timeaux.time_start=request.GET['time_start']
+                    schedule_timeaux.time_end=request.GET['time_end']
+                    schedule_timeaux.duration=request.GET['duration']
+                    schedule_timeaux.schedule=scheduleaux
+                    schedule_timeaux.save()
+
+            fechaprincipal = fechaprincipal + timedelta(days=1)
+            contador=contador+1
+            
         data=json.dumps({'status':'success','response':'schedule_time_created','data':{'id':schedule_time.id}})
     
     except Exception as e:
