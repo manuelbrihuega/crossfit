@@ -126,7 +126,7 @@ def list_all(request):
             raise Exception('unauthorized_list_all_schedules')
 
         user,auth = get_user_and_auth(request.session['auth_id'])
-        schedule_time=Schedules_times.objects.all()
+        schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1))
         cad ='<?xml version="1.0"?><monthly>'
         for sch in schedule_time:
             fechita = sch.schedule.date
