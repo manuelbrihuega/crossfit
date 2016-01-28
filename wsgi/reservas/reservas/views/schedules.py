@@ -130,8 +130,8 @@ def list_all(request):
         cad ='<?xml version="1.0"?><monthly>'
         for sch in schedule_time:
             fechita = sch.schedule.date
-            startdate=fechita.year+'-'+fechita.month+'-'+fechita.day
-            cad= cad + '<event><id>'+sch.id+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+sch.time_start+'</starttime>'+'<endtime>'+sch.time_end+'</endtime></event>'
+            startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
+            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime></event>'
         cad = cad + '</monthly>'
 
         data=json.dumps({'status':'success','response':'list_all_schedules','data':cad})
