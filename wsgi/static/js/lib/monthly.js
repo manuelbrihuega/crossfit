@@ -53,9 +53,9 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 
 		// Add Day Of Week Titles
 		if (options.weekStart == 'Sun') {
-			$('#' + uniqueId).append('<div class="monthly-day-title-wrap"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div><div class="monthly-day-wrap"></div>');
+			$('#' + uniqueId).append('<div class="monthly-day-title-wrap"><div>Dom</div><div>Lun</div><div>Mar</div><div>Mie</div><div>Ju</div><div>Vie</div><div>Sab</div></div><div class="monthly-day-wrap"></div>');
 		} else if (options.weekStart == 'Mon') {
-			$('#' + uniqueId).append('<div class="monthly-day-title-wrap"><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div><div class="monthly-day-wrap"></div>');
+			$('#' + uniqueId).append('<div class="monthly-day-title-wrap"><div>Lun</div><div>Mar</div><div>Mie</div><div>Ju</div><div>Vie</div><div>Sab</div><div>Dom</div></div><div class="monthly-day-wrap"></div>');
 		} else {
 			console.log('Incorrect entry for weekStart variable.')
 		}

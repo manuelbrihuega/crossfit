@@ -113,3 +113,32 @@ def add_interval(request):
         data = json.dumps({'status':'failed', 'response': e.args[0] })
 
     return APIResponse(request,data)
+
+
+def list_all(request):
+    """
+    List all schedules info
+    """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not have_permission(request.session['auth_id'],'list_all_schedules'):
+            raise Exception('unauthorized_list_all_schedules')
+
+        user,auth = get_user_and_auth(request.session['auth_id'])
+        schedule_time=Schedules_times.objects.all()
+        cad ='<?xml version="1.0"?><monthly>'
+        for sch in schedule_time:
+            startdate=sch.schedule.date.year+'-'+sch.schedule.date.month+'-'+sch.schedule.date.day
+            cad= cad + '<event><id>'+sch.id+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+sch.time_start+'</starttime>'+'<endtime>'+sch.time_end+'</endtime></event>'
+        cad = cad + '</monthly>'
+
+        data=json.dumps({'status':'success','response':'list_all_schedules','data':cad})
+
+    except Exception as e:
+        data = json.dumps({
+            'status':'failed',
+            'response': e.args[0]
+        })
+
+    return APIResponse(request,data)

@@ -54,7 +54,7 @@ function get_content() {
 				weekStart: 'Mon'
 			});
 			active_new_enterprise_form();
-			//startSearch();
+			loadCalendar();
 			$( ".mes" ).click(function() {
 				$('#todoslosmeses').prop('checked','');
 			});
@@ -162,6 +162,7 @@ function new_horario() {
 									$('#duracion').val('');
 									$('#activity_id').val('-1');
 									$('#fecha').val('');
+									loadCalendar();
 								}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');}
 							});
 						}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar una actividad','warning');}
@@ -309,6 +310,23 @@ function listarActividades() {
 
 		}
 		else super_error('Search failure');
+	});
+}
+
+function loadCalendar() {
+	
+	$('.waiting').show();
+	$('#mycalendar').hide();
+			
+	$.getJSON(api_url+'schedules/list_all?callback=?', {}, function(data){
+		if(data.status=='success'){
+			$('.waiting').hide();
+			$('#mycalendar').show();
+			$('#mycalendar').monthly({
+				weekStart: 'Mon',
+				xmlUrl: data.data
+			});
+		}
 	});
 }
 
