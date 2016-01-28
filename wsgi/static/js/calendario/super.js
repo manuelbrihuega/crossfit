@@ -50,9 +50,6 @@ function get_content() {
   				$('#marru').slideDown();
 			});
 			$('.waiting').hide();
-			$('#mycalendar').monthly({
-				weekStart: 'Mon'
-			});
 			active_new_enterprise_form();
 			loadCalendar();
 			$( ".mes" ).click(function() {

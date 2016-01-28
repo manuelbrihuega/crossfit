@@ -164,7 +164,7 @@ def list_all(request):
         cad = cad + '</monthly>'
 
         context = {'error':''}
-        fileName = '../../static/xml/calendario.xml'
+        fileName = os.path.join(PROJECT_PATH + '/../static/xml', 'calendario.xml')
         writeFile(cad, fileName, context)
 
         data=json.dumps({'status':'success','response':'list_all_schedules','data':fileName})
