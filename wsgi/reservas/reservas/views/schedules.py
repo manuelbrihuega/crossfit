@@ -12,6 +12,7 @@ from reservas.aux.permissions import *
 from reservas.aux.general import *
 from reservas.aux.tasks import add_task
 from reservas.aux.date import *
+from datetime import *
 
 
 def add_concrete(request):
@@ -79,7 +80,6 @@ def add_interval(request):
         schedule_time.schedule=schedule
         schedule_time.save()
 
-        from datetime import *
         ahora=datetime.now()
         ano=ahora.year
         fechprox=datetime(ano+1,1,1)
@@ -129,7 +129,7 @@ def list_all(request):
         schedule_time=Schedules_times.objects.all()
         cad ='<?xml version="1.0"?><monthly>'
         for sch in schedule_time:
-            startdate=sch.schedule.get_year()+'-'+sch.schedule.get_month()+'-'+sch.schedule.get_day()
+            startdate=sch.schedule.date.year+'-'+sch.schedule.date.month+'-'+sch.schedule.date.day
             cad= cad + '<event><id>'+sch.id+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+sch.time_start+'</starttime>'+'<endtime>'+sch.time_end+'</endtime></event>'
         cad = cad + '</monthly>'
 
