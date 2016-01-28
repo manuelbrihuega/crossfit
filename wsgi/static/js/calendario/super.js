@@ -313,12 +313,10 @@ function listarActividades() {
 function loadCalendar() {
 	
 	$('.waiting').show();
-	$('#mycalendar').hide();
-			
+	$('#mycalendar').html();		
 	$.getJSON(api_url+'schedules/list_all?callback=?', {}, function(data){
 		if(data.status=='success'){
 			$('.waiting').hide();
-			$('#mycalendar').show();
 			$('#mycalendar').monthly({
 				mode: 'event',
 				weekStart: 'Mon',
