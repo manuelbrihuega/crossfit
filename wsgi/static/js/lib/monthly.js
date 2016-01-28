@@ -165,6 +165,8 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 							endMonth = parseInt(endArr[1], 10),
 							endDay = parseInt(endArr[2], 10),
 							eventURL = $(this).find('url').text(),
+							eventOc = $(this).find('oc').text(),
+							eventDis = $(this).find('dis').text(),
 							eventTitle = $(this).find('name').text(),
 							eventColor = $(this).find('color').text(),
 							eventId = $(this).find('id').text(),
@@ -200,7 +202,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 
 						// function to print out list for multi day events
 						function multidaylist(){
-							$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<div class="listed-event"  data-eventid="'+ eventId +'" style="padding-top:0px;"><span onclick="showHorario('+eventId+');" style="float: left; overflow: auto; margin-right: 14px; cursor:pointer;">'+eventTitle+'</span><div style="cursor:pointer; overflow:auto; width:29px;" onclick="deleteHorario('+eventId+');"><i class="fa fa-trash-o" style="font-size: 35px; margin-top: 3px;"></i></div><div style="width: auto; float: none; margin-top: -17px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
+							$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<div class="listed-event"  data-eventid="'+ eventId +'" style="padding-top:0px;"><span onclick="showHorario('+eventId+');" style="float: left; overflow: auto; margin-right: 14px; cursor:pointer;">'+eventTitle+'</span><div style="cursor:pointer; overflow:auto; width:200px;" onclick="deleteHorario('+eventId+');"><i class="fa fa-trash-o" style="font-size: 35px; margin-top: 3px; float: left;"></i><span style="font-size: 13px; display: block; float: left; padding-top: 3px; margin-left: 20px; color: green;">Plazas disponibles: '+eventDis+'</span><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: red;">Plazas ocupadas: '+eventOc+'</span></div><div style="width: auto; float: none; margin-top: -17px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
 						}
 						
 
@@ -209,7 +211,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 							// Add Indicators
 							$('#'+uniqueId+' *[data-number="'+startDay+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
 							// Print out event list for single day event
-							$('#'+uniqueId+' .monthly-list-item[data-number="'+startDay+'"]').addClass('item-has-event').append('<div class="listed-event" data-eventid="'+ eventId +'" style="padding-top:0px;"><span onclick="showHorario('+eventId+');" style="float: left; overflow: auto; margin-right: 14px; cursor:pointer;">'+eventTitle+'</span><div style="cursor:pointer; overflow:auto; width:29px;" onclick="deleteHorario('+eventId+');"><i class="fa fa-trash-o" style="font-size: 35px; margin-top: 3px;"></i></div><div style="width: auto; float: none; margin-top: -17px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
+							$('#'+uniqueId+' .monthly-list-item[data-number="'+startDay+'"]').addClass('item-has-event').append('<div class="listed-event" data-eventid="'+ eventId +'" style="padding-top:0px;"><span onclick="showHorario('+eventId+');" style="float: left; overflow: auto; margin-right: 14px; cursor:pointer;">'+eventTitle+'</span><div style="cursor:pointer; overflow:auto; width:200px;" onclick="deleteHorario('+eventId+');"><i class="fa fa-trash-o" style="font-size: 35px; margin-top: 3px; float: left;"></i><span style="font-size: 13px; display: block; float: left; padding-top: 3px; margin-left: 20px; color: green;">Plazas disponibles: '+eventDis+'</span><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: red;">Plazas ocupadas: '+eventOc+'</span></div><div style="width: auto; float: none; margin-top: -17px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
 
 
 						// If event is multi day & within month

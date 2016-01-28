@@ -162,7 +162,14 @@ def list_all(request):
         for sch in schedule_time:
             fechita = sch.schedule.date
             startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
-            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime></event>'
+            ocupadas = 0
+            disponibles = 0
+            aforo = sch.schedule.activity.max_capacity
+            reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
+            for res in reservations:
+                ocupadas = ocupadas + 1
+            disponibles = aforo - ocupadas
+            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+ocupadas+'</oc><dis>'+disponibles+'</dis></event>'
         cad = cad + '</monthly>'
 
         context = {'error':''}
