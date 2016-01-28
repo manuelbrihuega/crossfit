@@ -163,11 +163,11 @@ def list_all(request):
             cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime></event>'
         cad = cad + '</monthly>'
 
-        context = {'error':''}
-        fileName = os.path.join(PROJECT_PATH + '/../static/xml', 'calendario.xml')
-        writeFile(cad, fileName, context)
+        #context = {'error':''}
+        #fileName = os.path.join(PROJECT_PATH + '/../static/xml', 'calendario.xml')
+        #writeFile(cad, fileName, context)
 
-        data=json.dumps({'status':'success','response':'list_all_schedules','data':fileName})
+        data=json.dumps({'status':'success','response':'list_all_schedules','data':os.path.abspath(os.path.dirname(__file__))})
 
     except Exception as e:
         data = json.dumps({
