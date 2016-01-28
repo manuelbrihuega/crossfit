@@ -107,6 +107,15 @@ class Schedules(models.Model):
     monthly = models.CharField(default="",max_length=100)
     activity = models.ForeignKey('Activities',null=False,blank=False,on_delete = models.CASCADE)
     
+    def get_year(self):
+        return self.date.year
+
+    def get_day(self):
+        return self.date.day
+
+    def get_month(self):
+        return self.date.month
+        
 
 #SCHEDULES_TIMES
 class Schedules_times(models.Model):
