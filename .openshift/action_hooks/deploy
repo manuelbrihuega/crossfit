@@ -18,3 +18,6 @@ python "$OPENSHIFT_REPO_DIR"wsgi/reservas/manage.py migrate --noinput
 echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/reservas/manage.py collectstatic --noinput'"
 # GETTING-STARTED: change 'reservas' to your project name:
 python "$OPENSHIFT_REPO_DIR"wsgi/reservas/manage.py collectstatic --noinput
+
+mkdir "$OPENSHIFT_REPO_DIR"/wsgi/static/xml
+chmod 777 -R "$OPENSHIFT_REPO_DIR"/wsgi/static/xml
