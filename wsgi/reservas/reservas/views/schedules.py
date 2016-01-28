@@ -3,7 +3,8 @@
 from django.http import HttpResponse
 import json
 from django.db.models import Q
-
+import os
+from django.core.files import File
 from reservas.models import *
 
 from reservas.aux.auth import *
@@ -115,6 +116,34 @@ def add_interval(request):
     return APIResponse(request,data)
 
 
+def openFile(fileName, mode, context):
+    # open file using python's open method
+    # by default file gets opened in read mode
+    try:
+        fileHandler = open(fileName, mode)
+        return {'opened':True, 'handler':fileHandler}
+    except IOError:
+        context['error'] += 'Unable to open file ' + fileName + '\n'
+    except:
+        context['error'] += 'Unexpected exception in openFile method.\n'
+    return {'opened':False, 'handler':None}
+
+
+def writeFile(content, fileName, context):
+    # open file write mode
+    fileHandler = openFile(fileName, 'w', context)
+    
+    if fileHandler['opened']:
+        # create Django File object using python's file object
+        file = File(fileHandler['handler'])
+        # write content into the file
+        file.write(content)
+        # flush content so that file will be modified.
+        file.flush()
+        # close file
+        file.close()
+
+
 def list_all(request):
     """
     List all schedules info
@@ -134,7 +163,11 @@ def list_all(request):
             cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime></event>'
         cad = cad + '</monthly>'
 
-        data=json.dumps({'status':'success','response':'list_all_schedules','data':cad})
+        context = {'error':''}
+        fileName = '../../static/xml/calendario.xml'
+        writeFile(cad, fileName, context)
+
+        data=json.dumps({'status':'success','response':'list_all_schedules','data':fileName})
 
     except Exception as e:
         data = json.dumps({
