@@ -129,7 +129,8 @@ def list_all(request):
         schedule_time=Schedules_times.objects.all()
         cad ='<?xml version="1.0"?><monthly>'
         for sch in schedule_time:
-            startdate=sch.schedule.date.year+'-'+sch.schedule.date.month+'-'+sch.schedule.date.day
+            fechita = sch.schedule.date
+            startdate=fechita.year+'-'+fechita.month+'-'+fechita.day
             cad= cad + '<event><id>'+sch.id+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+sch.time_start+'</starttime>'+'<endtime>'+sch.time_end+'</endtime></event>'
         cad = cad + '</monthly>'
 
