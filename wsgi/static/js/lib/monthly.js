@@ -200,7 +200,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 
 						// function to print out list for multi day events
 						function multidaylist(){
-							$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'<div><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></a>');
+							$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<div class="listed-event"  data-eventid="'+ eventId +'" style="padding-top:0px;"><span onclick="showHorario('+eventId+');" style="float: left; overflow: auto; margin-right: 14px;">'+eventTitle+'</span><div style="cursor:pointer;" onclick="deleteHorario('+eventId+');"><i class="fa fa-trash-o" style="font-size: 35px; margin-top: 3px;"></i></div><div style="width: auto; float: none; margin-top: -17px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
 						}
 						
 
@@ -366,13 +366,13 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 		});
 		
 		// Clicking an event within the list
-		$(document.body).on('click', '#'+uniqueId+' .listed-event', function (e) {
+		/*$(document.body).on('click', '#'+uniqueId+' .listed-event', function (e) {
 			var href = $(this).attr('href');
 			// If there isn't a link, don't go anywhere
 			if(!href) {
 				e.preventDefault();
 			}
-		});
+		});*/
 
 		}
 	});
