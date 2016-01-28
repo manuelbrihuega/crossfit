@@ -344,7 +344,7 @@
 }
 .ui-widget-header {
 	border: 1px solid #e78f08;
-	background: #075a8f url(../../img/jquery-ui/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x;
+	background-color: #075a8f;
 	color: #ffffff;
 	font-weight: bold;
 }
