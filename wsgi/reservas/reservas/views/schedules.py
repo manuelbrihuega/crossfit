@@ -14,6 +14,7 @@ from reservas.aux.general import *
 from reservas.aux.tasks import add_task
 from reservas.aux.date import *
 from datetime import *
+from django.conf import settings
 
 
 def add_concrete(request):
