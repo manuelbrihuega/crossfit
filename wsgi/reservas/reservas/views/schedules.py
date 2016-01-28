@@ -169,7 +169,7 @@ def list_all(request):
             for res in reservations:
                 ocupadas = ocupadas + 1
             disponibles = aforo - ocupadas
-            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+ocupadas+'</oc><dis>'+disponibles+'</dis></event>'
+            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis></event>'
         cad = cad + '</monthly>'
 
         context = {'error':''}
