@@ -178,3 +178,40 @@ def list_all(request):
         })
 
     return APIResponse(request,data)
+
+
+def delete(request):
+    """
+    Delete schedule_time
+    """
+    
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+
+        if not have_permission(request.session['auth_id'], 'delete_schedule'):
+            raise Exception('unauthorized_delete_schedule')
+
+        if not validate_parameter(request.GET, 'id'):
+            raise Exception('schedule_id_missed')
+
+        user,auth = get_user_and_auth(request.session['auth_id'])
+        
+        schedule_time=Schedules_times.objects.get(id=request.GET['id'])
+            
+        schedule=schedule_time.schedule
+        schedule_time.delete()
+        schedule.delete()
+        
+        data = json.dumps( { 'status': 'success', 'response': 'schedule_deleted'} )
+       
+    except Activities.DoesNotExist:
+        data = json.dumps({'status': 'failed', 'response': 'schedule_not_found'})
+
+    except Exception as e:
+        data = json.dumps({
+            'status':'failed',
+            'response': e.args[0]
+        })
+
+    return APIResponse(request=request, data=data)

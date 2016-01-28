@@ -363,3 +363,20 @@ function restarHoras() {
 		}
 	}
 }
+
+function deleteHorario(id) {
+	var confirmacion=confirm('¿Seguro que quieres eliminar este evento?');
+	if (confirmacion==true)
+	{
+		$('.waiting').show();
+		$('#mycalendar').html('');
+		$.getJSON(api_url+'schedules/delete?callback=?', {id:id}, function(data){
+			if(data.status=='success'){
+				loadCalendar();
+				launch_alert('<i class="fa fa-smile-o"></i> Evento eliminado','');
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+		});
+
+	}
+}
