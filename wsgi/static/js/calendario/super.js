@@ -161,7 +161,7 @@ function new_horario() {
 									$('#duracion').val('');
 									$('#activity_id').val('-1');
 									$('#fecha').val('');
-									loadCalendar();
+									location.reload();
 								}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');}
 							});
 						}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar una actividad','warning');}
@@ -376,8 +376,8 @@ function deleteHorario(id) {
 		$('#mycalendar').remove();
 		$.getJSON(api_url+'schedules/delete?callback=?', {id:id}, function(data){
 			if(data.status=='success'){
-				loadCalendar();
 				launch_alert('<i class="fa fa-smile-o"></i> Evento eliminado','');
+				location.reload();
 			}
 			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 		});
