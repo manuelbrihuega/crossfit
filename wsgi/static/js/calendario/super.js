@@ -33,7 +33,7 @@ function get_content() {
 
 			if (!Modernizr.inputtypes.date) {
     			$('input[type=date]').datepicker({
-  					dateFormat: "yyyy-mm-dd"
+  					dateFormat: "yy-mm-dd"
 				});
     			$('input[type=date]').css('border-bottom','1px solid lightgray');
     			$('#ui-datepicker-div').css('background-color','white');
