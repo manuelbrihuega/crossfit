@@ -35,6 +35,7 @@ def add_concrete(request):
         schedule=Schedules()
         schedule.concrete=True
         schedule.date=request.GET['date']
+        schedule.date= schedule.date+timedelta(minutes=60*2)
         schedule.activity=activity
         schedule.save()
         
