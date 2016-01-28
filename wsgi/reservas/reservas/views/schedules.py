@@ -34,8 +34,8 @@ def add_concrete(request):
         activity=Activities.objects.get(id=request.GET['activity_id'])
         schedule=Schedules()
         schedule.concrete=True
-        schedule.date=request.GET['date']
-        schedule.date= schedule.date+timedelta(minutes=60*2)
+        fechazocad=str(request.GET['date']).split('-')
+        schedule.date=datetime(int(fechazocad[0]), int(fechazocad[1]),int(fechazocad[2]), 12, 12, 12)
         schedule.activity=activity
         schedule.save()
         
