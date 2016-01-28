@@ -169,7 +169,7 @@ def list_all(request):
         writeFile(cad, fileName, context)
         scheme = 'https://' if request.is_secure() else 'http://'
         urlfinal = scheme + request.get_host() + settings.STATIC_URL + 'xml/calendario.xml'
-        data=json.dumps({'status':'success','response':'list_all_schedules','data':urlfinal,'filename':str(fileName)})
+        data=json.dumps({'status':'success','response':'list_all_schedules','data':urlfinal})
 
     except Exception as e:
         data = json.dumps({

@@ -320,6 +320,7 @@ function loadCalendar() {
 			$('.waiting').hide();
 			$('#mycalendar').show();
 			$('#mycalendar').monthly({
+				mode: 'event',
 				weekStart: 'Mon',
 				xmlUrl: data.data
 			});
