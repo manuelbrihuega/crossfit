@@ -32,7 +32,9 @@ function get_content() {
 			});
 
 			if (!Modernizr.inputtypes.date) {
-    			$('input[type=date]').datepicker();
+    			$('input[type=date]').datepicker({
+  					altFormat: "yyyy-mm-dd"
+				});
     			$('input[type=date]').css('border-bottom','1px solid lightgray');
     			$('#ui-datepicker-div').css('background-color','white');
         		$('#ui-datepicker-div').css('border','1px solid lightgray');
@@ -313,13 +315,17 @@ function listarActividades() {
 function loadCalendar() {
 	
 	$('.waiting').show();
-	$('#mycalendar').html('');		
+	if($('#mycalendar').length){
+		$('#mycalendar').remove();
+	}
 	$.getJSON(api_url+'schedules/list_all?callback=?', {}, function(data){
 		if(data.status=='success'){
 			$('.waiting').hide();
+			$('#enterprises_accordion').append('<div id="mycalendar" class="monthly"></div>');
 			$('#mycalendar').monthly({
 				mode: 'event',
 				weekStart: 'Mon',
+				disablePast: true,
 				xmlUrl: data.data
 			});
 		}
@@ -367,7 +373,7 @@ function deleteHorario(id) {
 	if (confirmacion==true)
 	{
 		$('.waiting').show();
-		$('#mycalendar').html('');
+		$('#mycalendar').remove();
 		$.getJSON(api_url+'schedules/delete?callback=?', {id:id}, function(data){
 			if(data.status=='success'){
 				loadCalendar();
