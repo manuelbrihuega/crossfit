@@ -225,6 +225,41 @@ def delete(request):
     return APIResponse(request=request, data=data)
 
 
+def delete_reservation(request):
+    """
+    Delete reservation
+    """
+    
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+
+        if not have_permission(request.session['auth_id'], 'delete_reservation'):
+            raise Exception('unauthorized_delete_reservation')
+
+        if not validate_parameter(request.GET, 'id'):
+            raise Exception('reservation_id_missed')
+
+        user,auth = get_user_and_auth(request.session['auth_id'])
+        
+        reservation=Reservations.objects.get(id=request.GET['id'])
+            
+        reservation.delete()
+        
+        data = json.dumps( { 'status': 'success', 'response': 'reservation_deleted'} )
+       
+    except Reservations.DoesNotExist:
+        data = json.dumps({'status': 'failed', 'response': 'reservation_not_found'})
+
+    except Exception as e:
+        data = json.dumps({
+            'status':'failed',
+            'response': e.args[0]
+        })
+
+    return APIResponse(request=request, data=data)
+    
+
 def get_foreign(request):
     """
     Get foreign schedule info

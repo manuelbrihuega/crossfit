@@ -1497,6 +1497,89 @@ function delete_actividad(actividad_id) {
 	}
 }
 
+function eliminarReserva(id,obj) {
+	var confirmacion=confirm('¿Seguro que quieres eliminar la reserva de este cliente?');
+	if (confirmacion==true)
+	{
+		$(obj).html('<i class="fa fa-cog fa-spin"></i>');
+		$.getJSON(api_url+'schedules/delete_reservation?callback=?', {id_reservation:id}, function(data){
+			if(data.status=='success'){
+				launch_alert('<i class="fa fa-smile-o"></i> Reserva eliminada','');
+				//$('#horario_details_modal').modal('hide');
+				$('#celda_'+id).remove();
+				$('#tituloreservas').html('Reservas <i onclick="addReserva();" class="fa fa-plus-square"></i>');
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+		});
+
+	}
+}
+
+function addReserva(){
+	var optionsname ='<option value="-1">-----</option>';
+	var optionssurname='<option value="-1">-----</option>';
+	$.getJSON(api_url+'customers/search?callback=?', {lookup:'*'}, function(data){
+		if(data.status=='success'){
+			var vector = new Array();
+		    $.each(data.data, function(index, cus) {
+		    	var controlador = false;
+		    	for (var i = 0; i < vector.length; i++) {
+        			if (vector[i] == cus.name) {
+            			controlador=true;
+        			}
+    			}
+    			if(!controlador){
+    				vector.push(cus.name);
+    				optionsname = optionsname + '<option value="'+cus.name+'">'+cus.name+'</option>';
+    			}
+				
+			});
+		
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+	});
+	
+	var primerselect=$('<select class="form-control name"></select>').append(optionsname);
+	var segundoselect=$('<select class="form-control surname"></select>').append(optionssurname);
+	var fila = $('<tr></tr>');
+	
+	var primeracol = $('<td></td>').append(primerselect);
+	var segundacol = $('<td></td>').append(segundoselect);
+	var terceracol = $('<td></td>').append('-');
+	var cuartacol = $('<td></td>').append('-');
+	var quintacol = $('<td></td>').append('<select class="form-control queue"><option value="false">NO</option><option value="true">SI</option></select>');
+	var botonguardar=$('<i style="cursor:pointer; font-size:18px;" class="fa fa-floppy-o"></i>');
+	var sextacol = $('<td></td>').append(botonguardar);
+	fila.append(primeracol);
+	fila.append(segundacol);
+	fila.append(terceracol);
+	fila.append(cuartacol);
+	fila.append(quintacol);
+	fila.append(sextacol);
+	primerselect.change(function(){ 
+		var nuevocontent = '';
+		$.getJSON(api_url+'customers/search?callback=?', {lookup:$(this).val()}, function(data){
+			if(data.status=='success'){
+				$.each(data.data, function(index, cusap) {
+		    		nuevocontent = nuevocontent + '<option value="'+cusap.id+'">'+cusap.surname+'</option>';
+				});
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+		});
+		segundoselect.html(nuevocontent);
+	});
+	segundoselect.change(function(){ 
+		$.getJSON(api_url+'customers/get_foreign?callback=?', {customer_id:$(this).val()}, function(data){
+			if(data.status=='success'){
+				terceracol.html(data.data.auth_profile.email);
+				cuartacol.html(data.data.auth_profile.phone);
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+		});
+	});
+	$('#tableweyclientesbody').append(fila);
+}
+
 function delete_faq(faq_id) {
 	var confirmacion=confirm('¿Seguro que quieres eliminar la FAQ?');
 	if (confirmacion==true)
@@ -1645,7 +1728,7 @@ function showHorario(id) {
 				modalAddBody(mymodal,body);
 				
                 $('#nameactivity').html(data.data.schedule.activity_name);
-                $('#houractivity').html('De '+data.data.schedule.time_start.split(' ')[1]+' a '+data.data.schedule.time_end.split(' ')[1]);
+                $('#houractivity').html('De '+data.data.schedule.time_start.split(' ')[1].split(':')[0]+':'+data.data.schedule.time_start.split(' ')[1].split(':')[1]+' a '+data.data.schedule.time_end.split(' ')[1].split(':')[0]+':'+data.data.schedule.time_end.split(' ')[1].split(':')[1]);
                 $('#idactivity').html(data.data.schedule.activity_id);
                 $('#idscheduletime').html(data.data.schedule.schedule_time_id);
                 $('#idschedule').html(data.data.schedule.schedule_id);
@@ -1657,7 +1740,7 @@ function showHorario(id) {
 					}else{
 						cadcola = 'NO';
 					}
-					$('#tableweyclientesbody').append('<tr style="cursor:pointer;" data-id="'+res.id+'">'+'<td>'+res.name+'</td>'+'<td>'+res.surname+'</td>'+'<td>'+res.email+'</td>'+'<td>'+res.phone+'</td>'+'<td>'+cadcola+'</td>'+'<td><i style="cursor:pointer;" onclick=eliminarReserva("'+res.id+'"); class="fa fa-trash-o"></i></td>'+'</tr>');
+					$('#tableweyclientesbody').append('<tr id="celda_'+res.id+'" style="cursor:pointer;" data-id="'+res.id+'">'+'<td>'+res.name+'</td>'+'<td>'+res.surname+'</td>'+'<td>'+res.email+'</td>'+'<td>'+res.phone+'</td>'+'<td>'+cadcola+'</td>'+'<td><i style="cursor:pointer; font-size:18px;" onclick=eliminarReserva("'+res.id+'",this); class="fa fa-trash-o"></i></td>'+'</tr>');
 				});
 				$('#tableweyclientes').tablesorter();
 				
