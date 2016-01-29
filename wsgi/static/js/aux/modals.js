@@ -1794,7 +1794,7 @@ function showHorario(id) {
 
 	$.getJSON( api_url+'schedules/hay_plazas?callback=?', {id:id}, function(data){
 		if(data.status=='success'){
-			if(data.data.disponibles>0 || data.data.disponibles_cola){
+			if(data.data.disponibles>0 || data.data.disponibles_cola>0){
 				$('#tituloreservas').html('Reservas <i onclick="addReserva();" class="fa fa-plus-square"></i>');
 			}
 			$('#disponibles').val(data.data.disponibles);
