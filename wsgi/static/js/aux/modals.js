@@ -1546,7 +1546,7 @@ function eliminarReserva(id,obj) {
 function addReserva(){
 	var optionsname ='<option value="-1">-----</option>';
 	var optionssurname='<option value="-1">-----</option>';
-	$.getJSON(api_url+'customers/search?callback=?', {lookup:'*'}, function(data){
+	$.getJSON(api_url+'customers/search?callback=?', {lookup:'*',filtro:'todos',order:'nombreDESC'}, function(data){
 		if(data.status=='success'){
 			var vector = new Array();
 		    $.each(data.data, function(index, cus) {
@@ -1567,8 +1567,8 @@ function addReserva(){
 		else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 	});
 	
-	var primerselect=$('<select class="form-control name"></select>').append(optionsname);
-	var segundoselect=$('<select class="form-control surname"></select>').append(optionssurname);
+	var primerselect=$('<select class="name"></select>').append(optionsname);
+	var segundoselect=$('<select class="surname"></select>').append(optionssurname);
 	var fila = $('<tr></tr>');
 	
 	var primeracol = $('<td></td>').append(primerselect);
@@ -1576,10 +1576,10 @@ function addReserva(){
 	var terceracol = $('<td></td>').append('-');
 	var cuartacol = $('<td></td>').append('-');
 	if($('#disponibles').val()>0){
-		var quintacol = $('<td></td>').append('<select class="form-control queue"><option value="false">NO</option></select>');	
+		var quintacol = $('<td></td>').append('<select class="queue"><option value="false">NO</option></select>');	
 	}
 	if($('#disponibles').val()==0 && $('#disponibles_cola').val()>0){
-		var quintacol = $('<td></td>').append('<select class="form-control queue"><option value="true">SI</option></select>');	
+		var quintacol = $('<td></td>').append('<select class="queue"><option value="true">SI</option></select>');	
 	}
 	var botonguardar=$('<i style="cursor:pointer; font-size:18px;" class="fa fa-floppy-o"></i>');
 	var sextacol = $('<td></td>').append(botonguardar);
@@ -1591,7 +1591,7 @@ function addReserva(){
 	fila.append(sextacol);
 	primerselect.change(function(){ 
 		var nuevocontent = '';
-		$.getJSON(api_url+'customers/search?callback=?', {lookup:$(this).val()}, function(data){
+		$.getJSON(api_url+'customers/search?callback=?', {lookup:$(this).val(),filtro:'todos',order:'nombreDESC'}, function(data){
 			if(data.status=='success'){
 				$.each(data.data, function(index, cusap) {
 		    		nuevocontent = nuevocontent + '<option value="'+cusap.id+'">'+cusap.surname+'</option>';
