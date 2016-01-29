@@ -258,7 +258,7 @@ def delete_reservation(request):
         })
 
     return APIResponse(request=request, data=data)
-    
+
 
 def get_foreign(request):
     """
@@ -300,6 +300,39 @@ def get_foreign(request):
                 data=json.dumps({'status':'failed','response':'id_missed'})
         else:
             data=json.dumps({'status':'failed','response':'unauthorized_get_foreign_schedule'})
+    else:
+        data=json.dumps({'status':'failed','response':'not_logged'})
+    return APIResponse(request,data)
+
+
+def hay_plazas(request):
+    """
+    Define si hay plazas o no
+    """
+    if 'auth_id' in request.session:
+        if have_permission(request.session['auth_id'],'hay_plazas_schedule'):
+            if validate_parameter(request.GET,'id'):
+                try:
+                    schedule_time=Schedules_times.objects.get(id=request.GET['id'])
+                    aforo=schedule_time.schedule.activity.max_capacity
+                    aforocola=schedule_time.schedule.activity.queue_capacity
+                    reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time.id))
+                    ocupadas=0
+                    ocupadascola=0
+                    for res in reservations:
+                        if res.queue:
+                            ocupadascola = ocupadascola + 1
+                        else:
+                            ocupadas = ocupadas + 1  
+                    disponibles=aforo - ocupadas
+                    disponiblescola=aforocola - ocupadascola
+                    data=json.dumps({'status':'success','response':'hay_plazas_schedule','data':{'aforo':str(aforo), 'aforo_cola':str(aforocola), 'disponibles':str(disponibles), 'disponibles_cola':str(disponiblescola), 'ocupadas':str(ocupadas), 'ocupadas_cola':str(ocupadascola)}})
+                except Exception as e:
+                    data=json.dumps({'status':'failed','response':e.args[0]})
+            else:
+                data=json.dumps({'status':'failed','response':'id_missed'})
+        else:
+            data=json.dumps({'status':'failed','response':'unauthorized_hay_plazas_schedule'})
     else:
         data=json.dumps({'status':'failed','response':'not_logged'})
     return APIResponse(request,data)

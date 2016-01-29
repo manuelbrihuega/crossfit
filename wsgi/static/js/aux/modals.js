@@ -1508,6 +1508,34 @@ function eliminarReserva(id,obj) {
 				//$('#horario_details_modal').modal('hide');
 				$('#celda_'+id).remove();
 				$('#tituloreservas').html('Reservas <i onclick="addReserva();" class="fa fa-plus-square"></i>');
+				if($('#disponibles_cola').val()==0){
+					$('#disponibles_cola').val(1);
+					var ocupacol = $('#ocupadas_cola').val();
+					$('#ocupadas_cola').val(ocupacol-1);
+				}
+				if($('#disponibles_cola').val()>0 && $('#disponibles').val()==0){
+					var discol = $('#disponibles_cola').val();
+					if($('#aforo_cola').val()>discol){
+						$('#disponibles_cola').val(discol+1);
+						var ocupacol = $('#ocupadas_cola').val();
+						$('#ocupadas_cola').val(ocupacol-1);
+					}else{
+						var dis = $('#disponibles').val();
+						$('#disponibles').val(dis+1);
+						var ocu = $('#ocupadas').val();
+						$('#ocupadas').val(ocu-1);
+					}
+					
+				}
+				if($('#disponibles').val()>0){
+					var dis = $('#disponibles').val();
+					if($('#aforo').val()>dis){
+						$('#disponibles').val(dis+1);
+						var ocu = $('#ocupadas').val();
+						$('#ocupadas').val(ocu-1);
+					}
+
+				}
 			}
 			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 		});
@@ -1547,7 +1575,12 @@ function addReserva(){
 	var segundacol = $('<td></td>').append(segundoselect);
 	var terceracol = $('<td></td>').append('-');
 	var cuartacol = $('<td></td>').append('-');
-	var quintacol = $('<td></td>').append('<select class="form-control queue"><option value="false">NO</option><option value="true">SI</option></select>');
+	if($('#disponibles').val()>0){
+		var quintacol = $('<td></td>').append('<select class="form-control queue"><option value="false">NO</option></select>');	
+	}
+	if($('#disponibles').val()==0 && $('#disponibles_cola').val()>0){
+		var quintacol = $('<td></td>').append('<select class="form-control queue"><option value="true">SI</option></select>');	
+	}
 	var botonguardar=$('<i style="cursor:pointer; font-size:18px;" class="fa fa-floppy-o"></i>');
 	var sextacol = $('<td></td>').append(botonguardar);
 	fila.append(primeracol);
@@ -1746,6 +1779,7 @@ function showHorario(id) {
 				
 				var footer = $('<div></div>');
 				
+				
 				modalAddFooter(mymodal,footer);
 				
 			});
@@ -1754,6 +1788,21 @@ function showHorario(id) {
 			
 			
 			
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos de la actividad','warning')
+	});
+
+	$.getJSON( api_url+'schedules/hay_plazas?callback=?', {id:id}, function(data){
+		if(data.status=='success'){
+			if(data.data.disponibles>0){
+				$('#tituloreservas').html('Reservas <i onclick="addReserva();" class="fa fa-plus-square"></i>');
+			}
+			$('#disponibles').val(data.data.disponibles);
+			$('#disponibles_cola').val(data.data.disponibles_cola);
+			$('#ocupadas').val(data.data.ocupadas);
+			$('#ocupadas_cola').val(data.data.ocupadas_cola);
+			$('#aforo').val(data.data.aforo);
+			$('#aforo_cola').val(data.data.aforo_cola);
 		}
 		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos de la actividad','warning')
 	});
