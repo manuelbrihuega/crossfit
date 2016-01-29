@@ -223,3 +223,48 @@ def delete(request):
         })
 
     return APIResponse(request=request, data=data)
+
+
+def get_foreign(request):
+    """
+    Get foreign schedule info
+    """
+    if 'auth_id' in request.session:
+        if have_permission(request.session['auth_id'],'get_foreign_schedule'):
+            if validate_parameter(request.GET,'id'):
+                try:
+                    schedule_time=Schedules_times.objects.get(id=request.GET['id'])
+                    schedule_profile={'schedule_time_id':schedule_time.id,
+                                        'time_start':schedule_time.time_start,
+                                        'time_end':schedule_time.time_end,
+                                        'duration':schedule_time.duration,
+                                        'schedule_id':schedule_time.schedule.id,
+                                        'date':schedule_time.schedule.date,
+                                        'activity_id':schedule_time.schedule.activity.id,
+                                        'activity_name':schedule_time.schedule.activity.name,
+                                        'activity_description':schedule_time.schedule.activity.description,
+                                        'activity_id_max_capacity':schedule_time.schedule.activity.max_capacity,
+                                        'activity_id_min_capacity':schedule_time.schedule.activity.min_capacity,
+                                        'activity_id_queue_capacity':schedule_time.schedule.activity.queue_capacity}
+                    reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time.id))
+                    reservations_profile=[]
+                    for res in reservations:
+                        reservations_profile.append({'id':res.id,
+                                 'name':res.auth.name,
+                                 'surname':res.auth.surname,
+                                 'email':res.auth.email,
+                                 'queue':res.queue,
+                                 'position_queue':res.position_queue,
+                                 'date':res.date,
+                                 'phone':res.auth.phone})  
+
+                    data=json.dumps({'status':'success','response':'get_foreign_schedule','data':{'schedule':schedule_profile, 'reservations':reservations_profile}})
+                except:
+                    data=json.dumps({'status':'failed','response':'schedule_not_found'})
+            else:
+                data=json.dumps({'status':'failed','response':'id_missed'})
+        else:
+            data=json.dumps({'status':'failed','response':'unauthorized_get_foreign_schedule'})
+    else:
+        data=json.dumps({'status':'failed','response':'not_logged'})
+    return APIResponse(request,data)

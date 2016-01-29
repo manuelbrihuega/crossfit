@@ -1629,6 +1629,58 @@ function modal_operator_details(operator_id) {
 }
 
 
+function showHorario(id) {
+	var mymodal=newModal('horario_details_modal',true, true);
+	modalAddTitle(mymodal,'');
+	doModalBigger(mymodal);
+	modalAddBody(mymodal,'<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
+	mymodal.modal('show');
+	
+	
+	$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:id}, function(data){
+		if(data.status=='success'){
+			var body = $('<div></div>').attr({'id':'actividad_details_wrapper'});
+			$.post(base_url+'/partials/modal_calendario_details', function(template, textStatus, xhr) {
+				body.html(template);
+				modalAddBody(mymodal,body);
+				
+                $('#nameactivity').html(data.data.schedule.activity_name);
+                $('#houractivity').html('De '+data.data.schedule.time_start+' a '+data.data.schedule.time_end);
+                $('#idactivity').html(data.data.schedule.activity_id);
+                $('#idscheduletime').html(data.data.schedule.schedule_time_id);
+                $('#idschedule').html(data.data.schedule.schedule_id);
+	            $('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Eliminar</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
+        
+				$.each(data.data, function(index, res) {
+					if(res.queue=='1'){
+						cadcola = res.position_queue+'º';
+					}else{
+						cadcola = 'NO';
+					}
+					$('#tableweyclientesbody').append('<tr style="cursor:pointer;" data-id="'+res.id+'">'+'<td>'+res.name+'</td>'+'<td>'+res.surname+'</td>'+'<td>'+res.email+'</td>'+'<td>'+res.phone+'</td>'+'<td>'+cadcola+'</td>'+'<td><i style="cursor:pointer;" onclick=eliminarReserva("'+res.id+'"); class="fa fa-trash-o"></i></td>'+'</tr>');
+				});
+				$('#tableweyclientes').tablesorter();
+				
+				var footer = $('<div></div>');
+				
+				modalAddFooter(mymodal,footer);
+				
+			});
+			
+			
+			
+			
+			
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos de la actividad','warning')
+	});
+	
+
+	
+}
+
+
+
 // DRIVERS
 function modal_driver_operator_details(driver_id) {
 	var mymodal=newModal('driver_details_modal',true, true);
