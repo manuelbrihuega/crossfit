@@ -1785,14 +1785,7 @@ function showHorario(id) {
 			});
 			
 			
-			
-			
-			
-		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos de la actividad','warning')
-	});
-
-	$.getJSON( api_url+'schedules/hay_plazas?callback=?', {id:id}, function(data){
+			$.getJSON( api_url+'schedules/hay_plazas?callback=?', {id:id}, function(data){
 		if(data.status=='success'){
 			if(parseInt(data.data.disponibles)>0 || parseInt(data.data.disponibles_cola)>0){
 				$('#tituloreservas').html('Reservas <i onclick="addReserva();" class="fa fa-plus-square"></i>');
@@ -1806,6 +1799,13 @@ function showHorario(id) {
 		}
 		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos de la actividad','warning')
 	});
+			
+			
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos de la actividad','warning')
+	});
+
+	
 	
 
 	
