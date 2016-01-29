@@ -1508,30 +1508,30 @@ function eliminarReserva(id,obj) {
 				//$('#horario_details_modal').modal('hide');
 				$('#celda_'+id).remove();
 				$('#tituloreservas').html('Reservas <i onclick="addReserva();" class="fa fa-plus-square"></i>');
-				if($('#disponibles_cola').val()==0){
+				if(parseInt($('#disponibles_cola').val())==0){
 					$('#disponibles_cola').val(1);
-					var ocupacol = $('#ocupadas_cola').val();
+					var ocupacol = parseInt($('#ocupadas_cola').val());
 					$('#ocupadas_cola').val(ocupacol-1);
 				}
-				if($('#disponibles_cola').val()>0 && $('#disponibles').val()==0){
-					var discol = $('#disponibles_cola').val();
-					if($('#aforo_cola').val()>discol){
+				if(parseInt($('#disponibles_cola').val())>0 && parseInt($('#disponibles').val())==0){
+					var discol = parseInt($('#disponibles_cola').val());
+					if(parseInt($('#aforo_cola').val())>discol){
 						$('#disponibles_cola').val(discol+1);
-						var ocupacol = $('#ocupadas_cola').val();
+						var ocupacol = parseInt($('#ocupadas_cola').val());
 						$('#ocupadas_cola').val(ocupacol-1);
 					}else{
-						var dis = $('#disponibles').val();
+						var dis = parseInt($('#disponibles').val());
 						$('#disponibles').val(dis+1);
-						var ocu = $('#ocupadas').val();
+						var ocu = parseInt($('#ocupadas').val());
 						$('#ocupadas').val(ocu-1);
 					}
 					
 				}
-				if($('#disponibles').val()>0){
-					var dis = $('#disponibles').val();
-					if($('#aforo').val()>dis){
+				if(parseInt($('#disponibles').val())>0){
+					var dis = parseInt($('#disponibles').val());
+					if(parseInt($('#aforo').val())>dis){
 						$('#disponibles').val(dis+1);
-						var ocu = $('#ocupadas').val();
+						var ocu = parseInt($('#ocupadas').val());
 						$('#ocupadas').val(ocu-1);
 					}
 
@@ -1794,7 +1794,7 @@ function showHorario(id) {
 
 	$.getJSON( api_url+'schedules/hay_plazas?callback=?', {id:id}, function(data){
 		if(data.status=='success'){
-			if(data.data.disponibles>0 || data.data.disponibles_cola>0){
+			if(parseInt(data.data.disponibles)>0 || parseInt(data.data.disponibles_cola)>0){
 				$('#tituloreservas').html('Reservas <i onclick="addReserva();" class="fa fa-plus-square"></i>');
 			}
 			$('#disponibles').val(data.data.disponibles);
