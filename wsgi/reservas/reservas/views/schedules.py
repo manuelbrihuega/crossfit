@@ -259,8 +259,8 @@ def get_foreign(request):
                                  'phone':res.auth.phone})  
 
                     data=json.dumps({'status':'success','response':'get_foreign_schedule','data':{'schedule':schedule_profile, 'reservations':reservations_profile}})
-                except:
-                    data=json.dumps({'status':'failed','response':'schedule_not_found'})
+                except Exception as e:
+                    data=json.dumps({'status':'failed','response':e.args[0]})
             else:
                 data=json.dumps({'status':'failed','response':'id_missed'})
         else:
