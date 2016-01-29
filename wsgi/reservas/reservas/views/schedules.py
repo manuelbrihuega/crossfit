@@ -165,13 +165,14 @@ def list_all(request):
             ocupadas = 0
             disponibles = 0
             aforo = sch.schedule.activity.max_capacity
+            aforocola = sch.schedule.activity.queue_capacity
             reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
             for res in reservations:
                 ocupadas = ocupadas + 1
             disponibles = aforo - ocupadas
             if disponibles < 0:
                 disponibles = 0;
-            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis></event>'
+            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol></event>'
         cad = cad + '</monthly>'
 
         context = {'error':''}

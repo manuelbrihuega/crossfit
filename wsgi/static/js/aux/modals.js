@@ -1768,7 +1768,7 @@ function showHorario(id) {
 	            $('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Eliminar</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
         
 				$.each(data.data.reservations, function(index, res) {
-					if(res.queue=='true'){
+					if(res.queue==true){
 						cadcola = res.position_queue+'º';
 					}else{
 						cadcola = 'NO';
