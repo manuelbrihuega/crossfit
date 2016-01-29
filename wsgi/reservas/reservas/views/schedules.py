@@ -235,8 +235,8 @@ def get_foreign(request):
                 try:
                     schedule_time=Schedules_times.objects.get(id=request.GET['id'])
                     schedule_profile={'schedule_time_id':schedule_time.id,
-                                        'time_start':schedule_time.time_start,
-                                        'time_end':schedule_time.time_end,
+                                        'time_start':get_string_from_date(schedule_time.time_start),
+                                        'time_end':get_string_from_date(schedule_time.time_end),
                                         'duration':schedule_time.duration,
                                         'schedule_id':schedule_time.schedule.id,
                                         'date':get_string_from_date(schedule_time.schedule.date),
