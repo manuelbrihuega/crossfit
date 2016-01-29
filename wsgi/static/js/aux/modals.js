@@ -1645,14 +1645,14 @@ function showHorario(id) {
 				modalAddBody(mymodal,body);
 				
                 $('#nameactivity').html(data.data.schedule.activity_name);
-                $('#houractivity').html('De '+data.data.schedule.time_start+' a '+data.data.schedule.time_end);
+                $('#houractivity').html('De '+data.data.schedule.time_start.split(' ')[1]+' a '+data.data.schedule.time_end.split(' ')[1]);
                 $('#idactivity').html(data.data.schedule.activity_id);
                 $('#idscheduletime').html(data.data.schedule.schedule_time_id);
                 $('#idschedule').html(data.data.schedule.schedule_id);
 	            $('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Eliminar</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
         
-				$.each(data.data, function(index, res) {
-					if(res.queue=='1'){
+				$.each(data.data.reservations, function(index, res) {
+					if(res.queue=='true'){
 						cadcola = res.position_queue+'º';
 					}else{
 						cadcola = 'NO';
