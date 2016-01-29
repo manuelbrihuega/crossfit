@@ -1598,8 +1598,9 @@ function addReserva(){
 				});
 			}
 			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
-		});
+		
 		segundoselect.html(nuevocontent);
+		});
 	});
 	segundoselect.change(function(){ 
 		$.getJSON(api_url+'customers/get_foreign?callback=?', {customer_id:$(this).val()}, function(data){
