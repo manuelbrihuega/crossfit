@@ -1549,7 +1549,7 @@ function addReserva(){
 	$.getJSON(api_url+'customers/search?callback=?', {lookup:'*',filtro:'todos',order:'nombreDESC'}, function(data){
 		if(data.status=='success'){
 			var vector = new Array();
-		    $.each(data.data, function(index, cus) {
+		    $.each(data.data.list, function(index, cus) {
 		    	var controlador = false;
 		    	for (var i = 0; i < vector.length; i++) {
         			if (vector[i] == cus.name) {
@@ -1593,7 +1593,7 @@ function addReserva(){
 		var nuevocontent = '';
 		$.getJSON(api_url+'customers/search?callback=?', {lookup:$(this).val(),filtro:'todos',order:'nombreDESC'}, function(data){
 			if(data.status=='success'){
-				$.each(data.data, function(index, cusap) {
+				$.each(data.data.list, function(index, cusap) {
 		    		nuevocontent = nuevocontent + '<option value="'+cusap.id+'">'+cusap.surname+'</option>';
 				});
 			}
