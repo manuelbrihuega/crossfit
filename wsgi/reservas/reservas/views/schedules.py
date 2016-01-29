@@ -239,7 +239,7 @@ def get_foreign(request):
                                         'time_end':schedule_time.time_end,
                                         'duration':schedule_time.duration,
                                         'schedule_id':schedule_time.schedule.id,
-                                        'date':schedule_time.schedule.date,
+                                        'date':get_string_from_date(schedule_time.schedule.date),
                                         'activity_id':schedule_time.schedule.activity.id,
                                         'activity_name':schedule_time.schedule.activity.name,
                                         'activity_description':schedule_time.schedule.activity.description,
@@ -255,7 +255,7 @@ def get_foreign(request):
                                  'email':res.auth.email,
                                  'queue':res.queue,
                                  'position_queue':res.position_queue,
-                                 'date':res.date,
+                                 'date':get_string_from_date(res.date),
                                  'phone':res.auth.phone})  
 
                     data=json.dumps({'status':'success','response':'get_foreign_schedule','data':{'schedule':schedule_profile, 'reservations':reservations_profile}})
