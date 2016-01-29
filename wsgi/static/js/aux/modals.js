@@ -1565,7 +1565,7 @@ function addReserva(){
 		
 		}
 		else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
-	});
+	
 	
 	var primerselect=$('<select class="name"></select>').append(optionsname);
 	var segundoselect=$('<select class="surname"></select>').append(optionssurname);
@@ -1611,6 +1611,7 @@ function addReserva(){
 		});
 	});
 	$('#tableweyclientesbody').append(fila);
+	});
 }
 
 function delete_faq(faq_id) {
