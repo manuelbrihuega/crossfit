@@ -54,44 +54,6 @@ def add_concrete(request):
     return APIResponse(request,data)
 
 
-def add_party(request):
-    """
-    Creates a new party
-    """
-    try:
-        if 'auth_id' not in request.session:
-            raise Exception('not_logged')
-        if not have_permission(request.session['auth_id'],'add_party'):
-            raise Exception('unauthorized_add_party')
-            
-        for field in ('name','date'):
-            if not validate_parameter(request.GET, field):
-                raise Exception(field+'_missed')
-        
-        party=Parties()
-        fechazocad=str(request.GET['date']).split('-')
-        party.date=datetime(int(fechazocad[0]), int(fechazocad[1]),int(fechazocad[2]), 12, 12, 12)
-        party.name=request.GET['name']
-        party.save()
-        schedules_times=Schedules_times.objects.all()
-        for sch in schedules_times:
-            if int(sch.schedule.date.year)==int(party.date.year) && int(sch.schedule.date.month)==int(party.date.month) && int(sch.schedule.date.day)==int(party.date.day):
-                schedule=sch.schedule
-                reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
-                for res in reservations:
-                    res.delete()
-                sch.delete()
-                schedule.delete()
-        
-        data=json.dumps({'status':'success','response':'party_created','data':{'id':party.id}})
-    
-    except Exception as e:
-        data = json.dumps({'status':'failed', 'response': e.args[0] })
-
-    return APIResponse(request,data)
-
-
-
 def add_interval(request):
     """
     Creates a new schedule time
@@ -525,3 +487,40 @@ def delete_party(request):
 
     return APIResponse(request=request, data=data)
 
+def add_party(request):
+    """
+    Creates a new party
+    """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not have_permission(request.session['auth_id'],'add_party'):
+            raise Exception('unauthorized_add_party')
+            
+        for field in ('name','date'):
+            if not validate_parameter(request.GET, field):
+                raise Exception(field+'_missed')
+        
+        party=Parties()
+        fechazocad=str(request.GET['date']).split('-')
+        party.date=datetime(int(fechazocad[0]), int(fechazocad[1]),int(fechazocad[2]), 12, 12, 12)
+        party.name=request.GET['name']
+        party.save()
+        schedules_times=Schedules_times.objects.filter(Q(schedule__concrete=True))
+        for sch in schedules_times:
+            if int(sch.schedule.date.year)==int(fechazocad[0]):
+                if int(sch.schedule.date.month)==int(fechazocad[1]):
+                    if int(sch.schedule.date.day)==int(fechazocad[2]):
+                        schedule=sch.schedule
+                        reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
+                        for res in reservations:
+                            res.delete()
+                        sch.delete()
+                        schedule.delete()
+        
+        data=json.dumps({'status':'success','response':'party_created','data':{'id':party.id}})
+    
+    except Exception as e:
+        data = json.dumps({'status':'failed', 'response': e.args[0] })
+
+    return APIResponse(request,data)
