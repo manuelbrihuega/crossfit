@@ -254,8 +254,18 @@ def delete_reservation(request):
             for res in reservations:
                 if res.position_queue > position:
                     res.position_queue = res.position_queue - 1
+                    res.save()
         else:
             reservation.delete()
+            reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
+            for res in reservations:
+                if res.position_queue==1:
+                    res.queue=False
+                    res.position_queue=None
+                    res.save()
+                else:
+                    res.position_queue = res.position_queue - 1
+                    res.save()
         
         data = json.dumps( { 'status': 'success', 'response': 'reservation_deleted'} )
        
