@@ -160,7 +160,9 @@ def list_all(request):
         schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1))
         cad ='<?xml version="1.0"?><monthly>'
         for sch in schedule_time:
-            if datetime.today()<sch.schedule.date:
+            fechaact = datetime(int(sch.schedule.date.year),int(sch.schedule.date.month),int(sch.schedule.date.day),0,0,0)
+            fechahoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
+            if fechahoy<=fechaact:
                 fechita = sch.schedule.date
                 startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
                 ocupadas = 0
