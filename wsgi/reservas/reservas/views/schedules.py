@@ -382,6 +382,8 @@ def add_reservation(request):
         ocupadas=0
         ocupadascola=0
         for res in reservations:
+            if res.auth.id==auth.id:
+                raise Exception('El cliente ya tiene una plaza ocupada')
             if res.queue:
                 ocupadascola = ocupadascola + 1
             else:
