@@ -215,6 +215,9 @@ def delete(request):
         schedule_time=Schedules_times.objects.get(id=request.GET['id'])
             
         schedule=schedule_time.schedule
+        reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time.id))
+        for res in reservations:
+            res.delete()
         schedule_time.delete()
         schedule.delete()
         
