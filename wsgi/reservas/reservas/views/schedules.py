@@ -54,6 +54,45 @@ def add_concrete(request):
     return APIResponse(request,data)
 
 
+def add_party(request):
+    """
+    Creates a new party
+    """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not have_permission(request.session['auth_id'],'add_party'):
+            raise Exception('unauthorized_add_party')
+            
+        for field in ('name','date'):
+            if not validate_parameter(request.GET, field):
+                raise Exception(field+'_missed')
+        
+        party=Parties()
+        fechazocad=str(request.GET['date']).split('-')
+        party.date=datetime(int(fechazocad[0]), int(fechazocad[1]),int(fechazocad[2]), 12, 12, 12)
+        party.name=request.GET['name']
+        party.save()
+        
+        schedules_times=Schedules_times.objects.all()
+        for sch in schedules_times:
+            if sch.schedule.date.year==party.date.year && sch.schedule.date.month==party.date.month && sch.schedule.date.day==party.date.day:
+                schedule=sch.schedule
+                reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
+                for res in reservations:
+                    res.delete()
+                sch.delete()
+                schedule.delete()
+        
+        data=json.dumps({'status':'success','response':'party_created','data':{'id':party.id}})
+    
+    except Exception as e:
+        data = json.dumps({'status':'failed', 'response': e.args[0] })
+
+    return APIResponse(request,data)
+
+
+
 def add_interval(request):
     """
     Creates a new schedule time
@@ -425,3 +464,65 @@ def add_reservation(request):
         data = json.dumps({'status':'failed', 'response': e.args[0] })
 
     return APIResponse(request,data)
+
+def list_parties(request):
+    """
+    List all parties info
+    """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not have_permission(request.session['auth_id'],'list_parties'):
+            raise Exception('unauthorized_list_parties')
+
+        user,auth = get_user_and_auth(request.session['auth_id'])
+        parties=Parties.objects.all()
+        list=[]
+        for party in parties:
+            list.append({'id':party.id,
+                         'name':party.name,
+                         'date':get_string_from_date(party.date)})
+
+
+        data=json.dumps({'status':'success','response':'list_parties','data':list})
+
+    except Exception as e:
+        data = json.dumps({
+            'status':'failed',
+            'response': e.args[0]
+        })
+
+    return APIResponse(request,data)
+
+def delete_party(request):
+    """
+    Delete party
+    """
+    
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+
+        if not have_permission(request.session['auth_id'], 'delete_party'):
+            raise Exception('unauthorized_delete_party')
+
+        if not validate_parameter(request.GET, 'id'):
+            raise Exception('party_id_missed')
+
+        
+        party=Parties.objects.get(id=request.GET['id'])
+        party.delete()
+        
+        data = json.dumps( { 'status': 'success', 'response': 'party_deleted'} )
+       
+    except Activities.DoesNotExist:
+        data = json.dumps({'status': 'failed', 'response': 'party_not_found'})
+
+    except Exception as e:
+        data = json.dumps({
+            'status':'failed',
+            'response': e.args[0]
+        })
+
+    return APIResponse(request=request, data=data)
+

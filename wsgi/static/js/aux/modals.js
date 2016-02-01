@@ -1556,7 +1556,7 @@ function eliminarReserva(id,obj) {
 				});
 				$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:schedule_time_id_important}, function(data){
 					if(data.status=='success'){
-						$('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Eliminar</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
+						$('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Acción</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
         				var cadcola = '';
 						$.each(data.data.reservations, function(index, res) {
 							if(res.queue==true){
@@ -1678,10 +1678,10 @@ function addReserva(){
 					}
 					else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos de la actividad','warning')
 				});
-				
+
 				$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:schedule_time_id_important}, function(data){
 					if(data.status=='success'){
-						$('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Eliminar</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
+						$('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Acción</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
         				var cadcola = '';
 						$.each(data.data.reservations, function(index, res) {
 							if(res.queue==true){
@@ -1861,7 +1861,7 @@ function showHorario(id) {
                 $('#idactivity').val(data.data.schedule.activity_id);
                 $('#idscheduletime').val(data.data.schedule.schedule_time_id);
                 $('#idschedule').val(data.data.schedule.schedule_id);
-	            $('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Eliminar</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
+	            $('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Acción</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
                 var cadcola = '';
 				$.each(data.data.reservations, function(index, res) {
 					if(res.queue==true){
