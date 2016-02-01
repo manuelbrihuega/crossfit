@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import unicodedata
 from django.http import HttpResponse
 from django.db.models import Q
 import json
@@ -116,8 +116,8 @@ def search(request):
             order = request.GET['order']
             list_customers=[]
             user,auth = get_user_and_auth(request.session['auth_id'])
-            if unicode(request.GET['lookup'])!='*':
-                words = str(unicode(request.GET['lookup'])).split()
+            if request.GET['lookup']!='*':
+                words = request.GET['lookup'].split()
                 counter = 0
                 for word in words:
                     if order=='nombreDESC':
