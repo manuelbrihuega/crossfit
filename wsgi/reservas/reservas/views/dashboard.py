@@ -79,6 +79,11 @@ def clientes(request):
     content = RequestContext(request,{'section':'clientes','css':['partials/modals.css']})
     return HttpResponse(template.render(content))    
 
+def configuracion(request):
+    template = loader.get_template('completes/base_dashboard.html')
+    content = RequestContext(request,{'section':'configuracion','css':['partials/modals.css']})
+    return HttpResponse(template.render(content))
+
 def call(request):
     template = loader.get_template('completes/base_dashboard.html')
     content = RequestContext(request,{'section':'call','css':['partials/operators.css','partials/modals.css']})

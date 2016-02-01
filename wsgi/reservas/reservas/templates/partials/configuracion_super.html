@@ -1,0 +1,49 @@
+
+
+<h1 class="page-header">Configuración</h1>
+
+<div id="new_customer_wrapper">
+	<h3 class="sub-header">Reservas</h3>
+	<form id="new_config_form" role="form">
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label>Intervalo de tiempo antes de la actividad a partir del cual no se puede RESERVAR (Minutos)</label>
+				<input type="text" class="form-control" id="minutos_reserva" placeholder="Minutos">
+			</div>
+		</div><br>
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label>Intervalo de tiempo antes de la actividad a partir del cual no se puede CANCELAR (Minutos)</label>
+				<input type="text" class="form-control" id="minutos_cancela" placeholder="Minutos">
+			</div>
+		</div><br>
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label>Días de antelación con los que se puede reservar (Días)</label>
+				<input type="text" class="form-control" id="dias_reserva" placeholder="Días">
+			</div>
+		</div><br>
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label>Días atrás para los que se muestran actividades ya realizadas (Días desde hoy)</label>
+				<input type="text" class="form-control" id="dias_atras" placeholder="Días">
+			</div>
+		</div><br>
+		<div class="row">
+			<div class="col-md-2">
+				<button id="botonenviar" type="submit" class="btn btn-default">Guardar</button>
+		  	</div>
+		</div>
+		</form>
+		<br>
+		<br>
+		<h3 class="sub-header">Días Festivos</h3>
+		<form id="new_fiesta_form" role="form">
+		<div class="row">
+			<div class="col-md-4"><input type="date" class="form-control" id="dia_festivo" placeholder="Fecha"></div>
+			<div class="col-md-6"><input type="text" class="form-control" id="nombre_festivo" placeholder="Fiesta"></div>
+			<div class="col-md-2"><button id="botonenviarfecha" type="submit" class="btn btn-default">Añadir</button></div>
+		</div><br>
+		</form>
+		<div id="submain"></div>	
+</div>

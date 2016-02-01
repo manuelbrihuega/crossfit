@@ -161,3 +161,16 @@ class News(models.Model):
 class Tasks(models.Model):
     method = models.CharField(default="",max_length=255)
     date = models.DateTimeField(default=None,null=True)
+
+
+class Configuration(models.Model):
+    days_pre = models.IntegerField(default=0,null=False)
+    days_pre_show = models.IntegerField(default=0,null=False)
+    minutes_post = models.IntegerField(default=0,null=False)
+    minutes_pre = models.IntegerField(default=0,null=False)
+    email = models.EmailField(max_length=100,default="")
+
+
+class Parties(models.Model):
+    date = models.DateTimeField(default=None,null=True)
+    name = models.CharField(default="",max_length=100)
