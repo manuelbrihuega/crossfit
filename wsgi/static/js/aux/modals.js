@@ -1536,8 +1536,9 @@ function eliminarReserva(id,obj) {
 					}
 
 				}
+				var schedule_time_id_important = $('#idscheduletime').val();
 				$('#tableweyclientes').html('<i class="fa fa-cog fa-spin"></i>');
-				$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:id}, function(data){
+				$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:schedule_time_id_important}, function(data){
 					if(data.status=='success'){
 						$('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Eliminar</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
         				var cadcola = '';
