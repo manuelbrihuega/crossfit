@@ -1663,6 +1663,8 @@ function addReserva(){
 
 				}
 				else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+				$(this).parent().html('<i style="cursor:pointer; font-size:18px;" class="fa fa-floppy-o"></i>');
+
 			});
 		}
 	});

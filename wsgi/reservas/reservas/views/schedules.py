@@ -256,6 +256,7 @@ def delete_reservation(request):
                     res.position_queue = res.position_queue - 1
                     res.save()
         else:
+            schedule_time_id = reservation.schedule_time.id
             reservation.delete()
             reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
             for res in reservations:
