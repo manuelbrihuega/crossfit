@@ -1590,7 +1590,7 @@ function addReserva(){
 	fila.append(quintacol);
 	fila.append(sextacol);
 	primerselect.change(function(){ 
-		var nuevocontent = '';
+		var nuevocontent = '<option value="-1">-----</option>';
 		$.getJSON(api_url+'customers/search?callback=?', {lookup:$(this).val(),filtro:'todos',order:'nombreDESC'}, function(data){
 			if(data.status=='success'){
 				$.each(data.data.list, function(index, cusap) {
@@ -1611,6 +1611,28 @@ function addReserva(){
 			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 		});
 	});
+	botonguardar.click(function(){
+		var fila = $(this).parent().parent();
+		var id_customer = fila.find('.surname').val();
+		var queue = fila.find('.queue').val(); 
+		var id_schedule_time = $('#idscheduletime').val();
+		var disponibles = $('#disponibles').val();
+		var disponibles_cola = $('#disponibles_cola').val();
+		if(disponibles_cola==0 && disponibles==0){
+			launch_alert('<i class="fa fa-frown-o"></i> '+'No hay plazas disponibles para esta actividad','warning');
+		}else{
+            $.getJSON(api_url+'schedules/add_reservation?callback=?', {schedule_time_id:id_schedule_time, customer_id:id_customer}, function(data){
+				if(data.status=='success'){
+					launch_alert('<i class="fa fa-smile-o"></i> Reserva añadida','');
+					location.reload();
+					showHorario(id_schedule_time);
+
+				}
+				else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+			});
+		}
+	});
+	//AHORA HACER FUNCION PARA GUARDAR Y EN PYTHON COLOCAR BIEN LA COLA AL ELIMINAR RESERVA
 	$('#tableweyclientesbody').append(fila);
 	});
 }

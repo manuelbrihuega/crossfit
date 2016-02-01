@@ -246,8 +246,15 @@ def delete_reservation(request):
         user,auth = get_user_and_auth(request.session['auth_id'])
         
         reservation=Reservations.objects.get(id=request.GET['id'])
-            
-        reservation.delete()
+        if reservation.queue:
+            position = reservation.position_queue
+            schedule_time_id = reservation.schedule_time.id
+            reservation.delete()
+            reservations=Reservations.objects.filter(Q(position_queue>position) & Q(schedule_time__id=schedule_time_id) & Q(queue=True))
+            for res in reservations:
+               res.position_queue = res.position_queue - 1
+        else:
+            reservation.delete()
         
         data = json.dumps( { 'status': 'success', 'response': 'reservation_deleted'} )
        
@@ -338,4 +345,59 @@ def hay_plazas(request):
             data=json.dumps({'status':'failed','response':'unauthorized_hay_plazas_schedule'})
     else:
         data=json.dumps({'status':'failed','response':'not_logged'})
+    return APIResponse(request,data)
+
+
+def add_reservation(request):
+    """
+    Creates a new reservation
+    """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not have_permission(request.session['auth_id'],'add_reservation'):
+            raise Exception('unauthorized_add_reservation')
+            
+        for field in ('schedule_time_id','customer_id'):
+            if not validate_parameter(request.GET, field):
+                raise Exception(field+'_missed')
+        
+        schedule_time=Schedules_times.objects.get(id=request.GET['schedule_time_id'])
+        customer=U_Customers.objects.get(id=request.GET['customer_id'])
+        auth=customer.auth
+        aforo=schedule_time.schedule.activity.max_capacity
+        aforocola=schedule_time.schedule.activity.queue_capacity
+        reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time.id))
+        ocupadas=0
+        ocupadascola=0
+        for res in reservations:
+            if res.queue:
+                ocupadascola = ocupadascola + 1
+            else:
+                ocupadas = ocupadas + 1  
+        disponibles=aforo - ocupadas
+        disponiblescola=aforocola - ocupadascola
+        if disponibles > 0:
+            reservation = Reservations()
+            reservation.auth = auth
+            reservation.date = datetime.datetime.now()
+            reservation.queue = False
+            reservation.schedule_time = schedule_time
+            reservation.save()
+        elif disponiblescola > 0:
+            reservation = Reservations()
+            reservation.auth = auth
+            reservation.date = datetime.datetime.now()
+            reservation.queue = True
+            reservation.position_queue = (aforocola - disponiblescola) + 1
+            reservation.schedule_time = schedule_time
+            reservation.save()
+        else:
+            raise Exception('No hay plazas disponibles')
+            
+        data=json.dumps({'status':'success','response':'reservation_created','data':{'id':reservation.id}})
+    
+    except Exception as e:
+        data = json.dumps({'status':'failed', 'response': e.args[0] })
+
     return APIResponse(request,data)
