@@ -391,7 +391,7 @@ def add_reservation(request):
         if disponibles > 0:
             reservation = Reservations()
             reservation.auth = auth
-            reservation.date = datetime.datetime.now()
+            reservation.date = datetime.utcnow()
             reservation.queue = False
             reservation.schedule_time = schedule_time
             reservation.save()
