@@ -1536,6 +1536,23 @@ function eliminarReserva(id,obj) {
 					}
 
 				}
+				$('#tableweyclientes').html('<i class="fa fa-cog fa-spin"></i>');
+				$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:id}, function(data){
+					if(data.status=='success'){
+						$('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Eliminar</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
+        				var cadcola = '';
+						$.each(data.data.reservations, function(index, res) {
+							if(res.queue==true){
+								cadcola = res.position_queue+'º';
+							}else{
+								cadcola = 'NO';
+							}
+							$('#tableweyclientesbody').append('<tr id="celda_'+res.id+'" style="cursor:pointer;" data-id="'+res.id+'">'+'<td>'+res.name+'</td>'+'<td>'+res.surname+'</td>'+'<td>'+res.email+'</td>'+'<td>'+res.phone+'</td>'+'<td>'+cadcola+'</td>'+'<td><i style="cursor:pointer; font-size:18px;" onclick=eliminarReserva("'+res.id+'",this); class="fa fa-trash-o"></i></td>'+'</tr>');
+						});
+						$('#tableweyclientes').tablesorter();
+					}
+				});
+
 			}
 			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 		});
@@ -1621,6 +1638,7 @@ function addReserva(){
 		if(disponibles_cola==0 && disponibles==0){
 			launch_alert('<i class="fa fa-frown-o"></i> '+'No hay plazas disponibles para esta actividad','warning');
 		}else{
+			$(obj).parent().html('<i class="fa fa-cog fa-spin"></i>');
             $.getJSON(api_url+'schedules/add_reservation?callback=?', {schedule_time_id:id_schedule_time, customer_id:id_customer}, function(data){
 				if(data.status=='success'){
 					launch_alert('<i class="fa fa-smile-o"></i> Reserva añadida','');
@@ -1786,11 +1804,11 @@ function showHorario(id) {
 				
                 $('#nameactivity').html(data.data.schedule.activity_name);
                 $('#houractivity').html('De '+data.data.schedule.time_start.split(' ')[1].split(':')[0]+':'+data.data.schedule.time_start.split(' ')[1].split(':')[1]+' a '+data.data.schedule.time_end.split(' ')[1].split(':')[0]+':'+data.data.schedule.time_end.split(' ')[1].split(':')[1]);
-                $('#idactivity').html(data.data.schedule.activity_id);
-                $('#idscheduletime').html(data.data.schedule.schedule_time_id);
-                $('#idschedule').html(data.data.schedule.schedule_id);
+                $('#idactivity').val(data.data.schedule.activity_id);
+                $('#idscheduletime').val(data.data.schedule.schedule_time_id);
+                $('#idschedule').val(data.data.schedule.schedule_id);
 	            $('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Eliminar</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
-        
+                var cadcola = '';
 				$.each(data.data.reservations, function(index, res) {
 					if(res.queue==true){
 						cadcola = res.position_queue+'º';
