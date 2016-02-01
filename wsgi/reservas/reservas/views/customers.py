@@ -13,7 +13,6 @@ from reservas.aux.general import *
 from reservas.aux.strings import *
 from reservas.aux.auth import *
 from reservas.aux.tasks import *
-#from api.aux.radios import *
 
 @transaction.atomic
 def add(request):
@@ -117,8 +116,8 @@ def search(request):
             order = request.GET['order']
             list_customers=[]
             user,auth = get_user_and_auth(request.session['auth_id'])
-            if request.GET['lookup']!='*':
-                words = str(request.GET['lookup']).split()
+            if unicode(request.GET['lookup'])!='*':
+                words = str(unicode(request.GET['lookup'])).split()
                 counter = 0
                 for word in words:
                     if order=='nombreDESC':
