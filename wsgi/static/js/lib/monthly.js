@@ -90,7 +90,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 					var day = i + 1; // Fix 0 indexed days
 					var dayNamenum = new Date(y, mZeroed, day, 0, 0, 0, 0).getDay()
 
-					if(eventColor==''){
+					if !(uniqueId.indexOf("festivo") >= 0){
 					$('#' + uniqueId + ' .monthly-day-wrap').append('<a href="#" class="monthly-day monthly-day-event" data-number="'+day+'"><div class="monthly-day-number">'+day+'</div><div class="monthly-indicator-wrap"></div></a>');
 					$('#' + uniqueId + ' .monthly-event-list').append('<div class="monthly-list-item" id="'+uniqueId+'day'+day+'" data-number="'+day+'"><div class="monthly-event-list-date">'+dayNames[dayNamenum]+'<br>'+day+'</div></div>');
 					}

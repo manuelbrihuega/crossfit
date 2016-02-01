@@ -184,7 +184,7 @@ def list_all(request):
         for fest in festivos:
             fechi = fest.date
             festfech=str(fechi.year)+'-'+str(fechi.month)+'-'+str(fechi.day)
-            cad= cad + '<event><id>'+str(fest.id)+'</id>'+'<name>'+fest.name+'</name>'+'<startdate>'+festfech+'</startdate>'+'<color>#ff6a6a</color></event>'
+            cad= cad + '<event><id>'+str(fest.id)+'festivo</id>'+'<name>'+fest.name+'</name>'+'<startdate>'+festfech+'</startdate>'+'<color>#ff6a6a</color></event>'
         cad = cad + '</monthly>'
 
         context = {'error':''}
