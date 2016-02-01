@@ -75,7 +75,7 @@ def add_party(request):
         party.save()
         schedules_times=Schedules_times.objects.all()
         for sch in schedules_times:
-            if sch.schedule.date.year==party.date.year && sch.schedule.date.month==party.date.month && sch.schedule.date.day==party.date.day:
+            if int(sch.schedule.date.year)==int(party.date.year) && int(sch.schedule.date.month)==int(party.date.month) && int(sch.schedule.date.day)==int(party.date.day):
                 schedule=sch.schedule
                 reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
                 for res in reservations:
