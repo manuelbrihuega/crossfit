@@ -92,8 +92,9 @@ function new_fiesta() {
 					$('#submain').html('');
 					initialsearch();
 					launch_alert('<i class="fa fa-smile-o"></i> Festivo añadido','');
+					$('#botonenviarfecha').html('Añadir');
 				
-				}else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+				}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonenviarfecha').html('Añadir');}
 			});
 											
 		}

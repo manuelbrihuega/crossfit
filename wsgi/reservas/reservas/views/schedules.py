@@ -180,6 +180,11 @@ def list_all(request):
                     discol=0
                 discol = aforocola - discol
                 cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol></event>'
+        fetsivos=Parties.objects.all()
+        for fest in festivos:
+            fechi = fest.date
+            festfech=str(fechi.year)+'-'+str(fechi.month)+'-'+str(fechi.day)
+            cad= cad + '<event><id>'+str(fest.id)+'</id>'+'<name>'+fest.name+'</name>'+'<startdate>'+festfech+'</startdate>'+'<color>#ff6a6a</color></event>'
         cad = cad + '</monthly>'
 
         context = {'error':''}
