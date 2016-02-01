@@ -1501,8 +1501,8 @@ function eliminarReserva(id,obj) {
 	var confirmacion=confirm('¿Seguro que quieres eliminar la reserva de este cliente?');
 	if (confirmacion==true)
 	{
-		$(obj).html('<i class="fa fa-cog fa-spin"></i>');
-		$.getJSON(api_url+'schedules/delete_reservation?callback=?', {id_reservation:id}, function(data){
+		$(obj).parent().html('<i class="fa fa-cog fa-spin"></i>');
+		$.getJSON(api_url+'schedules/delete_reservation?callback=?', {id:id}, function(data){
 			if(data.status=='success'){
 				launch_alert('<i class="fa fa-smile-o"></i> Reserva eliminada','');
 				//$('#horario_details_modal').modal('hide');
