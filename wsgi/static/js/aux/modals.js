@@ -1538,6 +1538,22 @@ function eliminarReserva(id,obj) {
 				}
 				var schedule_time_id_important = $('#idscheduletime').val();
 				$('#tableweyclientes').html('<i class="fa fa-cog fa-spin"></i>');
+				$.getJSON( api_url+'schedules/hay_plazas?callback=?', {id:schedule_time_id_important}, function(data){
+					if(data.status=='success'){
+						if(parseInt(data.data.disponibles)>0 || parseInt(data.data.disponibles_cola)>0){
+							$('#tituloreservas').html('Reservas <i onclick="addReserva();" style="cursor:pointer;" class="fa fa-plus-square"></i>');
+						}else{
+							$('#tituloreservas').html('Reservas:');
+						}
+						$('#disponibles').val(data.data.disponibles);
+						$('#disponibles_cola').val(data.data.disponibles_cola);
+						$('#ocupadas').val(data.data.ocupadas);
+						$('#ocupadas_cola').val(data.data.ocupadas_cola);
+						$('#aforo').val(data.data.aforo);
+						$('#aforo_cola').val(data.data.aforo_cola);
+					}
+					else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos de la actividad','warning')
+				});
 				$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:schedule_time_id_important}, function(data){
 					if(data.status=='success'){
 						$('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Eliminar</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
@@ -1666,7 +1682,6 @@ function addReserva(){
 				
 
 			});
-			$(this).parent().html('<i style="cursor:pointer; font-size:18px;" class="fa fa-floppy-o"></i>');
 		}
 	});
 	//AHORA HACER FUNCION PARA GUARDAR Y EN PYTHON COLOCAR BIEN LA COLA AL ELIMINAR RESERVA

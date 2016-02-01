@@ -172,7 +172,11 @@ def list_all(request):
             disponibles = aforo - ocupadas
             if disponibles < 0:
                 disponibles = 0;
-            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol></event>'
+            discol = ocupadas-aforo
+            if discol < 0:
+                discol=0
+            discol = aforocola - discol
+            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol></event>'
         cad = cad + '</monthly>'
 
         context = {'error':''}
