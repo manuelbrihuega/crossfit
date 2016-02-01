@@ -2,6 +2,8 @@
 Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 */
 
+
+
 (function($) {
 	$.fn.extend({
 		monthly: function(options) {
@@ -350,7 +352,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 
 		// Click A Day
 		$(document.body).on('click', '#'+uniqueId+' a.monthly-day', function (e) {
-			if(eventColor==''){
+			
 			// If events, show events list
 			if(options.mode == 'event' && options.eventList == true) {
 				var whichDay = $(this).data('number');
@@ -384,7 +386,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 				}
 			}
 			e.preventDefault();
-		}
+		
 		});
 		
 		// Clicking an event within the list
