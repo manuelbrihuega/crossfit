@@ -1663,9 +1663,10 @@ function addReserva(){
 
 				}
 				else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
-				$(this).parent().html('<i style="cursor:pointer; font-size:18px;" class="fa fa-floppy-o"></i>');
+				
 
 			});
+			$(this).parent().html('<i style="cursor:pointer; font-size:18px;" class="fa fa-floppy-o"></i>');
 		}
 	});
 	//AHORA HACER FUNCION PARA GUARDAR Y EN PYTHON COLOCAR BIEN LA COLA AL ELIMINAR RESERVA
@@ -1811,7 +1812,9 @@ function showHorario(id) {
 	doModalBigger(mymodal);
 	modalAddBody(mymodal,'<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
 	mymodal.modal('show');
-	
+	$('#horario_details_modal .close').click(function(){
+		location.reload();
+	});
 	
 	$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:id}, function(data){
 		if(data.status=='success'){
