@@ -160,23 +160,24 @@ def list_all(request):
         schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1))
         cad ='<?xml version="1.0"?><monthly>'
         for sch in schedule_time:
-            fechita = sch.schedule.date
-            startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
-            ocupadas = 0
-            disponibles = 0
-            aforo = sch.schedule.activity.max_capacity
-            aforocola = sch.schedule.activity.queue_capacity
-            reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
-            for res in reservations:
-                ocupadas = ocupadas + 1
-            disponibles = aforo - ocupadas
-            if disponibles < 0:
-                disponibles = 0;
-            discol = ocupadas-aforo
-            if discol < 0:
-                discol=0
-            discol = aforocola - discol
-            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol></event>'
+            if datetime.today()<sch.schedule.date:
+                fechita = sch.schedule.date
+                startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
+                ocupadas = 0
+                disponibles = 0
+                aforo = sch.schedule.activity.max_capacity
+                aforocola = sch.schedule.activity.queue_capacity
+                reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
+                for res in reservations:
+                    ocupadas = ocupadas + 1
+                disponibles = aforo - ocupadas
+                if disponibles < 0:
+                    disponibles = 0;
+                discol = ocupadas-aforo
+                if discol < 0:
+                    discol=0
+                discol = aforocola - discol
+                cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol></event>'
         cad = cad + '</monthly>'
 
         context = {'error':''}
