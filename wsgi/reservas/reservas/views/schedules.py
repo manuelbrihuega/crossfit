@@ -73,7 +73,6 @@ def add_party(request):
         party.date=datetime(int(fechazocad[0]), int(fechazocad[1]),int(fechazocad[2]), 12, 12, 12)
         party.name=request.GET['name']
         party.save()
-        
         schedules_times=Schedules_times.objects.all()
         for sch in schedules_times:
             if sch.schedule.date.year==party.date.year && sch.schedule.date.month==party.date.month && sch.schedule.date.day==party.date.day:
