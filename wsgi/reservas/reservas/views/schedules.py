@@ -398,7 +398,7 @@ def add_reservation(request):
         elif disponiblescola > 0:
             reservation = Reservations()
             reservation.auth = auth
-            reservation.date = datetime.datetime.now()
+            reservation.date = datetime.utcnow()
             reservation.queue = True
             reservation.position_queue = (aforocola - disponiblescola) + 1
             reservation.schedule_time = schedule_time

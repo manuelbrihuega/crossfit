@@ -1507,7 +1507,7 @@ function eliminarReserva(id,obj) {
 				launch_alert('<i class="fa fa-smile-o"></i> Reserva eliminada','');
 				//$('#horario_details_modal').modal('hide');
 				$('#celda_'+id).remove();
-				$('#tituloreservas').html('Reservas <i onclick="addReserva();" class="fa fa-plus-square"></i>');
+				$('#tituloreservas').html('Reservas <i onclick="addReserva();" style="cursor:pointer;" class="fa fa-plus-square"></i>');
 				if(parseInt($('#disponibles_cola').val())==0){
 					$('#disponibles_cola').val(1);
 					var ocupacol = parseInt($('#ocupadas_cola').val());
@@ -1830,7 +1830,7 @@ function showHorario(id) {
 			$.getJSON( api_url+'schedules/hay_plazas?callback=?', {id:id}, function(data){
 		if(data.status=='success'){
 			if(parseInt(data.data.disponibles)>0 || parseInt(data.data.disponibles_cola)>0){
-				$('#tituloreservas').html('Reservas <i onclick="addReserva();" class="fa fa-plus-square"></i>');
+				$('#tituloreservas').html('Reservas <i onclick="addReserva();" style="cursor:pointer;" class="fa fa-plus-square"></i>');
 			}
 			$('#disponibles').val(data.data.disponibles);
 			$('#disponibles_cola').val(data.data.disponibles_cola);
