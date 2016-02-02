@@ -162,7 +162,7 @@ function new_horario() {
 									$('#activity_id').val('-1');
 									$('#fecha').val('');
 									location.reload();
-								}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');}
+								}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonadd').html('Enviar');}
 							});
 						}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar una actividad','warning');}
 					}else{launch_alert('<i class="fa fa-frown-o"></i> El intervalo horario es erróneo','warning');}

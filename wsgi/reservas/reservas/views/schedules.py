@@ -98,6 +98,7 @@ def add_interval(request):
         fechaprincipal=datetime.now()
         cadmeses=request.GET['monthly'].split(',')
         cadsemana=request.GET['weekly'].split(',')
+        festivos = Parties.objects.all()
         while contador<=dias:
             if cadmeses[fechaprincipal.month-1]=='1':
                 if cadsemana[fechaprincipal.weekday()]=='1':
@@ -105,13 +106,20 @@ def add_interval(request):
                     scheduleaux.concrete=True
                     scheduleaux.date=fechaprincipal
                     scheduleaux.activity=activity
-                    scheduleaux.save()
-                    schedule_timeaux=Schedules_times()
-                    schedule_timeaux.time_start=request.GET['time_start']
-                    schedule_timeaux.time_end=request.GET['time_end']
-                    schedule_timeaux.duration=request.GET['duration']
-                    schedule_timeaux.schedule=scheduleaux
-                    schedule_timeaux.save()
+                    timbre = True
+                    for fest in festivos:
+                        if fest.date.year==fechaprincipal.year:
+                            if fest.date.month==fechaprincipal.month:
+                                if fest.date.day==fechaprincipal.day:
+                                    timbre = False
+                    if timbre:
+                        scheduleaux.save()
+                        schedule_timeaux=Schedules_times()
+                        schedule_timeaux.time_start=request.GET['time_start']
+                        schedule_timeaux.time_end=request.GET['time_end']
+                        schedule_timeaux.duration=request.GET['duration']
+                        schedule_timeaux.schedule=scheduleaux
+                        schedule_timeaux.save()
 
             fechaprincipal = fechaprincipal + timedelta(days=1)
             contador=contador+1
