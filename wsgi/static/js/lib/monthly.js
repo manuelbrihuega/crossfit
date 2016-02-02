@@ -226,10 +226,12 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 						// If event is one day & within month
 						if (!fullendDate && startMonth == setMonth && startYear == setYear) {
 							if(eventColor==''){
+							if($('#'+uniqueId+'.monthly-event-indicator').size() < 6){
 							// Add Indicators
 							$('#'+uniqueId+' *[data-number="'+startDay+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
 							// Print out event list for single day event
 							$('#'+uniqueId+' .monthly-list-item[data-number="'+startDay+'"]').addClass('item-has-event').append('<div class="listed-event" data-eventid="'+ eventId +'" style="padding-top:0px;"><span onclick="showHorario('+eventId+');" style="float: left; overflow: auto; margin-right: 14px; cursor:pointer;">'+eventTitle+'</span><div style="overflow:auto; width:400px;"><i onclick="deleteHorario('+eventId+');" class="fa fa-trash-o" style="cursor:pointer; font-size: 35px; margin-top: 3px; float: left;"></i><div style="overflow: auto; width: 200px; float: left;"><span style="font-size: 13px; display: block; float: left; padding-top: 3px; margin-left: 20px; '+colordis+'">Plazas disponibles: '+eventDis+'</span><span style="font-size: 13px; display: block; float: left; margin-left: 20px; '+colorcola+'">Plazas en la cola: '+eventDisCol+'</span></div><div style="overflow: auto; width: 140px; float: left; margin-top: 2px;"><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: black;">Aforo: '+eventAf+'</span><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: black;">Aforo de la cola: '+eventAfcol+'</span></div></div><div style="width: auto; float: none; margin-top: -17px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
+							}
 							}else{
 								$('#'+uniqueId+' *[data-number="'+startDay+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator"  data-eventid="'+ eventId +'" style="background: #fbb6b6; font-size:22px; height:auto; white-space: normal;" title="'+eventTitle+'">'+eventTitle+'</div>');
 								$('#'+uniqueId+' *[data-number="'+startDay+'"] .monthly-indicator-wrap').parent().css('background-color','#fbb6b6');
