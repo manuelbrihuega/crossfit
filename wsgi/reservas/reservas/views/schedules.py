@@ -426,6 +426,10 @@ def add_reservation(request):
             reservation.date = datetime.utcnow()
             reservation.queue = False
             reservation.schedule_time = schedule_time
+            if not customer.vip:
+                customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
+                customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                customer.save()
             reservation.save()
         elif disponiblescola > 0:
             reservation = Reservations()
@@ -434,6 +438,10 @@ def add_reservation(request):
             reservation.queue = True
             reservation.position_queue = (aforocola - disponiblescola) + 1
             reservation.schedule_time = schedule_time
+            if not customer.vip:
+                customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
+                customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                customer.save()
             reservation.save()
         else:
             raise Exception('No hay plazas disponibles')
@@ -565,6 +573,7 @@ def edit_config(request):
         config.days_pre_show = request.GET['dias_atras']
         config.minutes_post = request.GET['minutos_cancela']
         config.minutes_pre = request.GET['minutos_reserva']
+        config.save()
         data=json.dumps({'status':'success','response':'configuration_modified'})
     
     except Exception, e:
