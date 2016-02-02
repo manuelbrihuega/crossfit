@@ -59,9 +59,9 @@ function identify(role) {
 								//update_pending_enterprises_badge();
 								break;
 
-		case 'U_Customers': 	var method_url=api_url+'passengers/get?callback=?';
-								update_tickets_badge();
-								ninja_jumps();
+		case 'U_Customers': 	var method_url=api_url+'customers/get?callback=?';
+								//update_tickets_badge();
+								//ninja_jumps();
 								break;
 
 		default: ninja_jumps();
@@ -335,16 +335,7 @@ function update_pending_enterprises_badge() {
 
 
 var theroles = {	'U_Super' : 'Super',
-					'U_Passengers' : 'Pasajeros',
-					'U_Drivers' : 'Taxistas', 
-					'U_Viewer_Radios' : 'Gestores de solicitures (Radios tradicionales)', 
-					'U_Viewer_Digital_Radios' : 'Administrador de Radios digitales', 
-					'U_Admin_Radios' : 'Administradores de Radios Tradicionales', 
-					'U_Delegations' : 'Delegaciones', 
-					'U_Supporters' : 'Soporte', 
-					'U_Operators' : 'Operadoras', 
-					'U_Buttons' : 'Pulsadores',
-					'U_Admin_Enterprises' : 'Administradores de Empresas'
+					'U_Customers' : 'Clientes'
 				};
 
 

@@ -282,6 +282,37 @@ def search(request):
     return APIResponse(request,data)
 
 
+def get(request):
+    """
+    Gets a customer profile
+    """
+    if 'auth_id' in request.session:
+        if is_role(request.session['auth_id'],'U_Customers'):
+            cu=get_user(request.session['auth_id'])
+            if cu:
+                auth_profile=get_profile(request.session['auth_id'])
+                cu_profile={'id':cu.id,
+                            'nif':cu.nif, 
+                            'birthdate':get_string_from_date(local_date(cu.birthdate,2)), 
+                            'credit_wod':cu.credit_wod, 
+                            'credit_box':cu.credit_box, 
+                            'paid':cu.paid, 
+                            'vip':cu.vip, 
+                            'validated':cu.validated, 
+                            'test_user':cu.test_user, 
+                            'rate_id':cu.rate_id}
+                data=json.dumps({'status':'success','response':'customer_profile','data':{'auth_profile':auth_profile,'customer_profile':cu_profile}})
+
+            else:
+                data=json.dumps({'status': 'failed', 'response':'customer_not_found'})
+        else:
+            data=json.dumps({'status': 'failed', 'response':'not_customer'})
+    else:
+        data=json.dumps({'status': 'failed', 'response':'not_logged'})
+
+    return APIResponse(request,data)
+
+
 def get_foreign(request):
     """
     Gets a foreign customer profile

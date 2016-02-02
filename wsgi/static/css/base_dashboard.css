@@ -46,7 +46,7 @@ body[data-role=U_Drivers] .nav-sidebar > li.driver,
 body[data-role=U_Supporters] .nav-sidebar > li.supporter,
 body[data-role=U_Operators] .nav-sidebar > li.operator,
 body[data-role=U_Admin_Enterprises] .nav-sidebar > li.admin_enterprise,
-body[data-role=U_Customers] .nav-sidebar > li.passenger{display: block;}
+body[data-role=U_Customers] .nav-sidebar > li.cliente{display: block;}
 .nav-sidebar > li > a { padding-right: 20px; padding-left: 20px; font-size: 16px; font-weight: bold; color: #666;}
 .nav-sidebar > li > a:hover { color: #075a8f;}
 
