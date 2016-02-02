@@ -175,10 +175,12 @@ def list_all(request):
         user,auth = get_user_and_auth(request.session['auth_id'])
         schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1)).order_by('time_start')
         cad ='<?xml version="1.0"?><monthly>'
+        conf = Configuration.objects.get(id=1)
         for sch in schedule_time:
             fechaact = datetime(int(sch.schedule.date.year),int(sch.schedule.date.month),int(sch.schedule.date.day),0,0,0)
-            fechahoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
-            if fechahoy<=fechaact:
+            fechahoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) - timedelta(days=conf.days_pre_show)
+            fechanext = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) - timedelta(days=conf.days_pre)
+            if fechahoy<=fechaact and fechanext>=fechaact:
                 fechita = sch.schedule.date
                 startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
                 ocupadas = 0
@@ -429,13 +431,13 @@ def add_reservation(request):
                 ocupadas = ocupadas + 1  
         disponibles=aforo - ocupadas
         disponiblescola=aforocola - ocupadascola
-        
+        '''
         conf = Configuration.objects.get(id=1)
         ahoramismo = datetime.today()
         fechaparaactividad = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, schedule_time.time_start.hour, schedule_time.time_start.minute, 0)
         fechaparaactividad = fechaparaactividad - timedelta(minutes=conf.minutes_pre)
         if fechaparaactividad <= ahoramismo:
-            raise Exception('Ya es demasiado tarde para reservar plaza en esta actividad') 
+            raise Exception('Ya es demasiado tarde para reservar plaza en esta actividad') '''
         if disponibles > 0:
             reservation = Reservations()
             reservation.auth = auth
