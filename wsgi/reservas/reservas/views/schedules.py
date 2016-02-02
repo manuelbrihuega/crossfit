@@ -16,6 +16,8 @@ from reservas.aux.date import *
 from datetime import *
 from django.conf import settings
 
+#TAREA: cuando hacemos una reserva en cola hay que añadir una tarea que compruebe cuando acabe el plazo, si estamos ya dentro de la clase, si seguimos en la cola hay que borra la reserva y aumentar el credito consumido
+#TAREA: hay que lanzar una tarea el dia 1 de cada mes para que se restablezca el crédito a cada usuario
 
 def add_concrete(request):
     """
@@ -272,12 +274,15 @@ def delete_reservation(request):
         if not validate_parameter(request.GET, 'id'):
             raise Exception('reservation_id_missed')
 
-        user,auth = get_user_and_auth(request.session['auth_id'])
-        
         reservation=Reservations.objects.get(id=request.GET['id'])
+        user,auth = get_user_and_auth(reservation.auth.id)
         if reservation.queue:
             position = reservation.position_queue
             schedule_time_id = reservation.schedule_time.id
+            if not user.vip:
+                user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
+                user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
+                user.save()
             reservation.delete()
             reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
             for res in reservations:
@@ -286,6 +291,10 @@ def delete_reservation(request):
                     res.save()
         else:
             schedule_time_id = reservation.schedule_time.id
+            if not user.vip:
+                user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
+                user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
+                user.save()
             reservation.delete()
             reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
             for res in reservations:
