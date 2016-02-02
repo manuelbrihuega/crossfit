@@ -177,28 +177,28 @@ def list_all(request):
         cad ='<?xml version="1.0"?><monthly>'
         conf = Configuration.objects.get(id=1)
         for sch in schedule_time:
-            fechaact = datetime(int(sch.schedule.date.year),int(sch.schedule.date.month),int(sch.schedule.date.day),0,0,0)
+            '''fechaact = datetime(int(sch.schedule.date.year),int(sch.schedule.date.month),int(sch.schedule.date.day),0,0,0)
             fechahoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) - timedelta(days=conf.days_pre_show)
             fechanext = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_pre)
-            #
-            if fechahoy<=fechaact and fechanext>=fechaact:
-                fechita = sch.schedule.date
-                startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
-                ocupadas = 0
-                disponibles = 0
-                aforo = sch.schedule.activity.max_capacity
-                aforocola = sch.schedule.activity.queue_capacity
-                reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
-                for res in reservations:
-                    ocupadas = ocupadas + 1
-                disponibles = aforo - ocupadas
-                if disponibles < 0:
-                    disponibles = 0;
-                discol = ocupadas-aforo
-                if discol < 0:
-                    discol=0
-                discol = aforocola - discol
-                cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol></event>'
+            
+            if fechahoy<=fechaact and fechanext>=fechaact:'''
+            fechita = sch.schedule.date
+            startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
+            ocupadas = 0
+            disponibles = 0
+            aforo = sch.schedule.activity.max_capacity
+            aforocola = sch.schedule.activity.queue_capacity
+            reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
+            for res in reservations:
+                ocupadas = ocupadas + 1
+            disponibles = aforo - ocupadas
+            if disponibles < 0:
+                disponibles = 0;
+            discol = ocupadas-aforo
+            if discol < 0:
+                discol=0
+            discol = aforocola - discol
+            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol></event>'
         festivos=Parties.objects.all()
         for fest in festivos:
             fechi = fest.date

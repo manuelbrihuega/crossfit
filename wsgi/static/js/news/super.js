@@ -19,50 +19,8 @@ function loadTemplate() {
 			new_communication();
 			return false;
 		});
-		loadRoles();
-		loadDelegations();
 		loadNews();
 		
-	});
-}
-
-function loadRoles() {
-	$.getJSON(api_url+'auth/list_roles?callback=?', '', function(data){
-		if(data.status=='success'){
-			$.each(data.data, function(index, role) {
-				$('#new_role').append('<option value="'+role.id+'">'+theroles[role.role]+'</option>');
-			});
-		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al leer roles','warning');
-	});
-}
-
-function loadDelegations() {
-	$.getJSON(api_url+'delegations/list_all?callback=?', '', function(data){
-		if(data.status=='success'){
-			$('#new_delegation').html('<option value="0">Todas las delegaciones</option>');
-			$('#new_radio').html('<option value="0">Todas las radios</option>');
-			$.each(data.data.delegations, function(index, delegation) {
-				$('#new_delegation').append('<option value="'+delegation.id+'">'+delegation.delegation+'</option>');
-			});
-			$('#new_delegation').change(function(){
-				loadRadios();
-			});
-		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al leer las delegaciones','warning');
-	});
-}
-
-function loadRadios() {
-	var delegation_id = $('#new_delegation').val();
-	$.getJSON(api_url+'delegations/list_cities?callback=?', {delegation_id:delegation_id}, function(data){
-		if(data.status=='success'){
-			$('#new_radio').html('<option value="0">Todas las radios</option>');
-			$.each(data.data.cities, function(index, city) {
-				$('#new_radio').append('<option value="'+city.id+'">'+city.radio+'</option>');
-			});
-		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al leer las ciudades','warning');
 	});
 }
 
@@ -90,10 +48,8 @@ function addItem(anew) {
 		
 		var labels=$('<div></div>').attr('class','labels pull-right'); item.append(labels);
 			
-			var label_rol=$('<div></div>').attr('class','label label-default').text('Para: '+theroles[anew.role]); labels.append(label_rol);
-			if(anew.radio.length>0) var label_radio=$('<div></div>').attr('class','label label-default').text('De: '+anew.radio); labels.append(label_radio);
-			if(anew.delegation.length>0) var label_delegation=$('<div></div>').attr('class','label label-default').text('De: '+anew.delegation); labels.append(label_delegation);
 			
+		
 			var i=$('<i></i>').attr('class','fa fa-trash-o'); labels.append(i);
 			i.click(function(event) {
 				delete_new(anew.id);
@@ -135,17 +91,11 @@ function show_new() {
 }
 
 function new_communication() {
-	var role_id=$('#new_role').val();
-	var delegation_id=$('#new_delegation').val();
-	var radio_id=$('#new_radio').val();
 	var title=$('#new_title').val();
 	var body=$('#new_body').val();
 	var link=$('#new_link').val();
-	if (role_id.length>0){
 		if (title.length>0 || body.length>0){
-			var params = {title:title, body:body, link:link, role_id:role_id};
-			if (delegation_id!='0') params['delegation_id']=delegation_id;
-			if (radio_id!='0') params['radio_id']=radio_id;
+			var params = {title:title, body:body, link:link};
 			
 			$.getJSON(api_url+'news/add_global_news?callback=?', params, function(data){
 				if(data.status=='success'){
@@ -157,7 +107,5 @@ function new_communication() {
 			});
 		}
 		else launch_alert('<i class="fa fa-frown-o"></i> O el título o el cuerpo debe estar definido','warning');
-	}
-	else launch_alert('<i class="fa fa-frown-o"></i> Debes elegir un rol','warning');
 }
 
