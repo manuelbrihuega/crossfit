@@ -224,13 +224,13 @@ var titulos = new Array();
 						
 						var cuidador = false;
 						for(var i=0; i<titulos.length; i++){
-							if(titulos[i]==eventTitle+startDay){
+							if(titulos[i]==eventTitle+startDay+startMonth+startYear){
 								cuidador = true;
 							}
 						}
 
 						if(!cuidador){
-							titulos.push(eventTitle+startDay);
+							titulos.push(eventTitle+startDay+startMonth+startYear);
 						}
 
 						// If event is one day & within month
