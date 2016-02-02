@@ -96,14 +96,15 @@ function new_communication() {
 	var link=$('#new_link').val();
 		if (title.length>0 || body.length>0){
 			var params = {title:title, body:body, link:link};
-			
+			$('#botonnuevacom').html('<i class="fa fa-cog fa-spin"></i>');
 			$.getJSON(api_url+'news/add_global_news?callback=?', params, function(data){
 				if(data.status=='success'){
 					$('#new_title').add('#new_body').add('#new_link').val('');
 					loadNews();
 					launch_alert('<i class="fa fa-smile-o"></i> Nueva comunicación creada','');
+					$('#botonnuevacom').html('ENVIAR');
 				}
-				else launch_alert('<i class="fa fa-frown-o"></i> Error al enviar','warning');
+				else{ launch_alert('<i class="fa fa-frown-o"></i> Error al enviar','warning'); $('#botonnuevacom').html('ENVIAR');}
 			});
 		}
 		else launch_alert('<i class="fa fa-frown-o"></i> O el título o el cuerpo debe estar definido','warning');
