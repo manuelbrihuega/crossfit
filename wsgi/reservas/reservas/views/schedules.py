@@ -543,3 +543,53 @@ def add_party(request):
         data = json.dumps({'status':'failed', 'response': e.args[0] })
 
     return APIResponse(request,data)
+
+
+def edit_config(request):
+    """
+    Edit config
+    """
+    if 'auth_id' not in request.session:
+        data=json.dumps({'status': 'failed', 'response':'not_logged'})
+
+    if not have_permission(request.session['auth_id'],'edit_config'):
+        data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_config'})
+
+    for field in ('minutos_reserva','minutos_cancela','dias_reserva','dias_atras'):
+        if not validate_parameter(request.GET, field):
+            raise Exception(field+'_missed')
+                
+    try:
+        config=Configuration.objects.get(id=1)
+        config.days_pre = request.GET['dias_reserva']
+        config.days_pre_show = request.GET['dias_atras']
+        config.minutes_post = request.GET['minutos_cancela']
+        config.minutes_pre = request.GET['minutos_reserva']
+        data=json.dumps({'status':'success','response':'configuration_modified'})
+    
+    except Exception, e:
+            data=json.dumps({'status': 'failed', 'response':e.args[0]})
+
+    return APIResponse(request,data)
+
+
+def get_configuration(request):
+    """
+    Get foreign config info
+    """
+    if 'auth_id' in request.session:
+        if have_permission(request.session['auth_id'],'get_configuration'):
+            try:
+                config=Configuration.objects.get(id=1)
+                config_profile={'dias_reserva':config.days_pre,
+                                'dias_atras':config.days_pre_show,
+                                'minutos_cancela':config.minutes_post,
+                                'minutos_reserva':config.minutes_pre}
+                data=json.dumps({'status':'success','response':'get_configuration','data': config_profile})
+            except Exception as e:
+                data=json.dumps({'status':'failed','response':e.args[0]})
+        else:
+            data=json.dumps({'status':'failed','response':'unauthorized_get_configuration'})
+    else:
+        data=json.dumps({'status':'failed','response':'not_logged'})
+    return APIResponse(request,data)

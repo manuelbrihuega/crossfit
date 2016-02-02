@@ -12,6 +12,15 @@ function get_content() {
 						var role = $('body').attr('data-role');
 						initialsearch();
 						active_new_fiesta_form();
+						$.getJSON(api_url+'schedules/get_configuration?callback=?', {}, function(data){
+							if(data.status=='success'){
+								$('#minutos_reserva').val(data.data.minutos_reserva);
+								$('#minutos_cancela').val(data.data.minutos_cancela);
+								$('#dias_reserva').val(data.data.dias_reserva);
+								$('#dias_atras').val(data.data.dias_atras);		
+							}
+			
+						});
 						if (!Modernizr.inputtypes.date) {
     						$('input[type=date]').datepicker();
     						$('input[type=date]').css('border-bottom','1px solid lightgray');
@@ -77,6 +86,13 @@ function active_new_fiesta_form() {
 	});
 }
 
+function edit_config() {
+	$('#new_config_form').submit(false).submit(function(e){
+		edit_configuracion();
+		return false;
+	});
+}
+
 function new_fiesta() {
 	var date=$('#dia_festivo').val();
 	var name=$('#nombre_festivo').val();
@@ -103,6 +119,38 @@ function new_fiesta() {
 	else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir un nombre para el festivo','warning');
 	
 }
+
+function edit_configuracion() {
+	var minutos_reserva=$('#minutos_reserva').val();
+	var minutos_cancela=$('#minutos_cancela').val();
+	var dias_reserva=$('#dias_reserva').val();
+	var dias_atras=$('#dias_atras').val();
+	if (minutos_reserva.length>0){
+		if (minutos_cancela.length>0){
+			if (dias_reserva.length>0){
+				if (dias_atras.length>0){
+					$('#botonenviar').html('<i class="fa fa-cog fa-spin"></i>');
+					$.getJSON(api_url+'schedules/edit_config?callback=?', { minutos_reserva:minutos_reserva, 
+																		    minutos_cancela:minutos_cancela,
+																		    dias_reserva:dias_reserva,
+																		    dias_atras:dias_atras}, function(data){
+																								
+						if(data.status=='success'){
+							launch_alert('<i class="fa fa-smile-o"></i> Configuración guardada','');
+							$('#botonenviar').html('Guardar');
+				
+						}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonenviar').html('Guardar');}
+					});
+				}
+				else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar los días','warning');									
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar los días','warning');
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar los minutos','warning');
+	}
+	else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar los minutos','warning');
+}
+
 
 function new_customer() {
 	var name=$('#new_customer_name').val();
