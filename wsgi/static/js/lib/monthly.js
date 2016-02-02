@@ -379,7 +379,8 @@ var titulos = new Array();
 				$('#' + uniqueId+' .monthly-event-list').show();
 				$('#' + uniqueId+' .monthly-event-list').css('transform');
 				$('#' + uniqueId+' .monthly-event-list').css('transform','scale(1)');
-				//cai$('#'+uniqueId+' .monthly-list-item[data-number="'+whichDay+'"]').show();
+				//cai
+				$('#'+uniqueId+' .monthly-list-item[data-number="'+whichDay+'"]').show();
 
 				var myElement = document.getElementById(uniqueId+'day'+whichDay);
 				var topPos = myElement.offsetTop;
