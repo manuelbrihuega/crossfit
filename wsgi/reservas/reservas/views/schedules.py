@@ -36,6 +36,12 @@ def add_concrete(request):
         schedule.concrete=True
         fechazocad=str(request.GET['date']).split('-')
         schedule.date=datetime(int(fechazocad[0]), int(fechazocad[1]),int(fechazocad[2]), 12, 12, 12)
+        festivos=Parties.objects.all()
+        for fest in festivos:
+            if fechazocad[0]==fest.date.year:
+                if fechazocad[1]==fest.date.month:
+                    if fechazocad[2]==fest.date.day:
+                        raise Exception('El día seleccionado es festivo')
         schedule.activity=activity
         schedule.save()
         
