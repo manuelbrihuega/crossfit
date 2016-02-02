@@ -432,7 +432,7 @@ def add_reservation(request):
         
         conf = Configuration.objects.get(id=1)
         ahoramismo = datetime.today()
-        fechaparaactividad = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, schedule_time.time_start.hour, schedule_time.time_start.minutes, 0)
+        fechaparaactividad = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, schedule_time.time_start.hour, schedule_time.time_start.minute, 0)
         fechaparaactividad = fechaparaactividad - timedelta(minutes=conf.minutes_pre)
         if fechaparaactividad <= ahoramismo:
             raise Exception('Ya es demasiado tarde para reservar plaza en esta actividad') 
