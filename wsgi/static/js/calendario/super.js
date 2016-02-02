@@ -276,7 +276,7 @@ function new_horario() {
 											$('#noviembre').prop('checked','');
 											$('#diciembre').prop('checked','');
 											$('#todoslosmeses').prop('checked','');
-			
+											location.reload();
 										}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');}
 									});
 								}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar una actividad','warning');}
