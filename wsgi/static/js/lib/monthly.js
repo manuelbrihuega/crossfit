@@ -323,6 +323,7 @@ var titulos = new Array();
 
 		// Advance months
 		$(document.body).on('click', '#'+uniqueId+' .monthly-next', function (e) {
+			titulos.length=0;
 			var setMonth = $('#' + uniqueId).data('setMonth'),
 				setYear = $('#' + uniqueId).data('setYear');
 			if (setMonth == 12) {
@@ -340,6 +341,7 @@ var titulos = new Array();
 
 		// Go back in months
 		$(document.body).on('click', '#'+uniqueId+' .monthly-prev', function (e) {
+			titulos.length=0;
 			var setMonth = $('#' + uniqueId).data('setMonth'),
 				setYear = $('#' + uniqueId).data('setYear');
 			if (setMonth == 1) {
@@ -379,8 +381,7 @@ var titulos = new Array();
 				$('#' + uniqueId+' .monthly-event-list').show();
 				$('#' + uniqueId+' .monthly-event-list').css('transform');
 				$('#' + uniqueId+' .monthly-event-list').css('transform','scale(1)');
-				//cai
-				$('#'+uniqueId+' .monthly-list-item[data-number="'+whichDay+'"]').show();
+				//cai$('#'+uniqueId+' .monthly-list-item[data-number="'+whichDay+'"]').show();
 
 				var myElement = document.getElementById(uniqueId+'day'+whichDay);
 				var topPos = myElement.offsetTop;
