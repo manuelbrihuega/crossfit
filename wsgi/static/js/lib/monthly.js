@@ -2,7 +2,7 @@
 Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 */
 
-
+var titulos = new Array();
 
 (function($) {
 	$.fn.extend({
@@ -222,11 +222,21 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 						
 						}
 						
+						var cuidador = false;
+						for(var i=0; i<titulos.length; i++){
+							if(titulos[i]==eventTitle){
+								cuidador = true;
+							}
+						}
+
+						if(!cuidador){
+							titulos.push(eventTitle);
+						}
 
 						// If event is one day & within month
 						if (!fullendDate && startMonth == setMonth && startYear == setYear) {
 							if(eventColor==''){
-							if($('#'+uniqueId+'.monthly-event-indicator').size() < 6){
+							if(!cuidador){
 							// Add Indicators
 							$('#'+uniqueId+' *[data-number="'+startDay+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
 							// Print out event list for single day event
