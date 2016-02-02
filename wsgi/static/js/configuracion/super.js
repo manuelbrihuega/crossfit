@@ -12,6 +12,7 @@ function get_content() {
 						var role = $('body').attr('data-role');
 						initialsearch();
 						active_new_fiesta_form();
+						edit_config();
 						$.getJSON(api_url+'schedules/get_configuration?callback=?', {}, function(data){
 							if(data.status=='success'){
 								$('#minutos_reserva').val(data.data.minutos_reserva);
