@@ -44,7 +44,7 @@ function logout() {
 
 function tokin(token) {
 	$.getJSON( api_url+'auth/tokin?callback=?', {token:token}, function(data){
-		if(data.status=='success') window.location=base_url+'/dashboard';
+		if(data.status=='success') window.location=base_url+'/calendario';
 		else launch_alert('<i class="fa fa-frown-o"></i> Error al identificar con token','warning')
 	});
 	return false;
@@ -123,6 +123,7 @@ function select_content() {
 									break;
 
 		case 'calendario': 		if(role=='U_Super') javascript='calendario/super.js';
+								if(role=='U_Customers') javascript='calendario/cliente.js';
 									break;
 
 		case 'actividades': 		if(role=='U_Super') javascript='actividades/super.js';

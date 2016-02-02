@@ -2,36 +2,14 @@ function get_content() {
 
     $.when(
         $.getScript(media_url+'js/aux/calendario.js'),
-        $.getScript(media_url+'js/lib/monthly.js'),
 		$.getScript(media_url+'js/aux/date.js'),
         $.getScript(media_url+'js/aux/modals.js'),
         $.getScript(media_url+'js/lib/sha1.js'),
         $.ready.promise()
     ).then(function(){
-		$.post('partials/calendario_super', function(template, textStatus, xhr) {
+		$.post('partials/calendario_cliente', function(template, textStatus, xhr) {
 			$('#main').html(template);
-			listarActividades();
-			$('#horaini').timepicker({
-    			showPeriodLabels: false,
-    			hourText: 'Hora',
-    			minuteText: 'Minutos',
-    			myPosition: 'left top',
-    			atPosition: 'left bottom' 
-			});
-			$('#horafin').timepicker({
-    			showPeriodLabels: false,
-    			hourText: 'Hora',
-    			minuteText: 'Minutos',
-    			myPosition: 'left top',
-    			atPosition: 'left bottom'
-			});
-			$( "#horaini" ).change(function() {
-  				restarHoras();
-			});
-			$( "#horafin" ).change(function() {
-  				restarHoras();
-			});
-
+			//listarActividades();
 			if (!Modernizr.inputtypes.date) {
     			$('input[type=date]').datepicker({
   					dateFormat: "yy-mm-dd"
@@ -42,73 +20,8 @@ function get_content() {
         		$('#ui-datepicker-div').css('padding','15px');
         		$('#ui-datepicker-div').css('border-radius','8px');
 			}
-			$( "#fechaconcreta" ).click(function() {
-				$('#divpatron').slideUp();
-  				$('#divfecha').slideDown();
-  				$('#marru').slideDown();
-			});
-			$( "#fechapatron" ).click(function() {
-  				$('#divfecha').slideUp();
-  				$('#divpatron').slideDown();
-  				$('#marru').slideDown();
-			});
 			$('.waiting').hide();
-			active_new_enterprise_form();
 			loadCalendar();
-			$( ".mes" ).click(function() {
-				$('#todoslosmeses').prop('checked','');
-			});
-			$( ".dia" ).click(function() {
-				$('#todoslosdias').prop('checked','');
-			});
-			$( "#todoslosmeses" ).click(function() {
-  				if($('#todoslosmeses').is(":checked")){
-  					$('#enero').prop('checked','checked');
-  					$('#febrero').prop('checked','checked');
-  					$('#marzo').prop('checked','checked');
-  					$('#abril').prop('checked','checked');
-  					$('#mayo').prop('checked','checked');
-  					$('#junio').prop('checked','checked');
-  					$('#julio').prop('checked','checked');
-  					$('#agosto').prop('checked','checked');
-  					$('#septiembre').prop('checked','checked');
-  					$('#octubre').prop('checked','checked');
-  					$('#noviembre').prop('checked','checked');
-  					$('#diciembre').prop('checked','checked');
-  				}else{
-  					$('#enero').prop('checked','');
-  					$('#febrero').prop('checked','');
-  					$('#marzo').prop('checked','');
-  					$('#abril').prop('checked','');
-  					$('#mayo').prop('checked','');
-  					$('#junio').prop('checked','');
-  					$('#julio').prop('checked','');
-  					$('#agosto').prop('checked','');
-  					$('#septiembre').prop('checked','');
-  					$('#octubre').prop('checked','');
-  					$('#noviembre').prop('checked','');
-  					$('#diciembre').prop('checked','');
-  				}
-			});
-			$( "#todoslosdias" ).click(function() {
-  				if($('#todoslosdias').is(":checked")){
-  					$('#lunes').prop('checked','checked');
-  					$('#martes').prop('checked','checked');
-  					$('#miercoles').prop('checked','checked');
-  					$('#jueves').prop('checked','checked');
-  					$('#viernes').prop('checked','checked');
-  					$('#sabado').prop('checked','checked');
-  					$('#domingo').prop('checked','checked');
-  				}else{
-  					$('#lunes').prop('checked','');
-  					$('#martes').prop('checked','');
-  					$('#miercoles').prop('checked','');
-  					$('#jueves').prop('checked','');
-  					$('#viernes').prop('checked','');
-  					$('#sabado').prop('checked','');
-  					$('#domingo').prop('checked','');
-  				}
-			});
 		});
     });
 

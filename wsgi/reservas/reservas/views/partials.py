@@ -83,6 +83,11 @@ def calendario_super(request):
     content = RequestContext(request)
     return HttpResponse(template.render(content))
 
+def calendario_cliente(request):
+    template = loader.get_template('partials/calendario_cliente.html')
+    content = RequestContext(request)
+    return HttpResponse(template.render(content))
+
 def actividades_super(request):
     template = loader.get_template('partials/actividades_super.html')
     content = RequestContext(request)
