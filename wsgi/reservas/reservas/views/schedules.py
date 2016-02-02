@@ -180,7 +180,8 @@ def list_all(request):
             fechaact = datetime(int(sch.schedule.date.year),int(sch.schedule.date.month),int(sch.schedule.date.day),0,0,0)
             fechahoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) - timedelta(days=conf.days_pre_show)
             fechanext = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) - timedelta(days=conf.days_pre)
-            if fechahoy<=fechaact and fechanext>=fechaact:
+            #and fechanext>=fechaact
+            if fechahoy<=fechaact:
                 fechita = sch.schedule.date
                 startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
                 ocupadas = 0
