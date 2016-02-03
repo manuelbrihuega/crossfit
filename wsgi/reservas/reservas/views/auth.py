@@ -258,7 +258,7 @@ def status(request):
         except:
             data=json.dumps({'status':'failed','response':'auth_error'})
     else:
-        data=json.dumps({'status':'success','response':'not_logged'})
+        data=json.dumps({'status':'success','response':request.session})
 
     return APIResponse(request,data)
 
