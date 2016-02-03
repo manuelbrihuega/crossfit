@@ -1112,7 +1112,27 @@ function modal_passenger_details(passenger_id) {
 	
 }
 
+function activateEditNameActivity() {
+	$('#lapiz').hide();
+	$('#nameactivity').hide();
+	$('#nameactivityinput').show();
+	$('#disquete').show();
+}
 
+function saveNameActivity() {
+	var id = $('#idactivity').val();
+	var name = $('#nameactivityinput').val();
+	$.getJSON(api_url+'rates/edit_name?callback=?', {id:id, name:name}, function(data){
+		if(data.status=='success'){
+			launch_alert('<i class="fa fa-smile-o"></i> Nombre guardado','');
+			$('#lapiz').show();
+			$('#nameactivity').html($('#nameactivityinput').val());
+			$('#nameactivity').show();
+			$('#nameactivityinput').hide();
+			$('#disquete').hide();
+		}else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+	});
+}
 
 function showTarifa(tarifa_id) {
 	var mymodal=newModal('tarifa_details_modal',true, true);
@@ -1135,7 +1155,11 @@ function showTarifa(tarifa_id) {
 				$('#tarifa_credit_wod').val(data.data.rate.credit_wod);
 				$('#tarifa_credit_box').val(data.data.rate.credit_box);
 				$('#tarifa_observations').val(data.data.rate.observations);
-				
+				if(data.data.rate.tipobono){
+					$( "#tipobono_mod" ).prop( "checked", true );
+				}else{
+					$( "#tipobono_mod" ).prop( "checked", false );
+				}
 				
 				
 				
@@ -2779,12 +2803,17 @@ function edit_tarifa() {
 	var credit_box = $('#tarifa_credit_box').val();
 	var observations = $('#tarifa_observations').val();
 	var save_button = $('.edit_tarifa_button');
+	if($('#tipobono_mod').is(':checked')){
+		var tipobono=1;
+	}else{
+		var tipobono=0;
+	}
 	if (name.length>0){
 		if (price.length>0){
 			if (credit_wod.length>0){
 				if (credit_box.length>0){
 						save_button.html('<i class="fa fa-cog fa-spin"></i>');
-						var params = {id:id,name:name,price:price,credit_wod:credit_wod,credit_box:credit_box};
+						var params = {id:id,name:name,price:price,credit_wod:credit_wod,credit_box:credit_box,tipobono:tipobono};
 							if (observations.length>0) params['observations']=observations;
 							$.getJSON(api_url+'rates/edit_foreign?callback=?', params, function(data){
 								if(data.status=='success'){

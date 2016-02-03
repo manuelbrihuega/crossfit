@@ -111,6 +111,11 @@ function new_enterprise() {
 	var credit_wod=$('#new_tarifa_credit_wod').val();
 	var credit_box=$('#new_tarifa_credit_box').val();
 	var observations=$('#new_tarifa_observations').val();
+	if($('#tipobono').is(':checked')){
+		var tipobono=1;
+	}else{
+		var tipobono=0;
+	}
 	if (name.length>0){
 		if (price.length>0){
 			if (credit_wod.length>0){
@@ -120,7 +125,8 @@ function new_enterprise() {
 																price:price,
 																credit_wod:credit_wod,
 																credit_box:credit_box,
-																observations:observations}, function(data){
+																observations:observations,
+																tipobono:tipobono}, function(data){
 																								
 												if(data.status=='success'){
 													$('#botonadd').html('Enviar');

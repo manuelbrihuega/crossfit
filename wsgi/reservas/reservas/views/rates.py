@@ -33,7 +33,8 @@ def list_all(request):
                          'credit_wod':rate.credit_wod,
                          'credit_box':rate.credit_box,
                          'price':rate.price,
-                         'observations':rate.observations})
+                         'observations':rate.observations,
+                         'tipobono':rate.tipobono})
 
 
         data=json.dumps({'status':'success','response':'list_all_rates','data':list})
@@ -73,7 +74,8 @@ def search(request):
                          'credit_wod':rate.credit_wod,
                          'credit_box':rate.credit_box,
                          'price':rate.price,
-                         'observations':rate.observations})                     
+                         'observations':rate.observations,
+                         'tipobono':rate.tipobono})                     
             
         data=json.dumps({'status': 'success', 'response':'search_rates','data':list})
     
@@ -93,7 +95,7 @@ def add(request):
         if not have_permission(request.session['auth_id'],'add_rate'):
             raise Exception('unauthorized_add_rate')
             
-        for field in ('name','price','credit_wod','credit_box'):
+        for field in ('name','price','credit_wod','credit_box','tipobono'):
             if not validate_parameter(request.GET, field):
                 raise Exception(field+'_missed')
         
@@ -104,6 +106,7 @@ def add(request):
         rate.price=request.GET['price']
         rate.credit_wod=request.GET['credit_wod']
         rate.credit_box=request.GET['credit_box']
+        rate.tipobono=getBoolValue(request.GET['tipobono'])
         if validate_parameter(request.GET,'observations'):
             rate.observations=request.GET['observations']
         rate.save()
@@ -130,7 +133,8 @@ def get_foreign(request):
                                         'price':rate.price,
                                         'credit_wod':rate.credit_wod,
                                         'credit_box':rate.credit_box,
-                                        'observations':rate.observations}
+                                        'observations':rate.observations,
+                                        'tipobono':rate.tipobono}
                     data=json.dumps({'status':'success','response':'get_rate','data':{'rate':rate_profile,}})
                 except:
                     data=json.dumps({'status':'failed','response':'rate_not_found'})
@@ -184,7 +188,7 @@ def edit_foreign(request):
     """
     if 'auth_id' in request.session:
         if have_permission(request.session['auth_id'],'edit_foreign_rate'):
-            for field in ('name','price','credit_wod','credit_box'):
+            for field in ('name','price','credit_wod','credit_box','tipobono'):
                 if not validate_parameter(request.GET, field):
                     raise Exception(field+'_missed')
             try:
@@ -193,6 +197,7 @@ def edit_foreign(request):
                 rate.price=request.GET['price']
                 rate.credit_wod=request.GET['credit_wod']
                 rate.credit_box=request.GET['credit_box']
+                rate.tipobono=getBoolValue(request.GET['tipobono'])
                 if validate_parameter(request.GET,'observations'):
                     rate.observations=request.GET['observations']
                 rate.save()
@@ -207,6 +212,29 @@ def edit_foreign(request):
 
     return APIResponse(request,data)
 
+def edit_name(request):
+    """
+    Edits a rate
+    """
+    if 'auth_id' in request.session:
+        if have_permission(request.session['auth_id'],'edit_name_rate'):
+            for field in ('name','id'):
+                if not validate_parameter(request.GET, field):
+                    raise Exception(field+'_missed')
+            try:
+                rate=Rates.objects.get(id=request.GET['id'])
+                rate.name=request.GET['name']
+                rate.save()
+                data=json.dumps({'status':'success','response':'rate_modified'})
+            except:
+                data=json.dumps({'status': 'failed', 'response':'rate_not_found'})
+           
+        else:
+            data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_name_rate'})
+    else:
+        data=json.dumps({'status': 'failed', 'response':'not_logged'})
+
+    return APIResponse(request,data)
 
 '''
 def get(request):
