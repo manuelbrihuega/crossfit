@@ -546,9 +546,8 @@ def add_reservation_client(request):
             raise Exception('not_customer')
         if not have_permission(request.session['auth_id'],'add_reservation_client'):
             raise Exception('unauthorized_add_reservation_client')
-        for field in ('schedule_time_id'):
-            if not validate_parameter(request.GET, field):
-                raise Exception(field+'_missed')
+        if not validate_parameter(request.GET, 'schedule_time_id'):
+            raise Exception(field+'_missed')
         customer=get_user(request.session['auth_id'])
         schedule_time=Schedules_times.objects.get(id=request.GET['schedule_time_id'])
         auth=customer.auth
