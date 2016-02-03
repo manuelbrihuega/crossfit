@@ -261,7 +261,7 @@ def status(request):
     else:
         data=json.dumps({'status':'success','response':'not_logged'})
 
-    return APIResponse(request,data)
+    return APIResponse(request,data) 
 
 
 
