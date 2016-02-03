@@ -802,6 +802,10 @@ def add_dni(request):
         dni=Dnis()
         dni.nif=request.GET['nif']
         dni.save()
+        customers = U_Customers.objects.filter(Q(nif=dni.nif))
+        for cu in customers:
+            cu.validated = True
+            cu.save()
         data=json.dumps({'status':'success','response':'dni_created','data':{'id':dni.id}})
     
     except Exception as e:

@@ -12,6 +12,7 @@ function get_content() {
 						var role = $('body').attr('data-role');
 						initialsearch();
 						active_new_fiesta_form();
+						active_new_dnipre_form();
 						edit_config();
 						$.getJSON(api_url+'schedules/get_configuration?callback=?', {}, function(data){
 							if(data.status=='success'){
@@ -119,6 +120,13 @@ function eliminarDnipre(id) {
 function active_new_fiesta_form() {
 	$('#new_fiesta_form').submit(false).submit(function(e){
 		new_fiesta();
+		return false;
+	});
+}
+
+function active_new_dnipre_form() {
+	$('#new_dnipre_form').submit(false).submit(function(e){
+		new_dni();
 		return false;
 	});
 }
