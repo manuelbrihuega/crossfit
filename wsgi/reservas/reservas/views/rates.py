@@ -188,8 +188,9 @@ def edit_foreign(request):
     """
     if 'auth_id' in request.session:
         if have_permission(request.session['auth_id'],'edit_foreign_rate'):
-            if not validate_parameter(request.GET, 'name'):
-                raise Exception(field+'_missed')
+            for field in ('name','price','credit_wod','credit_box','tipobono'):
+                if not validate_parameter(request.GET, field):
+                    raise Exception(field+'_missed')
             try:
                 rate=Rates.objects.get(id=request.GET['id'])
                 rate.name=request.GET['name']
@@ -211,30 +212,6 @@ def edit_foreign(request):
 
     return APIResponse(request,data)
 
-
-def edit_name(request):
-    """
-    Edits a rate
-    """
-    if 'auth_id' in request.session:
-        if have_permission(request.session['auth_id'],'edit_name_rate'):
-            for field in ('nameact','idact'):
-                if not validate_parameter(request.GET, field):
-                    raise Exception(field+'_missed')
-            try:
-                rate=Rates.objects.get(id=request.GET['idact'])
-                rate.name=str(request.GET['nameact'])
-                rate.save()
-                data=json.dumps({'status':'success','response':'rate_modified'})
-            except:
-                data=json.dumps({'status': 'failed', 'response':'rate_not_found'})
-           
-        else:
-            data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_name_rate'})
-    else:
-        data=json.dumps({'status': 'failed', 'response':'not_logged'})
-
-    return APIResponse(request,data)
 
 '''
 def get(request):

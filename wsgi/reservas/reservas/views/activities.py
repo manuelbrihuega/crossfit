@@ -215,3 +215,28 @@ def edit_foreign(request):
         data=json.dumps({'status': 'failed', 'response':'not_logged'})
 
     return APIResponse(request,data)
+
+
+def edit_name(request):
+    """
+    Edit
+    """
+    if 'auth_id' in request.session:
+        if have_permission(request.session['auth_id'],'edit_name_activity'):
+            for field in ('name','id'):
+                if not validate_parameter(request.GET, field):
+                    raise Exception(field+'_missed')
+            try:
+                act=Activities.objects.get(id=request.GET['id'])
+                act.name=str(request.GET['name'])
+                act.save()
+                data=json.dumps({'status':'success','response':'activity_modified'})
+            except:
+                data=json.dumps({'status': 'failed', 'response':'activity_not_found'})
+           
+        else:
+            data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_name_activity'})
+    else:
+        data=json.dumps({'status': 'failed', 'response':'not_logged'})
+
+    return APIResponse(request,data)
