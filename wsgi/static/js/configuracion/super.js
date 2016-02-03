@@ -39,6 +39,7 @@ function get_content() {
 
 function initialsearch() {
 	$('#submain').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey2" class="table table-condensed tablesorter"></table></div>');
+	$('#submaindos').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey3" class="table table-condensed tablesorter"></table></div>');
 	$('.waiting').show();
 	$('.table-responsive').hide();
 			
@@ -54,6 +55,26 @@ function initialsearch() {
 					$('#tableweybody2').append('<tr data-id="'+party.id+'">'+'<td>'+party.date+'</td>'+'<td>'+party.name+'</td>'+'<td><i style="cursor:pointer; font-size:18px;" onclick=eliminarFiesta("'+party.id+'",this); class="fa fa-trash-o"></i></td>'+'</tr>');
 				});
 				$('#tablewey2').tablesorter();
+			}
+			else{ $('.waiting').hide();
+			$('.table-responsive').show(); }
+		}
+		else { $('.waiting').hide();
+			$('.table-responsive').show();}
+	});
+
+	$.getJSON(api_url+'schedules/list_dnis?callback=?', {}, function(data){
+		////console.log(data.data)
+		if(data.status=='success'){
+			$('.waiting').hide();
+			$('.table-responsive').show();
+			$('#tablewey3').html('<thead><tr><th>DNI</th><th>Acción</th></tr></thead><tbody id="tableweybody3"></tbody>');
+			
+			if(data.data.length>0){
+				$.each(data.data, function(index, dni) {
+					$('#tableweybody3').append('<tr data-id="'+dni.id+'">'+'<td>'+dni.nif+'</td>'+'<td><i style="cursor:pointer; font-size:18px;" onclick=eliminarDnipre("'+dni.id+'",this); class="fa fa-trash-o"></i></td>'+'</tr>');
+				});
+				$('#tablewey3').tablesorter();
 			}
 			else{ $('.waiting').hide();
 			$('.table-responsive').show(); }
@@ -79,6 +100,21 @@ function eliminarFiesta(id) {
 	}
 }
 
+function eliminarDnipre(id) {
+	var confirmacion=confirm('¿Seguro que quieres eliminar el DNI?');
+	if (confirmacion==true)
+	{
+		$.getJSON(api_url+'schedules/delete_dni?callback=?', {id:id}, function(data){
+			if(data.status=='success'){
+				launch_alert('<i class="fa fa-smile-o"></i> DNI eliminado','');
+				$('#submaindos').html('');
+				initialsearch();	
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+		});
+
+	}
+}
 
 function active_new_fiesta_form() {
 	$('#new_fiesta_form').submit(false).submit(function(e){
@@ -118,6 +154,28 @@ function new_fiesta() {
 		else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir una fecha para el festivo','warning');
 	}
 	else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir un nombre para el festivo','warning');
+	
+}
+
+
+function new_dni() {
+	var nif=$('#dnipre').val();
+	if (nif.length>0){
+		$('#botonenviardnipre').html('<i class="fa fa-cog fa-spin"></i>');
+			$.getJSON(api_url+'schedules/add_dni?callback=?', {nif:nif}, function(data){
+																								
+				if(data.status=='success'){
+					$('#dnipre').val('');
+					$('#submaindos').html('');
+					initialsearch();
+					launch_alert('<i class="fa fa-smile-o"></i> DNI añadido','');
+					$('#botonenviardnipre').html('Añadir');
+				
+				}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonenviardnipre').html('Añadir');}
+			});
+											
+	}
+	else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir un DNI','warning');
 	
 }
 

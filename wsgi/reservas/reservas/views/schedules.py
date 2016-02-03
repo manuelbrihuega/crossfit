@@ -650,6 +650,36 @@ def list_parties(request):
 
     return APIResponse(request,data)
 
+
+def list_dnis(request):
+    """
+    List all dnis info
+    """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not have_permission(request.session['auth_id'],'list_dnis'):
+            raise Exception('unauthorized_list_dnis')
+
+        user,auth = get_user_and_auth(request.session['auth_id'])
+        dnis=Dnis.objects.all()
+        list=[]
+        for dn in dnis:
+            list.append({'id':dn.id,
+                         'nif':dn.nif})
+
+
+        data=json.dumps({'status':'success','response':'list_dnis','data':list})
+
+    except Exception as e:
+        data = json.dumps({
+            'status':'failed',
+            'response': e.args[0]
+        })
+
+    return APIResponse(request,data)
+
+
 def delete_party(request):
     """
     Delete party
@@ -671,7 +701,7 @@ def delete_party(request):
         
         data = json.dumps( { 'status': 'success', 'response': 'party_deleted'} )
        
-    except Activities.DoesNotExist:
+    except Parties.DoesNotExist:
         data = json.dumps({'status': 'failed', 'response': 'party_not_found'})
 
     except Exception as e:
@@ -681,6 +711,41 @@ def delete_party(request):
         })
 
     return APIResponse(request=request, data=data)
+
+
+def delete_dni(request):
+    """
+    Delete dni
+    """
+    
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+
+        if not have_permission(request.session['auth_id'], 'delete_dni'):
+            raise Exception('unauthorized_delete_dni')
+
+        if not validate_parameter(request.GET, 'id'):
+            raise Exception('dni_id_missed')
+
+        
+        dni=Dnis.objects.get(id=request.GET['id'])
+        dni.delete()
+        
+        data = json.dumps( { 'status': 'success', 'response': 'dni_deleted'} )
+       
+    except Dnis.DoesNotExist:
+        data = json.dumps({'status': 'failed', 'response': 'dni_not_found'})
+
+    except Exception as e:
+        data = json.dumps({
+            'status':'failed',
+            'response': e.args[0]
+        })
+
+    return APIResponse(request=request, data=data)
+
+
 
 def add_party(request):
     """
@@ -719,6 +784,31 @@ def add_party(request):
         data = json.dumps({'status':'failed', 'response': e.args[0] })
 
     return APIResponse(request,data)
+
+
+def add_dni(request):
+    """
+    Creates a new dni
+    """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not have_permission(request.session['auth_id'],'add_dni'):
+            raise Exception('unauthorized_add_dni')
+            
+        if not validate_parameter(request.GET, 'nif'):
+            raise Exception(field+'_missed')
+        
+        dni=Dnis()
+        dni.nif=request.GET['nif']
+        dni.save()
+        data=json.dumps({'status':'success','response':'dni_created','data':{'id':dni.id}})
+    
+    except Exception as e:
+        data = json.dumps({'status':'failed', 'response': e.args[0] })
+
+    return APIResponse(request,data)
+
 
 
 def edit_config(request):

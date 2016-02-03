@@ -175,3 +175,6 @@ class Configuration(models.Model):
 class Parties(models.Model):
     date = models.DateTimeField(default=None,null=True)
     name = models.CharField(default="",max_length=100)
+
+class Dnis(models.Model):
+    nif = models.CharField(default="",max_length=20)
