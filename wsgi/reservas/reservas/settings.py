@@ -16,7 +16,7 @@ ALLOWED_HOSTS = [
     'localhost']
 ROOT_URLCONF = 'reservas.urls'
 WSGI_APPLICATION = 'reservas.wsgi.application'
-LANGUAGE_CODE = 'es'
+#LANGUAGE_CODE = 'es'
 TIME_ZONE = 'Europe/Madrid'
 USE_I18N = True
 USE_L10N = True
