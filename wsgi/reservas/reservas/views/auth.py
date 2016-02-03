@@ -129,8 +129,9 @@ def logout(request):
     """
     if 'auth_id' in request.session:
         auth_id=request.session['auth_id']
-        del request.session['auth_id']
         delete_session(auth_id)
+        del request.session['auth_id']
+        
 
         data=json.dumps({'status': 'success', 'response':'logout'})
     else:
