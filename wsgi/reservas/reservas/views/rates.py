@@ -218,12 +218,12 @@ def edit_name(request):
     """
     if 'auth_id' in request.session:
         if have_permission(request.session['auth_id'],'edit_name_rate'):
-            for field in ('name','idact'):
+            for field in ('nameact','idact'):
                 if not validate_parameter(request.GET, field):
                     raise Exception(field+'_missed')
             try:
                 rate=Rates.objects.get(id=request.GET['idact'])
-                rate.name=request.GET['name']
+                rate.name=str(request.GET['nameact'])
                 rate.save()
                 data=json.dumps({'status':'success','response':'rate_modified'})
             except:
