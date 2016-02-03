@@ -6,12 +6,8 @@ SECRET_KEY = 'qrdor327)nv9wzv$w7pn-76tur1kafvoel6_)$=z0tdyvtqo!i'
 DEBUG = True
 TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = [
-    'api.taxible.com',
     'crossfit-reservasjerez.rhcloud.com/api/',
     'crossfit-reservasjerez.rhcloud.com',
-    'api.taxibleapp.com',
-    'taxible.com',
-    'taxibleapp.com',
     '127.0.0.1',
     'localhost']
 ROOT_URLCONF = 'reservas.urls'
@@ -25,7 +21,7 @@ _ = lambda s: s
 STATIC_URL = '/static/'
 STATIC_ROOT = (PROJECT_PATH + '/../static')
 TEMPLATE_DIRS = (PROJECT_PATH+'/templates')
-SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+#SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 31 * 24 * 60 * 60 #
 INSTALLED_APPS = (
@@ -37,14 +33,27 @@ INSTALLED_APPS = (
     'corsheaders',
     'django_extensions',
 )
+#MIDDLEWARE_CLASSES = (
+   # 'django.contrib.sessions.middleware.SessionMiddleware',
+   # 'django.middleware.locale.LocaleMiddleware',
+   # 'django.contrib.messages.middleware.MessageMiddleware',
+  #  'django.middleware.common.CommonMiddleware',
+ #   'django.middleware.clickjacking.XFrameOptionsMiddleware',
+ #   'corsheaders.middleware.CorsMiddleware'
+#)
+
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware'
 )
+
+
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.debug",
