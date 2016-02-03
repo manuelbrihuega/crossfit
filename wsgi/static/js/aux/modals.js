@@ -1122,7 +1122,7 @@ function activateEditNameActivity() {
 function saveNameActivity() {
 	var id = $('#idactivity').val();
 	var name = $('#nameactivityinput').val();
-	$.getJSON(api_url+'rates/edit_name?callback=?', {id:id, name:name}, function(data){
+	$.getJSON(api_url+'rates/edit_name?callback=?', {idact:id, name:name}, function(data){
 		if(data.status=='success'){
 			launch_alert('<i class="fa fa-smile-o"></i> Nombre guardado','');
 			$('#lapiz').show();
