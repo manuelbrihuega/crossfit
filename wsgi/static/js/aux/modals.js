@@ -1707,6 +1707,142 @@ function addReserva(){
 	});
 }
 
+
+function addReservaCliente(id){
+	var confirmacion=confirm('¿Está seguro de que quiere reservar plaza para esta actividad?');
+	if(confirmacion){
+		$('#mycalendar').hide();
+		$('.waiting').show();
+		$.getJSON(api_url+'schedules/hay_plazas?callback=?', {id:id}, function(data){
+			if(data.status=='success'){
+				var disponibles = data.data.disponibles;
+				var disponibles_cola = data.data.disponibles_cola;
+				var minutos = data.data.minutos;
+				var consume_wod = parseInt(data.data.consume_wod);
+				var consume_box = parseInt(data.data.consume_box);
+				if(parseInt(disponibles)>0){
+
+					$.getJSON(api_url+'customers/get?callback=?', {}, function(data){
+						if(data.status=='success'){
+							var credit_box = parseInt(data.data.customer_profile.credit_box);
+							var credit_wod = parseInt(data.data.customer_profile.credit_wod);
+							if(consume_wod==0){
+								if(credit_box>=consume_box && credit_box!=0){
+									$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+										if(data.status=='success'){
+											launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+											location.reload();
+										}
+										else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+			
+									});
+								}else{
+									launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+								}
+							}else{
+								if(consume_box==0){
+									if(credit_wod>=consume_wod && credit_wod!=0){
+										$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+											if(data.status=='success'){
+												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+												location.reload();
+											}
+											else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+										});
+									}else{
+										launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+									}
+								}else{
+									if(credit_wod>=consume_wod && credit_box>=consume_box && credit_box!=0 && credit_wod!=0){
+										$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+											if(data.status=='success'){
+												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+												location.reload();
+											}
+											else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+			
+										});
+									}else{
+										launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');	
+									}
+								}
+							}
+						}
+						else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+			
+					});
+
+				}else{
+					if(parseInt(disponibles_cola)>0){
+						var confirmacioncola=confirm('Esta actividad ya tiene todas sus plazas reservadas. ¿Está seguro de colocarse en cola para esta actividad? Realizaremos su reserva de forma automática si alguna plaza queda libre. En el caso de no liberarse ninguna plaza, cancelaremos su reserva y le avisaremos '+minutos+' minutos antes del inicio de la actividad. Las notificaciones se realizarán por Email y Telegram.');
+						if(confirmacioncola){
+							$.getJSON(api_url+'customers/get?callback=?', {}, function(data){
+								if(data.status=='success'){
+									var credit_box = parseInt(data.data.customer_profile.credit_box);
+									var credit_wod = parseInt(data.data.customer_profile.credit_wod);
+									if(consume_wod==0){
+										if(credit_box>=consume_box && credit_box!=0){
+											$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+												if(data.status=='success'){
+													launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+													location.reload();
+												}
+												else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+			
+											});
+										}else{
+											launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+										}
+									}else{
+										if(consume_box==0){
+											if(credit_wod>=consume_wod && credit_wod!=0){
+												$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+													if(data.status=='success'){
+														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+														location.reload();
+													}
+													else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+			
+												});
+											}else{
+												launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+											}
+										}else{
+											if(credit_wod>=consume_wod && credit_box>=consume_box && credit_box!=0 && credit_wod!=0){
+												$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+													if(data.status=='success'){
+														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+														location.reload();
+													}
+													else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+			
+												});
+											}else{
+												launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');	
+											}
+										}
+									}
+								}
+								else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+			
+							});
+
+						}else{
+							location.reload();
+						}
+					}else{
+						launch_alert('No hay plazas disponibles para esta actividad y la cola está completa.','warning');
+					}
+				}
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+		
+		});
+	}
+	
+}
+
+
 function delete_faq(faq_id) {
 	var confirmacion=confirm('¿Seguro que quieres eliminar la FAQ?');
 	if (confirmacion==true)

@@ -438,6 +438,7 @@ def hay_plazas(request):
             if validate_parameter(request.GET,'id'):
                 try:
                     schedule_time=Schedules_times.objects.get(id=request.GET['id'])
+                    configuration=Configuration.objects.get(id=1)
                     aforo=schedule_time.schedule.activity.max_capacity
                     aforocola=schedule_time.schedule.activity.queue_capacity
                     reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time.id))
@@ -450,7 +451,7 @@ def hay_plazas(request):
                             ocupadas = ocupadas + 1  
                     disponibles=aforo - ocupadas
                     disponiblescola=aforocola - ocupadascola
-                    data=json.dumps({'status':'success','response':'hay_plazas_schedule','data':{'aforo':str(aforo), 'aforo_cola':str(aforocola), 'disponibles':str(disponibles), 'disponibles_cola':str(disponiblescola), 'ocupadas':str(ocupadas), 'ocupadas_cola':str(ocupadascola)}})
+                    data=json.dumps({'status':'success','response':'hay_plazas_schedule','data':{'consume_box':schedule_time.schedule.activity.credit_box, 'consume_wod':schedule_time.schedule.activity.credit_wod, 'aforo':str(aforo), 'minutos':configuration.minutes_post, 'aforo_cola':str(aforocola), 'disponibles':str(disponibles), 'disponibles_cola':str(disponiblescola), 'ocupadas':str(ocupadas), 'ocupadas_cola':str(ocupadascola)}})
                 except Exception as e:
                     data=json.dumps({'status':'failed','response':e.args[0]})
             else:
@@ -532,6 +533,94 @@ def add_reservation(request):
         data = json.dumps({'status':'failed', 'response': e.args[0] })
 
     return APIResponse(request,data)
+
+
+def add_reservation_client(request):
+    """
+    Creates a new reservation
+    """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not is_role(request.session['auth_id'],'U_Customers'):
+            raise Exception('not_customer')
+        if not have_permission(request.session['auth_id'],'add_reservation_client'):
+            raise Exception('unauthorized_add_reservation_client')
+        for field in ('schedule_time_id'):
+            if not validate_parameter(request.GET, field):
+                raise Exception(field+'_missed')
+        customer=get_user(request.session['auth_id'])
+        schedule_time=Schedules_times.objects.get(id=request.GET['schedule_time_id'])
+        auth=customer.auth
+        aforo=schedule_time.schedule.activity.max_capacity
+        aforocola=schedule_time.schedule.activity.queue_capacity
+        reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time.id))
+        ocupadas=0
+        ocupadascola=0
+        for res in reservations:
+            if res.auth.id==auth.id:
+                raise Exception('El cliente ya tiene una plaza ocupada')
+            if res.queue:
+                ocupadascola = ocupadascola + 1
+            else:
+                ocupadas = ocupadas + 1  
+        disponibles=aforo - ocupadas
+        disponiblescola=aforocola - ocupadascola
+        conf = Configuration.objects.get(id=1)
+        ahoramismo = datetime.today()
+        fechaparaactividad = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, schedule_time.time_start.hour, schedule_time.time_start.minute, 0)
+        fechaparaactividad = fechaparaactividad - timedelta(minutes=conf.minutes_pre)
+        
+        consumo_wod = schedule_time.schedule.activity.credit_wod
+        consumo_box = schedule_time.schedule.activity.credit_box
+        mequedanbox = customer.credit_box
+        mequedanwod = customer.credit_wod
+        if not customer.validated:
+            raise Exception('Cliente no validado')
+        if not customer.vip:
+            if mequedanwod==0 and mequedanbox==0:
+                raise Exception('No te quedan créditos para reservar')
+            if mequedanwod==0 and mequedanbox<consumo_box:
+                raise Exception('No te quedan créditos para reservar')
+            if mequedanbox==0 and mequedanwod<consumo_wod:
+                raise Exception('No te quedan créditos para reservar')
+            if mequedanwod!=0 and mequedanbox!=0 and mequedanbox<consumo_box and mequedanwod<consumo_wod:
+                raise Exception('No te quedan créditos para reservar')
+            if fechaparaactividad <= ahoramismo:
+                raise Exception('Ya es demasiado tarde para reservar plaza en esta actividad')
+        if disponibles > 0:
+            reservation = Reservations()
+            reservation.auth = auth
+            reservation.date = datetime.utcnow()
+            reservation.queue = False
+            reservation.schedule_time = schedule_time
+            if not customer.vip:
+                customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
+                customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                customer.save()
+            reservation.save()
+        elif disponiblescola > 0:
+            reservation = Reservations()
+            reservation.auth = auth
+            reservation.date = datetime.utcnow()
+            reservation.queue = True
+            reservation.position_queue = (aforocola - disponiblescola) + 1
+            reservation.schedule_time = schedule_time
+            if not customer.vip:
+                customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
+                customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                customer.save()
+            reservation.save()
+        else:
+            raise Exception('No hay plazas disponibles')
+            
+        data=json.dumps({'status':'success','response':'reservation_created','data':{'id':reservation.id}})
+    
+    except Exception as e:
+        data = json.dumps({'status':'failed', 'response': e.args[0] })
+
+    return APIResponse(request,data)
+
 
 def list_parties(request):
     """
