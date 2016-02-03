@@ -222,6 +222,67 @@ def list_all(request):
     return APIResponse(request,data)
 
 
+def list_all_for_customers(request):
+    """
+    List all schedules info for customers
+    """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not have_permission(request.session['auth_id'],'list_all_schedules_for_customers'):
+            raise Exception('unauthorized_list_all_schedules_for_customers')
+
+        user,auth = get_user_and_auth(request.session['auth_id'])
+        schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1)).order_by('time_start')
+        cad ='<?xml version="1.0"?><monthly>'
+        conf = Configuration.objects.get(id=1)
+        for sch in schedule_time:
+            fechaact = datetime(int(sch.schedule.date.year),int(sch.schedule.date.month),int(sch.schedule.date.day),0,0,0)
+            fechahoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) - timedelta(days=conf.days_pre_show)
+            fechanext = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_pre)
+            
+            if fechahoy<=fechaact and fechanext>=fechaact:
+                fechita = sch.schedule.date
+                startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
+                ocupadas = 0
+                disponibles = 0
+                aforo = sch.schedule.activity.max_capacity
+                aforocola = sch.schedule.activity.queue_capacity
+                reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
+                for res in reservations:
+                    ocupadas = ocupadas + 1
+                disponibles = aforo - ocupadas
+                if disponibles < 0:
+                    disponibles = 0;
+                discol = ocupadas-aforo
+                if discol < 0:
+                    discol=0
+                discol = aforocola - discol
+                cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol></event>'
+        festivos=Parties.objects.all()
+        for fest in festivos:
+            fechi = fest.date
+            festfech=str(fechi.year)+'-'+str(fechi.month)+'-'+str(fechi.day)
+            cad= cad + '<event><id>'+str(fest.id)+'festivo</id>'+'<name>'+fest.name+'</name>'+'<startdate>'+festfech+'</startdate>'+'<color>#ff6a6a</color></event>'
+        cad = cad + '</monthly>'
+
+        context = {'error':''}
+        fileName = os.path.join(os.path.abspath(os.path.dirname(__file__)) + '/../../../static/xml', 'calendario.xml')
+        writeFile(cad, fileName, context)
+        scheme = 'https://' if request.is_secure() else 'http://'
+        urlfinal = scheme + request.get_host() + settings.STATIC_URL + 'xml/calendario.xml'
+        data=json.dumps({'status':'success','response':'list_all_schedules','data':urlfinal})
+
+    except Exception as e:
+        data = json.dumps({
+            'status':'failed',
+            'response': e.args[0]
+        })
+
+    return APIResponse(request,data)
+
+
+
 def delete(request):
     """
     Delete schedule_time
