@@ -152,12 +152,12 @@ function new_fiesta() {
 					$('#nombre_festivo').val('');
 					$('#submain').html('');
 					$('#submain').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey2" class="table table-condensed tablesorter"></table></div>');
-	$('.waiting').show();
+	$('#submain .waiting').show();
 	$('.table-responsive').hide();
 					$.getJSON(api_url+'schedules/list_parties?callback=?', {}, function(data){
 		////console.log(data.data)
 		if(data.status=='success'){
-			$('.waiting').hide();
+			$('#submain .waiting').hide();
 			$('.table-responsive').show();
 			$('#tablewey2').html('<thead><tr><th>Fecha</th><th>Nombre</th><th>Acción</th></tr></thead><tbody id="tableweybody2"></tbody>');
 			
@@ -198,13 +198,13 @@ function new_dni() {
 					$('#dnipre').val('');
 					$('#submaindos').html('');
 					$('#submaindos').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey3" class="table table-condensed tablesorter"></table></div>');
-					$('.waiting').show();
+					$('#submaindos .waiting').show();
 					$('.table-responsive').hide();
 	
 					$.getJSON(api_url+'schedules/list_dnis?callback=?', {}, function(data){
 		////console.log(data.data)
 		if(data.status=='success'){
-			$('.waiting').hide();
+			$('#submaindos .waiting').hide();
 			$('.table-responsive').show();
 			$('#tablewey3').html('<thead><tr><th>DNI</th><th>Acción</th></tr></thead><tbody id="tableweybody3"></tbody>');
 			
