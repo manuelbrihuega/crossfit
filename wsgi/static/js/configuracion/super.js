@@ -151,7 +151,29 @@ function new_fiesta() {
 					$('#dia_festivo').val('');
 					$('#nombre_festivo').val('');
 					$('#submain').html('');
-					initialsearch();
+					$('#submain').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey2" class="table table-condensed tablesorter"></table></div>');
+	$('.waiting').show();
+	$('.table-responsive').hide();
+					$.getJSON(api_url+'schedules/list_parties?callback=?', {}, function(data){
+		////console.log(data.data)
+		if(data.status=='success'){
+			$('.waiting').hide();
+			$('.table-responsive').show();
+			$('#tablewey2').html('<thead><tr><th>Fecha</th><th>Nombre</th><th>Acción</th></tr></thead><tbody id="tableweybody2"></tbody>');
+			
+			if(data.data.length>0){
+				$.each(data.data, function(index, party) {
+					$('#tableweybody2').append('<tr data-id="'+party.id+'">'+'<td>'+party.date+'</td>'+'<td>'+party.name+'</td>'+'<td><i style="cursor:pointer; font-size:18px;" onclick=eliminarFiesta("'+party.id+'",this); class="fa fa-trash-o"></i></td>'+'</tr>');
+				});
+				$('#tablewey2').tablesorter();
+			}
+			else{ $('.waiting').hide();
+			$('.table-responsive').show(); }
+		}
+		else { $('.waiting').hide();
+			$('.table-responsive').show();}
+	});
+
 					launch_alert('<i class="fa fa-smile-o"></i> Festivo añadido','');
 					$('#botonenviarfecha').html('Añadir');
 				
@@ -175,9 +197,33 @@ function new_dni() {
 				if(data.status=='success'){
 					$('#dnipre').val('');
 					$('#submaindos').html('');
-					initialsearch();
+					$('#submaindos').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey3" class="table table-condensed tablesorter"></table></div>');
+					$('.waiting').show();
+					$('.table-responsive').hide();
+	
+					$.getJSON(api_url+'schedules/list_dnis?callback=?', {}, function(data){
+		////console.log(data.data)
+		if(data.status=='success'){
+			$('.waiting').hide();
+			$('.table-responsive').show();
+			$('#tablewey3').html('<thead><tr><th>DNI</th><th>Acción</th></tr></thead><tbody id="tableweybody3"></tbody>');
+			
+			if(data.data.length>0){
+				$.each(data.data, function(index, dni) {
+					$('#tableweybody3').append('<tr data-id="'+dni.id+'">'+'<td>'+dni.nif+'</td>'+'<td><i style="cursor:pointer; font-size:18px;" onclick=eliminarDnipre("'+dni.id+'",this); class="fa fa-trash-o"></i></td>'+'</tr>');
+				});
+				$('#tablewey3').tablesorter();
+			}
+			else{ $('.waiting').hide();
+			$('.table-responsive').show(); }
+		}
+		else { $('.waiting').hide();
+			$('.table-responsive').show();}
+	});
 					launch_alert('<i class="fa fa-smile-o"></i> DNI añadido','');
 					$('#botonenviardnipre').html('Añadir');
+
+
 				
 				}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonenviardnipre').html('Añadir');}
 			});
