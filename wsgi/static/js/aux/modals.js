@@ -1733,7 +1733,8 @@ function addReservaCliente(id){
 											launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 											location.reload();
 										}
-										else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); location.reload();}
+										else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#mycalendar').show();}
 			
 									});
 								}else{
@@ -1750,7 +1751,8 @@ function addReservaCliente(id){
 												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 												location.reload();
 											}
-											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); location.reload();}
+											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#mycalendar').show();}
 										});
 									}else{
 										launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
@@ -1764,7 +1766,8 @@ function addReservaCliente(id){
 												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 												location.reload();
 											}
-											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); location.reload();}
+											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#mycalendar').show();}
 			
 										});
 									}else{
@@ -1794,7 +1797,8 @@ function addReservaCliente(id){
 													launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 													location.reload();
 												}
-												else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); location.reload();}
+												else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#mycalendar').show();}
 			
 											});
 										}else{
@@ -1810,7 +1814,8 @@ function addReservaCliente(id){
 														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 														location.reload();
 													}
-													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); location.reload();}
+													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#mycalendar').show();}
 			
 												});
 											}else{
@@ -1825,7 +1830,8 @@ function addReservaCliente(id){
 														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 														location.reload();
 													}
-													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); location.reload();}
+													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#mycalendar').show();}
 			
 												});
 											}else{
