@@ -188,7 +188,7 @@ def edit_foreign(request):
     """
     if 'auth_id' in request.session:
         if have_permission(request.session['auth_id'],'edit_foreign_rate'):
-            for field in ('name','price','credit_wod','credit_box','tipobono'):
+            for field in ('name'):
                 if not validate_parameter(request.GET, field):
                     raise Exception(field+'_missed')
             try:
@@ -211,6 +211,7 @@ def edit_foreign(request):
         data=json.dumps({'status': 'failed', 'response':'not_logged'})
 
     return APIResponse(request,data)
+
 
 def edit_name(request):
     """
