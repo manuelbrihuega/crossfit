@@ -1115,7 +1115,7 @@ function modal_passenger_details(passenger_id) {
 function activateEditNameActivity() {
 	$('#lapiz').hide();
 	$('#nameactivity').hide();
-	$('#nameactivityinput').show();
+	$('#nameactivityinput').css('display','inline');
 	$('#disquete').show();
 }
 
