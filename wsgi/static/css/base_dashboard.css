@@ -52,6 +52,7 @@ body[data-role=U_Customers] .nav-sidebar > li.cliente{display: block;}
 
 body[data-section=profile] .nav-sidebar > li.profile> a,
 body[data-section=clientes] .nav-sidebar > li.clientes> a,
+body[data-section=perfil] .nav-sidebar > li.perfil> a,
 body[data-section=configuracion] .nav-sidebar > li.configuracion> a,
 body[data-section=actividades] .nav-sidebar > li.actividades> a,
 body[data-section=tarifas] .nav-sidebar > li.tarifas> a,

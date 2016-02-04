@@ -374,6 +374,34 @@ def edit_foreign(request):
 
     return APIResponse(request,data)
 
+
+def edit_client(request):
+    """
+    Edits a profile
+    """
+    if 'auth_id' not in request.session:
+        data=json.dumps({'status': 'failed', 'response':'not_logged'})
+
+    if not have_permission(request.session['auth_id'],'edit_client'):
+        data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_client'})
+    user,auth = get_user_and_auth(request.session['auth_id'])
+    try:
+        result_auth=edit_auth(user.auth_id,request.GET)
+        result_customer=edit_customer_b(user.auth_id,request.GET)
+        if result_auth['status']=='success':
+            data=json.dumps({'status':'success','response':'auth_modified'})
+        else:
+            if result_customer['status']=='success':
+                data=json.dumps({'status':'success','response':'customer_modified'})
+            else:
+                data=json.dumps({'status':'failed','response':result_customer['response']})
+    except Exception, e:
+        data=json.dumps({'status': 'failed', 'response':e.args[0]})
+
+    return APIResponse(request,data)
+
+
+
 def delete(request):
     """
     Deletes a customer and all related info

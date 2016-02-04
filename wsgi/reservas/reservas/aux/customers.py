@@ -96,3 +96,46 @@ def edit_customer(auth_id,data,rate):
 
     else:
         return {'status':'failed','response':'not_customer'}
+
+
+def edit_customer_b(auth_id,data):
+    customer=get_user(auth_id)
+    auth=Auth.objects.get(id=auth_id)
+    found = False
+    changed = False
+    if customer:
+        if validate_parameter(data,'credit_wod'):
+            found=True
+            if customer.credit_wod!=data['credit_wod']:
+                changed=True
+                customer.credit_wod=data['credit_wod']
+        if validate_parameter(data,'credit_box'):
+            found=True
+            if customer.credit_box!=data['credit_box']:
+                changed=True
+                customer.credit_box=data['credit_box']
+        if validate_parameter(data,'birthdate'):
+            found=True
+            if customer.birthdate!=data['birthdate']:
+                changed=True
+                customer.birthdate=data['birthdate']
+        if validate_parameter(data,'nif'):
+            found=True
+            if customer.nif!=data['nif']:
+                changed=True
+                customer.nif=data['nif']
+        if not found:
+            return {'status':'failed','response':'parameter_not_found'}
+
+        elif not changed:
+            return {'status':'failed','response':'nothing_changed'}
+
+        else:
+            customer.paid=getBoolValue(data['paid'])
+            customer.vip=getBoolValue(data['vip'])
+            customer.test_user=getBoolValue(data['test_user'])
+            customer.save()
+            return {'status':'success','response':'changed'}
+
+    else:
+        return {'status':'failed','response':'not_customer'}

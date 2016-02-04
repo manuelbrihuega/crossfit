@@ -132,6 +132,9 @@ function select_content() {
 		case 'clientes': 			if(role=='U_Super') javascript='clientes/super.js';
 									break;
 
+		case 'perfil': 			if(role=='U_Customers') javascript='perfil/clientes.js';
+									break;
+
 		case 'configuracion': 		if(role=='U_Super') javascript='configuracion/super.js';
 									break;
 
