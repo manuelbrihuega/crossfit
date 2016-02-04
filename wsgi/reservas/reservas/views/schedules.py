@@ -242,6 +242,17 @@ def list_all_for_customers(request):
             fechanext = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_pre)
             
             if fechahoy<=fechaact and fechanext>=fechaact:
+                conf = Configuration.objects.get(id=1)
+                ahoramismo = datetime.today()
+                fechaparaactividad = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
+                fechasepuedecancelar = fechaparaactividad - timedelta(minutes=conf.minutes_post)
+                fechasepuedereservar = fechaparaactividad - timedelta(minutes=conf.minutes_pre)
+                cadsepuedereservar = '<sepuedereservar>SI</sepuedereservar>'
+                if fechasepuedereservar <= ahoramismo:
+                    cadsepuedereservar = '<sepuedereservar>NO</sepuedereservar>'
+                cadsepuedecancelar = '<sepuedecancelar>SI</sepuedecancelar>'
+                if fechasepuedecancelar <= ahoramismo:
+                    cadsepuedecancelar = '<sepuedecancelar>NO</sepuedecancelar>'
                 fechita = sch.schedule.date
                 startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
                 ocupadas = 0
@@ -249,8 +260,11 @@ def list_all_for_customers(request):
                 aforo = sch.schedule.activity.max_capacity
                 aforocola = sch.schedule.activity.queue_capacity
                 reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
+                yareservada = '<yareservada>NO</yareservada>'
                 for res in reservations:
                     ocupadas = ocupadas + 1
+                    if res.auth.id==auth.id:
+                        yareservada='<yareservada>SI</yareservada>'
                 disponibles = aforo - ocupadas
                 if disponibles < 0:
                     disponibles = 0;
@@ -258,7 +272,7 @@ def list_all_for_customers(request):
                 if discol < 0:
                     discol=0
                 discol = aforocola - discol
-                cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol></event>'
+                cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol>'+yareservada+cadsepuedereservar+cadsepuedecancelar+'</event>'
         festivos=Parties.objects.all()
         for fest in festivos:
             fechi = fest.date
@@ -370,6 +384,74 @@ def delete_reservation(request):
                     res.position_queue = res.position_queue - 1
                     res.save()
         
+        data = json.dumps( { 'status': 'success', 'response': 'reservation_deleted'} )
+       
+    except Reservations.DoesNotExist:
+        data = json.dumps({'status': 'failed', 'response': 'reservation_not_found'})
+
+    except Exception as e:
+        data = json.dumps({
+            'status':'failed',
+            'response': e.args[0]
+        })
+
+    return APIResponse(request=request, data=data)
+
+
+def delete_reservation_client(request):
+    """
+    Delete reservation
+    """
+    
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+
+        if not have_permission(request.session['auth_id'], 'delete_reservation_client'):
+            raise Exception('unauthorized_delete_reservation_client')
+
+        if not validate_parameter(request.GET, 'schedule_time_id'):
+            raise Exception('schedule_time_id_missed')
+
+        user,auth = get_user_and_auth(reservation.auth.id)
+        schedule_time = Schedules_times.objects.get(id=request.GET['schedule_time_id'])
+        reservations=Reservations.objects.filter(Q(schedule_time__id=request.GET['schedule_time_id']) & Q(auth__id=auth.id))
+        for reservation in reservations:
+            ahoramismo = datetime.today()
+            fechaparaactividad = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, schedule_time.time_start.hour, schedule_time.time_start.minute, 0)
+            fechaparaactividad = fechaparaactividad - timedelta(minutes=conf.minutes_post)
+            if fechaparaactividad <= ahoramismo:
+                raise Exception('Ya es demasiado tarde para cancelar su reserva')
+            if reservation.queue:
+                position = reservation.position_queue
+                schedule_time_id = reservation.schedule_time.id
+                if not user.vip:
+                    user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
+                    user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
+                    user.save()
+                reservation.delete()
+                reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
+                for res in reservations:
+                    if res.position_queue > position:
+                        res.position_queue = res.position_queue - 1
+                        res.save()
+            else:
+                schedule_time_id = reservation.schedule_time.id
+                if not user.vip:
+                    user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
+                    user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
+                    user.save()
+                reservation.delete()
+                reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
+                for res in reservations:
+                    if res.position_queue==1:
+                        res.queue=False
+                        res.position_queue=None
+                        res.save()
+                    else:
+                        res.position_queue = res.position_queue - 1
+                        res.save()
+            
         data = json.dumps( { 'status': 'success', 'response': 'reservation_deleted'} )
        
     except Reservations.DoesNotExist:

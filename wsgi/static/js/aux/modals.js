@@ -1732,6 +1732,27 @@ function addReserva(){
 }
 
 
+function deleteMiReserva(id_schedule_time){
+	var confirmacion=confirm('¿Está seguro de que quiere cancelar la reserva? Su plaza quedará disponible para otro usuario.');
+	if(confirmacion){
+		$('.waiting').show();
+		$('#mycalendar').hide();
+		$.getJSON(api_url+'schedules/delete_reservation_client?callback=?', {schedule_time_id:id_schedule_time}, function(data){
+			if(data.status=='success'){
+				launch_alert('<i class="fa fa-smile-o"></i> Reserva cancelada con éxito. Su plaza se ha liberado','');
+				location.reload();
+			}
+			else{ 
+				launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); 
+				$('.waiting').hide();
+				$('#mycalendar').show();
+			}
+			
+		});
+	}
+}
+
+
 function addReservaCliente(id){
 	var confirmacion=confirm('¿Está seguro de que quiere reservar plaza para esta actividad?');
 	if(confirmacion){

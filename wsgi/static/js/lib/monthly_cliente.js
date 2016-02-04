@@ -170,6 +170,9 @@ var titulos = new Array();
 							eventURL = $(this).find('url').text(),
 							eventOc = $(this).find('oc').text(),
 							eventDis = $(this).find('dis').text(),
+							eventYa = $(this).find('yareservada').text(),
+							eventPres = $(this).find('sepuedereservar').text(),
+							eventPcan = $(this).find('sepuedecancelar').text(),
 							eventDisCol = $(this).find('discol').text(),
 							eventAf = $(this).find('af').text(),
 							eventAfcol = $(this).find('afcol').text(),
@@ -215,9 +218,28 @@ var titulos = new Array();
 						if(eventDisCol==0){
 							colorcola = 'color:red;';
 						}
+						var backgr = '';
+						if(eventPcan=='NO' && eventPres=='NO'){
+							colorcola = 'color:lightgray;';
+							colordis = 'color:lightgray;';
+							backgr = 'background-color: gray;'
+						}
+						var cadaction = '';
+						if(eventYa=='SI'){
+							cadaction = '<i onclick="deleteMiReserva('+eventId+');" class="fa fa-ban" style="cursor:pointer; font-size: 35px; margin-top: 3px; float: left;"></i>';
+							if(eventPcan=='NO'){
+								cadaction = '';
+							}
+						}
+						if(eventYa=='NO'){
+							cadaction = '<i onclick="addReservaCliente('+eventId+');" class="fa fa-plus-square" style="cursor:pointer; font-size: 35px; margin-top: 3px; float: left;"></i>';
+							if(eventPres=='NO'){
+								cadaction = '';
+							}
+						}
 						function multidaylist(){
 							if(eventColor==''){
-							    $('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<div class="listed-event"  data-eventid="'+ eventId +'" style="padding-top:0px;"><span style="min-width: 165px; float: left; overflow: auto; margin-right: 14px;">'+eventTitle+'</span><div style="overflow:auto; width:400px;"><i onclick="addReservaCliente('+eventId+');" class="fa fa-plus-square" style="cursor:pointer; font-size: 35px; margin-top: 3px; float: left;"></i><div style="overflow: auto; width: 200px; float: left;"><span style="font-size: 13px; display: block; float: left; padding-top: 3px; margin-left: 20px; '+colordis+'">Plazas disponibles: '+eventDis+'</span><span style="font-size: 13px; display: block; float: left; margin-left: 20px; '+colorcola+'">Plazas en la cola: '+eventDisCol+'</span></div><div style="overflow: auto; width: 140px; float: left; margin-top: 2px;"><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: black;">Aforo: '+eventAf+'</span><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: black;">Aforo de la cola: '+eventAfcol+'</span></div></div><div style="width: auto; float: none; margin-top: -17px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
+							    $('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<div class="listed-event"  data-eventid="'+ eventId +'" style="'+backgr+'padding-top:0px;"><span style="min-width: 165px; float: left; overflow: auto; margin-right: 14px;">'+eventTitle+'</span><div style="overflow:auto; width:400px;">'+cadaction+'<div style="overflow: auto; width: 200px; float: left;"><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; padding-top: 3px; margin-left: 20px; '+colordis+'">Plazas disponibles: '+eventDis+'</span><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; margin-left: 20px; '+colorcola+'">Plazas en la cola: '+eventDisCol+'</span></div><div style="overflow: auto; width: 140px; float: left; margin-top: 2px;"><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: black;">Aforo: '+eventAf+'</span><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: black;">Aforo de la cola: '+eventAfcol+'</span></div></div><div style="width: auto; float: none; margin-top: -17px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
 							}
 						
 						}
@@ -249,7 +271,7 @@ var titulos = new Array();
 							//BONO EN TARIFAS
 							//EDITAR NOMBRE DE ACTIVIDADES
 							//PREVALIDACION DNIS
-							$('#'+uniqueId+' .monthly-list-item[data-number="'+startDay+'"]').addClass('item-has-event').append('<div class="listed-event" data-eventid="'+ eventId +'" style="padding-top:0px;"><span style="min-width: 165px; float: left; overflow: auto; margin-right: 14px;">'+eventTitle+'</span><div style="overflow:auto; width:400px;"><i onclick="addReservaCliente('+eventId+');" class="fa fa-plus-square" style="cursor:pointer; font-size: 35px; margin-top: 3px; float: left;"></i><div style="overflow: auto; width: 200px; float: left;"><span style="font-size: 13px; display: block; float: left; padding-top: 3px; margin-left: 20px; '+colordis+'">Plazas disponibles: '+eventDis+'</span><span style="font-size: 13px; display: block; float: left; margin-left: 20px; '+colorcola+'">Plazas en la cola: '+eventDisCol+'</span></div><div style="overflow: auto; width: 140px; float: left; margin-top: 2px;"><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: black;">Aforo: '+eventAf+'</span><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: black;">Aforo de la cola: '+eventAfcol+'</span></div></div><div style="width: auto; float: none; margin-top: -17px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
+							$('#'+uniqueId+' .monthly-list-item[data-number="'+startDay+'"]').addClass('item-has-event').append('<div class="listed-event" data-eventid="'+ eventId +'" style="padding-top:0px;"><span style="min-width: 165px; float: left; overflow: auto; margin-right: 14px;">'+eventTitle+'</span><div style="overflow:auto; width:400px;">'+cadaction+'<div style="overflow: auto; width: 200px; float: left;"><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; padding-top: 3px; margin-left: 20px; '+colordis+'">Plazas disponibles: '+eventDis+'</span><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; margin-left: 20px; '+colorcola+'">Plazas en la cola: '+eventDisCol+'</span></div><div style="overflow: auto; width: 140px; float: left; margin-top: 2px;"><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: black;">Aforo: '+eventAf+'</span><span style="font-size: 13px; display: block; float: left; margin-left: 20px; color: black;">Aforo de la cola: '+eventAfcol+'</span></div></div><div style="width: auto; float: none; margin-top: -17px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
 							
 							}else{
 								$('#'+uniqueId+' *[data-number="'+startDay+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator"  data-eventid="'+ eventId +'" style="background: #fbb6b6; font-size:22px; height:auto; white-space: normal;" title="'+eventTitle+'">'+eventTitle+'</div>');
