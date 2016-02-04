@@ -412,7 +412,7 @@ def delete_reservation_client(request):
 
         if not validate_parameter(request.GET, 'schedule_time_id'):
             raise Exception('schedule_time_id_missed')
-
+        conf = Configuration.objects.get(1)
         user,auth = get_user_and_auth(request.session['auth_id'])
         schedule_time = Schedules_times.objects.get(id=request.GET['schedule_time_id'])
         reservations=Reservations.objects.filter(Q(schedule_time__id=request.GET['schedule_time_id']) & Q(auth__id=auth.id))
