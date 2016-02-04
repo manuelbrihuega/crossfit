@@ -24,6 +24,7 @@ def create_customer(data,auth,rate):
             for d in dnies:
                 customer.validated = True
                 customer.auth.active = True
+                customer.auth.save()
         customer.save()
 
         return {'status':'success','response':customer}
