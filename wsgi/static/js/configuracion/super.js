@@ -39,8 +39,8 @@ function get_content() {
 }
 
 function initialsearch() {
+	$('#submain').html('');
 	$('#submain').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey2" class="table table-condensed tablesorter"></table></div>');
-	$('#submaindos').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey3" class="table table-condensed tablesorter"></table></div>');
 	$('#submain .waiting').show();
 	$('.table-responsive').hide();
 			
@@ -63,6 +63,8 @@ function initialsearch() {
 		else { $('.waiting').hide();
 			$('.table-responsive').show();}
 	});
+	$('#submaindos').html('');
+	$('#submaindos').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey3" class="table table-condensed tablesorter"></table></div>');
 	$('#submaindos .waiting').show();
 	$.getJSON(api_url+'schedules/list_dnis?callback=?', {}, function(data){
 		////console.log(data.data)
