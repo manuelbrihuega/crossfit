@@ -41,7 +41,7 @@ function get_content() {
 function initialsearch() {
 	$('#submain').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey2" class="table table-condensed tablesorter"></table></div>');
 	$('#submaindos').append('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div><div class="table-responsive" style="margin-top: 35px;"><table id="tablewey3" class="table table-condensed tablesorter"></table></div>');
-	$('.waiting').show();
+	$('#submain .waiting').show();
 	$('.table-responsive').hide();
 			
 	$.getJSON(api_url+'schedules/list_parties?callback=?', {}, function(data){
@@ -63,7 +63,7 @@ function initialsearch() {
 		else { $('.waiting').hide();
 			$('.table-responsive').show();}
 	});
-
+	$('#submaindos .waiting').show();
 	$.getJSON(api_url+'schedules/list_dnis?callback=?', {}, function(data){
 		////console.log(data.data)
 		if(data.status=='success'){

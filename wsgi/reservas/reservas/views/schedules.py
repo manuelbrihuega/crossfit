@@ -805,6 +805,7 @@ def add_dni(request):
         customers = U_Customers.objects.filter(Q(nif=dni.nif))
         for cu in customers:
             cu.validated = True
+            cu.auth.active = True
             cu.save()
         data=json.dumps({'status':'success','response':'dni_created','data':{'id':dni.id}})
     

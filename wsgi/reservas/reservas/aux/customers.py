@@ -19,6 +19,10 @@ def create_customer(data,auth,rate):
             customer.birthdate=data["birthdate"]
         if validate_parameter(data,'nif'):
             customer.nif=data["nif"]
+            dnies = Dnis.objects.filter(Q(nif=customer.nif))
+            for d in dnies:
+                customer.validated = True
+                customer.auth.active = True
         customer.save()
 
         return {'status':'success','response':customer}
