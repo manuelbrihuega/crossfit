@@ -221,10 +221,16 @@ var titulos = new Array();
 						var backgr = '';
 						var coloraforo = 'color: black;';
 						if(eventPcan=='NO' && eventPres=='NO'){
-							colorcola = 'color:lightgray;';
-							colordis = 'color:lightgray;';
+							colorcola = 'color:transparent;';
+							colordis = 'color:transparent;';
 							backgr = 'background-color: gray; color: lightgray !important;'
-							coloraforo = 'color: lightgray;';
+							coloraforo = 'color: transparent;';
+						}
+						if(eventPcan=='NO' && eventYa=='SI'){
+							colorcola = 'color:transparent;';
+							colordis = 'color:transparent;';
+							backgr = 'background-color: gray; color: lightgray !important;'
+							coloraforo = 'color: transparent;';
 						}
 						var cadaction = '';
 						if(eventYa=='SI'){
@@ -241,7 +247,7 @@ var titulos = new Array();
 						}
 						function multidaylist(){
 							if(eventColor==''){
-							    $('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<div class="listed-event"  data-eventid="'+ eventId +'" style="'+backgr+' padding-top:0px;"><span style="min-width: 165px; float: left; overflow: auto; margin-right: 14px;">'+eventTitle+'</span><div style="overflow:auto; width:400px;">'+cadaction+'<div style="overflow: auto; width: 200px; float: left;"><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; padding-top: 3px; margin-left: 20px; '+colordis+'">Plazas disponibles: '+eventDis+'</span><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; margin-left: 20px; '+colorcola+'">Plazas en la cola: '+eventDisCol+'</span></div><div style="overflow: auto; width: 140px; float: left; margin-top: 2px;"><span style="font-size: 11px; text-transform: uppercase; padding-top: 2px; display: block; float: left; margin-left: 20px; '+coloraforo+'">Aforo: '+eventAf+'</span><span style="font-size: 11px; text-transform: uppercase; display: block; float: left; margin-left: 20px; '+coloraforo+'">Aforo de la cola: '+eventAfcol+'</span></div></div><div style="width: auto; float: none; margin-top: -17px; max-width: 165px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
+							    $('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<div class="listed-event"  data-eventid="'+ eventId +'" style="'+backgr+' padding-top:0px;"><span style="min-width: 165px; float: left; overflow: auto; margin-right: 14px;">'+eventTitle+'</span><div style="overflow:auto; width:400px;">'+cadaction+'<div style="overflow: auto; width: 200px; float: left;"><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; padding-top: 3px; margin-left: 20px; '+colordis+'">Plazas disponibles: '+eventDis+'</span><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; margin-left: 20px; '+colorcola+'">Plazas en la cola: '+eventDisCol+'</span></div><div style="overflow: auto; width: 140px; float: left; margin-top: 1px;"><span style="font-size: 11px; text-transform: uppercase; padding-top: 2px; display: block; float: left; margin-left: 20px; '+coloraforo+'">Aforo: '+eventAf+'</span><span style="font-size: 11px; text-transform: uppercase; display: block; float: left; margin-left: 20px; '+coloraforo+'">Aforo de la cola: '+eventAfcol+'</span></div></div><div style="width: auto; float: none; margin-top: -17px; max-width: 165px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
 							}
 						
 						}
@@ -273,7 +279,7 @@ var titulos = new Array();
 							//BONO EN TARIFAS
 							//EDITAR NOMBRE DE ACTIVIDADES
 							//PREVALIDACION DNIS
-							$('#'+uniqueId+' .monthly-list-item[data-number="'+startDay+'"]').addClass('item-has-event').append('<div class="listed-event" data-eventid="'+ eventId +'" style="'+backgr+' padding-top:0px;"><span style="min-width: 165px; float: left; overflow: auto; margin-right: 14px;">'+eventTitle+'</span><div style="overflow:auto; width:400px;">'+cadaction+'<div style="overflow: auto; width: 200px; float: left;"><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; padding-top: 3px; margin-left: 20px; '+colordis+'">Plazas disponibles: '+eventDis+'</span><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; margin-left: 20px; '+colorcola+'">Plazas en la cola: '+eventDisCol+'</span></div><div style="overflow: auto; width: 140px; float: left; margin-top: 2px;"><span style="font-size: 11px; text-transform: uppercase; padding-top: 2px; display: block; float: left; margin-left: 20px; '+coloraforo+'">Aforo: '+eventAf+'</span><span style="font-size: 11px; text-transform: uppercase; display: block; float: left; margin-left: 20px; '+coloraforo+'">Aforo de la cola: '+eventAfcol+'</span></div></div><div style="width: auto; float: none; margin-top: -17px; max-width: 165px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
+							$('#'+uniqueId+' .monthly-list-item[data-number="'+startDay+'"]').addClass('item-has-event').append('<div class="listed-event" data-eventid="'+ eventId +'" style="'+backgr+' padding-top:0px;"><span style="min-width: 165px; float: left; overflow: auto; margin-right: 14px;">'+eventTitle+'</span><div style="overflow:auto; width:400px;">'+cadaction+'<div style="overflow: auto; width: 200px; float: left;"><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; padding-top: 3px; margin-left: 20px; '+colordis+'">Plazas disponibles: '+eventDis+'</span><span style="font-size: 11px; font-weight: 600; text-transform: uppercase; display: block; float: left; margin-left: 20px; '+colorcola+'">Plazas en la cola: '+eventDisCol+'</span></div><div style="overflow: auto; width: 140px; float: left; margin-top: 1px;"><span style="font-size: 11px; text-transform: uppercase; padding-top: 2px; display: block; float: left; margin-left: 20px; '+coloraforo+'">Aforo: '+eventAf+'</span><span style="font-size: 11px; text-transform: uppercase; display: block; float: left; margin-left: 20px; '+coloraforo+'">Aforo de la cola: '+eventAfcol+'</span></div></div><div style="width: auto; float: none; margin-top: -17px; max-width: 165px;"><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></div>');
 							
 							}else{
 								$('#'+uniqueId+' *[data-number="'+startDay+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator"  data-eventid="'+ eventId +'" style="background: #fbb6b6; font-size:22px; height:auto; white-space: normal;" title="'+eventTitle+'">'+eventTitle+'</div>');
