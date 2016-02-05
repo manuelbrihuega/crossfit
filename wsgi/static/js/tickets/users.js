@@ -138,12 +138,13 @@ function new_ticket() {
 	var text=$('#new_text').val();
 	if (title.length>0){
 		if(text.length>0){
-		
+			$('.btn-default').html('<i class="fa fa-cog fa-spin"></i>');
 			$.getJSON(api_url+'tickets/add?callback=?', {title:title, text:text, offset:local_offset}, function(data){
 				if(data.status=='success'){
 					$('#new_title').add('#new_text').val('');
 					get_list();
 					launch_alert('<i class="fa fa-smile-o"></i> Incidencia enviada','');
+					$('.btn-default').html('Enviar');
 				}
 				else launch_alert('<i class="fa fa-frown-o"></i> Error al enviar','warning');
 			});

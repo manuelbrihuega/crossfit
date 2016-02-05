@@ -2,7 +2,7 @@ from datetime import datetime
 from reservas.models import Messages
 from reservas.aux.date import *
 from reservas.aux.emails import *
-
+import unicodedata
 
 def add_message(ticket,text,way,offset):
     """
