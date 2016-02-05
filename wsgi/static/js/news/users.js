@@ -9,6 +9,9 @@ function get_content() {
 					$.each(data.data.news, function(index, anew) {
 						addItem(anew);
 					});
+					if(data.data.news.length==0){
+						super_error('En este momento no hay notificaciones');
+					}
 				}
 				else super_error('News failure');
 			});

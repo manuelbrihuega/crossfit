@@ -61,6 +61,7 @@ function identify(role) {
 
 		case 'U_Customers': 	var method_url=api_url+'customers/get?callback=?';
 								//update_tickets_badge();
+								update_pending_drivers_badge();
 								//ninja_jumps();
 								break;
 
@@ -317,11 +318,11 @@ function update_tickets_supporter_badge() {
 }
 
 function update_pending_drivers_badge() {
-	$.getJSON(api_url+'drivers/list_pending_notification?callback=?','', function(data){
+	$.getJSON(api_url+'news/list_news?callback=?','', function(data){
 		if(data.status=='success'){
 			notifications=parseInt(data.data);
-			if(notifications>0)$('#badge_drivers').text(notifications).fadeIn();
-			else $('#badge_drivers').text(notifications).fadeOut();
+			if(notifications>0)$('#badge_news').text(notifications).fadeIn();
+			else $('#badge_news').text(notifications).fadeOut();
 		}
 	});
 }
