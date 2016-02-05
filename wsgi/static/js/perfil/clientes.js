@@ -25,7 +25,7 @@ function get_content() {
 								var year=fechados[0];
 								var mes=fechados[1];
 								var dia=fechados[2];
-								$('#new_customer_birthdate').val(year+'/'+mes+'/'+dia);
+								$('#new_customer_birthdate').val(year+'-'+mes+'-'+dia);
 		
 							}else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 						});
