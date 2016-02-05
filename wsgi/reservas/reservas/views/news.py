@@ -53,7 +53,7 @@ def list_news(request):
 
             try:
                 items = []
-                items=News.objects.filter(role=None).order_by('-id')[:10]
+                items=News.objects.all().order_by('-id')[:10]
                
 
 
