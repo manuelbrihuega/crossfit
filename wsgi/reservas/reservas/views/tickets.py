@@ -27,7 +27,6 @@ def add(request):
     if validate_parameter(request.GET,'offset'):
         if validate_parameter(request.GET,'title'):
             if validate_parameter(request.GET,'text'):
-
                 try:
                     ticket=Tickets()
                     ticket.title=request.GET['title']
@@ -35,26 +34,15 @@ def add(request):
                     if 'auth_id' in request.session:
                         ticket.auth_id=request.session['auth_id']
                         sender=True
-                    elif validate_parameter(request.GET,'email'):
-                        ticket.email=request.GET['email']
-                        sender=True
-
                     if sender:
                         ticket.save()
                         message=Messages()
                         message.ticket=ticket
                         message.text=unicode(request.GET['text'])
                         message.original_way=True
-                        message.date=datetime.utcnow()
-                        message.date=local_date(message.date,int(request.GET['offset']))
+                        message.date=local_date(datetime.utcnow(),int(request.GET['offset']))
                         message.save()
-                        #message=add_message(ticket,str(request.GET['text']),True,request.GET['offset'])
-                        user = ''
-                        if ticket.auth:
-                            user = str(ticket.auth.name) + ' ' + str(ticket.auth.surname) + ' - ' + str(ticket.auth.email) + ' (' + str(ticket.auth.phone) + ')'   
-                        else:
-                            user = 'No identificado'
-                        data=json.dumps({'status': 'success', 'response':'ticked_added', 'data': {'ticket_id':ticket.id, 'message': { 'id':message.id, 'text':message.text, 'date':message.date }} })
+                        data=json.dumps({'status': 'success', 'response':'ticked_added', 'data': {'ticket_id':ticket.id} })
                         
                     else:
                         data=json.dumps({'status': 'failed', 'response':'sender_missed'})

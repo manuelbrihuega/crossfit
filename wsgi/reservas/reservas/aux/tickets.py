@@ -15,9 +15,9 @@ def add_message(ticket,text,way,offset):
         message.ticket=ticket
         message.text=text
         message.original_way=way
-        message.date=datetime.utcnow()
+        message.date=localdate=local_date(datetime.utcnow(),offset)
         message.save()
-        localdate=local_date(message.date,offset)
+        
         if way:
             user = ''
             if ticket.auth:
