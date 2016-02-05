@@ -40,12 +40,21 @@ def add(request):
 
                     if sender:
                         ticket.save()
-                        message=add_message(ticket,request.GET['text'],True,request.GET['offset'])
-
-                        if message['status']=='success':
-                            data=json.dumps({'status': 'success', 'response':'ticked_added', 'data': {'ticket_id':ticket.id, 'message':message['data']['message']} })
+                        message=Messages()
+                        message.ticket=ticket
+                        message.text=str(request.GET['text'])
+                        message.original_way=True
+                        message.date=datetime.utcnow()
+                        message.save()
+                        localdate=local_date(message.date,request.GET['offset'])
+                        #message=add_message(ticket,str(request.GET['text']),True,request.GET['offset'])
+                        user = ''
+                        if ticket.auth:
+                            user = str(ticket.auth.name) + ' ' + str(ticket.auth.surname) + ' - ' + str(ticket.auth.email) + ' (' + str(ticket.auth.phone) + ')'   
                         else:
-                            data=json.dumps({'status': 'failed', 'response':message['response']})
+                            user = 'No identificado'
+                        data=json.dumps({'status': 'success', 'response':'ticked_added', 'data': {'ticket_id':ticket.id, 'message':message['data']['message']} })
+                        
                     else:
                         data=json.dumps({'status': 'failed', 'response':'sender_missed'})
                 except:
