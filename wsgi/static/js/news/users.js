@@ -10,7 +10,7 @@ function get_content() {
 						addItem(anew);
 					});
 					if(data.data.news.length==0){
-						super_error('En este momento no hay notificaciones');
+						$('#news_wrapper').html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">En este momento no hay notificaciones</div></div>');
 					}
 				}
 				else super_error('News failure');
