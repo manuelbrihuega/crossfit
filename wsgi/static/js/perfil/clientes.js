@@ -20,7 +20,12 @@ function get_content() {
 								$('#new_customer_nif').val(data.data.customer_profile.nif);
 								$('#new_customer_phone').val(data.data.auth_profile.phone);
 								$('#new_customer_email').val(data.data.auth_profile.email);
-								$('#new_customer_birthdate').val(data.data.customer_profile.birthdate);
+								var fecha=data.data.customer_profile.birthdate.split(" ");
+								var fechados=fecha[0].split("-");
+								var year=fechados[0];
+								var mes=fechados[1];
+								var dia=fechados[2];
+								$('#new_customer_birthdate').val(year+'/'+mes+'/'+dia);
 		
 							}else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 						});
