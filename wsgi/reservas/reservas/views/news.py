@@ -45,6 +45,38 @@ def list_news_foreign(request):
     return APIResponse(request,data)
     
 
+def list_news(request):
+    """ Get the list of news  """
+    if 'auth_id' in request.session:
+        if have_permission(request.session['auth_id'],'list_news'):
+            auth=Auth.objects.get(id=request.session['auth_id'])
+
+            try:
+                items = []
+                items=News.objects.filter(role=None).order_by('-id')[:10]
+               
+
+
+                # TODO: contemplar noticias para radios
+
+                items_list = []
+
+                for item in items:
+                    date = item.date
+                    items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'role':item.role.role, 'date':get_string_from_date(date)})
+
+                data=json.dumps({'status': 'success', 'response':'news_list', 'data':{'news':items_list} })
+
+            except:
+                data=json.dumps({'status': 'failed', 'response':'new_not_found'})
+
+        else:
+            data=json.dumps({'status': 'failed', 'response':'unauthorized_list_news'})
+    else:
+        data=json.dumps({'status': 'failed', 'response':'not_logged'})
+
+    return APIResponse(request,data)
+
 
 
 def add_global_news(request):
