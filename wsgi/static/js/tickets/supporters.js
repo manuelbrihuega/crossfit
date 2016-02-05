@@ -3,9 +3,6 @@ function get_content() {
             $.getScript('http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js'),
             $.getScript(media_url+'js/aux/date.js'),
             $.getScript(media_url+'js/aux/modals.js'),
-            $.getScript(media_url+'js/aux/passengers.js'),
-            $.getScript(media_url+'js/aux/radios.js'),
-            $.getScript(media_url+'js/aux/drivers.js'),
             $.ready.promise()
     ).then(function(){
         $.post('partials/tickets_supporters', function(template, textStatus, xhr) {
