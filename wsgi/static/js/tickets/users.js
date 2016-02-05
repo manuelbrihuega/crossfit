@@ -25,7 +25,7 @@ function get_list() {
 				addPanel(ticket);
 			});
 			if(data.data.tickets.length==0){
-				super_error('No hay incidencias abiertas');
+				$('#main').append('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">En este momento no hay notificaciones</div></div>');
 			}
 		}
 		else super_error('Tickets failure');
