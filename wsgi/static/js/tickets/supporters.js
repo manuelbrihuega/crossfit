@@ -2,6 +2,7 @@ function get_content() {
     $.when(
             $.getScript('http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js'),
             $.getScript(media_url+'js/aux/date.js'),
+            $.getScript(media_url+'js/aux/clientes.js'),
             $.getScript(media_url+'js/aux/modals.js'),
             $.ready.promise()
     ).then(function(){
