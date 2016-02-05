@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import unicodedata
 from django.http import HttpResponse
 import json
@@ -42,10 +43,10 @@ def add(request):
                         ticket.save()
                         message=Messages()
                         message.ticket=ticket
-                        message.text=str(request.GET['text'])
+                        message.text=unicode(request.GET['text'])
                         message.original_way=True
-                        message.date=datetime.utcnow()
-                        message.date=local_date(message.date,int(request.GET['offset']))
+                        #message.date=datetime.utcnow()
+                        #message.date=local_date(message.date,int(request.GET['offset']))
                         message.save()
                         #message=add_message(ticket,str(request.GET['text']),True,request.GET['offset'])
                         user = ''
@@ -58,7 +59,7 @@ def add(request):
                     else:
                         data=json.dumps({'status': 'failed', 'response':'sender_missed'})
                 except Exception as e:
-                    data=json.dumps({'status': 'failed', 'response':'ticket_model_failure'+e.args[0]+sys.exc_traceback.tb_lineno})
+                    data=json.dumps({'status': 'failed', 'response':'ticket_model_failure'+e.args[0]})
             else:
                 data=json.dumps({'status': 'failed', 'response':'text_missed'})
         else:
