@@ -69,7 +69,7 @@ function edit_customer() {
 			if (nif.length>0){
 				if (phone.length>0){
 					if (email.length>0){
-						if (password.length>0){
+						
 							if(password==passwordrepeat){
 								if(birthdate.length>0){
 										$('#botonenviar').html('<i class="fa fa-cog fa-spin"></i>');
@@ -91,8 +91,7 @@ function edit_customer() {
 									else launch_alert('<i class="fa fa-frown-o"></i> Debes introducir la fecha de nacimiento','warning');
 								}
 								else launch_alert('<i class="fa fa-frown-o"></i> Las contraseñas no coinciden','warning');			
-							}
-							else launch_alert('<i class="fa fa-frown-o"></i> Debes introducir una contraseña','warning');	
+								
 						}
 						else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir un email','warning');	
 					}

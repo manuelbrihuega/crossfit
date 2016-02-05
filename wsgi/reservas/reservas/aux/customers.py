@@ -104,16 +104,6 @@ def edit_customer_b(auth_id,data):
     found = False
     changed = False
     if customer:
-        if validate_parameter(data,'credit_wod'):
-            found=True
-            if customer.credit_wod!=data['credit_wod']:
-                changed=True
-                customer.credit_wod=data['credit_wod']
-        if validate_parameter(data,'credit_box'):
-            found=True
-            if customer.credit_box!=data['credit_box']:
-                changed=True
-                customer.credit_box=data['credit_box']
         if validate_parameter(data,'birthdate'):
             found=True
             if customer.birthdate!=data['birthdate']:
