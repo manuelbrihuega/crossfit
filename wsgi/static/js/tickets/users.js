@@ -24,6 +24,9 @@ function get_list() {
 			$.each(data.data.tickets, function(index, ticket) {
 				addPanel(ticket);
 			});
+			if(data.data.tickets.length==0){
+				super_error('No hay incidencias abiertas');
+			}
 		}
 		else super_error('Tickets failure');
 	});
