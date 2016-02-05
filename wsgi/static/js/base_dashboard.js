@@ -220,7 +220,7 @@ function select_content() {
 									if(role=='U_Admin_Enterprises') javascript='news/users.js';
 									break;
 
-		case 'tickets': 			if(role=='U_Passengers') javascript='tickets/users.js';
+		case 'tickets': 			if(role=='U_Customers') javascript='tickets/users.js';
 									if(role=='U_Operators') javascript='tickets/users.js';
 									if(role=='U_Viewer_Radios') javascript='tickets/users.js';
 									if(role=='U_Viewer_Digital_Radios') javascript='tickets/users.js';
