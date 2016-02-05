@@ -58,7 +58,7 @@ def add(request):
                     else:
                         data=json.dumps({'status': 'failed', 'response':'sender_missed'})
                 except Exception as e:
-                    data=json.dumps({'status': 'failed', 'response':'ticket_model_failure'+e.args[0]})
+                    data=json.dumps({'status': 'failed', 'response':'ticket_model_failure'+e.args[0]+sys.exc_traceback.tb_lineno})
             else:
                 data=json.dumps({'status': 'failed', 'response':'text_missed'})
         else:
