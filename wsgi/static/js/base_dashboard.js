@@ -225,7 +225,7 @@ function select_content() {
 									if(role=='U_Viewer_Radios') javascript='tickets/users.js';
 									if(role=='U_Viewer_Digital_Radios') javascript='tickets/users.js';
 									if(role=='U_Drivers') javascript='tickets/users.js';
-									if(role=='U_Delegations') javascript='tickets/users.js';
+									if(role=='U_Delegations') javascript='tickets/supporters.js';
 									if(role=='U_Super') javascript='tickets/users.js';
 									if(role=='U_Admin_Enterprises') javascript='tickets/users.js';
 
