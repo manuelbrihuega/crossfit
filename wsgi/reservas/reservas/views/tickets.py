@@ -237,7 +237,7 @@ def list_foreign(request):
                 user_profile={'id':get_user(ticket.auth.id).id,
                               'auth_id':ticket.auth.id,
                               'name':ticket.auth.name+" "+ticket.auth.surname,
-                              'phone':'+'+ticket.auth.prefix+ticket.auth.phone,
+                              'phone':ticket.auth.phone,
                               'email':ticket.auth.email}
             else:
                 user_profile={'email':ticket.email}
