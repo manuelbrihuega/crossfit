@@ -53,7 +53,7 @@ def list_news(request):
 
             try:
                 items = []
-                items=News.objects.all().order_by('-id')[:10]
+                items=News.objects.all()
                
 
 
@@ -63,7 +63,7 @@ def list_news(request):
 
                 for item in items:
                     date = item.date
-                    items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'role':item.role.role, 'date':get_string_from_date(date)})
+                    items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date)})
 
                 data=json.dumps({'status': 'success', 'response':'news_list', 'data':{'news':items_list} })
 
