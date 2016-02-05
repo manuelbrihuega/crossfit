@@ -45,8 +45,8 @@ def add(request):
                         message.ticket=ticket
                         message.text=unicode(request.GET['text'])
                         message.original_way=True
-                        #message.date=datetime.utcnow()
-                        #message.date=local_date(message.date,int(request.GET['offset']))
+                        message.date=datetime.utcnow()
+                        message.date=local_date(message.date,int(request.GET['offset']))
                         message.save()
                         #message=add_message(ticket,str(request.GET['text']),True,request.GET['offset'])
                         user = ''
@@ -54,7 +54,7 @@ def add(request):
                             user = str(ticket.auth.name) + ' ' + str(ticket.auth.surname) + ' - ' + str(ticket.auth.email) + ' (' + str(ticket.auth.phone) + ')'   
                         else:
                             user = 'No identificado'
-                        data=json.dumps({'status': 'success', 'response':'ticked_added', 'data': {'ticket_id':ticket.id, 'message': { 'id':message.id, 'text':message.text, 'original_way':message.original_way, 'date':message.date }} })
+                        data=json.dumps({'status': 'success', 'response':'ticked_added', 'data': {'ticket_id':ticket.id, 'message': { 'id':message.id, 'text':message.text, 'date':message.date }} })
                         
                     else:
                         data=json.dumps({'status': 'failed', 'response':'sender_missed'})
