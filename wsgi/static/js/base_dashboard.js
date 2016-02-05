@@ -211,7 +211,7 @@ function select_content() {
 									break;
 
 		case 'news': 				if(role=='U_Super') javascript='news/super.js';
-									if(role=='U_Passengers') javascript='news/users.js';
+									if(role=='U_Customers') javascript='news/users.js';
 									if(role=='U_Operators') javascript='news/operator.js';
 									if(role=='U_Viewer_Radios') javascript='news/users.js';
 									if(role=='U_Viewer_Digital_Radios') javascript='news/adminradios.js';
