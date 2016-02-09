@@ -452,8 +452,8 @@ def deactivate(request):
                     else:
                         data=json.dumps({'status':'failed','response':'auth_already_deactivated'})
 
-                except:
-                    data=json.dumps({'status': 'failed', 'response':'auth_not_found'})
+                except Exception as e:
+                    data=json.dumps({'status': 'failed', 'response':'auth_not_found'+e.args[0]})
 
             else:
                data=json.dumps({'status': 'failed', 'response':'id_missed'})
