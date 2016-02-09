@@ -54,7 +54,7 @@ function addPanel(ticket) {
 			var form=$('<form></form>').attr({'role':'form', 'data-ticket-id':ticket.id}); body.append(form);
 				var group=$('<div></div>').attr({'class':'form-group'}); form.append(group);
 					var textarea=$('<textarea></textarea>').attr({'class':'form-control respuesta', 'row':'3', 'placeholder':'Escribir nueva respuesta', 'data-ticket-id':ticket.id}); group.append(textarea);
-				var enviar=$('<button></button>').attr({'type':'submit','class':'btn btn-default'}).text('Enviar'); form.append(enviar);
+				var enviar=$('<button></button>').attr({'type':'submit','class':'btn btn-default','id':'enviarmsg'}).text('Enviar'); form.append(enviar);
 				var cerrar=$('<button></button>').attr({'class':'cerrar btn btn-default', 'data-ticket-id':ticket.id}).text('Dar por cerrada'); form.append(cerrar);
 				
 				form.submit(function(e){
@@ -88,7 +88,7 @@ function add_message(element) {
 	if (response_textarea.length==1){
 		var text = response_textarea.val();
 		if(text.length>0){
-			
+			$('#enviarmsg').html('<i class="fa fa-cog fa-spin"></i>');			
 			$.getJSON(api_url+'tickets/respond?callback=?', {ticket_id:ticket_id, text:text, offset:local_offset}, function(data){
 				if(data.status=='success'){
 					insert_message(data.data.message,messages_wrapper);
@@ -96,9 +96,11 @@ function add_message(element) {
 					response_textarea.val('').focus();
 					update_tickets_badge();
 					launch_alert('<i class="fa fa-smile-o"></i> Mensaje enviado','')
-			
+					$('#enviarmsg').html('Enviar');
 				}
-				else launch_alert('<i class="fa fa-frown-o"></i> Incidencia cerrada','warning');
+				else{ launch_alert('<i class="fa fa-frown-o"></i> Incidencia cerrada','warning');
+					$('#enviarmsg').html('Enviar');
+				}
 			});
 		}
 		else launch_alert('<i class="fa fa-frown-o"></i> Respuesta vacía','warning');

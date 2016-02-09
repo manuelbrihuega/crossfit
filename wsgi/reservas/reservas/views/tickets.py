@@ -163,7 +163,7 @@ def close(request):
     return APIResponse(request,data)
 
 
-def respond(request):
+'''def respond(request):
     """ Add message to ticket  """
     if 'auth_id' in request.session:
         if validate_parameter(request.GET,'offset'):
@@ -197,6 +197,34 @@ def respond(request):
            data=json.dumps({'status': 'failed', 'response':'offset_missed'})
     else:
         data=json.dumps({'status': 'failed', 'response':'not_logged'})
+
+    return APIResponse(request,data)'''
+
+
+def respond(request):
+    """ Get every ticket """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not validate_parameter(request.GET,'ticket_id'):
+            raise Exception('id_missed')
+        if not validate_parameter(request.GET,'text'):
+            raise Exception('text_missed')
+        if not have_permission(request.session['auth_id'],'respond_foreign_ticket'):
+            raise Exception('unauthorized_respond_foreign_ticket')
+        ticket=Tickets.objects.get(id=request.GET['ticket_id'])
+        message=add_message(ticket,request.GET['text'],False,request.GET['offset'])
+        ticket.status=1
+        ticket.save()
+
+        data=json.dumps({'status': 'success', 'response':'ticket_responded','data': {'message':message['data']['message']} })
+
+    except Tickets.DoesNotExist:
+        data=json.dumps({'status':'failed','response':'ticket_not_found'})
+
+    except Exception as e:
+        data=json.dumps({'status':'failed','repsonse':e.args[0]})
+
 
     return APIResponse(request,data)
 
