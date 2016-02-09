@@ -20,7 +20,46 @@ def revise_tasks():
             print 'EXEC: '+task.method
         except:
             print 'ERROR EXEC: '+task.method
+    #print 'EXEC: revise_reservations()'
     return True
+
+def revise_reservations():
+    from reservas.models import *
+    from datetime import *
+    from reservas.aux.emails import *
+    hoy=datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
+    reservas=Reservations.objects.filter(Q(schedule_time__schedule__date>hoy) & Q(cursada=False))
+    conf=Configuration.objects.get(id=1)
+    for res in reservas:
+        fechaparaactividad = datetime(res.schedule_time.schedule.date.year, res.schedule_time.schedule.date.month, res.schedule_time.schedule.date.day, res.schedule_time.time_start.hour, res.schedule_time.time_start.minute, 0)
+        fechasepuedecancelar = fechaparaactividad - timedelta(minutes=conf.minutes_post)
+        if datetime.today() >= fechasepuedecancelar:
+            if res.queue:
+                customer=U_Customers.objects.filter(Q(auth__id=res.auth.id))
+                for cus in customer:
+                    if not cus.vip:
+                        cus.credit_wod = cus.credit_wod + res.schedule_time.schedule.activity.credit_wod
+                        cus.credit_box = cus.credit_box + res.schedule_time.schedule.activity.credit_box
+                        cus.save()
+                send_email_cancel_reservation_cola_fin(res.auth.id, res.id)
+                res.delete()
+            else:
+                schedule_time = res.schedule_time
+                rss = Reservations.objects.filter(Q(schedule_time__id=schedule_time.id))
+                numplazas = 0
+                for rs in rss:
+                    numplazas = numplazas + 1
+                minimum = res.schedule_time.schedule.activity.min_capacity
+                if numplazas >= minimum:
+                    #se confirma
+                    res.cursada = True
+                    res.save()
+                    send_email_confirm_reservation(res.auth.id, res.id)
+                else:
+                    #se cancela
+                    send_email_cancel_reservation_minimo(res.auth.id, res.id)
+                    res.delete()
+                
 
 
 ##############

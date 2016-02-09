@@ -132,7 +132,7 @@ class Reservations(models.Model):
     date = models.DateTimeField(default=None,null=False)
     queue = models.BooleanField(default=False)
     position_queue = models.IntegerField(default=0,null=True)
-
+    cursada = models.BooleanField(default=False)
 
 #TICKETS
 class Tickets(models.Model):
