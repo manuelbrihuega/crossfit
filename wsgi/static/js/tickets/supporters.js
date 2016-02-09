@@ -55,7 +55,7 @@ function addPanel(role,ticket) {
 		var heading=$('<div></div>').attr('class','panel-heading'); panel.append(heading);
 			var title=$('<h4></h4>').attr('class','panel-title row'); heading.append(title);
 				var toggle=$('<a></a>').attr({'class':'accordion-toggle col-md-10','data-toggle':'collapse', 'data-parent':'#tickets_accordion', 'href':'#ticket_'+ticket.id}).text(ticket.title); title.append(toggle);
-                var role_type=$('<span></span>').attr({'class':'col-md-2'}).text(role); title.append(role_type);
+                var role_type=$('<span></span>').attr({'class':'col-md-2'}).text(role); 
 
 		var collapse=$('<div></div>').attr({'class':'panel-collapse collapse','id':'ticket_'+ticket.id}); panel.append(collapse);
 			var body=$('<div></div>').attr({'class':'panel-body'}); collapse.append(body);
