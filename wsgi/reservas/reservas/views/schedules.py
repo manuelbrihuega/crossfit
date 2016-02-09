@@ -455,7 +455,7 @@ def delete_reservation_client(request):
                         res.queue=False
                         res.position_queue=None
                         res.save()
-                        send_email_cambiocolaareserva_reservation(res.auth.id, res.id):
+                        send_email_cambiocolaareserva_reservation(res.auth.id, res.id)
                     else:
                         res.position_queue = res.position_queue - 1
                         res.save()

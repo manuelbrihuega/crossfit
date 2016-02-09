@@ -59,6 +59,7 @@ def revise_reservations():
                     #se cancela
                     send_email_cancel_reservation_minimo(res.auth.id, res.id)
                     res.delete()
+                    #aqui hay que comunicar al super de si la clase se cancela o cuanta gente tiene la clase
                 
 
 
