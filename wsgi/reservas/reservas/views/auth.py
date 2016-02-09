@@ -421,8 +421,8 @@ def deactivate(request):
                         for res in reservations:
                             actividad = res.schedule_time.schedule.activity
                             if not customer.vip:
-                                customer.credit_box = customer.credit_box + activity.credit_box
-                                customer.credit_wod = customer.credit_wod + activity.credit_wod
+                                customer.credit_box = customer.credit_box + actividad.credit_box
+                                customer.credit_wod = customer.credit_wod + actividad.credit_wod
                                 customer.save()
                             if res.queue:
                                 position = res.position_queue
