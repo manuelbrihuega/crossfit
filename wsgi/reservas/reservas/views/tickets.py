@@ -213,7 +213,7 @@ def respond(request):
         if not have_permission(request.session['auth_id'],'respond_ticket'):
             raise Exception('unauthorized_respond_ticket')
         ticket=Tickets.objects.get(id=request.GET['ticket_id'])
-        message=add_message(ticket,request.GET['text'],False,request.GET['offset'])
+        message=add_message(ticket,request.GET['text'],True,request.GET['offset'])
         ticket.status=1
         ticket.save()
 
