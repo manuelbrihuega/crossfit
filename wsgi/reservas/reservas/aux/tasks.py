@@ -60,7 +60,20 @@ def revise_reservations():
                     #se cancela
                     send_email_cancel_reservation_minimo(res.auth.id, res.id)
                     res.delete()
-                    #aqui hay que comunicar al super de si la clase se cancela o cuanta gente tiene la clase
+
+    schedules_timess=Schedules_times.objects.filter(Q(schedule__date>hoy))
+    for sch in schedules_timess:
+        fechaparaactividaddos = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
+        fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=conf.minutes_post)
+        if datetime.today() >= fechasepuedecancelardos:
+            rssdos = Reservations.objects.filter(Q(schedule_time__id=sch.id))
+            numplazasdos = 0
+            for rsdos in rssdos:
+                numplazasdos = numplazasdos + 1
+            minimumdos = sch.schedule.activity.min_capacity
+            if numplazasdos < minimumdos:
+                send_email_cancel_reservation_minimo_super(sch.id)
+                #aqui estamos avisando al super de que la clase se cancela xq no hay gente
                 
 
 
