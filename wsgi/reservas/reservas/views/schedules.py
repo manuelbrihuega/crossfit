@@ -11,6 +11,7 @@ from reservas.aux.auth import *
 #from api.aux.rates import *
 from reservas.aux.permissions import *
 from reservas.aux.general import *
+from reservas.aux.emails import *
 from reservas.aux.tasks import add_task
 from reservas.aux.date import *
 from datetime import *
@@ -319,6 +320,7 @@ def delete(request):
         schedule=schedule_time.schedule
         reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time.id))
         for res in reservations:
+            send_email_cancel_reservation(res.auth.id, res.id)
             res.delete()
         schedule_time.delete()
         schedule.delete()
@@ -361,6 +363,7 @@ def delete_reservation(request):
                 user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
                 user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
                 user.save()
+            send_email_cancel_reservation_cola(user.id, reservation.id)
             reservation.delete()
             reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
             for res in reservations:
@@ -373,6 +376,7 @@ def delete_reservation(request):
                 user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
                 user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
                 user.save()
+            send_email_cancel_reservation(user.auth.id, reservation.id)
             reservation.delete()
             reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
             for res in reservations:
@@ -429,6 +433,7 @@ def delete_reservation_client(request):
                     user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
                     user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
                     user.save()
+                send_email_cancel_reservation_cola(user.id, reservation.id)
                 reservation.delete()
                 reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
                 for res in reservations:
@@ -441,6 +446,7 @@ def delete_reservation_client(request):
                     user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
                     user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
                     user.save()
+                send_email_cancel_reservation(user.auth.id, reservation.id)
                 reservation.delete()
                 reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
                 for res in reservations:
@@ -860,6 +866,7 @@ def add_party(request):
                         schedule=sch.schedule
                         reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
                         for res in reservations:
+                            send_email_cancel_reservation(res.auth.id, res.id)
                             res.delete()
                         sch.delete()
                         schedule.delete()

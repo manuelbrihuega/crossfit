@@ -427,6 +427,7 @@ def deactivate(request):
                             if res.queue:
                                 position = res.position_queue
                                 reservationsdos=Reservations.objects.filter(Q(schedule_time__id=res.schedule_time.id) & Q(queue=True))
+                                send_email_cancel_reservation_cola(customer.id, res.id)
                                 res.delete()
                                 for resdos in reservationsdos:
                                     if resdos.position_queue > position:
@@ -434,6 +435,7 @@ def deactivate(request):
                                         resdos.save()
                             else:
                                 reservationstres=Reservations.objects.filter(Q(schedule_time__id=res.schedule_time.id) & Q(queue=True))
+                                send_email_cancel_reservation(customer.auth.id, res.id)
                                 res.delete()
                                 for restres in reservationstres:
                                     if restres.position_queue==1:

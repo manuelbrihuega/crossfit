@@ -108,6 +108,58 @@ def send_email_new_reservation_cola(cus_id, res_id):
         send_email(content,'Nueva reserva realizada', [cus.auth.email],'Nueva reserva','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
+
+def send_email_cancel_reservation_cola(cus_id, res_id):
+    """Send an email when a reservation is created"""
+    from reservas.models import *
+    try:
+        res=Reservations.objects.get(id=res_id)
+        cus=U_Customers.objects.get(id=cus_id)
+        conf=Configuration.objects.get(id=1)
+        content = render_to_string("emails/cancel_reservation_cola.html",
+                                   {'name':cus.auth.name,
+                                   'actividad':res.schedule_time.schedule.activity.name,
+                                   'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
+                                   'horario': str(res.schedule_time.time_start.hour)+':'+str(res.schedule_time.time_start.minute)+' a '+str(res.schedule_time.time_end.hour)+':'+str(res.schedule_time.time_end.minute),
+                                   'minutos': str(conf.minutes_post)})
+        send_email(content,'Reserva en cola cancelada', [cus.auth.email],'Reserva cancelada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+    except:
+        pass
+
+def send_email_cancel_reservation(auth_id, res_id):
+    """Send an email when a reservation is created"""
+    from reservas.models import *
+    try:
+        res=Reservations.objects.get(id=res_id)
+        auth=Auth.objects.get(id=auth_id)
+        conf=Configuration.objects.get(id=1)
+        content = render_to_string("emails/cancel_reservation.html",
+                                   {'name':auth.name,
+                                   'actividad':res.schedule_time.schedule.activity.name,
+                                   'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
+                                   'horario': str(res.schedule_time.time_start.hour)+':'+str(res.schedule_time.time_start.minute)+' a '+str(res.schedule_time.time_end.hour)+':'+str(res.schedule_time.time_end.minute),
+                                   'minutos': str(conf.minutes_post)})
+        send_email(content,'Reserva cancelada', [auth.email],'Reserva cancelada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+    except:
+        pass
+
+def send_email_cancel_reservation_minimo(cus_id, res_id):
+    """Send an email when a reservation is created"""
+    from reservas.models import *
+    try:
+        res=Reservations.objects.get(id=res_id)
+        cus=U_Customers.objects.get(id=cus_id)
+        conf=Configuration.objects.get(id=1)
+        content = render_to_string("emails/cancel_reservation_minimo.html",
+                                   {'name':cus.auth.name,
+                                   'actividad':res.schedule_time.schedule.activity.name,
+                                   'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
+                                   'horario': str(res.schedule_time.time_start.hour)+':'+str(res.schedule_time.time_start.minute)+' a '+str(res.schedule_time.time_end.hour)+':'+str(res.schedule_time.time_end.minute),
+                                   'minutos': str(conf.minutes_post)})
+        send_email(content,'Reserva cancelada', [cus.auth.email],'Reserva cancelada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+    except:
+        pass
+
 '''def send_email_new_driver_info(driver_id):
     """Send an email when a driver is created"""
     from api.models import U_Drivers
