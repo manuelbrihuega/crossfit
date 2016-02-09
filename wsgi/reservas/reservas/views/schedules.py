@@ -594,6 +594,7 @@ def add_reservation(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            send_email_new_reservation(customer.id, reservation.id)
         elif disponiblescola > 0:
             reservation = Reservations()
             reservation.auth = auth
@@ -606,6 +607,7 @@ def add_reservation(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            send_email_new_reservation_cola(customer.id, reservation.id)
         else:
             raise Exception('No hay plazas disponibles')
             
@@ -680,6 +682,7 @@ def add_reservation_client(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            send_email_new_reservation(customer.id, reservation.id)
         elif disponiblescola > 0:
             reservation = Reservations()
             reservation.auth = auth
@@ -692,9 +695,10 @@ def add_reservation_client(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            send_email_new_reservation_cola(customer.id, reservation.id)
         else:
             raise Exception('No hay plazas disponibles')
-            
+        
         data=json.dumps({'status':'success','response':'reservation_created','data':{'id':reservation.id}})
     
     except Exception as e:

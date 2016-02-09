@@ -322,6 +322,7 @@ def ban(request):
                         auth.banned=True
                         auth.save()
                         delete_session(auth.id)
+                        send_email_banned_user(auth.email, auth.name)
                         data=json.dumps({'status':'success','response':'auth_banned'})
 
                 except:
@@ -385,6 +386,7 @@ def activate(request):
                         customer=U_Customers.objects.get(auth=auth)
                         customer.validated=True
                         customer.save()
+                        send_email_customer_activated(customer.id)
                         data=json.dumps({'status':'success','response':'auth_activated'})
                 except:
                     data=json.dumps({'status': 'failed', 'response':'auth_not_found'})
@@ -415,7 +417,35 @@ def deactivate(request):
                         customer=U_Customers.objects.get(auth=auth)
                         customer.validated=False
                         customer.save()
+                        reservations = Reservations.objects.filter(Q(auth__id=auth.id))
+                        for res in reservations:
+                            actividad = res.schedule_time.schedule.activity
+                            if not customer.vip:
+                                customer.credit_box = customer.credit_box + activity.credit_box
+                                customer.credit_wod = customer.credit_wod + activity.credit_wod
+                                customer.save()
+                            if res.queue:
+                                position = res.position_queue
+                                reservationsdos=Reservations.objects.filter(Q(schedule_time__id=res.schedule_time.id) & Q(queue=True))
+                                res.delete()
+                                for resdos in reservationsdos:
+                                    if resdos.position_queue > position:
+                                        resdos.position_queue = resdos.position_queue - 1
+                                        resdos.save()
+                            else:
+                                reservationstres=Reservations.objects.filter(Q(schedule_time__id=res.schedule_time.id) & Q(queue=True))
+                                res.delete()
+                                for restres in reservationstres:
+                                    if restres.position_queue==1:
+                                        restres.queue=False
+                                        restres.position_queue=None
+                                        restres.save()
+                                    else:
+                                        restres.position_queue = restres.position_queue - 1
+                                        restres.save()
+
                         delete_session(auth.id)
+                        send_email_customer_deactivated(customer.id)
                         data=json.dumps({'status':'success','response':'auth_deactivated'})
                     else:
                         data=json.dumps({'status':'failed','response':'auth_already_deactivated'})

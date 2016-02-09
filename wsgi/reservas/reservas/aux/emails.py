@@ -25,7 +25,7 @@ def send_email_restorepass(url,email):
 def send_email_banned_user(email,name):
     """Send an email to announce an user has been banned"""
     content = render_to_string("emails/userbanned_es.html", {'name':name})
-    send_email(content,'Usuario baneado', [email],'USUARIO BANEADO','Taxible Support <soporte@taxible.com>')
+    send_email(content,'Usuario baneado', [email],'USUARIO BANEADO','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
 
 
 def send_email_ticket_message(email,title,text):
@@ -36,13 +36,8 @@ def send_email_ticket_message(email,title,text):
 def send_email_ticket_message_supporter(email,title,text,user):
     """Send an email to announce there is a new ticket message"""
     content = render_to_string("emails/new_ticket_message_supporter.html", {'title':title,'text':text, 'user':user})
-    send_email(content,'Nueva incidencia', ['manuel.brihuega@gmail.com'],'NUEVA INCIDENCIA','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
-    
-def send_email_tradicional_radio_disconnected(radio_name):
-    """Send an email to announce there is a tradicional radio desconnected"""
-    content = render_to_string("emails/radio_desconnected.html", {'radio_name':radio_name})
-    send_email(content,'Radio desconectada', ['soporte@taxible.com', 'info@taxible.com'],'RADIO DESCONECTADA','Taxible Support <soporte@taxible.com>')
-    
+    send_email(content,'Nueva incidencia', ['manuel.brihuega@gmail.com'],'NUEVA INCIDENCIA','CrossFit Jerez WEBAPP <crossfitjerezdelafrontera@gmail.com>')
+       
 
 def send_email_new_customer(customer_id):
     """Send an email when a customer is created"""
@@ -57,6 +52,62 @@ def send_email_new_customer(customer_id):
     except:
         pass
 
+def send_email_customer_deactivated(id_cus):
+    """Send an email when a customer is unvalidated"""
+    from reservas.models import U_Customers
+    try:
+        cus=U_Customers.objects.get(id=id_cus)
+        content = render_to_string("emails/customer_deactivated.html",
+                                   {'name':cus.auth.name})
+        send_email(content,'Has sido dado de baja', [cus.auth.email],'Baja en el sistema','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+    except:
+        pass
+
+def send_email_customer_activated(id_cus):
+    """Send an email when a customer is validated"""
+    from reservas.models import U_Customers
+    try:
+        cus=U_Customers.objects.get(id=id_cus)
+        content = render_to_string("emails/customer_activated.html",
+                                   {'name':cus.auth.name})
+        send_email(content,'Suscripción Validada!', [cus.auth.email],'Alta en el sistema','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+    except:
+        pass
+
+
+def send_email_new_reservation(cus_id, res_id):
+    """Send an email when a reservation is created"""
+    from reservas.models import *
+    try:
+        res=Reservations.objects.get(id=res_id)
+        cus=U_Customers.objects.get(id=cus_id)
+        conf=Configuration.objects.get(id=1)
+        content = render_to_string("emails/new_reservation.html",
+                                   {'name':cus.auth.name,
+                                   'actividad':res.schedule_time.schedule.activity.name,
+                                   'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
+                                   'horario': str(res.schedule_time.time_start.hour)+':'+str(res.schedule_time.time_start.minute)+' a '+str(res.schedule_time.time_end.hour)+':'+str(res.schedule_time.time_end.minute),
+                                   'minutos': str(conf.minutes_post)})
+        send_email(content,'Nueva reserva realizada', [cus.auth.email],'Nueva reserva','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+    except:
+        pass
+
+def send_email_new_reservation_cola(cus_id, res_id):
+    """Send an email when a reservation is created"""
+    from reservas.models import *
+    try:
+        res=Reservations.objects.get(id=res_id)
+        cus=U_Customers.objects.get(id=cus_id)
+        conf=Configuration.objects.get(id=1)
+        content = render_to_string("emails/new_reservation_cola.html",
+                                   {'name':cus.auth.name,
+                                   'actividad':res.schedule_time.schedule.activity.name,
+                                   'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
+                                   'horario': str(res.schedule_time.time_start.hour)+':'+str(res.schedule_time.time_start.minute)+' a '+str(res.schedule_time.time_end.hour)+':'+str(res.schedule_time.time_end.minute),
+                                   'minutos': str(conf.minutes_post)})
+        send_email(content,'Nueva reserva realizada', [cus.auth.email],'Nueva reserva','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+    except:
+        pass
 '''def send_email_new_driver_info(driver_id):
     """Send an email when a driver is created"""
     from api.models import U_Drivers
@@ -97,16 +148,7 @@ def send_email_new_touroperator_info(touroperator_id):
         pass
 
 
-def send_email_driver_activated(driver_id):
-    """Send an email when a driver is validated"""
-    from api.models import U_Drivers
-    try:
-        driver=U_Drivers.objects.get(id=driver_id)
-        content = render_to_string("emails/driver_activated.html",
-                                   {'name':driver.auth.name})
-        send_email(content,'Ya formas parte de Taxible', [driver.auth.email],'¡Ya formas parte de Taxible! ','Taxible Taxistas <taxistas@taxible.com>')
-    except:
-        pass
+
 
 def send_email_driver_activation_info(driver_id):
     """Send an email when a driver send a validation document"""
