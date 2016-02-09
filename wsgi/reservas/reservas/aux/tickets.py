@@ -17,14 +17,6 @@ def add_message(ticket,text,way,offset):
         message.original_way=way
         message.date=localdate=local_date(datetime.utcnow(),offset)
         message.save()
-        
-        if way:
-            user = ''
-            if ticket.auth:
-                user = str(ticket.auth.name) + ' ' + str(ticket.auth.surname) + ' - ' + str(ticket.auth.email) + ' (' + str(ticket.auth.phone) + ')'   
-            else:
-                user = 'No identificado'
-            #send_email_ticket_message_supporter('info@taxible.com',ticket.title,message.text,user)
             '''else:
                 if ticket.auth:
                     #send_email_ticket_message(ticket.auth.email,ticket.title,message.text)
