@@ -24,6 +24,7 @@ def revise_tasks():
     return True
 
 def revise_reservations():
+    from django.db.models import Q
     from reservas.models import *
     from datetime import *
     from reservas.aux.emails import *

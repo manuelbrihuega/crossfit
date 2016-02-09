@@ -3,7 +3,7 @@
 from django.http import HttpResponse
 import json
 import unicodedata
-
+from django.db.models import Q
 from reservas.models import *
 from reservas.aux.auth import *
 from reservas.aux.permissions import *
