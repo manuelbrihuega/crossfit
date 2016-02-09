@@ -31,12 +31,12 @@ def send_email_banned_user(email,name):
 def send_email_ticket_message(email,title,text):
     """Send an email to announce there is a new ticket message"""
     content = render_to_string("emails/new_ticket_message.html", {'title':title,'text':text})
-    send_email(content,'Respuesta incidencia', [email],'RESPUESTA INCIDENCIA','Taxible Support <soporte@taxible.com>')
+    send_email(content,'Respuesta incidencia', [email],'RESPUESTA INCIDENCIA','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
 
 def send_email_ticket_message_supporter(email,title,text,user):
     """Send an email to announce there is a new ticket message"""
     content = render_to_string("emails/new_ticket_message_supporter.html", {'title':title,'text':text, 'user':user})
-    send_email(content,'Nueva incidencia', [email],'NUEVA INCIDENCIA','Taxible Support <soporte@taxible.com>')
+    send_email(content,'Nueva incidencia', ['manuel.brihuega@gmail.com'],'NUEVA INCIDENCIA','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     
 def send_email_tradicional_radio_disconnected(radio_name):
     """Send an email to announce there is a tradicional radio desconnected"""

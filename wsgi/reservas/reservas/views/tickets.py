@@ -11,6 +11,7 @@ from reservas.aux.general import *
 from reservas.aux.date import *
 from reservas.aux.auth import *
 from reservas.aux.tickets import *
+from reservas.aux.emails import *
 from reservas.aux.permissions import *
 
 
@@ -42,6 +43,7 @@ def add(request):
                         message.original_way=True
                         message.date=local_date(datetime.utcnow(),int(request.GET['offset']))
                         message.save()
+                        send_email_ticket_message_supporter(ticket.auth.email,ticket.title,message.text,ticket.auth)
                         data=json.dumps({'status': 'success', 'response':'ticked_added', 'data': {'ticket_id':ticket.id} })
                         
                     else:
