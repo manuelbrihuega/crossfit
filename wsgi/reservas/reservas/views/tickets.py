@@ -210,8 +210,8 @@ def respond(request):
             raise Exception('id_missed')
         if not validate_parameter(request.GET,'text'):
             raise Exception('text_missed')
-        if not have_permission(request.session['auth_id'],'respond_foreign_ticket'):
-            raise Exception('unauthorized_respond_foreign_ticket')
+        if not have_permission(request.session['auth_id'],'respond_ticket'):
+            raise Exception('unauthorized_respond_ticket')
         ticket=Tickets.objects.get(id=request.GET['ticket_id'])
         message=add_message(ticket,request.GET['text'],False,request.GET['offset'])
         ticket.status=1
