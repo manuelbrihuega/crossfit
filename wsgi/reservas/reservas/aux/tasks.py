@@ -90,10 +90,10 @@ def reload_credit_users_task():
     dia=1
     if hoy.month == 12:
         mes = 1
-        year = today.year + 1
+        year = hoy.year + 1
     else:
-        mes = today.month + 1
-        year = today.year
+        mes = hoy.month + 1
+        year = hoy.year
 
     proxfecha = datetime(dia, mes, year, 0, 0, 0)
     
