@@ -152,7 +152,7 @@ def send_email_confirm_reservation(auth_id, res_id):
         conf=Configuration.objects.get(id=1)
         content = render_to_string("emails/confirm_reservation.html",
                                    {'name':auth.name,
-                                   'horaempiezo': str(res.schedule_time.time_start.hour)+':'+str(res.schedule_time.time_start.minute),
+                                   'horaempiezo': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1],
                                    'actividad':res.schedule_time.schedule.activity.name,
                                    'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
                                    'horario': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1],
@@ -171,7 +171,7 @@ def send_email_cambiocolaareserva_reservation(auth_id, res_id):
         conf=Configuration.objects.get(id=1)
         content = render_to_string("emails/confirm_cambio.html",
                                    {'name':auth.name,
-                                   'horaempiezo': str(res.schedule_time.time_start.hour)+':'+str(res.schedule_time.time_start.minute),
+                                   'horaempiezo': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1],
                                    'actividad':res.schedule_time.schedule.activity.name,
                                    'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
                                    'horario': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1],
