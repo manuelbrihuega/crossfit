@@ -86,7 +86,7 @@ def reload_credit_users_task():
     for cus in customers:
         cus.credit_box=cus.rate.credit_box
         cus.credit_wod=cus.rate.credit_wod
-        cus.save
+        cus.save()
     hoy=datetime.today()
     dia=1
     if hoy.month == 12:
