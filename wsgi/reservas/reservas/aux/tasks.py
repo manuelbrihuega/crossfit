@@ -20,7 +20,7 @@ def revise_tasks():
             print 'EXEC: '+task.method
         except:
             print 'ERROR EXEC: '+task.method
-    
+
     return True
 
 def revise_reservations():
@@ -58,6 +58,12 @@ def revise_reservations():
                     send_email_confirm_reservation(res.auth.id, res.id)
                 else:
                     #se cancela
+                    customer=U_Customers.objects.filter(Q(auth__id=res.auth.id))
+                    for cus in customer:
+                        if not cus.vip:
+                            cus.credit_wod = cus.credit_wod + res.schedule_time.schedule.activity.credit_wod
+                            cus.credit_box = cus.credit_box + res.schedule_time.schedule.activity.credit_box
+                            cus.save()
                     send_email_cancel_reservation_minimo(res.auth.id, res.id)
                     res.delete()
 
