@@ -20,7 +20,7 @@ def revise_tasks():
             print 'EXEC: '+task.method
         except:
             print 'ERROR EXEC: '+task.method
-    #print 'EXEC: revise_reservations()'
+    print 'EXEC: revise_reservations()'
     return True
 
 def revise_reservations():
