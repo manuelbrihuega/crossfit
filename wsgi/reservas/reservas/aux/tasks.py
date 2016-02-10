@@ -86,6 +86,7 @@ def reload_credit_users_task():
     for cus in customers:
         cus.credit_box=cus.rate.credit_box
         cus.credit_wod=cus.rate.credit_wod
+        cus.save
     hoy=datetime.today()
     dia=1
     if hoy.month == 12:
@@ -95,7 +96,7 @@ def reload_credit_users_task():
         mes = hoy.month + 1
         year = hoy.year
 
-    proxfecha = datetime(year, mes, dia, 0, 0, 0)
+    proxfecha = datetime(year, mes, dia, 4, 0, 0)
     
     add_task(proxfecha,'reload_credit_users_task()')
 
