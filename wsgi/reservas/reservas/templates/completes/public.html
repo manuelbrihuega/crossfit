@@ -86,6 +86,9 @@
 					</div>
 					<div class="columna3">
 						<div class="parrafo linkable">
+							<span onclick="OpenInNewTabExo('{{ BASE_URL }}/static/docs/exoneracion.pdf');">Exoneración</span>
+						</div>
+						<div class="parrafo linkable">
 							<span onclick="modal_eula('informacion_legal')">{% trans "Información Legal" %}</span>
 						</div>
 						<div class="parrafo linkable">
@@ -112,6 +115,10 @@
 	{% for js in javascript %} <script type="text/javascript" src="{{ MEDIA }}js/{{ js }}"> </script> {% endfor %}
 	
 	<script type="text/javascript">
+	   function OpenInNewTabExo(url) {
+		 var win = window.open(url, '_blank');
+  		 win.focus();
+		}
 	   var _gaq = _gaq || [];
 	   _gaq.push(['_setAccount', 'UA-29117939-11']);
 	   _gaq.push(['_setDomainName', 'taxibleapp.com']);
