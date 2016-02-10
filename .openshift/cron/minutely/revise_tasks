@@ -2,3 +2,4 @@
 
 cd $OPENSHIFT_HOMEDIR/app-root/repo/wsgi/reservas
 echo "from reservas.aux.tasks import revise_tasks;revise_tasks();quit();" | python manage.py shell
+echo "from reservas.aux.tasks import revise_reservations;revise_reservations();quit();" | python manage.py shell
