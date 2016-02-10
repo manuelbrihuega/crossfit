@@ -29,7 +29,7 @@ def revise_reservations():
     from datetime import *
     from reservas.aux.emails import *
     hoy=datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
-    reservas=Reservations.objects.filter(Q(schedule_time__schedule__date>hoy) & Q(cursada=False))
+    reservas=Reservations.objects.filter(Q(schedule_time__schedule__date__gt=hoy) & Q(cursada=False))
     conf=Configuration.objects.get(id=1)
     for res in reservas:
         fechaparaactividad = datetime(res.schedule_time.schedule.date.year, res.schedule_time.schedule.date.month, res.schedule_time.schedule.date.day, res.schedule_time.time_start.hour, res.schedule_time.time_start.minute, 0)
@@ -61,7 +61,7 @@ def revise_reservations():
                     send_email_cancel_reservation_minimo(res.auth.id, res.id)
                     res.delete()
 
-    schedules_timess=Schedules_times.objects.filter(Q(schedule__date>hoy))
+    schedules_timess=Schedules_times.objects.filter(Q(schedule__date__gt=hoy))
     for sch in schedules_timess:
         fechaparaactividaddos = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
         fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=conf.minutes_pre)
