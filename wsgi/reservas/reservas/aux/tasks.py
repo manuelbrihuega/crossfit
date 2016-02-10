@@ -95,7 +95,7 @@ def reload_credit_users_task():
         mes = hoy.month + 1
         year = hoy.year
 
-    proxfecha = datetime(dia, mes, year, 0, 0, 0)
+    proxfecha = datetime(year, mes, dia, 0, 0, 0)
     
     add_task(proxfecha,'reload_credit_users_task()')
 
