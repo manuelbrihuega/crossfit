@@ -33,7 +33,7 @@ def revise_reservations():
     conf=Configuration.objects.get(id=1)
     for res in reservas:
         fechaparaactividad = datetime(res.schedule_time.schedule.date.year, res.schedule_time.schedule.date.month, res.schedule_time.schedule.date.day, res.schedule_time.time_start.hour, res.schedule_time.time_start.minute, 0)
-        fechasepuedecancelar = fechaparaactividad - timedelta(minutes=conf.minutes_post)
+        fechasepuedecancelar = fechaparaactividad - timedelta(minutes=conf.minutes_pre)
         if datetime.today() >= fechasepuedecancelar:
             if res.queue:
                 customer=U_Customers.objects.filter(Q(auth__id=res.auth.id))
@@ -64,7 +64,7 @@ def revise_reservations():
     schedules_timess=Schedules_times.objects.filter(Q(schedule__date>hoy))
     for sch in schedules_timess:
         fechaparaactividaddos = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
-        fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=conf.minutes_post)
+        fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=conf.minutes_pre)
         if datetime.today() >= fechasepuedecancelardos:
             rssdos = Reservations.objects.filter(Q(schedule_time__id=sch.id))
             numplazasdos = 0
@@ -72,9 +72,32 @@ def revise_reservations():
                 numplazasdos = numplazasdos + 1
             minimumdos = sch.schedule.activity.min_capacity
             if numplazasdos < minimumdos:
-                send_email_cancel_reservation_minimo_super(sch.id)
+                if not sch.cursada:
+                    send_email_cancel_reservation_minimo_super(sch.id)
+                    sch.cursada=True
+                    sch.save()
                 #aqui estamos avisando al super de que la clase se cancela xq no hay gente
                 
+
+def reload_credit_users_task():
+    from reservas.models import *
+    from datetime import *
+    customers=U_Customers.objects.all()
+    for cus in customers:
+        cus.credit_box=cus.rate.credit_box
+        cus.credit_wod=cus.rate.credit_wod
+    hoy=datetime.today()
+    dia=1
+    if hoy.month == 12:
+        mes = 1
+        year = today.year + 1
+    else:
+        mes = today.month + 1
+        year = today.year
+
+    proxfecha = datetime(dia, mes, year, 0, 0, 0)
+    
+    add_task(proxfecha,'reload_credit_users_task()')
 
 
 ##############

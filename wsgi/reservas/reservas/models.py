@@ -124,6 +124,7 @@ class Schedules_times(models.Model):
     time_end = models.TimeField(default=None,null=False)
     duration = models.IntegerField(default=0,null=False)
     schedule = models.ForeignKey('Schedules', null=False, blank=False,on_delete=models.CASCADE)
+    cursada = models.BooleanField(default=False)
 
 #RESERVATIONS
 class Reservations(models.Model):
