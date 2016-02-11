@@ -277,9 +277,9 @@ function edit_configuracion() {
 
 function edit_configuracion_email() {
 	var email=$('#email_coach').val();
-	if (email_coach.length>0){
+	if (email.length>0){
 		$('#botonenviaremail').html('<i class="fa fa-cog fa-spin"></i>');
-		$.getJSON(api_url+'schedules/edit_config_email?callback=?', { email:email_coach}, function(data){
+		$.getJSON(api_url+'schedules/edit_config_email?callback=?', { email:email}, function(data){
 			if(data.status=='success'){
 				launch_alert('<i class="fa fa-smile-o"></i> Configuración guardada','');
 				$('#botonenviaremail').html('Guardar');
