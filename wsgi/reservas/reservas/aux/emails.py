@@ -241,7 +241,7 @@ def send_email_confirm_class_super(sch_id, asistentes, numplazasdos):
         finalcad=''
         for ass in cad:
           if ass!='':
-            finalcad= finalcad + '<p>- '+ ass +'</p>' 
+            finalcad= finalcad + '- '+ ass +'\n' 
         content = render_to_string("emails/confirm_class_super.html",
                                    {'actividad':sch.schedule.activity.name,
                                    'fecha': str(sch.schedule.date.day)+'-'+str(sch.schedule.date.month)+'-'+str(sch.schedule.date.year),
