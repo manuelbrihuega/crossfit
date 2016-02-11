@@ -69,26 +69,27 @@ def revise_reservations():
 
     schedules_timess=Schedules_times.objects.filter(Q(schedule__date__gt=hoy))
     for sch in schedules_timess:
-        fechaparaactividaddos = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
-        fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=conf.minutes_pre)
-        if datetime.today() >= fechasepuedecancelardos:
-            rssdos = Reservations.objects.filter(Q(schedule_time__id=sch.id))
-            numplazasdos = 0
-            asistentes = ''
-            for rsdos in rssdos:
-                numplazasdos = numplazasdos + 1
-                asistentes = asistentes + rsdos.auth.name + ' ' + rsdos.auth.surname + ', '
-            minimumdos = sch.schedule.activity.min_capacity
-            if numplazasdos < minimumdos:
-                if not sch.cursada:
+        if not sch.cursada:
+            fechaparaactividaddos = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
+            fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=conf.minutes_pre)
+            if datetime.today() >= fechasepuedecancelardos:
+                rssdos = Reservations.objects.filter(Q(schedule_time__id=sch.id))
+                numplazasdos = 0
+                asistentes = ''
+                for rsdos in rssdos:
+                    numplazasdos = numplazasdos + 1
+                    asistentes = asistentes + rsdos.auth.name + ' ' + rsdos.auth.surname + ', '
+                minimumdos = sch.schedule.activity.min_capacity
+                if numplazasdos < minimumdos:
                     send_email_cancel_reservation_minimo_super(sch.id)
                     sch.cursada=True
                     sch.save()
-            else:
-                if not sch.cursada:
-                    #send_email_confirm_class_super(sch.id, asistentes, numplazasdos)
+                else:
+                    send_email_confirm_class_super(sch.id, asistentes, numplazasdos)
+                    sch.cursada=True
+                    sch.save()
 
-                #aqui estamos avisando al super de que la clase se cancela xq no hay gente
+                    #aqui estamos avisando al super de que la clase se cancela xq no hay gente
                 
 
 def reload_credit_users_task():
