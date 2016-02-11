@@ -229,6 +229,23 @@ def send_email_cancel_reservation_minimo_super(sch_id):
         send_email(content,'Actividad cancelada', ['manuel.brihuega@gmail.com'],'Actividad cancelada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
+
+def send_email_confirm_class_super(sch_id, asistentes, numplazasdos):
+    from reservas.models import *
+    try:
+        conf=Configuration.objects.get(id=1)
+        sch=Schedules_times.objects.get(id=sch_id)
+        content = render_to_string("emails/confirm_class_super.html",
+                                   {'actividad':sch.schedule.activity.name,
+                                   'fecha': str(sch.schedule.date.day)+'-'+str(sch.schedule.date.month)+'-'+str(sch.schedule.date.year),
+                                   'horario': get_string_from_date(sch.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(sch.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_end).split(' ')[1].split(':')[1],
+                                   'minutos': str(conf.minutes_post),
+                                   'asistentes': asistentes.split(','),
+                                   'numeroasis':numplazasdos})
+        send_email(content,'Actividad confirmada', ['manuel.brihuega@gmail.com'],'Actividad confirmada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+    except:
+        pass
+
         
 '''def send_email_new_driver_info(driver_id):
     """Send an email when a driver is created"""
