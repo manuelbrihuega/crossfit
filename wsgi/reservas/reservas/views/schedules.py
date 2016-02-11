@@ -285,7 +285,7 @@ def list_all_for_customers(request):
         fileName = os.path.join(os.path.abspath(os.path.dirname(__file__)) + '/../../../static/xml', 'calendario.xml')
         writeFile(cad, fileName, context)
         scheme = 'https://' if request.is_secure() else 'http://'
-        urlfinal = scheme + request.get_host() + settings.STATIC_URL + 'xml/calendario.xml'
+        urlfinal = scheme + request.get_host() + settings.STATIC_URL + 'xml/calendarioclientes.xml'
         data=json.dumps({'status':'success','response':'list_all_schedules','data':urlfinal})
 
     except Exception as e:
