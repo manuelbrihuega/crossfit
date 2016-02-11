@@ -36,7 +36,8 @@ def send_email_ticket_message(email,title,text):
 def send_email_ticket_message_supporter(email,title,text,user):
     """Send an email to announce there is a new ticket message"""
     content = render_to_string("emails/new_ticket_message_supporter.html", {'title':title,'text':text, 'user':user})
-    send_email(content,'Nueva incidencia', ['manuel.brihuega@gmail.com'],'NUEVA INCIDENCIA','CrossFit Jerez WEBAPP <crossfitjerezdelafrontera@gmail.com>')
+    conf=Configuration.objects.get(id=1)
+    send_email(content,'Nueva incidencia', [conf.email],'NUEVA INCIDENCIA','CrossFit Jerez WEBAPP <crossfitjerezdelafrontera@gmail.com>')
        
 
 def send_email_new_customer(customer_id):
@@ -226,7 +227,8 @@ def send_email_cancel_reservation_minimo_super(sch_id):
                                    'fecha': str(sch.schedule.date.day)+'-'+str(sch.schedule.date.month)+'-'+str(sch.schedule.date.year),
                                    'horario': get_string_from_date(sch.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(sch.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_end).split(' ')[1].split(':')[1],
                                    'minutos': str(conf.minutes_post)})
-        send_email(content,'Actividad cancelada', ['manuel.brihuega@gmail.com'],'Actividad cancelada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+        conf=Configuration.objects.get(id=1)
+        send_email(content,'Actividad cancelada', [conf.email],'Actividad cancelada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
 
@@ -235,14 +237,20 @@ def send_email_confirm_class_super(sch_id, asistentes, numplazasdos):
     try:
         conf=Configuration.objects.get(id=1)
         sch=Schedules_times.objects.get(id=sch_id)
+        cad=asistentes.split(',')
+        finalcad=''
+        for ass in cad:
+          if ass!='':
+            finalcad= finalcad + '<p>- '+ ass +'</p>' 
         content = render_to_string("emails/confirm_class_super.html",
                                    {'actividad':sch.schedule.activity.name,
                                    'fecha': str(sch.schedule.date.day)+'-'+str(sch.schedule.date.month)+'-'+str(sch.schedule.date.year),
                                    'horario': get_string_from_date(sch.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(sch.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_end).split(' ')[1].split(':')[1],
                                    'minutos': str(conf.minutes_post),
-                                   'asistentes': asistentes.split(','),
+                                   'asistentes': finalcad,
                                    'numeroasis':numplazasdos})
-        send_email(content,'Actividad confirmada', ['manuel.brihuega@gmail.com'],'Actividad confirmada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+        conf=Configuration.objects.get(id=1)
+        send_email(content,'Actividad confirmada', [conf.email],'Actividad confirmada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
 

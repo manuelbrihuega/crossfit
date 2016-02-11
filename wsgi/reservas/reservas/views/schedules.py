@@ -940,6 +940,31 @@ def edit_config(request):
     return APIResponse(request,data)
 
 
+def edit_config_email(request):
+    """
+    Edit config
+    """
+    if 'auth_id' not in request.session:
+        data=json.dumps({'status': 'failed', 'response':'not_logged'})
+
+    if not have_permission(request.session['auth_id'],'edit_config_email'):
+        data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_config_email'})
+
+    if not validate_parameter(request.GET, 'email'):
+        raise Exception('email_missed')
+                
+    try:
+        config=Configuration.objects.get(id=1)
+        config.email = request.GET['email']
+        config.save()
+        data=json.dumps({'status':'success','response':'configuration_modified'})
+    
+    except Exception, e:
+            data=json.dumps({'status': 'failed', 'response':e.args[0]})
+
+    return APIResponse(request,data)
+
+
 def get_configuration(request):
     """
     Get foreign config info
@@ -951,7 +976,8 @@ def get_configuration(request):
                 config_profile={'dias_reserva':config.days_pre,
                                 'dias_atras':config.days_pre_show,
                                 'minutos_cancela':config.minutes_post,
-                                'minutos_reserva':config.minutes_pre}
+                                'minutos_reserva':config.minutes_pre,
+                                'email':config.email}
                 data=json.dumps({'status':'success','response':'get_configuration','data': config_profile})
             except Exception as e:
                 data=json.dumps({'status':'failed','response':e.args[0]})

@@ -14,12 +14,14 @@ function get_content() {
 						active_new_fiesta_form();
 						active_new_dnipre_form();
 						edit_config();
+						edit_config_email();
 						$.getJSON(api_url+'schedules/get_configuration?callback=?', {}, function(data){
 							if(data.status=='success'){
 								$('#minutos_reserva').val(data.data.minutos_reserva);
 								$('#minutos_cancela').val(data.data.minutos_cancela);
 								$('#dias_reserva').val(data.data.dias_reserva);
-								$('#dias_atras').val(data.data.dias_atras);		
+								$('#dias_atras').val(data.data.dias_atras);
+								$('#email_coach').val(data.data.email);		
 							}
 			
 						});
@@ -136,6 +138,13 @@ function active_new_dnipre_form() {
 function edit_config() {
 	$('#new_config_form').submit(false).submit(function(e){
 		edit_configuracion();
+		return false;
+	});
+}
+
+function edit_config_email() {
+	$('#new_configemail_form').submit(false).submit(function(e){
+		edit_configuracion_email();
 		return false;
 	});
 }
@@ -264,6 +273,21 @@ function edit_configuracion() {
 		else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar los minutos','warning');
 	}
 	else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar los minutos','warning');
+}
+
+function edit_configuracion_email() {
+	var email=$('#email_coach').val();
+	if (email_coach.length>0){
+		$('#botonenviaremail').html('<i class="fa fa-cog fa-spin"></i>');
+		$.getJSON(api_url+'schedules/edit_config_email?callback=?', { email:email_coach}, function(data){
+			if(data.status=='success'){
+				launch_alert('<i class="fa fa-smile-o"></i> Configuración guardada','');
+				$('#botonenviaremail').html('Guardar');
+				
+			}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonenviaremail').html('Guardar');}
+		});
+	}
+	else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar el email','warning');									
 }
 
 
