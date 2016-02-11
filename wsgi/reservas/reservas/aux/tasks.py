@@ -86,7 +86,7 @@ def revise_reservations():
                     sch.save()
             else:
                 if not sch.cursada:
-                    send_email_confirm_class_super(sch.id, asistentes, numplazasdos)
+                    #send_email_confirm_class_super(sch.id, asistentes, numplazasdos)
 
                 #aqui estamos avisando al super de que la clase se cancela xq no hay gente
                 
