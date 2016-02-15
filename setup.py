@@ -38,7 +38,9 @@ setup(
         'requests==2.2.1',
         'six==1.6.1',
         'wsgiref==0.1.2',
-        'xlrd==0.9.3'
+        'xlrd==0.9.3',
+        'libjansson',
+        'libgcrypt20'
     ],
     dependency_links=[
         'https://pypi.python.org/simple/django/'
