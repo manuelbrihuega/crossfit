@@ -38,15 +38,7 @@ setup(
         'requests==2.2.1',
         'six==1.6.1',
         'wsgiref==0.1.2',
-        'xlrd==0.9.3',
-        'libreadline-dev', 
-        'libconfig-dev',
-        'libssl-dev', 
-        'lua5.2', 
-        'liblua5.2-dev', 
-        'libevent-dev', 
-        'libjansson-dev', 
-        'libpython-dev'
+        'xlrd==0.9.3'
     ],
     dependency_links=[
         'https://pypi.python.org/simple/django/'
