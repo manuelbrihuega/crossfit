@@ -134,10 +134,11 @@ def send_email_restorepass_task(url,email):
 #   TELEGRAM  #
 ###############
 
-'''def send_telegram_task(name,nick,phone,msg):
+def send_telegram_task(name,nick,phone,msg):
     from reservas.aux.telegram import send_telegram
     send_telegram(name,nick,phone,msg)
 
+'''
 def warning_telegram_task(msg):
     from reservas.aux.telegram import send_telegram
     send_telegram('Manuel de la Calle','Manuel_de_la_Calle','+34675349165',msg)
