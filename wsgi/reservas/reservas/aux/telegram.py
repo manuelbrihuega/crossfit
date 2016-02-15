@@ -5,7 +5,7 @@ import os
 def send_telegram(name,nick,phone,msg):
     # cmd = '/Users/rafaparadela/Downloads/tg/telegram -k /Users/rafaparadela/Downloads/tg/tg.pub'
     patheo = os.path.dirname(__file__) + '/../../../../../dependencies/tg/bin/'
-    cmd = patheo+'telegram -k '+patheo'../tg-server.pub'
+    cmd = patheo+'telegram -k '+patheo+'../tg-server.pub'
     telegram = pexpect.spawn(cmd)
     # telegram.expect('0m',timeout=5)
     index = telegram.expect(['0m', 'unread', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
