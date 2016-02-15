@@ -40,7 +40,7 @@ setup(
         'wsgiref==0.1.2',
         'xlrd==0.9.3',
         'libjansson',
-        'libgcrypt20'
+        'libgcrypt'
     ],
     dependency_links=[
         'https://pypi.python.org/simple/django/'
