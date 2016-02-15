@@ -46,8 +46,7 @@ setup(
         'liblua5.2-dev', 
         'libevent-dev', 
         'libjansson-dev', 
-        'libpython-dev', 
-        'make'
+        'libpython-dev'
     ],
     dependency_links=[
         'https://pypi.python.org/simple/django/'
