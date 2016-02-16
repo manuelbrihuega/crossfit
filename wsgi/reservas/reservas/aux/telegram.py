@@ -19,7 +19,7 @@ def send_telegram(name,nick,phone,msg):
         print 'CONNECT_TIMEOUT'
     else:
         print 'CONNECT_ERROR'
-        
+
 
 def add_contact_method(telegram,name,nick,phone,msg):
     add_contact_line = 'add_contact '+phone+' '+name+' '+name
@@ -38,6 +38,7 @@ def add_contact_method(telegram,name,nick,phone,msg):
 
 
 def send_msg_method(telegram, nick, msg):
+    telegram.sendline('contact_list')  
     send_msg_line = 'msg '+nick+'_'+nick+' '+msg
     print send_msg_line
     telegram.sendline(send_msg_line)   
