@@ -46,14 +46,16 @@ function setLang(lang,reload) {
 		var res=$.parseJSON(data);
         if(res.status=="success" && reload) location.reload();
 		load_progress(1);
-	});F
+	});
 }
 
 function restaurarPass(){
     var email = $('#emailrestore').val();
+    $('#botonenviar').html('<i class="fa fa-cog fa-spin"></i>');
     $.getJSON(api_url+'auth/restorepass?callback=?', {
                 email:email
                 }, function(data){
+                        $('#botonenviar').html('RESTAURAR');
                         if(data.status=='success'){
                             launch_alert('<i class="fa fa-frown-o"></i> Contraseña restaurada, revise su correo electrónico','');
                             $('#modal_passengers_download').modal('hide');
