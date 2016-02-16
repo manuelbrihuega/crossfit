@@ -72,14 +72,16 @@ def prueba(name, phone, msg):
     time.sleep(5)
     index = telegram.expect(['', 'successfully', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     telegram.sendline('contact_list')  
-    time.sleep(10)
+    time.sleep(6)
     contad = 0
     print line
     telegram.sendline(line)  
-    contad = 0
-    for line in telegram:
-        print line
-        contad = contad + 1
-        if contad==15:
-            break
+    #contad = 0
+    #for line in telegram:
+    #    print line
+    #    contad = contad + 1
+    #    if contad==15:
+    #        break
+    time.sleep(6)
+    telegram.sendline('quit')
     print 'OK'
