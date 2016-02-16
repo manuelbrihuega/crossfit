@@ -136,7 +136,7 @@ def send_email_restorepass_task(url,email):
 
 def send_telegram_task(name,nick,phone,msg):
     from reservas.aux.telegram import *
-    prueba(name,nick,phone,msg)
+    prueba(name,phone,msg)
     #send_telegram(name,nick,phone,msg)
 
 '''
