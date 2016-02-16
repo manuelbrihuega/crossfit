@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pexpect
 import os
+import time
 
 def send_telegram(name,nick,phone,msg):
     # cmd = '/Users/rafaparadela/Downloads/tg/telegram -k /Users/rafaparadela/Downloads/tg/tg.pub'
@@ -39,6 +40,7 @@ def add_contact_method(telegram,name,nick,phone,msg):
 
 def send_msg_method(telegram, nick, msg):
     telegram.sendline('contact_list')  
+    time.sleep(5)
     send_msg_line = 'msg '+nick+'_'+nick+' '+msg
     print send_msg_line
     telegram.sendline(send_msg_line)   
@@ -56,3 +58,12 @@ def send_msg_method(telegram, nick, msg):
         
     telegram.sendline('quit')
     
+def prueba(cmd):
+    telegram = pexpect.spawn(cmd)
+    index = telegram.expect(['', 'unread', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
+    telegram.sendline('add_contact +34675349165 User_id4 User_id4')
+    index = telegram.expect(['', 'successfully', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
+    telegram.sendline('contact_list')  
+    time.sleep(5)
+    telegram.sendline('msg User_id4_User_id4 FinalAbsoluto')  
+    print 'OK'
