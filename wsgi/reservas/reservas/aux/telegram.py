@@ -61,19 +61,34 @@ def send_msg_method(telegram, nick, msg):
 def prueba(cmd):
     telegram = pexpect.spawn(cmd)
     time.sleep(5)
+    contad = 0
     for line in telegram:
         print line
+        contad = contad + 1
+        if contad==15:
+            break
     index = telegram.expect(['', 'unread', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     telegram.sendline('add_contact +34675349165 User_id4 User_id4')
     time.sleep(5)
+    contad = 0
     for line in telegram:
         print line
+        contad = contad + 1
+        if contad==15:
+            break
     index = telegram.expect(['', 'successfully', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     telegram.sendline('contact_list')  
     time.sleep(5)
+    contad = 0
     for line in telegram:
         print line
+        contad = contad + 1
+        if contad==15:
+            break
     telegram.sendline('msg User_id4_User_id4 FinalAbsoluto')  
+    contad = 0
     for line in telegram:
-        print line
+        print linecontad = contad + 1
+        if contad==15:
+            break
     print 'OK'
