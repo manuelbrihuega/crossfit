@@ -88,7 +88,8 @@ def prueba(cmd):
     telegram.sendline('msg User_id4_User_id4 FinalAbsoluto')  
     contad = 0
     for line in telegram:
-        print linecontad = contad + 1
+        print line
+        contad = contad + 1
         if contad==15:
             break
     print 'OK'
