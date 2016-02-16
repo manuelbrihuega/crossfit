@@ -149,20 +149,20 @@ def restorepass(request):
         emailtrad = elimina_tildes(request.GET['email'], request.GET['email'])
         lista_auth=Auth.objects.filter(email=emailtrad)
         if len(lista_auth)>0:
-            auth=lista_auth[0]
-            url='http://'+request.get_host()+'/restorepass/'+auth.token
-            try:
-                add_task(datetime.utcnow(),'send_email_restorepass_task(url="'+url+'",email="'+emailtrad+'")')
-                name = 'User Id'+str(auth.id)
-                nick = 'User_Id'+str(auth.id)
-                phone = '+34'+str(auth.phone)
-                message = 'Puedes cambiar tu contraseña desde el siguiente enlace '+url
-                telegram = {'name': name, 'nick': nick , 'phone': phone , 'message': message }
-        
-                add_task(datetime.utcnow(),'send_telegram_task(name="'+str(name)+'",nick="'+str(nick)+'",phone="'+str(phone)+'",msg="'+message+'")')
-                data=json.dumps({'status': 'success', 'response':'email_sent'})
-            except Exception as e:
-                data=json.dumps({'status': 'failed', 'response':'email_unsent'+e.args[0]})
+            for auth in lista_auth:
+                url='http://'+str(request.get_host())+'/restorepass/'+str(auth.token)
+                try:
+                    add_task(datetime.utcnow(),'send_email_restorepass_task(url="'+url+'",email="'+emailtrad+'")')
+                    name = 'User Id'+str(auth.id)
+                    nick = 'User_Id'+str(auth.id)
+                    phone = '+34'+str(auth.phone)
+                    message = 'Puedes cambiar tu contraseña desde el siguiente enlace '+url
+                    telegram = {'name': name, 'nick': nick , 'phone': phone , 'message': message }
+            
+                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                    data=json.dumps({'status': 'success', 'response':'email_sent'})
+                except Exception as e:
+                    data=json.dumps({'status': 'failed', 'response':'email_unsent'+e.args[0]})
         else:
             data=json.dumps({'status': 'failed', 'response':'email_unknown'})
     else:
