@@ -154,7 +154,7 @@ def restorepass(request):
                 url='http://'+str(request.get_host())+'/restorepass/'+str(auth.token)
                 try:
                     add_task(datetime.utcnow(),'send_email_restorepass_task(url="'+url+'",email="'+emailtrad+'")')
-                    name = 'User Id'+str(auth.id)
+                    name = 'User_Id'+str(auth.id)
                     nick = 'User_Id'+str(auth.id)
                     phone = '+34'+str(auth.phone)
                     message = 'Puedes cambiar tu contraseña desde el siguiente enlace '+url
