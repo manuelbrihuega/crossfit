@@ -20,7 +20,7 @@ def send_telegram(name,nick,phone,msg):
         
 
 def add_contact_method(telegram,name,nick,phone,msg):
-    add_contact_line = 'add_contact '+phone+' '+name
+    add_contact_line = 'add_contact '+phone+' '+name+' '+name
     telegram.sendline(add_contact_line)
     index = telegram.expect(['', 'successfully', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     if index == 0 or index == 1:
@@ -35,7 +35,7 @@ def add_contact_method(telegram,name,nick,phone,msg):
 
 
 def send_msg_method(telegram, nick, msg):
-    send_msg_line = 'msg '+nick+' '+msg
+    send_msg_line = 'msg '+nick+'_'+nick+' '+msg
     telegram.sendline(send_msg_line)   
     index = telegram.expect(['', 'print_message', 'Bad', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     if index == 0 or index == 1:

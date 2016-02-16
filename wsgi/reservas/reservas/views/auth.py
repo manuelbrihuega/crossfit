@@ -161,8 +161,8 @@ def restorepass(request):
         
                 add_task(datetime.utcnow(),'send_telegram_task(name="'+str(name)+'",nick="'+str(nick)+'",phone="'+str(phone)+'",msg="'+message+'")')
                 data=json.dumps({'status': 'success', 'response':'email_sent'})
-            except:
-                data=json.dumps({'status': 'failed', 'response':'email_unsent'})
+            except Exception as e:
+                data=json.dumps({'status': 'failed', 'response':'email_unsent'+e.args[0]})
         else:
             data=json.dumps({'status': 'failed', 'response':'email_unknown'})
     else:
