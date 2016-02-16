@@ -10,7 +10,7 @@ def send_telegram(name,nick,phone,msg):
     cmd = patheo+'telegram-cli -k '+patheo+'../tg-server.pub'
     print cmd
     telegram = pexpect.spawn(cmd)
-    time.sleep(5)
+    time.sleep(10)
     # telegram.expect('0m',timeout=5)
     index = telegram.expect(['', 'unread', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     if index == 0 or index == 1:
@@ -25,12 +25,11 @@ def send_telegram(name,nick,phone,msg):
 
 def add_contact_method(telegram,name,nick,phone,msg):
     add_contact_line = 'add_contact '+phone+' '+name+' '+name
-    print add_contact_line
-    telegram.sendline(add_contact_line)
     time.sleep(5)
+    telegram.sendline(add_contact_line)
+    time.sleep(10)
     index = telegram.expect(['', 'successfully', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     if index == 0 or index == 1:
-        print telegram.after
         send_msg_method(telegram,nick,msg)
     elif index == 2:
         print 'ADD_CONTACT_END'
@@ -41,11 +40,13 @@ def add_contact_method(telegram,name,nick,phone,msg):
 
 
 def send_msg_method(telegram, nick, msg):
-    telegram.sendline('contact_list')  
     time.sleep(5)
+    telegram.sendline('contact_list')  
+    time.sleep(10)
     send_msg_line = 'msg '+nick+'_'+nick+' '+msg
-    print send_msg_line
+    #print send_msg_line
     telegram.sendline(send_msg_line)   
+    time.sleep(5)
     index = telegram.expect(['', 'print_message', 'Bad', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     if index == 0 or index == 1:
         print 'SENT'
@@ -70,7 +71,7 @@ def prueba(cmd, msg):
     telegram.sendline('contact_list')  
     time.sleep(5)
     contad = 0
-    telegram.sendline('msg User_id4_User_id4 '+msg)  
+    telegram.sendline('msg User_id2_User_id2 '+msg)  
     contad = 0
     for line in telegram:
         print line
