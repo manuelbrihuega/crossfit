@@ -62,6 +62,7 @@ def send_msg_method(telegram, nick, msg):
     telegram.sendline('quit')
     
 def prueba(name, phone, msg):
+    line = 'msg '+name+'_'+name+' '+msg
     patheo = os.path.dirname(__file__) + '/../../../../../../dependencies/tg/bin/'
     cmd = patheo+'telegram-cli -k '+patheo+'../tg-server.pub'
     telegram = pexpect.spawn(cmd)
@@ -71,9 +72,10 @@ def prueba(name, phone, msg):
     time.sleep(5)
     index = telegram.expect(['', 'successfully', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     telegram.sendline('contact_list')  
-    time.sleep(5)
+    time.sleep(10)
     contad = 0
-    telegram.sendline('msg '+name+'_'+name+' '+msg)  
+    print line
+    telegram.sendline(line)  
     contad = 0
     for line in telegram:
         print line

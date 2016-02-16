@@ -57,7 +57,7 @@ function restaurarPass(){
                 }, function(data){
                         $('#botonenviar').html('RESTAURAR');
                         if(data.status=='success'){
-                            launch_alert('<i class="fa fa-frown-o"></i> Contraseña restaurada, revise su correo electrónico','');
+                            launch_alert('<i class="fa fa-smile-o"></i> Contraseña restaurada, revise su correo electrónico','');
                             $('#modal_passengers_download').modal('hide');
                         }
                         else{
