@@ -151,7 +151,7 @@ def restorepass(request):
         lista_auth=Auth.objects.filter(email=emailtrad)
         if len(lista_auth)>0:
             for auth in lista_auth:
-                url='http://'+str(request.get_host())+'/restorepass/'+str(auth.token)
+                url='https://crossfit-reservasjerez.rhcloud.com/restorepass/'+str(auth.token)
                 try:
                     name = 'User_Id'+str(auth.id)
                     nick = 'User_Id'+str(auth.id)
