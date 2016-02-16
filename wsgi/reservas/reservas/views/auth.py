@@ -159,8 +159,8 @@ def restorepass(request):
                     phone = '+34'+str(auth.phone)
                     message = 'Puedes cambiar tu contraseña desde el siguiente enlace '+url
                     telegram = {'name': name, 'nick': nick , 'phone': phone , 'message': message }
-                    send_telegram(name,nick,phone,message)
-                    #add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                    #send_telegram(name,nick,phone,message)
+                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     data=json.dumps({'status': 'success', 'response':'email_sent'})
                 except Exception as e:
                     data=json.dumps({'status': 'failed', 'response':'email_unsent'+e.args[0]})
