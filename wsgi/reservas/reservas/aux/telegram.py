@@ -60,10 +60,20 @@ def send_msg_method(telegram, nick, msg):
     
 def prueba(cmd):
     telegram = pexpect.spawn(cmd)
+    time.sleep(5)
+    for line in telegram:
+        print line
     index = telegram.expect(['', 'unread', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     telegram.sendline('add_contact +34675349165 User_id4 User_id4')
+    time.sleep(5)
+    for line in telegram:
+        print line
     index = telegram.expect(['', 'successfully', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     telegram.sendline('contact_list')  
     time.sleep(5)
+    for line in telegram:
+        print line
     telegram.sendline('msg User_id4_User_id4 FinalAbsoluto')  
+    for line in telegram:
+        print line
     print 'OK'
