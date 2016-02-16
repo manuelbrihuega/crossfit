@@ -10,6 +10,7 @@ def send_telegram(name,nick,phone,msg):
     cmd = patheo+'telegram-cli -k '+patheo+'../tg-server.pub'
     print cmd
     telegram = pexpect.spawn(cmd)
+    time.sleep(5)
     # telegram.expect('0m',timeout=5)
     index = telegram.expect(['', 'unread', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     if index == 0 or index == 1:
@@ -26,6 +27,7 @@ def add_contact_method(telegram,name,nick,phone,msg):
     add_contact_line = 'add_contact '+phone+' '+name+' '+name
     print add_contact_line
     telegram.sendline(add_contact_line)
+    time.sleep(5)
     index = telegram.expect(['', 'successfully', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     if index == 0 or index == 1:
         print telegram.after
