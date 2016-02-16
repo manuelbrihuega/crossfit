@@ -153,7 +153,6 @@ def restorepass(request):
             for auth in lista_auth:
                 url='http://'+str(request.get_host())+'/restorepass/'+str(auth.token)
                 try:
-                    add_task(datetime.utcnow(),'send_email_restorepass_task(url="'+url+'",email="'+emailtrad+'")')
                     name = 'User_Id'+str(auth.id)
                     nick = 'User_Id'+str(auth.id)
                     phone = '+34'+str(auth.phone)
@@ -161,6 +160,7 @@ def restorepass(request):
                     telegram = {'name': name, 'nick': nick , 'phone': phone , 'message': message }
                     #send_telegram(name,nick,phone,message)
                     #prueba(name,phone,message)
+                    add_task(datetime.utcnow(),'send_email_restorepass_task(url="'+url+'",email="'+emailtrad+'")')
                     add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     data=json.dumps({'status': 'success', 'response':'email_sent'})
                 except Exception as e:
