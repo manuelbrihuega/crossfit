@@ -282,7 +282,7 @@ def list_all_for_customers(request):
         cad = cad + '</monthly>'
 
         context = {'error':''}
-        fileName = os.path.join(os.path.abspath(os.path.dirname(__file__)) + '/../../../static/xml', 'calendario.xml')
+        fileName = os.path.join(os.path.abspath(os.path.dirname(__file__)) + '/../../../static/xml', 'calendarioclientes.xml')
         writeFile(cad, fileName, context)
         scheme = 'https://' if request.is_secure() else 'http://'
         urlfinal = scheme + request.get_host() + settings.STATIC_URL + 'xml/calendarioclientes.xml'
