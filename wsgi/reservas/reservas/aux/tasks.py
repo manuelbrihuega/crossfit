@@ -172,8 +172,10 @@ def send_email_ticket_message_task(email, title, text):
     from reservas.aux.emails import send_email_ticket_message
     send_email_ticket_message(email,title,text)
 
-def send_email_ticket_message_supporter_task(email, title, text, auth):
+def send_email_ticket_message_supporter_task(email, title, text, auth_id):
     from reservas.aux.emails import send_email_ticket_message_supporter
+    from reservas.models import *
+    auth=Auth.objects.get(id=auth_id)
     send_email_ticket_message_supporter(email,title,text,auth)
 
 def send_email_customer_deactivated_task(idcus):
