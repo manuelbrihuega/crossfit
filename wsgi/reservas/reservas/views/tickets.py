@@ -48,7 +48,7 @@ def add(request):
                         name = 'User_Id'+str(superauth.id)
                         nick = 'User_Id'+str(superauth.id)
                         phone = '+34'+str(superauth.phone)
-                        messagel = 'Ha recibido un nuevo mensaje'
+                        messagel = 'Ha recibido un nuevo mensaje de una incidencia'
                         add_task(datetime.utcnow(),'send_email_ticket_message_supporter_task(email="'+ticket.auth.email+'",title="'+ticket.title+'",text="'+message.text+'",auth_id="'+str(ticket.auth.id)+'")')
                         add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+messagel+'")')
         
