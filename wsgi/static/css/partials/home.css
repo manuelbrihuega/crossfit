@@ -47,7 +47,7 @@
 	#level1.pa{background-image: url(../../img/i18n/level1_bg_md_pa.jpg);}
 	#level1.pe{background-image: url(../../img/i18n/level1_bg_md_pe.jpg);}
 	#level1.ad{background-image: url(../../img/i18n/level1_bg_md_ad.jpg);}
-	#logo{ margin: 120px auto 0; float:none; background: url("http://crossfit-reservasjerez.rhcloud.com/static/img/i18n/icono_adaptado.png") repeat scroll 0 0 / 100% auto;}
+	#logo{ margin: 50px auto 0; width: 380px; height: 200px;  float:none; background: url("http://crossfit-reservasjerez.rhcloud.com/static/img/i18n/icono_adaptado.png") repeat scroll 0 0 / 100% auto;}
 	#level1_1 h1{font-size: 35px;margin: 10px 0px 0px 0px; text-align: center;}
 	#level1_1 h3{font-size: 20px;margin: 2px 0px 30px 0px; text-align: center;}
 	#boton_descargar{ font-size: 12px;  }
@@ -126,8 +126,17 @@
 }
 
 @media (max-width: 480px) {
+    #logo{ height: 174px; width: 313px;}
 }
 
+@media (max-width: 355px) {
+    #logo{ height: 142px; width: 265px;}
+}
+
+@media (max-width: 305px) {
+    #logo{ height: 132px; width: 100%; margin-top: 35px; background-repeat: no-repeat;}
+    #level1{ min-height: 302px; }
+}
 
 /*FIN LEVEL 3*/
 
