@@ -450,7 +450,7 @@ def deactivate(request):
                                 nick = 'User_Id'+str(auth.id)
                                 phone = '+34'+str(auth.phone)
                                 message = 'Su suscripción en la cola para '+str(res.schedule_time.schedule.activity.name)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA, su posición en la cola será eliminada.'
-                                add_task(datetime.utcnow(),'send_email_cancel_reservation_cola_task(cus_id="'+str(customer.id)+'",res_id="'+str(res.id)+'")')
+                                send_email_cancel_reservation_cola(str(customer.id),str(res.id))
                                 add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                                 res.delete()
                                 for resdos in reservationsdos:
@@ -463,7 +463,7 @@ def deactivate(request):
                                 nick = 'User_Id'+str(customer.auth.id)
                                 phone = '+34'+str(customer.auth.phone)
                                 message = 'Su reserva para '+str(res.schedule_time.schedule.activity.name)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
-                                add_task(datetime.utcnow(),'send_email_cancel_reservation_task(auth_id="'+str(customer.auth.id)+'",res_id="'+str(res.id)+'")')
+                                send_email_cancel_reservation(str(customer.auth.id),str(res.id))
                                 add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                                 res.delete()
                                 for restres in reservationstres:

@@ -50,7 +50,7 @@ def revise_reservations():
                 nick = 'User_Id'+str(res.auth.id)
                 phone = '+34'+str(res.auth.phone)
                 message = 'El plazo de reserva para '+str(res.schedule_time.schedule.activity.name)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha terminado y NO has conseguido plaza, su posición en la cola será eliminada.'
-                add_task(datetime.utcnow(),'send_email_cancel_reservation_cola_fin_task(auth_id="'+str(res.auth.id)+'",res_id="'+str(res.id)+'")')
+                send_email_cancel_reservation_cola_fin(str(res.auth.id),str(res.id))
                 add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                 res.delete()
             else:
@@ -83,7 +83,7 @@ def revise_reservations():
                     nick = 'User_Id'+str(res.auth.id)
                     phone = '+34'+str(res.auth.phone)
                     message = 'Su reserva para '+str(res.schedule_time.schedule.activity.name)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA debido a que la actividad no ha cubierto el cupo mínimo de participantes.'
-                    add_task(datetime.utcnow(),'send_email_cancel_reservation_minimo_task(auth_id="'+str(res.auth.id)+'",res_id="'+str(res.id)+'")')
+                    send_email_cancel_reservation_minimo(str(res.auth.id),str(res.id))
                     add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     res.delete()
 
@@ -106,7 +106,7 @@ def revise_reservations():
                     nick = 'User_Id'+str(authito.id)
                     phone = '+34'+str(authito.phone)
                     message = 'La actividad '+str(sch.schedule.activity.name)+' del '+str(sch.schedule.date.day)+'-'+str(sch.schedule.date.month)+'-'+str(sch.schedule.date.year)+' de '+get_string_from_date(sch.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(sch.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA debido a que la actividad no ha cubierto el cupo mínimo de participantes.'
-                    add_task(datetime.utcnow(),'send_email_cancel_reservation_minimo_super_task(sch_id="'+str(sch.id)+'")')
+                    send_email_cancel_reservation_minimo_super(str(sch.id))
                     add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     sch.cursada=True
                     sch.save()
