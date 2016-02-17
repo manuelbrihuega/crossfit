@@ -76,6 +76,7 @@ def prueba(name, phone, msg):
     contad = 0
     print line
     telegram.sendline(line)  
+    index = telegram.expect(['', 'print_message', 'Bad', pexpect.EOF, pexpect.TIMEOUT],timeout=5)
     #contad = 0
     #for line in telegram:
     #    print line
