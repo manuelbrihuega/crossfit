@@ -400,7 +400,12 @@ def activate(request):
                         customer=U_Customers.objects.get(auth=auth)
                         customer.validated=True
                         customer.save()
-                        send_email_customer_activated(customer.id)
+                        name = 'User_Id'+str(auth.id)
+                        nick = 'User_Id'+str(auth.id)
+                        phone = '+34'+str(auth.phone)
+                        message = 'Bienvenido a CrossFit Jerez. Acabamos de validar su registro, a partir de ahora ya puede comenzar a utilizar el sistema de reservas!'
+                        add_task(datetime.utcnow(),'send_email_customer_activated_task(idcus="'+str(customer.id)+'")')
+                        add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                         data=json.dumps({'status':'success','response':'auth_activated'})
                 except:
                     data=json.dumps({'status': 'failed', 'response':'auth_not_found'})
@@ -441,7 +446,12 @@ def deactivate(request):
                             if res.queue:
                                 position = res.position_queue
                                 reservationsdos=Reservations.objects.filter(Q(schedule_time__id=res.schedule_time.id) & Q(queue=True))
-                                send_email_cancel_reservation_cola(customer.id, res.id)
+                                name = 'User_Id'+str(auth.id)
+                                nick = 'User_Id'+str(auth.id)
+                                phone = '+34'+str(auth.phone)
+                                message = 'Su suscripción en la cola para '+str(res.schedule_time.schedule.activity.name)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA, su posición en la cola será eliminada.'
+                                add_task(datetime.utcnow(),'send_email_cancel_reservation_cola_task(cus_id="'+str(customer.id)+'",res_id="'+res.id+'")')
+                                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                                 res.delete()
                                 for resdos in reservationsdos:
                                     if resdos.position_queue > position:
@@ -449,7 +459,12 @@ def deactivate(request):
                                         resdos.save()
                             else:
                                 reservationstres=Reservations.objects.filter(Q(schedule_time__id=res.schedule_time.id) & Q(queue=True))
-                                send_email_cancel_reservation(customer.auth.id, res.id)
+                                name = 'User_Id'+str(customer.auth.id)
+                                nick = 'User_Id'+str(customer.auth.id)
+                                phone = '+34'+str(customer.auth.phone)
+                                message = 'Su reserva para '+str(res.schedule_time.schedule.activity.name)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
+                                add_task(datetime.utcnow(),'send_email_cancel_reservation_task(auth_id="'+str(customer.auth.id)+'",res_id="'+res.id+'")')
+                                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                                 res.delete()
                                 for restres in reservationstres:
                                     if restres.position_queue==1:
@@ -461,7 +476,13 @@ def deactivate(request):
                                         restres.save()
 
                         delete_session(auth.id)
-                        send_email_customer_deactivated(customer.id)
+                        name = 'User_Id'+str(auth.id)
+                        nick = 'User_Id'+str(auth.id)
+                        phone = '+34'+str(auth.phone)
+                        message = 'Le informamos que acabamos de tramitar su baja en el sistema de reservas Crossfit Jerez.'
+                        add_task(datetime.utcnow(),'send_email_customer_deactivated_task(idcus="'+str(customer.id)+'")')
+                        add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                    
                         data=json.dumps({'status':'success','response':'auth_deactivated'})
                     else:
                         data=json.dumps({'status':'failed','response':'auth_already_deactivated'})
