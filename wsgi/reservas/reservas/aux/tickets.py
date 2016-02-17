@@ -21,9 +21,9 @@ def add_message(ticket,text,way,offset):
         name = 'User_Id'+str(ticket.auth.id)
         nick = 'User_Id'+str(ticket.auth.id)
         phone = '+34'+str(ticket.auth.phone)
-        message = 'Ha recibido una respuesta a su incidencia'
+        messagel = 'Ha recibido una respuesta a su incidencia'
         add_task(datetime.utcnow(),'send_email_ticket_message_task(email="'+ticket.auth.email+'",title="'+ticket.title+'",text="'+message.text+'")')
-        add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+        add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+messagel+'")')
         
         '''else:
             if ticket.auth:
