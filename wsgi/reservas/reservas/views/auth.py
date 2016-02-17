@@ -331,7 +331,12 @@ def ban(request):
                         auth.banned=True
                         auth.save()
                         delete_session(auth.id)
-                        send_email_banned_user(auth.email, auth.name)
+                        add_task(datetime.utcnow(),'send_email_banned_task(name="'+auth.name+'",email="'+auth.email+'")')
+                        name = 'User_Id'+str(auth.id)
+                        nick = 'User_Id'+str(auth.id)
+                        phone = '+34'+str(auth.phone)
+                        message = 'Le informamos que hemos deshabilitado temporalmente tu cuenta debido a un uso fraudulento que hemos detectado en ella.'
+                        add_task(datetime.utcnow(),'send_telegram_task(name="'+str(name)+'",nick="'+str(nick)+'",phone="'+str(phone)+'",msg="'+message+'")')
                         data=json.dumps({'status':'success','response':'auth_banned'})
 
                 except:

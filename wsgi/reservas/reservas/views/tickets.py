@@ -13,6 +13,7 @@ from reservas.aux.auth import *
 from reservas.aux.tickets import *
 from reservas.aux.emails import *
 from reservas.aux.permissions import *
+from reservas.aux.tasks import *
 
 
 def default(request):
@@ -43,7 +44,14 @@ def add(request):
                         message.original_way=True
                         message.date=local_date(datetime.utcnow(),int(request.GET['offset']))
                         message.save()
-                        send_email_ticket_message_supporter(ticket.auth.email,ticket.title,message.text,ticket.auth)
+                        superauth=Auth.objects.get(id=1)
+                        name = 'User_Id'+str(superauth.id)
+                        nick = 'User_Id'+str(superauth.id)
+                        phone = '+34'+str(superauth.phone)
+                        message = 'Ha recibido un nuevo mensaje'
+                        add_task(datetime.utcnow(),'send_email_ticket_message_supporter_task(email="'+ticket.auth.email+'",title="'+ticket.title+'",text="'+message.text+'",auth="'+ticket.auth+'")')
+                        add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+        
                         data=json.dumps({'status': 'success', 'response':'ticked_added', 'data': {'ticket_id':ticket.id} })
                         
                     else:

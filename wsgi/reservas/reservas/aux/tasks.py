@@ -130,6 +130,18 @@ def send_email_restorepass_task(url,email):
     from reservas.aux.emails import send_email_restorepass
     send_email_restorepass(url,email)
 
+def send_email_banned_task(name, email):
+    from reservas.aux.emails import send_email_banned_user
+    send_email_banned_user(email, name)
+
+def send_email_ticket_message_task(email, title, text):
+    from reservas.aux.emails import send_email_ticket_message
+    send_email_ticket_message(email,title,text)
+
+def send_email_ticket_message_supporter_task(email, title, text, auth):
+    from reservas.aux.emails import send_email_ticket_message_supporter
+    send_email_ticket_message_supporter(email,title,text,auth)
+
 ###############
 #   TELEGRAM  #
 ###############
