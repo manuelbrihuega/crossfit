@@ -269,7 +269,7 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 	.table-responsive {font-size: 11px;}
 	#new_customer_password{ margin-bottom: 2px; }
 	#new_customer_nif{ margin-bottom: 27px; }
-	.superformsuper > input { margin-bottom: 15px !important; }
+	.superformsuper input { margin-bottom: 15px !important; }
 }
 
 @media (min-width: 768px) { 
