@@ -270,6 +270,9 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 	#new_customer_password{ margin-bottom: 2px; }
 	#new_customer_nif{ margin-bottom: 27px; }
 	.superformsuper input { margin-bottom: 15px !important; }
+	#nombre_festivo{ width: 400px !important; margin-bottom: 15px !important;}
+	#dia_festivo{ width: 200px !important; margin-bottom: 15px !important;}
+	#dnipre{ width: 200px !important; margin-bottom: 15px !important;}
 }
 
 @media (min-width: 768px) { 
@@ -311,11 +314,12 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 @media (max-width: 440px) {
 	#enterprises_search { width: 100%; }
 	#input_search_passenger {width: 100%;}
-}
-@media (max-width: 400px) {
     .listed-event { width: 100%; }
+    #nombre_festivo{ width: 100% !important; margin-bottom: 15px !important;}
 }
 
 @media (max-width: 260px) {
     #fecha{width: 100% !important;}
+    #dia_festivo{ width: 100% !important; margin-bottom: 15px !important;}
+	#dnipre{ width: 100% !important; margin-bottom: 15px !important;}
 }
