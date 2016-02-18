@@ -244,7 +244,7 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 
 
 
-@media (min-width: 1230px) {
+@media (max-width: 1230px) {
 	#filtrossencillos{width: 100%;}
 }
 
@@ -257,7 +257,6 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 
 @media (min-width: 991px) and (max-width: 1200px)  {
     #chivato{ background-color: blue;  }
-    .table-responsive {font-size: 11px;}
 	.seven-cols .col-md-1,.seven-cols .col-sm-1, .seven-cols .col-lg-1 { width: 14.285714285714285714285714285714%; *width: 14.285714285714285714285714285714%;}
 }
 
@@ -267,6 +266,7 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 
 @media (max-width: 991px) {
 	#chivato{ background-color: pink;  }
+	.table-responsive {font-size: 11px;}
 	#new_customer_password{ margin-bottom: 2px; }
 	#new_customer_nif{ margin-bottom: 27px; }
 	.superformsuper > input { margin-bottom: 15px !important; }
