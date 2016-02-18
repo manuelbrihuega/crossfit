@@ -288,4 +288,7 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 
 @media (max-width: 480px) {
     #chivato{ background-color: yellow;  }
+    #contentActions{float: none !important; margin-bottom: 7px; margin-left: 41px; width: 240px !important;}
+    .listed-event > div > i { margin-top: 50px !important; }
+    .listed-event { width: -moz-fit-content; }
 }
