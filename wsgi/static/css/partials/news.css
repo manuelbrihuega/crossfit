@@ -7,8 +7,8 @@
 #news_wrapper>.item .labels i:hover{color: #991021;}
 #news_wrapper>.item .labels .label{margin-left: 4px;}
 #news_wrapper>.item .title{font-size: 20px; font-weight: bold; color: #666;}
-#news_wrapper>.item .date{font-size: 12px;color: #999;}
-#news_wrapper>.item .body{font-size: 14px;color: #999; margin-top: 10px; text-align: justify;}
+#news_wrapper>.item .date{font-size: 12px;color: grey;}
+#news_wrapper>.item .body{font-size: 14px;color: grey; margin-top: 10px; text-align: justify;}
 #news_wrapper>.item .link{font-size: 14px;color: #999; margin-top: 10px;}
 
 

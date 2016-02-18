@@ -15,7 +15,7 @@ body { -webkit-font-smoothing: antialiased; height: 100%; }
 .linkable{cursor:pointer;}
 .oculto{display:none;}
 #news_wrapper{background-color: whitesmoke; border-radius: 8px; padding: 13px;}
-#news_wrapper .clearfix{ margin-bottom: 0px; }
+#news_wrapper .clearfix{ margin-bottom: 0px !important; }
 /*NAVBAR*/
 .navbar{ background-color: #353535; color: #fff; border-radius: 0px; min-height:37px;margin-bottom: 0px;}
 #brand{ font-family: Arial; font-weight: 900; font-size: 18px; height: 37px;line-height: 37px; padding: 0 15px; vertical-align: middle; color: #fff; border: 0px solid #999; }
