@@ -292,3 +292,7 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
     .listed-event > div > i { margin-top: 50px !important; }
     .listed-event { width: -moz-fit-content; }
 }
+
+@media (max-width: 400px) {
+    .listed-event { width: 100%; }
+}
