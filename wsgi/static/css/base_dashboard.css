@@ -262,6 +262,8 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 
 @media (max-width: 991px) {
 	#chivato{ background-color: pink;  }
+	#new_customer_password{ margin-bottom: 2px; }
+	#new_customer_nif{ margin-bottom: 27px; }
 }
 
 @media (min-width: 768px) { 
