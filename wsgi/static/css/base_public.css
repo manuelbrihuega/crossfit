@@ -152,6 +152,14 @@ margin: 10px 15px;
 	#chivato{ background-color: green;  }
 }
 
+@media (max-width: 1160px) {
+    #sidebar .nav-sidebar .badge { display: none; }
+}
+
+@media (max-width: 1015px) {
+    #contentPlazas{ float: none !important; }
+}
+
 @media (max-width: 991px) {
 	#chivato{ background-color: pink;  }
     #formulario-newsletter{width: 200px;}
