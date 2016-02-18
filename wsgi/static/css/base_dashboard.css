@@ -178,6 +178,17 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 .totalFacturacion{border-top: 1px solid #DDDDDD; font-size: 18px; font-weight: bold; margin-left: 28px; margin-right: 14px; margin-top: 15px; padding-top: 10px;}
 #alertasContainer{position: absolute; background-color: white; width: 185px; border: 1px solid; border-radius: 7px; text-align: center; padding-bottom: 5px; padding-top: 5px; right: 108px; top: 49px; display: none;}
 
+@media (max-width: 1160px) {
+    #sidebar .nav-sidebar .badge { display: none !important; }
+}
+
+@media (max-width: 1015px) {
+	#contentPlazas{ float: none !important; }
+    #contentActions > i { margin-top: 18px; }
+    #contentActions { width: 240px; }
+    #contentActivity { padding-top: 16px; }
+}
+
 @media (max-width: 991px) {
 	.responsive-prev, .responsive-next{width: 20%; float: left;}
 	.responsive-year{width: 60%; float: left;}

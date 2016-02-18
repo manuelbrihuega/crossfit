@@ -153,16 +153,6 @@ margin: 10px 15px;
 	#chivato{ background-color: green;  }
 }
 
-@media (max-width: 1160px) {
-    #sidebar .nav-sidebar .badge { display: none !important; }
-}
-
-@media (max-width: 1015px) {
-    #contentPlazas{ float: none !important; }
-    #contentActions > i { margin-top: 18px; }
-    #contentActions { width: 240px; }
-    #contentActivity { padding-top: 16px; }
-}
 
 @media (max-width: 991px) {
 	#chivato{ background-color: pink;  }
