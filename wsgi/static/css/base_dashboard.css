@@ -285,6 +285,9 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 	#content{padding-left: 0px; padding-right: 0px;}
 	
 }
+@media (max-width: 600px) {
+	.monthly-event-list{height: 500px;}
+}
 
 @media (max-width: 480px) {
     #chivato{ background-color: yellow;  }
