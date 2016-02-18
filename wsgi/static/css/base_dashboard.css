@@ -273,6 +273,8 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 	#nombre_festivo{ width: 400px !important; margin-bottom: 15px !important;}
 	#dia_festivo{ width: 200px !important; margin-bottom: 15px !important;}
 	#dnipre{ width: 200px !important; margin-bottom: 15px !important;}
+	#email_coach{margin-bottom: 15px !important;}
+	#telefono_coach{margin-bottom: 15px !important;}
 }
 
 @media (min-width: 768px) { 

@@ -1023,11 +1023,15 @@ def edit_config_email(request):
 
     if not validate_parameter(request.GET, 'email'):
         raise Exception('email_missed')
+    if not validate_parameter(request.GET, 'telefono_coach'):
+        raise Exception('email_missed')
                 
     try:
         config=Configuration.objects.get(id=1)
         config.email = request.GET['email']
         config.save()
+        auth=Auth.objects.get(id=1)
+        auth.phone= request.GET['telefono_coach']
         data=json.dumps({'status':'success','response':'configuration_modified'})
     
     except Exception, e:
@@ -1044,11 +1048,13 @@ def get_configuration(request):
         if have_permission(request.session['auth_id'],'get_configuration'):
             try:
                 config=Configuration.objects.get(id=1)
+                auth=Auth.objects.get(id=1)
                 config_profile={'dias_reserva':config.days_pre,
                                 'dias_atras':config.days_pre_show,
                                 'minutos_cancela':config.minutes_post,
                                 'minutos_reserva':config.minutes_pre,
-                                'email':config.email}
+                                'email':config.email,
+                                'telefono_coach': auth.phone}
                 data=json.dumps({'status':'success','response':'get_configuration','data': config_profile})
             except Exception as e:
                 data=json.dumps({'status':'failed','response':e.args[0]})

@@ -131,9 +131,10 @@ def reload_credit_users_task():
     from datetime import *
     customers=U_Customers.objects.all()
     for cus in customers:
-        cus.credit_box=cus.rate.credit_box
-        cus.credit_wod=cus.rate.credit_wod
-        cus.save()
+        if not cus.rate.tipobono:
+            cus.credit_box=cus.rate.credit_box
+            cus.credit_wod=cus.rate.credit_wod
+            cus.save()
     hoy=datetime.today()
     dia=1
     if hoy.month == 12:

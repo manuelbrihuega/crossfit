@@ -29,7 +29,7 @@ function active_new_enterprise_form() {
 			
 				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito BOX</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
 				$.each(data.data, function(index, rate) {
-					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');
+					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+' €</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');
 				});
 				$('#tablewey').tablesorter();
 			}else{
@@ -75,7 +75,7 @@ function searchRates() {
 				$('.table-responsive').show();
 				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito BOX</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
 				$.each(data.data, function(index, rate) {
-					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+'</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');	
+					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+' €</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');	
 				});
 				$('#tablewey').tablesorter(); 
 			}

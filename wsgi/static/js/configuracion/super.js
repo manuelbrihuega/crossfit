@@ -21,7 +21,8 @@ function get_content() {
 								$('#minutos_cancela').val(data.data.minutos_cancela);
 								$('#dias_reserva').val(data.data.dias_reserva);
 								$('#dias_atras').val(data.data.dias_atras);
-								$('#email_coach').val(data.data.email);		
+								$('#email_coach').val(data.data.email);
+								$('#telefono_coach').val(data.data.telefono_coach);				
 							}
 			
 						});
@@ -277,15 +278,19 @@ function edit_configuracion() {
 
 function edit_configuracion_email() {
 	var email=$('#email_coach').val();
+	var telefono_coach=$('#telefono_coach').val();
 	if (email.length>0){
+		if (telefono_coach.length>0){
 		$('#botonenviaremail').html('<i class="fa fa-cog fa-spin"></i>');
-		$.getJSON(api_url+'schedules/edit_config_email?callback=?', { email:email}, function(data){
+		$.getJSON(api_url+'schedules/edit_config_email?callback=?', { email:email, telefono_coach:telefono_coach}, function(data){
 			if(data.status=='success'){
 				launch_alert('<i class="fa fa-smile-o"></i> Configuración guardada','');
 				$('#botonenviaremail').html('Guardar');
 				
 			}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonenviaremail').html('Guardar');}
 		});
+		}
+		else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar el teléfono','warning');
 	}
 	else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar el email','warning');									
 }
