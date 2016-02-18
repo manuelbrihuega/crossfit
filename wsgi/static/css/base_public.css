@@ -159,6 +159,9 @@ margin: 10px 15px;
 
 @media (max-width: 1015px) {
     #contentPlazas{ float: none !important; }
+    #contentActions > i { margin-top: 18px; }
+    #contentActions { width: 240px; }
+    #contentActivity { padding-top: 16px; }
 }
 
 @media (max-width: 991px) {
