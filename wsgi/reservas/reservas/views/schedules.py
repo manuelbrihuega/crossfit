@@ -1032,6 +1032,7 @@ def edit_config_email(request):
         config.save()
         auth=Auth.objects.get(id=1)
         auth.phone= request.GET['telefono_coach']
+        auth.save()
         data=json.dumps({'status':'success','response':'configuration_modified'})
     
     except Exception, e:
