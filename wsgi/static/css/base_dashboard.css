@@ -286,7 +286,7 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 	
 }
 @media (max-width: 600px) {
-	.monthly-event-list{height: 500px;}
+	.monthly-event-list{height: 500px !important;}
 }
 
 @media (max-width: 480px) {
