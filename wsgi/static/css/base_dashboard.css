@@ -184,7 +184,7 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 
 @media (max-width: 1015px) {
 	#contentPlazas{ float: none !important; }
-    #contentActions > i { margin-top: 18px !important; }
+    .listed-event > div > i { margin-top: 18px !important; }
     #contentActions { width: 240px !important; }
     #contentActivity { padding-top: 16px; }
 }
