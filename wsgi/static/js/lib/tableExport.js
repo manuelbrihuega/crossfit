@@ -275,7 +275,9 @@ THE SOFTWARE.*/
 					excelFile += "</body>";
 					excelFile += "</html>";
 
-					var base64data = "base64," + $.base64.encode(excelFile);
+					var base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) } 
+					//var base64data = "base64," + $.base64.encode(excelFile);
+					var base64data = "base64," + base64(excelFile); 
 					window.open('data:application/vnd.ms-'+defaults.type+';filename=exportData.doc;' + base64data);
 					
 				}else if(defaults.type == 'png'){
