@@ -5,6 +5,8 @@ function get_content() {
 		$.getScript(media_url+'js/aux/date.js'),
         $.getScript(media_url+'js/aux/modals.js'),
         $.getScript(media_url+'js/lib/sha1.js'),
+        $.getScript(media_url+'js/lib/tableExport.js', function(){
+						$.getScript(media_url+'js/lib/jquery.base64.js', function(){
         $.ready.promise()
     ).then(function(){
 		$.post('partials/tarifas_super', function(template, textStatus, xhr) {
@@ -13,6 +15,8 @@ function get_content() {
 			startSearch();
 		});
     });
+    });
+        });
 
 }
 
