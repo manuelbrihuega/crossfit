@@ -251,7 +251,7 @@ THE SOFTWARE.*/
 						console.log(excel);
 					}
 					
-					var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:"+defaults.type+"' xmlns='http://www.w3.org/TR/REC-html40'>";
+					var excelFile = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:"+defaults.type+"' xmlns='http://www.w3.org/TR/REC-html40'>";
 					excelFile += "<head>";
 					excelFile += "<!--[if gte mso 9]>";
 					excelFile += "<xml>";
