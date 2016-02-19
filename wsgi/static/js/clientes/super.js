@@ -5,24 +5,28 @@ function get_content() {
 		$.getScript(media_url+'js/aux/date.js', function(){
 			$.getScript(media_url+'js/aux/modals.js', function(){
 				$.getScript(media_url+'js/aux/clientes.js', function(){
-					$.post(base_url+'/partials/clientes_super', function(template, textStatus, xhr) {
-						$('#main').html(template);
-						$('#users_submenu div.button.passengers').addClass('active');
-						$('#submain').html('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
+					$.getScript(media_url+'js/lib/tableExport.js', function(){
+						$.getScript(media_url+'js/lib/jquery.base64.js', function(){
+							$.post(base_url+'/partials/clientes_super', function(template, textStatus, xhr) {
+								$('#main').html(template);
+								$('#users_submenu div.button.passengers').addClass('active');
+								$('#submain').html('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
 
-						var role = $('body').attr('data-role');
-						loadRates();
-						getPassengersStats();
-						active_new_customer_form();
-						initialsearch();
-						if (!Modernizr.inputtypes.date) {
-    						$('input[type=date]').datepicker();
-    						$('input[type=date]').css('border-bottom','1px solid lightgray');
-    						$('#ui-datepicker-div').css('background-color','white');
-        					$('#ui-datepicker-div').css('border','1px solid lightgray');
-        					$('#ui-datepicker-div').css('padding','15px');
-        					$('#ui-datepicker-div').css('border-radius','8px');
-						}
+								var role = $('body').attr('data-role');
+								loadRates();
+								getPassengersStats();
+								active_new_customer_form();
+								initialsearch();
+								if (!Modernizr.inputtypes.date) {
+		    						$('input[type=date]').datepicker();
+		    						$('input[type=date]').css('border-bottom','1px solid lightgray');
+		    						$('#ui-datepicker-div').css('background-color','white');
+		        					$('#ui-datepicker-div').css('border','1px solid lightgray');
+		        					$('#ui-datepicker-div').css('padding','15px');
+		        					$('#ui-datepicker-div').css('border-radius','8px');
+								}
+							});
+						});
 					});
 				});
 			});
