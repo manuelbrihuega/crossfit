@@ -2812,6 +2812,7 @@ function edit_passenger() {
 							$.getJSON(api_url+'customers/edit_foreign?callback=?', params, function(data){
 								if(data.status=='success'){
 									launch_alert('<i class="fa fa-smile-o"></i> Cliente guardado','');
+									initialsearch();
 								}
 								else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 								save_button.html('<i class="fa fa-floppy-o"></i>');
