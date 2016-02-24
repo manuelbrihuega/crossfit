@@ -88,10 +88,10 @@ def prueba(name, phone, msg):
     if index1 == 0:
         if index2 == 0:
             if index3 == 3:
-                print 'SEND_OK'
+                return 'SEND_OK'
             else:
-                print 'SEND_FAIL'
+                return 'SEND_FAIL'
         else:
-            print 'CONTACT_ERROR'
+            return 'CONTACT_ERROR'
     else:
-        print 'ERROR'
+        return 'ERROR'

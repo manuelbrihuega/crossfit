@@ -236,7 +236,7 @@ def send_telegram_task(name,nick,phone,msg):
     from reservas.aux.telegram import *
     from datetime import datetime
     if prueba(name,phone,msg) != 'SEND_OK':
-        add_task(datetime.utcnow(),'send_telegram_task('+name+','+nick+','+phone+','+msg+')')    
+        add_task(datetime.utcnow(),'send_telegram_task(\''+name+'\',\''+nick+'\',\''+phone+'\',\''+msg+'\')')    
     #send_telegram(name,nick,phone,msg)
 
 '''
