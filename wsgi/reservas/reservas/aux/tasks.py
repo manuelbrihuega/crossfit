@@ -234,7 +234,8 @@ def send_email_confirm_class_super_task(sch_id, asistentes, numplazasdos):
 
 def send_telegram_task(name,nick,phone,msg):
     from reservas.aux.telegram import *
-    prueba(name,phone,msg)
+    if prueba(name,phone,msg) != 'SEND_OK':
+        add_task(datetime.utcnow(),'send_telegram_task('+name+','+nick+','+phone+','+msg+')')    
     #send_telegram(name,nick,phone,msg)
 
 '''
