@@ -12,8 +12,7 @@ $(document).ready(function(){
 function status() {
 	$.getJSON( api_url+'auth/status?callback=?', '', function(data){
 		if(data.status=='success' && data.response=='logged'){
-			//window.location=base_url+'/calendario'; caijoe
-			window.location=base_url+'/clientes';
+			window.location=base_url+'/calendario';
 		}
 		else $('#signin').show();
 	});
@@ -26,8 +25,8 @@ function signin() {
 		////console.log(data);
 		
 		if(data.status=='success'){
-			//window.location=base_url+'/calendario'; caijoe
-			window.location=base_url+'/clientes';
+			window.location=base_url+'/calendario';
+			
 			//console.log(data.response);
 		
 		}

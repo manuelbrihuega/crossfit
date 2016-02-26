@@ -149,7 +149,42 @@ def reload_credit_users_task():
     proxfecha = hoy + timedelta(weeks=1)
     add_task(proxfecha,'reload_credit_users_task()')
 
+def not_pay_task():
+    from reservas.models import *
+    from datetime import *
+    customers=U_Customers.objects.all()
+    for cus in customers:
+        if not cus.rate.tipobono:
+            if not cus.vip:
+                cus.paid=False
+                cus.save()
+    hoy=datetime.today()
+    
+    dia=1
+    if hoy.month == 12:
+        mes = 1
+        year = hoy.year + 1
+    else:
+        mes = hoy.month + 1
+        year = hoy.year
+    proxfecha = datetime(year, mes, dia, 4, 0, 0)
+    add_task(proxfecha,'not_pay_task()')
+    fechanotvalid = hoy + timedelta(days=7)
+    add_task(fechanotvalid,'not_pay_not_valid_task()')
 
+def not_pay_not_valid_task():
+    from reservas.models import *
+    from datetime import *
+    customers=U_Customers.objects.all()
+    for cus in customers:
+        if not cus.rate.tipobono:
+            if not cus.vip:
+                if not cus.paid:
+                    cus.validated=False
+                    cus.save()
+                    au=cus.auth
+                    au.active=False
+                    au.save()
 ##############
 #   EMAIL    #
 ##############
