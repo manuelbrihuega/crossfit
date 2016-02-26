@@ -21,6 +21,7 @@ function get_content() {
 								$('#minutos_cancela').val(data.data.minutos_cancela);
 								$('#dias_reserva').val(data.data.dias_reserva);
 								$('#dias_atras').val(data.data.dias_atras);
+								$('#dias_pago').val(data.data.dias_pago);
 								$('#email_coach').val(data.data.email);
 								$('#telefono_coach').val(data.data.telefono_coach);				
 							}
@@ -250,22 +251,28 @@ function edit_configuracion() {
 	var minutos_cancela=$('#minutos_cancela').val();
 	var dias_reserva=$('#dias_reserva').val();
 	var dias_atras=$('#dias_atras').val();
+	var dias_pago=$('#dias_pago').val();
 	if (minutos_reserva.length>0){
 		if (minutos_cancela.length>0){
 			if (dias_reserva.length>0){
 				if (dias_atras.length>0){
+					if (dias_pago.length>0){
 					$('#botonenviar').html('<i class="fa fa-cog fa-spin"></i>');
 					$.getJSON(api_url+'schedules/edit_config?callback=?', { minutos_reserva:minutos_reserva, 
 																		    minutos_cancela:minutos_cancela,
 																		    dias_reserva:dias_reserva,
-																		    dias_atras:dias_atras}, function(data){
+																		    dias_atras:dias_atras,
+																		    dias_pago:dias_pago}, function(data){
 																								
 						if(data.status=='success'){
 							launch_alert('<i class="fa fa-smile-o"></i> Configuración guardada','');
 							$('#botonenviar').html('Guardar');
 				
 						}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonenviar').html('Guardar');}
+				
 					});
+				}
+				else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar los días','warning');
 				}
 				else launch_alert('<i class="fa fa-frown-o"></i> Debes indicar los días','warning');									
 			}

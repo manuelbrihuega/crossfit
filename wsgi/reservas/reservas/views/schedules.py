@@ -992,7 +992,7 @@ def edit_config(request):
     if not have_permission(request.session['auth_id'],'edit_config'):
         data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_config'})
 
-    for field in ('minutos_reserva','minutos_cancela','dias_reserva','dias_atras'):
+    for field in ('minutos_reserva','minutos_cancela','dias_reserva','dias_atras', 'dias_pago'):
         if not validate_parameter(request.GET, field):
             raise Exception(field+'_missed')
                 
@@ -1002,6 +1002,7 @@ def edit_config(request):
         config.days_pre_show = request.GET['dias_atras']
         config.minutes_post = request.GET['minutos_cancela']
         config.minutes_pre = request.GET['minutos_reserva']
+        config.dias_pago = request.GET['dias_pago']
         config.save()
         data=json.dumps({'status':'success','response':'configuration_modified'})
     
@@ -1052,6 +1053,7 @@ def get_configuration(request):
                 auth=Auth.objects.get(id=1)
                 config_profile={'dias_reserva':config.days_pre,
                                 'dias_atras':config.days_pre_show,
+                                'dias_pago':config.dias_pago,
                                 'minutos_cancela':config.minutes_post,
                                 'minutos_reserva':config.minutes_pre,
                                 'email':config.email,

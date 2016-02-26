@@ -169,7 +169,8 @@ def not_pay_task():
         year = hoy.year
     proxfecha = datetime(year, mes, dia, 4, 0, 0)
     add_task(proxfecha,'not_pay_task()')
-    fechanotvalid = hoy + timedelta(days=7)
+    conf = Configuration.objects.get(id=1)
+    fechanotvalid = hoy + timedelta(days=conf.dias_pago)
     add_task(fechanotvalid,'not_pay_not_valid_task()')
 
 def not_pay_not_valid_task():
