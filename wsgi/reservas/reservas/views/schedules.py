@@ -220,7 +220,7 @@ def list_all(request):
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         data = json.dumps({
             'status':'failed',
-            'response': e.args[0]+str(exc_tb.tb_lineno)
+            'response': e.args[0]+str(exc_tb.tb_lineno)+unicode(cad)
         })
 
     return APIResponse(request,data)
