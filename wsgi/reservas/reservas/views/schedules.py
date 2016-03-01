@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import unicodedata
 from django.http import HttpResponse
 import json
 from django.db.models import Q
@@ -199,7 +199,7 @@ def list_all(request):
             if discol < 0:
                 discol=0
             discol = aforocola - discol
-            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol></event>'
+            cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+str(sch.schedule.activity.name)+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol></event>'
         festivos=Parties.objects.all()
         for fest in festivos:
             fechi = fest.date
@@ -273,7 +273,7 @@ def list_all_for_customers(request):
                 if discol < 0:
                     discol=0
                 discol = aforocola - discol
-                cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+sch.schedule.activity.name+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol>'+yareservada+cadsepuedereservar+cadsepuedecancelar+'</event>'
+                cad= cad + '<event><id>'+str(sch.id)+'</id>'+'<name>'+str(sch.schedule.activity.name)+'</name>'+'<startdate>'+startdate+'</startdate>'+'<starttime>'+str(sch.time_start)+'</starttime>'+'<endtime>'+str(sch.time_end)+'</endtime><oc>'+str(ocupadas)+'</oc><dis>'+str(disponibles)+'</dis><af>'+str(aforo)+'</af><afcol>'+str(aforocola)+'</afcol><discol>'+str(discol)+'</discol>'+yareservada+cadsepuedereservar+cadsepuedecancelar+'</event>'
         festivos=Parties.objects.all()
         for fest in festivos:
             fechi = fest.date
