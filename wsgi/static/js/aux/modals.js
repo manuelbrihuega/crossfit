@@ -1155,17 +1155,17 @@ function showTarifa(tarifa_id) {
 				$('#tarifa_id').val(data.data.rate.id);
 				$('#tarifa_name').val(data.data.rate.name);
 				$('#tarifa_price').val(data.data.rate.price);
-				if(data.data.rate.credit_wod==0 && data.data.rate.credit_box==0 && data.data.rate.tipobono==1){
+				if(data.data.rate.credit_wod==0 && data.data.rate.credit_box==0 && data.data.rate.tipobono){
 					$('#tarifa_credit_bono').val(data.data.rate.credit_bono);
-					$('#muestrabono').show();
-					$('#muestrawod').hide();
-					$('#muestrabox').hide();
+					$('#mostradorbono2').show();
+					$('#mostradorwod2').hide();
+					$('#mostradorbox2').hide();
 				}else{
 					$('#tarifa_credit_wod').val(data.data.rate.credit_wod);
 					$('#tarifa_credit_box').val(data.data.rate.credit_box);
-					$('#muestrabono').hide();
-					$('#muestrawod').show();
-					$('#muestrabox').show();
+					$('#mostradorbono2').hide();
+					$('#mostradorwod2').show();
+					$('#mostradorbox2').show();
 				}
 				$('#tarifa_observations').val(data.data.rate.observations);
 				if(data.data.rate.tipobono){
@@ -1173,7 +1173,17 @@ function showTarifa(tarifa_id) {
 				}else{
 					$( "#tipobono_mod" ).prop( "checked", false );
 				}
-				
+				$('#tipobono_mod').click(function(){
+    				if($(this).is(':checked')){
+        				$('#mostradorbox2').hide();
+        				$('#mostradorwod2').hide();
+        				$('#mostradorbono2').show();
+    				} else {
+        				$('#mostradorbox2').show();
+        				$('#mostradorwod2').show();
+        				$('#mostradorbono2').hide();
+    				}
+	});
 				
 				
 				var footer = $('<div></div>').attr({'id':'passenger_details_footer'});
