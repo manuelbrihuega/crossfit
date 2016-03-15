@@ -13,8 +13,24 @@ function get_content() {
 			$('#main').html(template);
 			active_new_enterprise_form();
 			startSearch();
+			onchangeTipoBono();
 		});
     });
+
+}
+
+function onchangeTipoBono(){
+	$('#tipobono').click(function(){
+    	if($(this).is(':checked')){
+        	$('#mostradorbox').hide();
+        	$('#mostradorwod').hide();
+        	$('#mostradorbono').show();
+    	} else {
+        	$('#mostradorbox').show();
+        	$('#mostradorwod').show();
+        	$('#mostradorbono').hide();
+    	}
+	});
 
 }
 
@@ -29,9 +45,9 @@ function active_new_enterprise_form() {
 			$('.waiting').hide();
 			if(data.data.length>0){
 			
-				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito BOX</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
+				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito OPEN</th><th>Crédito BONO</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
 				$.each(data.data, function(index, rate) {
-					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+' €</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');
+					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+' €</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.credit_bono+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');
 				});
 				$('#tablewey').tablesorter();
 			}else{
@@ -75,9 +91,9 @@ function searchRates() {
 			$('.waiting').hide();
 			if(data.data.length>0){
 				$('.table-responsive').show();
-				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito BOX</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
+				$('#tablewey').html('<thead><tr><th>Nombre</th><th>Precio</th><th>Crédito WOD</th><th>Crédito OPEN</th><th>Crédito BONO</th><th>Observaciones</th></tr></thead><tbody id="tableweybody"></tbody>');
 				$.each(data.data, function(index, rate) {
-					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+' €</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');	
+					$('#tableweybody').append('<tr style="cursor:pointer;" onclick="showTarifa('+rate.id+');" data-id="'+rate.id+'">'+'<td>'+rate.name+'</td>'+'<td>'+rate.price+' €</td>'+'<td>'+rate.credit_wod+'</td>'+'<td>'+rate.credit_box+'</td>'+'<td>'+rate.credit_bono+'</td>'+'<td>'+rate.observations+'</td>'+'</tr>');	
 				});
 				$('#tablewey').tablesorter(); 
 			}
@@ -108,10 +124,57 @@ function show_new() {
 
 
 function new_enterprise() {
+	if($('#tipobono').is(':checked')){
+		var name=$('#new_tarifa_name').val();
+	var price=$('#new_tarifa_price').val();
+	var credit_bono=$('#new_tarifa_credit_bono').val();
+	var credit_box=0;
+	var credit_wod=0;
+	var observations=$('#new_tarifa_observations').val();
+	if($('#tipobono').is(':checked')){
+		var tipobono=1;
+	}else{
+		var tipobono=0;
+	}
+	if (name.length>0){
+		if (price.length>0){
+			if (credit_bono.length>0){
+					$('#botonadd').html('<i class="fa fa-cog fa-spin"></i>');
+					$.getJSON(api_url+'rates/add?callback=?', { name:name, 
+																price:price,
+																credit_wod:credit_wod,
+																credit_box:credit_box,
+																credit_bono:credit_bono,
+																observations:observations,
+																tipobono:tipobono}, function(data){
+																								
+												if(data.status=='success'){
+													$('#botonadd').html('Enviar');
+													show_new();
+													launch_alert('<i class="fa fa-smile-o"></i> Tarifa creada','');
+													searchRates();
+													$('#new_tarifa_name').val('');
+													$('#new_tarifa_price').val('');
+													$('#new_tarifa_credit_wod').val('');
+													$('#new_tarifa_credit_bono').val('');
+													$('#new_tarifa_credit_box').val('');
+													$('#new_tarifa_observations').val('');
+												}
+												else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+											});
+											
+									}
+									else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el crédito para el BONO','warning');
+								}
+								else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el precio','warning');			
+							}
+							else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir un nombre para la tarifa','warning');
+	}else{
 	var name=$('#new_tarifa_name').val();
 	var price=$('#new_tarifa_price').val();
 	var credit_wod=$('#new_tarifa_credit_wod').val();
 	var credit_box=$('#new_tarifa_credit_box').val();
+	var credit_bono=0;
 	var observations=$('#new_tarifa_observations').val();
 	if($('#tipobono').is(':checked')){
 		var tipobono=1;
@@ -127,6 +190,7 @@ function new_enterprise() {
 																price:price,
 																credit_wod:credit_wod,
 																credit_box:credit_box,
+																credit_bono:credit_bono,
 																observations:observations,
 																tipobono:tipobono}, function(data){
 																								
@@ -139,6 +203,7 @@ function new_enterprise() {
 													$('#new_tarifa_price').val('');
 													$('#new_tarifa_credit_wod').val('');
 													$('#new_tarifa_credit_box').val('');
+													$('#new_tarifa_credit_bono').val('');
 													$('#new_tarifa_observations').val('');
 												}
 												else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
@@ -153,4 +218,5 @@ function new_enterprise() {
 							}
 							else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir un nombre para la tarifa','warning');	
 						
+	}
 }
