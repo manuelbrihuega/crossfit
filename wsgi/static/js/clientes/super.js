@@ -130,7 +130,7 @@ function searchPassengers(todos,pagados,nopagados,validados,novalidados,order) {
 		if(data.status=='success'){
 			$('.waiting').hide();
 			$('.table-responsive').show();
-			$('#tablewey2').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Cred restantes WOD</th><th>Cred restantes OPEN</th><th>Cred. restantes BONO</th><th>Tarifa vigente</th><th>Estado</th></tr></thead><tbody id="tableweybody2"></tbody>');
+			$('#tablewey2').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Restantes WOD</th><th>Restantes OPEN</th><th>Restantes BONO</th><th>Tarifa vigente</th><th>Estado</th></tr></thead><tbody id="tableweybody2"></tbody>');
 			
 			if(data.data.list.length>0){
 				$.each(data.data.list, function(index, passenger) {
@@ -156,7 +156,7 @@ function initialsearch() {
 		if(data.status=='success'){
 			$('.waiting').hide();
 			$('.table-responsive').show();
-			$('#tablewey2').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Cred. restantes WOD</th><th>Cred. restantes OPEN</th><th>Cred. restantes BONO</th><th>Tarifa vigente</th><th>Estado</th></tr></thead><tbody id="tableweybody2"></tbody>');
+			$('#tablewey2').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Restantes WOD</th><th>Restantes OPEN</th><th>Restantes BONO</th><th>Tarifa vigente</th><th>Estado</th></tr></thead><tbody id="tableweybody2"></tbody>');
 			
 			if(data.data.list.length>0){
 				$.each(data.data.list, function(index, passenger) {
