@@ -46,16 +46,13 @@ def create_customer_super(data,auth,rate):
         customer.test_user=getBoolValue(data["prueba"])
         customer.validated=getBoolValue(data["validated"])
         customer.birthdate=data["birthdate"]
-        customer.direccion=data["direccion"]
         customer.nif=data["nif"]
         customer.save()
 
         return {'status':'success','response':customer}
 
     except Exception as e:
-        import sys, os
-        exc_type, exc_obj, exc_tb = sys.exc_info()
-        return {'status':'failed','response':e.args[0] + str(exc_tb.tb_lineno)}
+        return {'status':'failed','response':e.args[0]}
 
 
 def edit_customer(auth_id,data,rate):

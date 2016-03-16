@@ -228,9 +228,6 @@ function new_customer() {
 	var passwordrepeat=$('#new_customer_passwordrepeat').val();
 	var birthdate=$('#new_customer_birthdate').val();
 	var rate_id=$('#customer_rate').val();
-	var direccion=$('#new_customer_direccion').val();
-	var nota_general=$('#new_customer_nota_general').val();
-	var nota_especial=$('#new_customer_nota_especial').val();
 	if($('#new_customer_validated').is(':checked')){
 		var validado=1;
 	}else{
@@ -272,10 +269,7 @@ function new_customer() {
 																							vip:vip,
 																							paid:pagado,
 																							validated:validado,
-																							prueba:prueba,
-																							direccion:direccion,
-																							nota_general:nota_general,
-																							nota_especial:nota_especial}, function(data){
+																							prueba:prueba}, function(data){
 																								
 												if(data.status=='success'){
 													show_new();
@@ -284,9 +278,6 @@ function new_customer() {
 													$('#new_customer_nif').val('');
 													$('#new_customer_phone').val('');
 													$('#new_customer_email').val('');
-													$('#new_customer_direccion').val('');
-													$('#new_customer_nota_general').val('');
-													$('#new_customer_nota_especial').val('');
 													$('#new_customer_password').val('');
 													$('#new_customer_passwordrepeat').val('');
 													$('#new_customer_birthdate').val('');
