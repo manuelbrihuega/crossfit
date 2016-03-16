@@ -54,7 +54,7 @@ def create_customer_super(data,auth,rate):
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-        return {'status':'failed','response':'error'+str(exc_tb.tb_lineno) + str(fname)}
+        return {'status':'failed','response':'error'+e.args[0]+str(exc_tb.tb_lineno) + str(fname)}
 
 
 def edit_customer(auth_id,data,rate):
