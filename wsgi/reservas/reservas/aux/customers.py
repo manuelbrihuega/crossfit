@@ -52,7 +52,7 @@ def create_customer_super(data,auth,rate):
         return {'status':'success','response':customer}
 
     except Exception as e:
-        return {'status':'failed','response':e.args[0]}
+        return {'status':'failed','response':'e.args[0]'}
 
 
 def edit_customer(auth_id,data,rate):

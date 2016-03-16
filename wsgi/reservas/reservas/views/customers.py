@@ -102,11 +102,9 @@ def add_super(request):
             raise Exception('rate_not_found')
 
         except Exception as e:
-            import sys, os
-            exc_type, exc_obj, exc_tb = sys.exc_info()
             data = json.dumps({
                 'status':'failed',
-                'response': e.args[0] + str(exc_tb.tb_lineno)
+                'response': e.args[0]
             })
 
 
