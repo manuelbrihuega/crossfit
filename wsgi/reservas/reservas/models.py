@@ -66,6 +66,7 @@ class U_Customers(models.Model):
     birthdate = models.DateTimeField(default=None,null=True)
     credit_wod = models.IntegerField(default=0,null=False)
     credit_box = models.IntegerField(default=0,null=False)
+    credit_bono = models.IntegerField(default=0,null=False)
     paid = models.BooleanField(default=True)
     vip = models.BooleanField(default=False)
     test_user = models.BooleanField(default=False)
