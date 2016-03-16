@@ -40,6 +40,7 @@ def create_customer_super(data,auth,rate):
         customer.rate=rate
         customer.credit_wod=rate.credit_wod
         customer.credit_box=rate.credit_box
+        customer.credit_bono=rate.credit_bono
         customer.paid=getBoolValue(data["paid"])
         customer.vip=getBoolValue(data["vip"])
         customer.test_user=getBoolValue(data["prueba"])
@@ -53,7 +54,7 @@ def create_customer_super(data,auth,rate):
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-        return {'status':'failed','response':'error'+str(exc_tb.tb_lineno)}
+        return {'status':'failed','response':'error'+str(exc_tb.tb_lineno) + str(fname)}
 
 
 def edit_customer(auth_id,data,rate):
