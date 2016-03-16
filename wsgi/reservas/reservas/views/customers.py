@@ -29,12 +29,12 @@ def add(request):
             if request.GET['rate_id']!='-1':
                 rate=Rates.objects.get(id=request.GET['rate_id'])
             else:
-            	raise Exception('rate_missed')
+                raise Exception('rate_missed')
             result_auth=create_auth(request.GET,'U_Customers',False)
             if result_auth['status']=="success":
                 r_customer=create_customer(request.GET,result_auth['response'],rate)
                 if r_customer['status']=='failed':
-                	raise Exception(r_customer['response'])
+                    raise Exception(r_customer['response'])
                 else:
                     add_task(datetime.utcnow(),'send_email_new_customer_task(customer_id='+str(r_customer['response'].id)+')')
                     name = 'User_Id'+str(result_auth['response'].id)
@@ -79,30 +79,22 @@ def add_super(request):
                 if request.GET['rate_id']!='-1':
                     rate=Rates.objects.get(id=request.GET['rate_id'])
                 else:
-                	raise Exception('rate_missed')
+                    raise Exception('rate_missed')
                 resl=getBoolValue(request.GET['validated'])
                 result_auth=create_auth(request.GET,'U_Customers',resl)
                 if result_auth['status']=="success":
-                    customer=U_Customers()
-                    customer.auth=result_auth['response']
-                    customer.rate=rate
-                    customer.credit_wod=rate.credit_wod
-                    customer.credit_box=rate.credit_box
-                    customer.paid=getBoolValue(request.GET["paid"])
-                    customer.vip=getBoolValue(request.GET["vip"])
-                    customer.test_user=getBoolValue(request.GET["prueba"])
-                    customer.validated=getBoolValue(request.GET["validated"])
-                    customer.birthdate=request.GET["birthdate"]
-                    customer.nif=request.GET["nif"]
-                    customer.save()
-                    add_task(datetime.utcnow(),'send_email_new_customer_task(customer_id='+str(customer.id)+')')
-                    name = 'User_Id'+str(result_auth['response'].id)
-                    nick = 'User_Id'+str(result_auth['response'].id)
-                    phone = '+34'+str(result_auth['response'].phone)
-                    message = 'Gracias por registrate en el sistema de reservas de CrossFit Jerez. Podrá comenzar a utilizarlo cuando validemos su registro.'
-                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                    r_customer=create_customer_super(request.GET,result_auth['response'],rate)
+                    if r_customer['status']=='failed':
+                        raise Exception(r_customer['response'])
+                    else:
+                        add_task(datetime.utcnow(),'send_email_new_customer_task(customer_id='+str(r_customer['response'].id)+')')
+                        name = 'User_Id'+str(result_auth['response'].id)
+                        nick = 'User_Id'+str(result_auth['response'].id)
+                        phone = '+34'+str(result_auth['response'].phone)
+                        message = 'Gracias por registrate en el sistema de reservas de CrossFit Jerez. Podrá comenzar a utilizarlo cuando validemos su registro.'
+                        add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     
-                    data=json.dumps({'status':'success','response':'created','data':{'auth_id':result_auth['response'].id,'customer_id':customer.id}})
+                        data=json.dumps({'status':'success','response':'created','data':{'auth_id':result_auth['response'].id,'customer_id':r_customer['response'].id}})
                 else:
                     raise Exception(result_auth['response'])
 
@@ -112,7 +104,7 @@ def add_super(request):
         except Exception as e:
             data = json.dumps({
                 'status':'failed',
-                'response': 'e.args[0]'
+                'response': e.args[0]
             })
 
 
@@ -153,7 +145,7 @@ def search(request):
                                 items=U_Customers.objects.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('auth__name')
                             counter = 1
                         elif counter == 1:
-                    	    if filtro=='todos':
+                            if filtro=='todos':
                                 items=items.filter(Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)).order_by('auth__name')
                             elif filtro=='pagados':
                                 items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(paid=1)).order_by('auth__name')
@@ -239,7 +231,7 @@ def search(request):
                     list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'credit_bono':item.credit_bono, 'validated':item.validated, 'credit_wod_tarifa':item.rate.credit_wod, 'credit_box_tarifa':item.rate.credit_box, 'credit_bono_tarifa':item.rate.credit_bono, 'tarifa_vigente':item.rate.name, 'tarifa_vigente_precio':item.rate.price, 'direccion':item.direccion, 'nota_general':item.nota_general, 'nota_especial':item.nota_especial})
                 data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
             else:
-            	if order=='nombreDESC':
+                if order=='nombreDESC':
                     if filtro=='todos':
                         items=U_Customers.objects.all().order_by('auth__name')
                     elif filtro=='pagados':

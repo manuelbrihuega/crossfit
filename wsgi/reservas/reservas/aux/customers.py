@@ -1,5 +1,4 @@
 from reservas.models import *
-
 from reservas.aux.general import *
 from reservas.aux.strings import *
 from reservas.aux.auth import *
@@ -40,7 +39,6 @@ def create_customer_super(data,auth,rate):
         customer.rate=rate
         customer.credit_wod=rate.credit_wod
         customer.credit_box=rate.credit_box
-        customer.credit_bono=rate.credit_bono
         customer.paid=getBoolValue(data["paid"])
         customer.vip=getBoolValue(data["vip"])
         customer.test_user=getBoolValue(data["prueba"])
