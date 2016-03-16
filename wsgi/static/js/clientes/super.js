@@ -177,7 +177,7 @@ function active_new_customer_form() {
 }
 
 function pagar(obj) {
-	var id = $(obj).parent().attr('data-id');
+	var id = $(obj).parent().parent().attr('data-id');
 	var confirmacion=confirm('¿Está seguro de confirmar el pago del cliente?');
 	if (confirmacion==true)
 	{
@@ -198,7 +198,7 @@ function pagar(obj) {
 }
 
 function revetirPago(obj) {
-	var id = $(obj).parent().attr('data-id');
+	var id = $(obj).parent().parent().attr('data-id');
 	var confirmacion=confirm('¿Está seguro de deshacer el pago del cliente?');
 	if (confirmacion==true)
 	{

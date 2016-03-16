@@ -1,8 +1,8 @@
 function draw_passenger_sm(passenger, wrapper) {
 	var cad='';
 	var pay='PAGADO';
-	var color='style="color:green;"';
-	if(passenger.paid==0){ cad = 'background-color:#f8bfbf;'; pay = 'NO PAGADO'; color='style="color:red;"';}
+	var color='style="color:green; padding: 0px; text-align: center;"';
+	if(passenger.paid==0){ cad = 'background-color:#f8bfbf;'; pay = 'NO PAGADO'; color='style="color:red; padding: 0px; text-align: center;"';}
 	if(passenger.validated==0){ cad = cad + 'text-decoration: line-through;';}
 		/*var item = $('<div></div>').attr({'class':cad, 'data-id':passenger.id}); sm3.append(item);
 			var title = $('<div></div>').attr({'class':'title','style':'max-height: 20px; overflow: hidden;'}).text(passenger.name+' '+passenger.surname); item.append(title);
@@ -12,7 +12,7 @@ function draw_passenger_sm(passenger, wrapper) {
 			item.click(function(){
 				modal_passenger_details(passenger.id);
 			})*/
-			$('#tableweybody2').append('<tr style="cursor:pointer; '+cad+'" onclick="modal_passenger_details('+passenger.id+');" data-id="'+passenger.id+'">'+'<td>'+passenger.name+'</td>'+'<td>'+passenger.surname+'</td>'+'<td>'+passenger.credit_wod+'/'+passenger.credit_wod_tarifa+'</td>'+'<td>'+passenger.credit_box+'/'+passenger.credit_box_tarifa+'</td>'+'<td>'+passenger.credit_bono+'/'+passenger.credit_bono_tarifa+'</td>'+'<td>'+passenger.tarifa_vigente+' ('+passenger.tarifa_vigente_precio+')'+'</td>'+'<td '+color+' class="pagador">'+pay+'</td>'+'</tr>');
+			$('#tableweybody2').append('<tr style="cursor:pointer; '+cad+'" data-id="'+passenger.id+'">'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.name+'</td>'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.surname+'</td>'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.credit_wod+'/'+passenger.credit_wod_tarifa+'</td>'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.credit_box+'/'+passenger.credit_box_tarifa+'</td>'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.credit_bono+'/'+passenger.credit_bono_tarifa+'</td>'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.tarifa_vigente+' ('+passenger.tarifa_vigente_precio+')'+'</td>'+'<td '+color+' class="pagador">'+pay+'</td>'+'</tr>');
 			
 			$('#tablewey2').tablesorter();
 			$(".pagador").hover(function(){
