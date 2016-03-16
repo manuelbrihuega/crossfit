@@ -47,8 +47,6 @@ def create_customer_super(data,auth,rate):
         customer.validated=getBoolValue(data["validated"])
         customer.birthdate=data["birthdate"]
         customer.direccion=data["direccion"]
-        customer.nota_general=data["nota_general"]
-        customer.nota_especial=data["nota_especial"]
         customer.nif=data["nif"]
         customer.save()
 
