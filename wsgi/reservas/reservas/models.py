@@ -86,8 +86,8 @@ class Rates(models.Model):
     observations = models.CharField(default="",max_length=255)
     credit_wod = models.IntegerField(default=0,null=False)
     credit_box = models.IntegerField(default=0,null=False)
-    credit_bono = models.IntegerField(default=0,null=False)
     tipobono = models.BooleanField(default=False)
+    credit_bono = models.IntegerField(default=0,null=False)
 
     def __unicode__(self):
         return self.name

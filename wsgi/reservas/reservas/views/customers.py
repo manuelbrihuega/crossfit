@@ -13,6 +13,7 @@ from reservas.aux.general import *
 from reservas.aux.strings import *
 from reservas.aux.auth import *
 from reservas.aux.tasks import *
+import sys, os
 
 @transaction.atomic
 def add(request):
@@ -50,9 +51,11 @@ def add(request):
         raise Exception('rate_not_found')
 
     except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         data = json.dumps({
             'status':'failed',
-            'response': e.args[0]
+            'response': 'errorB'+e.args[0]+str(exc_tb.tb_lineno) + str(fname)
         })
 
 
@@ -102,9 +105,11 @@ def add_super(request):
             raise Exception('rate_not_found')
 
         except Exception as e:
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             data = json.dumps({
                 'status':'failed',
-                'response': e.args[0]
+                'response': 'errorC'+e.args[0]+str(exc_tb.tb_lineno) + str(fname)
             })
 
 
