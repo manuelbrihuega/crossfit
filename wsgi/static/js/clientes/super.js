@@ -197,7 +197,7 @@ function pagar(obj) {
 	}
 }
 
-function revetirPago(obj) {
+function revertirPago(obj) {
 	var id = $(obj).parent().parent().attr('data-id');
 	var confirmacion=confirm('¿Está seguro de deshacer el pago del cliente?');
 	if (confirmacion==true)
