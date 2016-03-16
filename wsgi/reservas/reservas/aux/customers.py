@@ -3,6 +3,7 @@ from reservas.aux.general import *
 from reservas.aux.strings import *
 from reservas.aux.auth import *
 from django.db.models import Q
+import sys, os
 
 def create_customer(data,auth,rate):
     try:
@@ -50,7 +51,9 @@ def create_customer_super(data,auth,rate):
         return {'status':'success','response':customer}
 
     except Exception as e:
-        return {'status':'failed','response':e.args[0]}
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        return {'status':'failed','response':'error'+str(exc_tb.tb_lineno)}
 
 
 def edit_customer(auth_id,data,rate):
