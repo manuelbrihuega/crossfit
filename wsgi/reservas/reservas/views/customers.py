@@ -441,3 +441,57 @@ def delete(request):
         data=json.dumps({'status':'failed','response':'not_logged'})
 
     return APIResponse(request,data)
+
+
+def pagar(request):
+    """
+    PAGA.
+    """
+    if 'auth_id' not in request.session:
+        data=json.dumps({'status':'failed','response':'not_logged'})
+    if not have_permission(request.session['auth_id'],'pagar_super'):
+        data=json.dumps({'status':'failed','response':'unauthorized_pagar_super'})
+    else:
+        try:
+            if not validate_parameter(request.GET,'id'):
+                raise Exception('id_missed')
+            customer=U_Customers.objects.get(id=request.GET['id'])
+            customer.paid=True
+            customer.validated=True
+            auth=customer.auth
+            auth.active=True
+            auth.save()
+            customer.save()  
+            data=json.dumps({'status':'success','response':'customer_paid'})
+        except Exception as e:
+            data = json.dumps({
+                'status':'failed',
+                'response': e.args[0]
+            })
+
+    return APIResponse(request,data)
+
+
+def revertir_pago(request):
+    """
+    NO PAGA.
+    """
+    if 'auth_id' not in request.session:
+        data=json.dumps({'status':'failed','response':'not_logged'})
+    if not have_permission(request.session['auth_id'],'pagar_super'):
+        data=json.dumps({'status':'failed','response':'unauthorized_pagar_super'})
+    else:
+        try:
+            if not validate_parameter(request.GET,'id'):
+                raise Exception('id_missed')
+            customer=U_Customers.objects.get(id=request.GET['id'])
+            customer.paid=False
+            customer.save()  
+            data=json.dumps({'status':'success','response':'customer_not_paid'})
+        except Exception as e:
+            data = json.dumps({
+                'status':'failed',
+                'response': e.args[0]
+            })
+
+    return APIResponse(request,data)

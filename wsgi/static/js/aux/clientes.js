@@ -17,12 +17,12 @@ function draw_passenger_sm(passenger, wrapper) {
 			$('#tablewey2').tablesorter();
 			$(".pagador").hover(function(){
     			if($(this).html()=='PAGADO'){
-    				$(this).html('<button onclick="revertirPago(this);" style="color:red;">REVERTIR PAGO</button>');
+    				$(this).html('<button onclick="revertirPago(this);" style="color:red; margin-top:0px; margin-bottom: 0px; margin-left:auto; margin-right: auto;">REVERTIR PAGO</button>');
     			}else{
-    				$(this).html('<button onclick="pagar(this);" style="color:green;">PAGAR</button>');
+    				$(this).html('<button onclick="pagar(this);" style="color:green; margin-top:0px; margin-bottom: 0px; margin-left:auto; margin-right: auto;">PAGAR</button>');
     			}
     		}, function(){
-    			if($(this).html()=='<button onclick="revertirPago(this);" style="color:red;">REVERTIR PAGO</button>'){
+    			if($(this).html()=='<button onclick="revertirPago(this);" style="color:red; margin-top:0px; margin-bottom: 0px; margin-left:auto; margin-right: auto;">REVERTIR PAGO</button>'){
     				$(this).html('PAGADO');
     			}else{
     				$(this).html('NO PAGADO');

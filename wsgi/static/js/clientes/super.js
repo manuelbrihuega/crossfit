@@ -176,6 +176,48 @@ function active_new_customer_form() {
 	});
 }
 
+function pagar(obj) {
+	var id = $(obj).parent().attr('data-id');
+	var confirmacion=confirm('¿Está seguro de confirmar el pago del cliente?');
+	if (confirmacion==true)
+	{
+		$.getJSON(api_url+'customers/pagar?callback=?', {id:id}, function(data){
+			if(data.status=='success'){
+				launch_alert('<i class="fa fa-smile-o"></i> Pago procesado satisfactoriamente','');
+				if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false,order); }
+				if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false,order); }
+				if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false,order); }
+				if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false,order); }
+				if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,order); }
+				
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+		});
+
+	}
+}
+
+function revetirPago(obj) {
+	var id = $(obj).parent().attr('data-id');
+	var confirmacion=confirm('¿Está seguro de deshacer el pago del cliente?');
+	if (confirmacion==true)
+	{
+		$.getJSON(api_url+'customers/revertir_pago?callback=?', {id:id}, function(data){
+			if(data.status=='success'){
+				launch_alert('<i class="fa fa-smile-o"></i> Pago revertido','');
+				if($('#todos').is(':checked')){ searchPassengers(true,false,false,false,false,order); }
+				if($('#pagados').is(':checked')){ searchPassengers(false,true,false,false,false,order); }
+				if($('#nopagados').is(':checked')){ searchPassengers(false,false,true,false,false,order); }
+				if($('#validados').is(':checked')){ searchPassengers(false,false,false,true,false,order); }
+				if($('#novalidados').is(':checked')){ searchPassengers(false,false,false,false,true,order); }
+				
+			}
+			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+		});
+
+	}
+}
+
 function new_customer() {
 	var name=$('#new_customer_name').val();
 	var surname=$('#new_customer_surname').val();
