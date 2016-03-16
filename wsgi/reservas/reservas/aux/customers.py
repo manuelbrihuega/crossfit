@@ -70,6 +70,11 @@ def edit_customer(auth_id,data,rate):
             if customer.credit_box!=data['credit_box']:
                 changed=True
                 customer.credit_box=data['credit_box']
+        if validate_parameter(data,'credit_bono'):
+            found=True
+            if customer.credit_bono!=data['credit_bono']:
+                changed=True
+                customer.credit_bono=data['credit_bono']
         if validate_parameter(data,'birthdate'):
             found=True
             if customer.birthdate!=data['birthdate']:
@@ -80,6 +85,14 @@ def edit_customer(auth_id,data,rate):
             if customer.nif!=data['nif']:
                 changed=True
                 customer.nif=data['nif']
+        if validate_parameter(data,'nota_general'):
+            if customer.nota_general!=data['nota_general']:
+                changed=True
+                customer.nota_general=data['nota_general']
+        if validate_parameter(data,'nota_especial'):
+            if customer.nota_especial!=data['nota_especial']:
+                changed=True
+                customer.nota_especial=data['nota_especial']
         if not found:
             return {'status':'failed','response':'parameter_not_found'}
 
@@ -114,6 +127,10 @@ def edit_customer_b(auth_id,data):
             if customer.nif!=data['nif']:
                 changed=True
                 customer.nif=data['nif']
+        if validate_parameter(data,'direccion'):
+            if customer.direccion!=data['direccion']:
+                changed=True
+                customer.direccion=data['direccion']
         if not found:
             return {'status':'failed','response':'parameter_not_found'}
 

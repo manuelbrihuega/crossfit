@@ -228,7 +228,7 @@ def search(request):
                             elif filtro=='novalidados':
                                 items=items.filter((Q(auth__name__icontains=word)|Q(auth__surname__icontains=word)|Q(auth__email__icontains=word)|Q(auth__phone__icontains=word)) & Q(validated=0)).order_by('-auth__surname')
                 for item in items:
-                    list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'credit_bono':item.credit_bono, 'validated':item.validated, 'credit_wod_tarifa':item.rate.credit_wod, 'credit_box_tarifa':item.rate.credit_box, 'credit_bono_tarifa':item.rate.credit_bono, 'tarifa_vigente':item.rate.name, 'tarifa_vigente_precio':item.rate.price})
+                    list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'credit_bono':item.credit_bono, 'validated':item.validated, 'credit_wod_tarifa':item.rate.credit_wod, 'credit_box_tarifa':item.rate.credit_box, 'credit_bono_tarifa':item.rate.credit_bono, 'tarifa_vigente':item.rate.name, 'tarifa_vigente_precio':item.rate.price, 'direccion':item.direccion, 'nota_general':item.nota_general, 'nota_especial':item.nota_especial})
                 data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
             else:
             	if order=='nombreDESC':
@@ -243,7 +243,7 @@ def search(request):
                     elif filtro=='novalidados':
                         items=U_Customers.objects.filter(Q(validated=0)).order_by('auth__name')
                     for item in items:
-                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'credit_bono':item.credit_bono, 'validated':item.validated, 'credit_wod_tarifa':item.rate.credit_wod, 'credit_box_tarifa':item.rate.credit_box, 'credit_bono_tarifa':item.rate.credit_bono, 'tarifa_vigente':item.rate.name, 'tarifa_vigente_precio':item.rate.price})
+                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'credit_bono':item.credit_bono, 'validated':item.validated, 'credit_wod_tarifa':item.rate.credit_wod, 'credit_box_tarifa':item.rate.credit_box, 'credit_bono_tarifa':item.rate.credit_bono, 'tarifa_vigente':item.rate.name, 'tarifa_vigente_precio':item.rate.price, 'direccion':item.direccion, 'nota_general':item.nota_general, 'nota_especial':item.nota_especial})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
                 elif order=='nombreASC':
                     if filtro=='todos':
@@ -257,7 +257,7 @@ def search(request):
                     elif filtro=='novalidados':
                         items=U_Customers.objects.filter(Q(validated=0)).order_by('-auth__name')
                     for item in items:
-                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'credit_bono':item.credit_bono, 'validated':item.validated, 'credit_wod_tarifa':item.rate.credit_wod, 'credit_box_tarifa':item.rate.credit_box, 'credit_bono_tarifa':item.rate.credit_bono, 'tarifa_vigente':item.rate.name, 'tarifa_vigente_precio':item.rate.price})
+                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'credit_bono':item.credit_bono, 'validated':item.validated, 'credit_wod_tarifa':item.rate.credit_wod, 'credit_box_tarifa':item.rate.credit_box, 'credit_bono_tarifa':item.rate.credit_bono, 'tarifa_vigente':item.rate.name, 'tarifa_vigente_precio':item.rate.price, 'direccion':item.direccion, 'nota_general':item.nota_general, 'nota_especial':item.nota_especial})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
                 elif order=='apellidosDESC':
                     if filtro=='todos':
@@ -271,7 +271,7 @@ def search(request):
                     elif filtro=='novalidados':
                         items=U_Customers.objects.filter(Q(validated=0)).order_by('auth__surname')
                     for item in items:
-                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'credit_bono':item.credit_bono, 'validated':item.validated, 'credit_wod_tarifa':item.rate.credit_wod, 'credit_box_tarifa':item.rate.credit_box, 'credit_bono_tarifa':item.rate.credit_bono, 'tarifa_vigente':item.rate.name, 'tarifa_vigente_precio':item.rate.price})
+                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'credit_bono':item.credit_bono, 'validated':item.validated, 'credit_wod_tarifa':item.rate.credit_wod, 'credit_box_tarifa':item.rate.credit_box, 'credit_bono_tarifa':item.rate.credit_bono, 'tarifa_vigente':item.rate.name, 'tarifa_vigente_precio':item.rate.price, 'direccion':item.direccion, 'nota_general':item.nota_general, 'nota_especial':item.nota_especial})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
                 elif order=='apellidosASC':
                     if filtro=='todos':
@@ -285,7 +285,7 @@ def search(request):
                     elif filtro=='novalidados':
                         items=U_Customers.objects.filter(Q(validated=0)).order_by('-auth__surname')
                     for item in items:
-                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'credit_bono':item.credit_bono, 'validated':item.validated, 'credit_wod_tarifa':item.rate.credit_wod, 'credit_box_tarifa':item.rate.credit_box, 'credit_bono_tarifa':item.rate.credit_bono, 'tarifa_vigente':item.rate.name, 'tarifa_vigente_precio':item.rate.price})
+                        list_customers.append({'id':item.id, 'name':item.auth.name, 'email':item.auth.email, 'surname':item.auth.surname, 'paid':item.paid, 'phone':item.auth.phone, 'nif':item.nif, 'credit_wod':item.credit_wod, 'credit_box':item.credit_box, 'credit_bono':item.credit_bono, 'validated':item.validated, 'credit_wod_tarifa':item.rate.credit_wod, 'credit_box_tarifa':item.rate.credit_box, 'credit_bono_tarifa':item.rate.credit_bono, 'tarifa_vigente':item.rate.name, 'tarifa_vigente_precio':item.rate.price, 'direccion':item.direccion, 'nota_general':item.nota_general, 'nota_especial':item.nota_especial})
                     data=json.dumps({'status': 'success','response':'search_customers','data':{'list':list_customers}})
         except Exception as e:
             data=json.dumps({'status': 'failed', 'response':e.args[0]})
@@ -317,7 +317,10 @@ def get(request):
                             'credit_wod_tarifa':cu.rate.credit_wod,
                             'credit_bono_tarifa':cu.rate.credit_bono,
                             'tarifa_vigente':cu.rate.name,
-                            'tarifa_vigente_precio':cu.rate.price}
+                            'tarifa_vigente_precio':cu.rate.price,
+                            'direccion':cu.direccion,
+                            'nota_general':cu.nota_general,
+                            'nota_especial':cu.nota_especial}
                 data=json.dumps({'status':'success','response':'customer_profile','data':{'auth_profile':auth_profile,'customer_profile':cu_profile}})
 
             else:
@@ -342,7 +345,7 @@ def get_foreign(request):
                     customer=U_Customers.objects.get(id=request.GET['customer_id'])
                     if customer:
                         auth_profile=get_profile(customer.auth_id)
-                        customer_profile={'id':customer.id, 'nif':customer.nif, 'birthdate':get_string_from_date(local_date(customer.birthdate,2)), 'credit_wod':customer.credit_wod, 'credit_box':customer.credit_box, 'credit_bono':customer.credit_bono, 'paid':customer.paid, 'vip':customer.vip, 'validated':customer.validated, 'test_user':customer.test_user, 'rate_id':customer.rate_id, 'credit_box_tarifa':customer.rate.credit_box, 'credit_wod_tarifa':customer.rate.credit_wod, 'credit_bono_tarifa':customer.rate.credit_bono, 'tarifa_vigente':customer.rate.name, 'tarifa_vigente_precio':customer.rate.price}
+                        customer_profile={'id':customer.id, 'nif':customer.nif, 'birthdate':get_string_from_date(local_date(customer.birthdate,2)), 'credit_wod':customer.credit_wod, 'credit_box':customer.credit_box, 'credit_bono':customer.credit_bono, 'paid':customer.paid, 'vip':customer.vip, 'validated':customer.validated, 'test_user':customer.test_user, 'rate_id':customer.rate_id, 'credit_box_tarifa':customer.rate.credit_box, 'credit_wod_tarifa':customer.rate.credit_wod, 'credit_bono_tarifa':customer.rate.credit_bono, 'tarifa_vigente':customer.rate.name, 'tarifa_vigente_precio':customer.rate.price, 'direccion':customer.direccion, 'nota_general':customer.nota_general, 'nota_especial':customer.nota_especial}
                         data=json.dumps({'status':'success','response':'customer_profile','data':{'auth_profile':auth_profile,
                                                                                                    'customer_profile':customer_profile
                                                                                                    }})

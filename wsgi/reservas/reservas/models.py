@@ -71,7 +71,10 @@ class U_Customers(models.Model):
     vip = models.BooleanField(default=False)
     test_user = models.BooleanField(default=False)
     validated = models.IntegerField(default=0)
-    rate = models.ForeignKey('Rates', null=True, blank=True,on_delete = models.SET_NULL) 
+    rate = models.ForeignKey('Rates', null=True, blank=True,on_delete = models.SET_NULL)
+    direccion = models.CharField(default="",max_length=500)
+    nota_general = models.TextField(default="")
+    nota_especial = models.TextField(default="")
 
     def __unicode__(self):
         return self.auth.name+" "+self.auth.surname

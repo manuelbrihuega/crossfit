@@ -1005,6 +1005,10 @@ function modal_passenger_details(passenger_id) {
 				$('#passenger_birthdate').val(year+"-"+mes+"-"+dia);
 				$('#passenger_credit_wod').val(data.data.customer_profile.credit_wod);
 				$('#passenger_credit_box').val(data.data.customer_profile.credit_box);
+				$('#passenger_credit_bono').val(data.data.customer_profile.credit_bono);
+				$('#passenger_direccion').val(data.data.customer_profile.direccion);
+				$('#passenger_nota_general').val(data.data.customer_profile.nota_general);
+				$('#passenger_nota_especial').val(data.data.customer_profile.nota_especial);
 
 				if(data.data.customer_profile.paid){
 					$( "#passenger_paid" ).prop( "checked", true );
@@ -2807,6 +2811,10 @@ function edit_passenger() {
 	var birthdate = $('#passenger_birthdate').val();
 	var credit_wod = $('#passenger_credit_wod').val();
 	var credit_box = $('#passenger_credit_box').val();
+	var credit_bono = $('#passenger_credit_bono').val();
+	var direccion = $('#passenger_direccion').val();
+	var nota_general = $('#passenger_nota_general').val();
+	var nota_especial = $('#passenger_nota_especial').val();
 	var paid = 0;
 	var test_user = 0;
 	var vip = 0;
@@ -2827,7 +2835,7 @@ function edit_passenger() {
 					if (phone.length>0){
 						if (birthdate.length>0){
 							save_button.html('<i class="fa fa-cog fa-spin"></i>');
-							var params = {id:id,name:name,surname:surname,email:email,nif:nif,phone:phone,rate_id:rate_id,birthdate:birthdate, credit_wod:credit_wod, credit_box:credit_box, paid:paid, test_user:test_user, vip:vip};
+							var params = {id:id,name:name,surname:surname,email:email,nif:nif,phone:phone,rate_id:rate_id,birthdate:birthdate, credit_wod:credit_wod, credit_box:credit_box, paid:paid, test_user:test_user, vip:vip, credit_bono:credit_bono, direccion:direccion, nota_general:nota_general, nota_especial:nota_especial};
 							if (password.length>0) params['password']=password;
 							$.getJSON(api_url+'customers/edit_foreign?callback=?', params, function(data){
 								if(data.status=='success'){
