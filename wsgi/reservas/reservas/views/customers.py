@@ -88,7 +88,6 @@ def add_super(request):
                     customer.rate=rate
                     customer.credit_wod=rate.credit_wod
                     customer.credit_box=rate.credit_box
-                    customer.credit_bono=rate.credit_bono
                     customer.paid=getBoolValue(request.GET["paid"])
                     customer.vip=getBoolValue(request.GET["vip"])
                     customer.test_user=getBoolValue(request.GET["prueba"])
@@ -113,7 +112,7 @@ def add_super(request):
         except Exception as e:
             data = json.dumps({
                 'status':'failed',
-                'response': e.args[0]
+                'response': 'e.args[0]'
             })
 
 
