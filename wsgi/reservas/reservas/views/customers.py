@@ -83,18 +83,27 @@ def add_super(request):
                 resl=getBoolValue(request.GET['validated'])
                 result_auth=create_auth(request.GET,'U_Customers',resl)
                 if result_auth['status']=="success":
-                    r_customer=create_customer_super(request.GET,result_auth['response'],rate)
-                    if r_customer['status']=='failed':
-                    	raise Exception(r_customer['response'])
-                    else:
-                        add_task(datetime.utcnow(),'send_email_new_customer_task(customer_id='+str(r_customer['response'].id)+')')
-                        name = 'User_Id'+str(result_auth['response'].id)
-                        nick = 'User_Id'+str(result_auth['response'].id)
-                        phone = '+34'+str(result_auth['response'].phone)
-                        message = 'Gracias por registrate en el sistema de reservas de CrossFit Jerez. Podrá comenzar a utilizarlo cuando validemos su registro.'
-                        add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                    customer=U_Customers()
+                    customer.auth=result_auth['response']
+                    customer.rate=rate
+                    customer.credit_wod=rate.credit_wod
+                    customer.credit_box=rate.credit_box
+                    customer.credit_bono=rate.credit_bono
+                    customer.paid=getBoolValue(request.GET["paid"])
+                    customer.vip=getBoolValue(request.GET["vip"])
+                    customer.test_user=getBoolValue(request.GET["prueba"])
+                    customer.validated=getBoolValue(request.GET["validated"])
+                    customer.birthdate=request.GET["birthdate"]
+                    customer.nif=request.GET["nif"]
+                    customer.save()
+                    add_task(datetime.utcnow(),'send_email_new_customer_task(customer_id='+str(customer.id)+')')
+                    name = 'User_Id'+str(result_auth['response'].id)
+                    nick = 'User_Id'+str(result_auth['response'].id)
+                    phone = '+34'+str(result_auth['response'].phone)
+                    message = 'Gracias por registrate en el sistema de reservas de CrossFit Jerez. Podrá comenzar a utilizarlo cuando validemos su registro.'
+                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     
-                    	data=json.dumps({'status':'success','response':'created','data':{'auth_id':result_auth['response'].id,'customer_id':r_customer['response'].id}})
+                    data=json.dumps({'status':'success','response':'created','data':{'auth_id':result_auth['response'].id,'customer_id':customer.id}})
                 else:
                     raise Exception(result_auth['response'])
 
