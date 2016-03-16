@@ -40,11 +40,15 @@ def create_customer_super(data,auth,rate):
         customer.rate=rate
         customer.credit_wod=rate.credit_wod
         customer.credit_box=rate.credit_box
+        customer.credit_bono=rate.credit_bono
         customer.paid=getBoolValue(data["paid"])
         customer.vip=getBoolValue(data["vip"])
         customer.test_user=getBoolValue(data["prueba"])
         customer.validated=getBoolValue(data["validated"])
         customer.birthdate=data["birthdate"]
+        customer.direccion=data["direccion"]
+        customer.nota_general=data["nota_general"]
+        customer.nota_especial=data["nota_especial"]
         customer.nif=data["nif"]
         customer.save()
 
@@ -89,6 +93,10 @@ def edit_customer(auth_id,data,rate):
             if customer.nota_general!=data['nota_general']:
                 changed=True
                 customer.nota_general=data['nota_general']
+        if validate_parameter(data,'direccion'):
+            if customer.direccion!=data['direccion']:
+                changed=True
+                customer.direccion=data['direccion']
         if validate_parameter(data,'nota_especial'):
             if customer.nota_especial!=data['nota_especial']:
                 changed=True

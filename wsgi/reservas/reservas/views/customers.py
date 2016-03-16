@@ -70,7 +70,7 @@ def add_super(request):
         data=json.dumps({'status':'failed','response':'unauthorized_add_customer_super'})
     else:
         try:
-            params=['birthdate','nif','name','surname','password','email','phone','rate_id','vip','paid','validated','prueba']
+            params=['birthdate','nif','name','surname','password','email','phone','rate_id','vip','paid','validated','prueba','direccion','nota_general','nota_especial']
             for param in params:
                 if not validate_parameter(request.GET,param):
                     raise Exception(param+'_missed')
