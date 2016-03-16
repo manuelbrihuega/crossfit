@@ -1044,12 +1044,12 @@ function modal_passenger_details(passenger_id) {
 				if(myrole=='U_Super'){
 				var group = $('<div></div>').attr({'class':'btn-group'}); footer.append(group);
 				
-				var ban_button = $('<button></button>').attr({'type':'button','class':'ban btn btn-default'}).text('BANEAR'); group.append(ban_button);
+				/*var ban_button = $('<button></button>').attr({'type':'button','class':'ban btn btn-default'}).text('BANEAR'); group.append(ban_button);
 				ban_button.click(function(){ ban(data.data.auth_profile.auth_id); });
 				
 				var unban_button = $('<button></button>').attr({'type':'button','class':'unban btn btn-default'}).text('DESBANEAR'); group.append(unban_button);
 				unban_button.click(function(){ unban(data.data.auth_profile.auth_id); });
-				
+				*/
 				var activate = $('<button></button>').attr({'type':'button','class':'activate btn btn-default'}).text('VALIDAR'); group.append(activate);
 				activate.click(function(){ 
 					activate.html('<i class="fa fa-cog fa-spin"></i>');
