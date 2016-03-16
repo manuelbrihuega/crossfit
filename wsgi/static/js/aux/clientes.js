@@ -18,7 +18,7 @@ function draw_passenger_sm(passenger, wrapper) {
 			$('#tablewey2').tablesorter();
 			$(".pagador").hover(function(){
     			if($(this).hasClass('paid')){
-    				$(this).html('<button onclick="revertirPago(this);" style="color:red; margin-top:0px; margin-bottom: 0px; margin-left:auto; margin-right: auto;">REVERTIR PAGO</button>');
+    				$(this).html('<button onclick="revertirPago(this);" style="color:red; margin-top:0px; margin-bottom: 0px; margin-left:auto; margin-right: auto;">REVERTIR</button>');
     			}else{
     				if($(this).hasClass('notpaid')){
     					$(this).html('<button onclick="pagar(this);" style="color:green; margin-top:0px; margin-bottom: 0px; margin-left:auto; margin-right: auto;">PAGAR</button>');
