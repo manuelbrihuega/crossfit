@@ -21,6 +21,13 @@ function get_content() {
 								$('#new_customer_phone').val(data.data.auth_profile.phone);
 								$('#new_customer_email').val(data.data.auth_profile.email);
 								$('#new_customer_direccion').val(data.data.customer_profile.direccion);
+								if(data.data.customer_profile.photo!=''){
+									$('#photo_viewer').css('background', 'url('+data.data.customer_profile.photo+') no-repeat');
+            						$('#photo_viewer').attr('data-image', data.data.customer_profile.photo);
+								}else{
+									$('#photo_viewer').css('background', 'url('+'http://f.cl.ly/items/0Y2k2I3K373a1u2K3H1d/placeholder1.gif'+') no-repeat');
+            						$('#photo_viewer').attr('data-image', 'http://f.cl.ly/items/0Y2k2I3K373a1u2K3H1d/placeholder1.gif');
+								}
 								var fecha=data.data.customer_profile.birthdate.split(" ");
 								var fechados=fecha[0].split("-");
 								var year=fechados[0];
@@ -54,6 +61,9 @@ function active_new_customer_form() {
 		edit_customer();
 		return false;
 	});
+	$("#enterprise_photo").change(function(){
+        show_preview_photo_enterprise(this);
+    });
 }
 
 function edit_customer() {
@@ -106,4 +116,66 @@ function edit_customer() {
 		}
 		else launch_alert('<i class="fa fa-frown-o"></i> Debes añadir el nombre','warning');
 	
+}
+
+function show_preview_photo_enterprise(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#photo_viewer').css('background', 'url('+e.target.result+') no-repeat');
+            $('#photo_viewer').attr('data-image', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function upload_photo_enterprise(){
+
+    var photoviewer=$('#photo_viewer');
+    var photo = photoviewer.attr('data-image');
+
+    var timestamp_actual=new Date().getTime();
+    var raw_input_params="timestamp="+timestamp_actual.toString()+"Q9eAZCIdRr1N9ecKXmT4j1d7XoM";
+    var signature = SHA1(raw_input_params);
+    var data_input = {file:photo,
+                    api_key:'887587895112958',
+                    timestamp:timestamp_actual.toString(),
+                    signature:signature};
+    var spinner = $('<i></i>').attr({'class':'fa fa-cog fa-spin'});
+    spinner.css({'position': 'relative','top': '-110px','font-size':'60px','left':'170px'});
+    photoviewer.append(spinner);
+    $('.fa-floppy-o').css('display','none');
+    $.ajax({
+		url: "https://api.cloudinary.com/v1_1/dgcbgj5ab/image/upload",
+        method:'post',
+        data:data_input,
+		success: function(data){
+            var id = $('#enterprise_id').val();
+            var params={id:id,logo:data.url};
+            $.getJSON(api_url+'enterprises/edit?callback=?', params, function(data){
+				if(data.status=='success'){
+
+					launch_alert('<i class="fa fa-smile-o"></i> Imagen subida','');
+				}
+				else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+
+                $('.fa-floppy-o').css('display','inline');
+                spinner.remove();
+			});
+
+        },
+
+        error: function(data){
+
+            $('.fa-floppy-o').css('display','inline');
+            launch_alert('<i class="fa fa-frown-o"></i> Error al subir la imagen','warning');
+            spinner.remove();
+        }
+
+    });
+
+
 }

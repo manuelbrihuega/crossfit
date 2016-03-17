@@ -75,6 +75,7 @@ class U_Customers(models.Model):
     direccion = models.CharField(default="",max_length=255)
     nota_general = models.TextField(default="")
     nota_especial = models.TextField(default="")
+    photo = models.CharField(default="",max_length=250)
 
     def __unicode__(self):
         return self.auth.name+" "+self.auth.surname

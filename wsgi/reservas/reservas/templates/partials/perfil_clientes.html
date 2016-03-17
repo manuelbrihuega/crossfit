@@ -4,6 +4,13 @@
 <div id="new_customer_wrapper">
 	<br>
 	<form id="new_customer_form" role="form">
+		<div id="photo_uploader">
+        <div id="photo_viewer">
+            <input type="file" class="" id="enterprise_photo" class="cloudinary-fileupload" data-cloudinary-field="image_upload">
+            <img id="photo_preview">
+        </div>
+
+    </div><br>
 		<div class="row">
 			<div class="col-md-2" style="padding-top: 5px;"><label>Nombre: </label></div>
 			<div class="col-md-5"><input type="text" class="form-control" id="new_customer_name" placeholder="Nombre"></div>
@@ -32,8 +39,8 @@
 			<div class="col-md-3"><input type="date" class="form-control" id="new_customer_birthdate" placeholder="Fecha de nacimiento"></div>
 		</div><br>
 		<div class="row">
-			<div class="col-md-3" style="padding-top: 5px;"><label>Dirección: </label></div>
-			<div class="col-md-9"><input type="text" class="form-control" id="new_customer_direccion" placeholder="Dirección"></div>
+			<div class="col-md-2" style="padding-top: 5px;"><label>Dirección: </label></div>
+			<div class="col-md-8"><input type="text" class="form-control" id="new_customer_direccion" placeholder="Dirección"></div>
 		</div><br>
 		<div class="row">
 			<div class="col-md-3">
