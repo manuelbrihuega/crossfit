@@ -5,6 +5,7 @@ function get_content() {
 		$.getScript(media_url+'js/aux/date.js', function(){
 			$.getScript(media_url+'js/aux/modals.js', function(){
 				$.getScript(media_url+'js/aux/perfil.js', function(){
+					$.getScript(media_url+'js/lib/sha1.js', function(){
 					$.post(base_url+'/partials/perfil_clientes', function(template, textStatus, xhr) {
 						$('#main').html(template);
 						//$('#users_submenu div.button.passengers').addClass('active');
@@ -49,6 +50,7 @@ function get_content() {
 						}
 					});
 				});
+			});
 			});
 		});
 	
