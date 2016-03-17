@@ -439,6 +439,7 @@ def edit_photo(request):
     user,auth = get_user_and_auth(request.session['auth_id'])
     try:
         user.photo = request.GET['photo']
+        user.save()
         data=json.dumps({'status':'success','response':'customer_modified'})
     except Exception, e:
         data=json.dumps({'status': 'failed', 'response':e.args[0]})
