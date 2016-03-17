@@ -148,7 +148,7 @@ function upload_photo_enterprise(){
                     signature:signature};
     var spinner = $('<i></i>').attr({'class':'fa fa-cog fa-spin'});
     spinner.css({'position': 'relative','top': '-110px','font-size':'60px','left':'170px'});
-    photoviewer.append(spinner);
+    $('.linkable').append(spinner);
     $('.fa-floppy-o').css('display','none');
     $.ajax({
 		url: "https://api.cloudinary.com/v1_1/crossfitjerez/image/upload",

@@ -994,7 +994,13 @@ function modal_passenger_details(passenger_id) {
 				$('#passenger_email').val(data.data.auth_profile.email);
 				loadRatesDos(data.data.customer_profile.rate_id);
 				$('#passenger_phone').val(data.data.auth_profile.phone);
-
+				if(data.data.customer_profile.photo!=''){
+					$('#photo_viewer').css('background', 'url('+data.data.customer_profile.photo+') no-repeat');
+            		$('#photo_viewer').attr('data-image', data.data.customer_profile.photo);
+				}else{
+					$('#photo_viewer').css('background', 'url('+'http://f.cl.ly/items/0Y2k2I3K373a1u2K3H1d/placeholder1.gif'+') no-repeat');
+            		$('#photo_viewer').attr('data-image', 'http://f.cl.ly/items/0Y2k2I3K373a1u2K3H1d/placeholder1.gif');
+				}
 				
 				$('#passenger_nif').val(data.data.customer_profile.nif);
 				var fecha=data.data.customer_profile.birthdate.split(" ");
