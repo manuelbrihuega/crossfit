@@ -147,7 +147,7 @@ function upload_photo_enterprise(){
                     timestamp:timestamp_actual.toString(),
                     signature:signature};
     var spinner = $('<i></i>').attr({'class':'fa fa-cog fa-spin'});
-    spinner.css({'position': 'relative','top': '-110px','font-size':'60px','left':'170px'});
+    //spinner.css({'position': 'relative','top': '-110px','font-size':'60px','left':'170px'});
     $('.linkable').append(spinner);
     $('.fa-floppy-o').css('display','none');
     $.ajax({
