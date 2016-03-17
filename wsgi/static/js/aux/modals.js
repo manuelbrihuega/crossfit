@@ -3645,7 +3645,7 @@ function modal_download_button(token) {
 	// modalAddFooter(mymodal,footer);
 }
 
-function upload_photo_enterprise(){
+/*function upload_photo_enterprise(){
 
     var photoviewer=$('#photo_viewer');
     var photo = photoviewer.attr('data-image');
@@ -3707,7 +3707,7 @@ function show_preview_photo_enterprise(input) {
     }
 }
 
-
+*/
 
 
 
