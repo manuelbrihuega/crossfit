@@ -325,7 +325,8 @@ def get(request):
                             'tarifa_vigente_precio':cu.rate.price,
                             'direccion':cu.direccion,
                             'nota_general':cu.nota_general,
-                            'nota_especial':cu.nota_especial}
+                            'nota_especial':cu.nota_especial,
+                            'photo':cu.photo}
                 data=json.dumps({'status':'success','response':'customer_profile','data':{'auth_profile':auth_profile,'customer_profile':cu_profile}})
 
             else:
@@ -350,7 +351,7 @@ def get_foreign(request):
                     customer=U_Customers.objects.get(id=request.GET['customer_id'])
                     if customer:
                         auth_profile=get_profile(customer.auth_id)
-                        customer_profile={'id':customer.id, 'nif':customer.nif, 'birthdate':get_string_from_date(local_date(customer.birthdate,2)), 'credit_wod':customer.credit_wod, 'credit_box':customer.credit_box, 'credit_bono':customer.credit_bono, 'paid':customer.paid, 'vip':customer.vip, 'validated':customer.validated, 'test_user':customer.test_user, 'rate_id':customer.rate_id, 'credit_box_tarifa':customer.rate.credit_box, 'credit_wod_tarifa':customer.rate.credit_wod, 'credit_bono_tarifa':customer.rate.credit_bono, 'tarifa_vigente':customer.rate.name, 'tarifa_vigente_precio':customer.rate.price, 'direccion':customer.direccion, 'nota_general':customer.nota_general, 'nota_especial':customer.nota_especial}
+                        customer_profile={'id':customer.id, 'nif':customer.nif, 'birthdate':get_string_from_date(local_date(customer.birthdate,2)), 'credit_wod':customer.credit_wod, 'credit_box':customer.credit_box, 'credit_bono':customer.credit_bono, 'paid':customer.paid, 'vip':customer.vip, 'validated':customer.validated, 'test_user':customer.test_user, 'rate_id':customer.rate_id, 'credit_box_tarifa':customer.rate.credit_box, 'credit_wod_tarifa':customer.rate.credit_wod, 'credit_bono_tarifa':customer.rate.credit_bono, 'tarifa_vigente':customer.rate.name, 'tarifa_vigente_precio':customer.rate.price, 'direccion':customer.direccion, 'nota_general':customer.nota_general, 'nota_especial':customer.nota_especial, 'photo':customer.photo}
                         data=json.dumps({'status':'success','response':'customer_profile','data':{'auth_profile':auth_profile,
                                                                                                    'customer_profile':customer_profile
                                                                                                    }})
@@ -425,6 +426,24 @@ def edit_client(request):
 
     return APIResponse(request,data)
 
+
+def edit_photo(request):
+    """
+    Edits a profile
+    """
+    if 'auth_id' not in request.session:
+        data=json.dumps({'status': 'failed', 'response':'not_logged'})
+
+    if not have_permission(request.session['auth_id'],'edit_client'):
+        data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_client'})
+    user,auth = get_user_and_auth(request.session['auth_id'])
+    try:
+        user.photo = request.GET['photo']
+        data=json.dumps({'status':'success','response':'customer_modified'})
+    except Exception, e:
+        data=json.dumps({'status': 'failed', 'response':e.args[0]})
+
+    return APIResponse(request,data)
 
 
 def delete(request):

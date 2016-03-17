@@ -138,10 +138,10 @@ function upload_photo_enterprise(){
     var photo = photoviewer.attr('data-image');
 
     var timestamp_actual=new Date().getTime();
-    var raw_input_params="timestamp="+timestamp_actual.toString()+"Q9eAZCIdRr1N9ecKXmT4j1d7XoM";
+    var raw_input_params="timestamp="+timestamp_actual.toString()+"OZf0hPozV90ajcvqFlWVX1EyKBk";
     var signature = SHA1(raw_input_params);
     var data_input = {file:photo,
-                    api_key:'887587895112958',
+                    api_key:'681813545162725',
                     timestamp:timestamp_actual.toString(),
                     signature:signature};
     var spinner = $('<i></i>').attr({'class':'fa fa-cog fa-spin'});
@@ -149,13 +149,12 @@ function upload_photo_enterprise(){
     photoviewer.append(spinner);
     $('.fa-floppy-o').css('display','none');
     $.ajax({
-		url: "https://api.cloudinary.com/v1_1/dgcbgj5ab/image/upload",
+		url: "https://api.cloudinary.com/v1_1/crossfitjerez/image/upload",
         method:'post',
         data:data_input,
 		success: function(data){
-            var id = $('#enterprise_id').val();
-            var params={id:id,logo:data.url};
-            $.getJSON(api_url+'enterprises/edit?callback=?', params, function(data){
+            var params={photo:data.url};
+            $.getJSON(api_url+'customers/edit_photo?callback=?', params, function(data){
 				if(data.status=='success'){
 
 					launch_alert('<i class="fa fa-smile-o"></i> Imagen subida','');
