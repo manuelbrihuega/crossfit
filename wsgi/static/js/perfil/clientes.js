@@ -20,6 +20,7 @@ function get_content() {
 								$('#new_customer_nif').val(data.data.customer_profile.nif);
 								$('#new_customer_phone').val(data.data.auth_profile.phone);
 								$('#new_customer_email').val(data.data.auth_profile.email);
+								$('#new_customer_direccion').val(data.data.customer_profile.direccion);
 								var fecha=data.data.customer_profile.birthdate.split(" ");
 								var fechados=fecha[0].split("-");
 								var year=fechados[0];
@@ -64,6 +65,7 @@ function edit_customer() {
 	var password=$('#new_customer_password').val();
 	var passwordrepeat=$('#new_customer_passwordrepeat').val();
 	var birthdate=$('#new_customer_birthdate').val();
+	var direccion=$('#new_customer_direccion').val();
 	if (name.length>0){
 		if (surname.length>0){
 			if (nif.length>0){
@@ -79,6 +81,7 @@ function edit_customer() {
 																							phone:phone,
 																							email:email,
 																							birthdate:birthdate,
+																							direccion:direccion,
 																							password:password}, function(data){
 																								
 											if(data.status=='success'){

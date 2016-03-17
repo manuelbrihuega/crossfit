@@ -12,12 +12,15 @@ def create_customer(data,auth,rate):
         customer.rate=rate
         customer.credit_wod=rate.credit_wod
         customer.credit_box=rate.credit_box
+        customer.credit_bono=rate.credit_bono
         customer.paid=False
         customer.vip=False
         customer.test_user=False
         customer.validated=False
         if validate_parameter(data,'birthdate'):
             customer.birthdate=data["birthdate"]
+        if validate_parameter(data,'direccion'):
+            customer.direccion=data["direccion"]
         if validate_parameter(data,'nif'):
             customer.nif=data["nif"]
             dnies = Dnis.objects.filter(Q(nif=customer.nif))
