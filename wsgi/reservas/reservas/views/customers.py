@@ -471,7 +471,7 @@ def delete(request):
     return APIResponse(request,data)
 
 
-'''def pagar(request):
+def pagar(request):
     """
     PAGA.
     """
@@ -538,4 +538,4 @@ def revertir_pago(request):
                 'response': e.args[0]
             })
 
-    return APIResponse(request,data)'''
+    return APIResponse(request,data)
