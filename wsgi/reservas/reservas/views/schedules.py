@@ -608,7 +608,13 @@ def get_foreign_pagos_customer(request):
                 try:
                     pagos=Pagos.objects.filter(Q(auth_id=request.GET['id']))
                     pagos_profile=[]
+                    customer=get_user(request.GET['id'])
                     for pay in pagos:
+                        if customer.pago_en_curso.id==pay.id:
+                            pay.credit_wod=customer.credit_wod
+                            pay.credit_box=customer.credit_box
+                            pay.credit_bono=customer.credit_bono
+                            pay.save()
                         pagos_profile.append({'id':pay.id,
                                  'date':get_string_from_date(pay.date),
                                  'rate':pay.rate.name,
