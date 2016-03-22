@@ -475,6 +475,7 @@ def pagar(request):
     """
     PAGA.
     """
+    from datetime import *
     if 'auth_id' not in request.session:
         data=json.dumps({'status':'failed','response':'not_logged'})
     if not have_permission(request.session['auth_id'],'pagar_super'):
@@ -488,8 +489,20 @@ def pagar(request):
             customer.validated=True
             auth=customer.auth
             auth.active=True
+            pago=Pagos()
+            pago.date=datetime.today()
+            pago.rate=customer.rate
+            pago.credit_bono=customer.credit_bono
+            pago.credit_box=customer.credit_box
+            pago.credit_wod=customer.credit_wod
+            pago.credit_wod_total=customer.rate.credit_wod
+            pago.credit_box_total=customer.rate.credit_box
+            pago.credit_bono_total=customer.rate.credit_bono
+            pago.auth=auth
+            pago.save()
+            customer.pago_en_curso=pago
             auth.save()
-            customer.save()  
+            customer.save()
             data=json.dumps({'status':'success','response':'customer_paid'})
         except Exception as e:
             data = json.dumps({
@@ -514,6 +527,9 @@ def revertir_pago(request):
                 raise Exception('id_missed')
             customer=U_Customers.objects.get(id=request.GET['id'])
             customer.paid=False
+            if customer.pago_en_curso:
+                customer.pago_en_curso.delete()
+                customer.pago_en_curso=None
             customer.save()  
             data=json.dumps({'status':'success','response':'customer_not_paid'})
         except Exception as e:

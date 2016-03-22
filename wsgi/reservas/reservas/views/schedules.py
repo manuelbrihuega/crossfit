@@ -598,6 +598,39 @@ def get_foreign_reservations_customer(request):
     return APIResponse(request,data)
 
 
+def get_foreign_pagos_customer(request):
+    """
+    Get foreign reservations
+    """
+    if 'auth_id' in request.session:
+        if have_permission(request.session['auth_id'],'get_foreign_pagos_customer'):
+            if validate_parameter(request.GET,'id'):
+                try:
+                    pagos=Pagos.objects.filter(Q(auth_id=request.GET['id']))
+                    pagos_profile=[]
+                    for pay in pagos:
+                        pagos_profile.append({'id':pay.id,
+                                 'date':get_string_from_date(pay.date),
+                                 'rate':pay.rate.name,
+                                 'credit_wod':pay.credit_wod,
+                                 'credit_wod_total':pay.credit_wod_total,
+                                 'credit_box':pay.credit_box,
+                                 'credit_box_total':pay.credit_box_total,
+                                 'credit_bono':pay.credit_bono,
+                                 'credit_bono_total':pay.credit_bono_total})  
+
+                    data=json.dumps({'status':'success','response':'get_foreign_pagos_customer','data':{'pagos':pagos_profile}})
+                except Exception as e:
+                    data=json.dumps({'status':'failed','response':e.args[0]})
+            else:
+                data=json.dumps({'status':'failed','response':'id_missed'})
+        else:
+            data=json.dumps({'status':'failed','response':'unauthorized_get_foreign_pagos_customer'})
+    else:
+        data=json.dumps({'status':'failed','response':'not_logged'})
+    return APIResponse(request,data)
+
+
 
 def hay_plazas(request):
     """
