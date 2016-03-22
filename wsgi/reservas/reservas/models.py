@@ -76,6 +76,7 @@ class U_Customers(models.Model):
     nota_general = models.TextField(default="")
     nota_especial = models.TextField(default="")
     photo = models.CharField(default="",max_length=250)
+    pago_en_curso = models.ForeignKey('Pagos', null=True, blank=True,on_delete = models.SET_NULL)
 
     def __unicode__(self):
         return self.auth.name+" "+self.auth.surname
@@ -187,3 +188,11 @@ class Parties(models.Model):
 
 class Dnis(models.Model):
     nif = models.CharField(default="",max_length=20)
+
+#PAGOS
+class Pagos(models.Model):
+    date = models.DateTimeField(default=None,null=True)
+    rate = models.ForeignKey('Rates', null=True, blank=True,on_delete = models.SET_NULL)
+    credit_wod = models.IntegerField(default=0,null=False)
+    credit_box = models.IntegerField(default=0,null=False)
+    credit_bono = models.IntegerField(default=0,null=False)

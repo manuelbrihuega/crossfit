@@ -1040,7 +1040,7 @@ function modal_passenger_details(passenger_id) {
 				$.getJSON( api_url+'schedules/get_foreign_reservations_customer?callback=?', {id:data.data.auth_profile.auth_id}, function(data){
 					if(data.status=='success'){
 						for (var i=0; i<data.data.reservations.length; i++){
-							$('#tableweybodyreservas').append('<tr><td>'+data.data.reservations[i].activity+'</td><td>'+data.data.reservations[i].date+'</td><td>'+data.data.reservations[i].time_start+'</td><td>'+data.data.reservations[i].time_end+'</td></tr>');
+							$('#tableweybodyreservas').append('<tr><td>'+data.data.reservations[i].activity+'</td><td>'+data.data.reservations[i].date.split(' ')[0]+'</td><td>'+data.data.reservations[i].time_start.split(' ')[1]+'</td><td>'+data.data.reservations[i].time_end.split(' ')[1]+'</td></tr>');
 						}
 						$('#cargando').hide();
 					}else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos','warning');

@@ -136,7 +136,7 @@ def reload_credit_users_task():
             cus.credit_wod=cus.rate.credit_wod
             cus.save()
     hoy=datetime.today()
-    '''
+    
     dia=1
     if hoy.month == 12:
         mes = 1
@@ -145,9 +145,10 @@ def reload_credit_users_task():
         mes = hoy.month + 1
         year = hoy.year
     proxfecha = datetime(year, mes, dia, 4, 0, 0)
-    '''
-    proxfecha = hoy + timedelta(weeks=1)
+    
+    '''proxfecha = hoy + timedelta(weeks=1)'''
     add_task(proxfecha,'reload_credit_users_task()')
+
 
 def not_pay_task():
     from reservas.models import *
