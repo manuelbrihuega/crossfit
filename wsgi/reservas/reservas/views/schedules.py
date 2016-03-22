@@ -571,7 +571,7 @@ def get_foreign_reservations_customer(request):
         if have_permission(request.session['auth_id'],'get_foreign_reservations_customer'):
             if validate_parameter(request.GET,'id'):
                 try:
-                    reservations=Reservations.objects.get(auth_id=request.GET['id'])
+                    reservations=Reservations.objects.filter(Q(auth_id=request.GET['id']))
                     reservations_profile=[]
                     for res in reservations:
                         reservations_profile.append({'id':res.id,
