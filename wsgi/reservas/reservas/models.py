@@ -191,7 +191,6 @@ class Dnis(models.Model):
 
 #PAGOS
 class Pagos(models.Model):
-    auth = models.ForeignKey('Auth', null=False, blank=False,on_delete=models.CASCADE)
     date = models.DateTimeField(default=None,null=True)
     rate = models.ForeignKey('Rates', null=True, blank=True,on_delete = models.SET_NULL)
     credit_wod = models.IntegerField(default=0,null=False)
@@ -200,3 +199,4 @@ class Pagos(models.Model):
     credit_wod_total = models.IntegerField(default=0,null=False)
     credit_box_total = models.IntegerField(default=0,null=False)
     credit_bono_total = models.IntegerField(default=0,null=False)
+    auth = models.ForeignKey('Auth', null=False, blank=False,on_delete=models.CASCADE)
