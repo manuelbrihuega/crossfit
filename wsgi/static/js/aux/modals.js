@@ -1049,11 +1049,11 @@ function modal_passenger_details(passenger_id) {
 				$.getJSON( api_url+'schedules/get_foreign_pagos_customer?callback=?', {id:data.data.auth_profile.auth_id}, function(data){
 					if(data.status=='success'){
 						for (var i=0; i<data.data.pagos.length; i++){
-							var credwodaux = int(data.data.pagos[i].credit_wod_total) - int(data.data.pagos[i].credit_wod);
+							var credwodaux = data.data.pagos[i].credit_wod_total - data.data.pagos[i].credit_wod;
 							var credwod = credwodaux + '/' + data.data.pagos[i].credit_wod_total;
-							var credboxaux = int(data.data.pagos[i].credit_box_total) - int(data.data.pagos[i].credit_box);
+							var credboxaux = data.data.pagos[i].credit_box_total - data.data.pagos[i].credit_box;
 							var credbox = credboxaux + '/' + data.data.pagos[i].credit_box_total;
-							var credbonoaux = int(data.data.pagos[i].credit_bono_total) - int(data.data.pagos[i].credit_bono);
+							var credbonoaux = data.data.pagos[i].credit_bono_total - data.data.pagos[i].credit_bono;
 							var credbono = credbonoaux + '/' + data.data.pagos[i].credit_bono_total;
 							$('#tableweybodypagos').append('<tr><td>'+data.data.pagos[i].rate+'</td><td>'+data.data.pagos[i].date.split(' ')[0]+'</td><td>'+credwod+'</td><td>'+credbox+'</td><td>'+credbono+'</td></tr>');
 						}
