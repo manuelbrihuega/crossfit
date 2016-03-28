@@ -64,14 +64,18 @@ def list_news(request):
                 items_list = []
                 cu = U_Customers.objects.filter(Q(auth__id=auth.id))
                 idfin = 0
+                number = 0
                 for c in cu:
                     idfin = c.id
+                    number = c.newscomunications
+                    c.newscomunications=0
+                    c.save()
                 for item in items:
                     if item.u_customer==None or item.u_customer.id==idfin:
                         date = item.date
                         items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date)})
 
-                data=json.dumps({'status': 'success', 'response':'news_list', 'data':{'news':items_list} })
+                data=json.dumps({'status': 'success', 'response':'news_list', 'data':{'news':items_list, 'number':number} })
 
             except:
                 data=json.dumps({'status': 'failed', 'response':'new_not_found'})
@@ -100,6 +104,19 @@ def add_global_news(request):
                 if validate_parameter(request.GET,'destiner'):
                     if request.GET['destiner']!=0:
                         new.u_customer_id = request.GET['destiner']
+                        cus = U_Customers.objects.get(id=request.GET['destiner'])
+                        cus.newscomunications = cus.newscomunications + 1
+                        cus.save()
+                    else:
+                        customers = U_Customers.objects.all()
+                        for cus in customers:
+                            cus.newscomunications = cus.newscomunications + 1
+                            cus.save()
+                else:
+                    customers = U_Customers.objects.all()
+                    for cus in customers:
+                        cus.newscomunications = cus.newscomunications + 1
+                        cus.save()
                 new.date=datetime.utcnow()
                 new.save()
                 data=json.dumps({'status': 'success', 'response':'new_added', 'data':{'id':new.id}})

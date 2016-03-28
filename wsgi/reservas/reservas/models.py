@@ -79,6 +79,7 @@ class U_Customers(models.Model):
     pago_en_curso = models.ForeignKey('Pagos', null=True, blank=True,on_delete = models.SET_NULL)
     emailnotif = models.BooleanField(default=True)
     telegramnotif = models.BooleanField(default=True)
+    newscomunications = models.IntegerField(default=0,null=False)
 
     def __unicode__(self):
         return self.auth.name+" "+self.auth.surname
