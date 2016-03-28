@@ -30,7 +30,16 @@ function loadTemplate() {
 function loadNews() {
 	$('#new_communication_wrapper').slideUp();
 	$('#news_wrapper').empty();
-	
+	$.getJSON(api_url+'customers/search?callback=?', {lookup:'*',filtro:'todos',order:'nombreDESC'}, function(data){
+		if(data.status=='success'){
+			var cad = '<option vaue="0">TODOS</option>';
+			$.each(data.data.list, function(index, cus) {
+				cad = cad + '<option vaue="'+cus.id+'">'+cus.name+'</option>';
+			});
+			$('#new_destiner').html(cad);
+		}
+		else super_error('Customers failure');
+	});
 	$.getJSON(api_url+'news/list_news_foreign?callback=?', '', function(data){
 		if(data.status=='success'){
 			$.each(data.data.news, function(index, anew) {
@@ -94,8 +103,9 @@ function new_communication() {
 	var title=$('#new_title').val();
 	var body=$('#new_body').val();
 	var link=$('#new_link').val();
+	var destiner=$('#new_destiner').val();
 		if (title.length>0 || body.length>0){
-			var params = {title:title, body:body, link:link};
+			var params = {title:title, body:body, link:link, destiner:destiner};
 			$('#botonnuevacom').html('<i class="fa fa-cog fa-spin"></i>');
 			$.getJSON(api_url+'news/add_global_news?callback=?', params, function(data){
 				if(data.status=='success'){
