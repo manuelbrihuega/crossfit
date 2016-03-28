@@ -66,7 +66,11 @@ function addItem(anew) {
 		
 		
 		var title=$('<div></div>').attr('class','title').html(anew.title); item.append(title);
-		var date=$('<div></div>').attr('class','date').text(fecha_castellano_sin_hora(anew.date)); item.append(date);
+		if (anew.name){
+			var date=$('<div></div>').attr('class','date').text(fecha_castellano_sin_hora(anew.date)+' | Destinatario: '+anew.name); item.append(date);
+		}else{
+			var date=$('<div></div>').attr('class','date').text(fecha_castellano_sin_hora(anew.date)); item.append(date);
+		}
 		var body=$('<div></div>').attr('class','body').html(anew.body); item.append(body);
 		if(anew.link){
 			var link=$('<div></div>').attr('class','link'); item.append(link);

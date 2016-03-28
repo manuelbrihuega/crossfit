@@ -30,8 +30,10 @@ def list_news_foreign(request):
 
                 for item in items:
                     date = item.date
-                    items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date)})
-
+                    if item.auth:
+                        items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date), 'name':item.auth})
+                    else:
+                        items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date)})
                 data=json.dumps({'status': 'success', 'response':'news_list', 'data':{'news':items_list} })
 
             except:
