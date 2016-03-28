@@ -328,8 +328,12 @@ def delete(request):
             nick = 'User_Id'+str(res.auth.id)
             phone = '+34'+str(res.auth.phone)
             message = 'Su reserva para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
-            send_email_cancel_reservation(str(res.auth.id),str(res.id))
-            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+            cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
+            for c in cu:
+                if c.emailnotif:
+                    send_email_cancel_reservation(str(res.auth.id),str(res.id))
+                if c.telegramnotif:
+                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
             res.delete()
         schedule_time.delete()
         schedule.delete()
@@ -376,8 +380,10 @@ def delete_reservation(request):
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
             message = 'Su suscripción en la cola para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA, su posición en la cola será eliminada.'
-            send_email_cancel_reservation_cola(str(user.id),str(reservation.id))
-            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+            if user.emailnotif:
+                send_email_cancel_reservation_cola(str(user.id),str(reservation.id))
+            if user.telegramnotif:
+                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
             reservation.delete()
             reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
             for res in reservations:
@@ -394,8 +400,10 @@ def delete_reservation(request):
             nick = 'User_Id'+str(user.auth.id)
             phone = '+34'+str(user.auth.phone)
             message = 'Su reserva para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
-            send_email_cancel_reservation(str(user.auth.id),str(reservation.id))
-            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+            if user.emailnotif:
+                send_email_cancel_reservation(str(user.auth.id),str(reservation.id))
+            if user.telegramnotif:
+                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
             reservation.delete()
             reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
             for res in reservations:
@@ -410,8 +418,12 @@ def delete_reservation(request):
                     conf=Configuration.objects.get(id=1)
                     minutitos=str(conf.minutes_post)
                     message = 'Ha quedado libre una plaza para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Acabamos de registrar su reserva. Puedes cancelar la reserva hasta '+minutitos+' minutos antes de la actividad'
-                    add_task(datetime.utcnow(),'send_email_cambiocolaareserva_reservation_task(auth_id="'+str(res.auth.id)+'",res_id="'+str(res.id)+'")')
-                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                    cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
+                    for c in cu:
+                        if c.emailnotif:
+                            add_task(datetime.utcnow(),'send_email_cambiocolaareserva_reservation_task(auth_id="'+str(res.auth.id)+'",res_id="'+str(res.id)+'")')
+                        if c.telegramnotif:
+                            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                 else:
                     res.position_queue = res.position_queue - 1
                     res.save()
@@ -465,8 +477,10 @@ def delete_reservation_client(request):
                 nick = 'User_Id'+str(auth.id)
                 phone = '+34'+str(auth.phone)
                 message = 'Su suscripción en la cola para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA, su posición en la cola será eliminada.'
-                add_task(datetime.utcnow(),'send_email_cancel_reservation_cola_task(cus_id="'+str(user.id)+'",res_id="'+str(reservation.id)+'")')
-                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                if user.emailnotif:
+                    add_task(datetime.utcnow(),'send_email_cancel_reservation_cola_task(cus_id="'+str(user.id)+'",res_id="'+str(reservation.id)+'")')
+                if user.telegramnotif:
+                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                 reservation.delete()
                 reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
                 for res in reservations:
@@ -483,8 +497,10 @@ def delete_reservation_client(request):
                 nick = 'User_Id'+str(user.auth.id)
                 phone = '+34'+str(user.auth.phone)
                 message = 'Su reserva para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
-                send_email_cancel_reservation(str(user.auth.id),str(reservation.id))
-                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                if user.emailnotif:
+                    send_email_cancel_reservation(str(user.auth.id),str(reservation.id))
+                if user.telegramnotif:
+                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                 reservation.delete()
                 reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time_id) & Q(queue=True))
                 for res in reservations:
@@ -498,8 +514,12 @@ def delete_reservation_client(request):
                         conf=Configuration.objects.get(id=1)
                         minutitos=str(conf.minutes_post)
                         message = 'Ha quedado libre una plaza para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Acabamos de registrar su reserva. Puedes cancelar la reserva hasta '+minutitos+' minutos antes de la actividad'
-                        add_task(datetime.utcnow(),'send_email_cambiocolaareserva_reservation_task(auth_id="'+str(res.auth.id)+'",res_id="'+str(res.id)+'")')
-                        add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                        cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
+                        for c in cu:
+                            if c.emailnotif:
+                                add_task(datetime.utcnow(),'send_email_cambiocolaareserva_reservation_task(auth_id="'+str(res.auth.id)+'",res_id="'+str(res.id)+'")')
+                            if c.telegramnotif:
+                                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     else:
                         res.position_queue = res.position_queue - 1
                         res.save()
@@ -727,8 +747,10 @@ def add_reservation(request):
             conf=Configuration.objects.get(id=1)
             minutitos=str(conf.minutes_post)
             message = 'Acabas de realizar una reserva para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Te recordamos que si deseas cancelarla, puedes hacerlo hasta '+minutitos+' minutos antes de la actividad.'
-            add_task(datetime.utcnow(),'send_email_new_reservation_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
-            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+            if customer.emailnotif:
+                add_task(datetime.utcnow(),'send_email_new_reservation_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
+            if customer.telegramnotif:
+                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
         elif disponiblescola > 0:
             reservation = Reservations()
             reservation.auth = auth
@@ -745,8 +767,10 @@ def add_reservation(request):
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
             message = 'Acabas de ponerte en cola para '+str(schedule_time.schedule.activity)+' el '+str(schedule_time.schedule.date.day)+'-'+str(schedule_time.schedule.date.month)+'-'+str(schedule_time.schedule.date.year)+' de '+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[1]+'. Cuando alguna plaza quede libre, su petición se procesará y se realizará la reserva.'
-            add_task(datetime.utcnow(),'send_email_new_reservation_cola_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
-            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+            if customer.emailnotif:
+                add_task(datetime.utcnow(),'send_email_new_reservation_cola_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
+            if customer.telegramnotif:
+                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
         else:
             raise Exception('No hay plazas disponibles')
             
@@ -827,8 +851,10 @@ def add_reservation_client(request):
             conf=Configuration.objects.get(id=1)
             minutitos=str(conf.minutes_post)
             message = 'Acabas de realizar una reserva para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Te recordamos que si deseas cancelarla, puedes hacerlo hasta '+minutitos+' minutos antes de la actividad.'
-            add_task(datetime.utcnow(),'send_email_new_reservation_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
-            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+            if customer.emailnotif:
+                add_task(datetime.utcnow(),'send_email_new_reservation_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
+            if customer.telegramnotif:
+                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
         elif disponiblescola > 0:
             reservation = Reservations()
             reservation.auth = auth
@@ -847,8 +873,10 @@ def add_reservation_client(request):
             conf=Configuration.objects.get(id=1)
             minutitos=str(conf.minutes_post)
             message = 'Acabas de ponerte en cola para '+str(schedule_time.schedule.activity)+' el '+str(schedule_time.schedule.date.day)+'-'+str(schedule_time.schedule.date.month)+'-'+str(schedule_time.schedule.date.year)+' de '+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[1]+'. Cuando alguna plaza quede libre, su petición se procesará y se realizará la reserva.'
-            add_task(datetime.utcnow(),'send_email_new_reservation_cola_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
-            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+            if customer.emailnotif:
+                add_task(datetime.utcnow(),'send_email_new_reservation_cola_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
+            if customer.telegramnotif:
+                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
         else:
             raise Exception('No hay plazas disponibles')
         
@@ -1017,8 +1045,12 @@ def add_party(request):
                             nick = 'User_Id'+str(res.auth.id)
                             phone = '+34'+str(res.auth.phone)
                             message = 'Su reserva para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
-                            send_email_cancel_reservation(str(res.auth.id),str(res.id))
-                            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                            cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
+                            for c in cu:
+                                if c.emailnotif:
+                                    send_email_cancel_reservation(str(res.auth.id),str(res.id))
+                                if c.telegramnotif:
+                                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                             res.delete()
                         sch.delete()
                         schedule.delete()

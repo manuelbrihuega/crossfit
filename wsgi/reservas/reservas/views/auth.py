@@ -160,8 +160,12 @@ def restorepass(request):
                     telegram = {'name': name, 'nick': nick , 'phone': phone , 'message': message }
                     #send_telegram(name,nick,phone,message)
                     #prueba(name,phone,message)
-                    add_task(datetime.utcnow(),'send_email_restorepass_task(url="'+url+'",email="'+emailtrad+'")')
-                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                    cu = U_Customers.objects.filter(Q(auth__id=auth.id))
+                    for c in cu:
+                        if c.emailnotif:
+                            add_task(datetime.utcnow(),'send_email_restorepass_task(url="'+url+'",email="'+emailtrad+'")')
+                        if c.telegramnotif:
+                            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     data=json.dumps({'status': 'success', 'response':'email_sent'})
                 except Exception as e:
                     data=json.dumps({'status': 'failed', 'response':'email_unsent'+e.args[0]})
@@ -331,12 +335,16 @@ def ban(request):
                         auth.banned=True
                         auth.save()
                         delete_session(auth.id)
-                        add_task(datetime.utcnow(),'send_email_banned_task(name="'+auth.name+'",email="'+auth.email+'")')
-                        name = 'User_Id'+str(auth.id)
-                        nick = 'User_Id'+str(auth.id)
-                        phone = '+34'+str(auth.phone)
-                        message = 'Le informamos que hemos deshabilitado temporalmente tu cuenta debido a un uso fraudulento que hemos detectado en ella.'
-                        add_task(datetime.utcnow(),'send_telegram_task(name="'+str(name)+'",nick="'+str(nick)+'",phone="'+str(phone)+'",msg="'+message+'")')
+                        cu = U_Customers.objects.filter(Q(auth__id=auth.id))
+                        for c in cu:
+                            if c.emailnotif:
+                                add_task(datetime.utcnow(),'send_email_banned_task(name="'+auth.name+'",email="'+auth.email+'")')
+                            name = 'User_Id'+str(auth.id)
+                            nick = 'User_Id'+str(auth.id)
+                            phone = '+34'+str(auth.phone)
+                            message = 'Le informamos que hemos deshabilitado temporalmente tu cuenta debido a un uso fraudulento que hemos detectado en ella.'
+                            if c.telegramnotif:
+                                add_task(datetime.utcnow(),'send_telegram_task(name="'+str(name)+'",nick="'+str(nick)+'",phone="'+str(phone)+'",msg="'+message+'")')
                         data=json.dumps({'status':'success','response':'auth_banned'})
 
                 except:
@@ -404,8 +412,10 @@ def activate(request):
                         nick = 'User_Id'+str(auth.id)
                         phone = '+34'+str(auth.phone)
                         message = 'Bienvenido a CrossFit Jerez. Acabamos de validar su registro, a partir de ahora ya puede comenzar a utilizar el sistema de reservas!'
-                        add_task(datetime.utcnow(),'send_email_customer_activated_task(idcus="'+str(customer.id)+'")')
-                        add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                        if customer.emailnotif:
+                            add_task(datetime.utcnow(),'send_email_customer_activated_task(idcus="'+str(customer.id)+'")')
+                        if customer.telegramnotif:
+                            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                         data=json.dumps({'status':'success','response':'auth_activated'})
                 except:
                     data=json.dumps({'status': 'failed', 'response':'auth_not_found'})
@@ -450,8 +460,10 @@ def deactivate(request):
                                 nick = 'User_Id'+str(auth.id)
                                 phone = '+34'+str(auth.phone)
                                 message = 'Su suscripción en la cola para '+str(res.schedule_time.schedule.activity.name)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA, su posición en la cola será eliminada.'
-                                send_email_cancel_reservation_cola(str(customer.id),str(res.id))
-                                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                                if customer.emailnotif:
+                                    send_email_cancel_reservation_cola(str(customer.id),str(res.id))
+                                if customer.telegramnotif:
+                                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                                 res.delete()
                                 for resdos in reservationsdos:
                                     if resdos.position_queue > position:
@@ -463,8 +475,10 @@ def deactivate(request):
                                 nick = 'User_Id'+str(customer.auth.id)
                                 phone = '+34'+str(customer.auth.phone)
                                 message = 'Su reserva para '+str(res.schedule_time.schedule.activity.name)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
-                                send_email_cancel_reservation(str(customer.auth.id),str(res.id))
-                                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                                if customer.emailnotif:
+                                    send_email_cancel_reservation(str(customer.auth.id),str(res.id))
+                                if customer.telegramnotif:
+                                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                                 res.delete()
                                 for restres in reservationstres:
                                     if restres.position_queue==1:
@@ -480,8 +494,10 @@ def deactivate(request):
                         nick = 'User_Id'+str(auth.id)
                         phone = '+34'+str(auth.phone)
                         message = 'Le informamos que acabamos de tramitar su baja en el sistema de reservas Crossfit Jerez.'
-                        add_task(datetime.utcnow(),'send_email_customer_deactivated_task(idcus="'+str(customer.id)+'")')
-                        add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                        if customer.emailnotif:
+                            add_task(datetime.utcnow(),'send_email_customer_deactivated_task(idcus="'+str(customer.id)+'")')
+                        if customer.telegramnotif:
+                            add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     
                         data=json.dumps({'status':'success','response':'auth_deactivated'})
                     else:

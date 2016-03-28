@@ -9,7 +9,7 @@ from reservas.aux.auth import *
 # MAIN METHOD
 def send_email(content,subject,emails,title, sender=None):
     rendered = render_to_string("email.html", {'subject':subject,'content':content,'title':title})
-    thesender=sender if sender!=None else 'Taxible Support <soporte@taxible.com>'
+    thesender=sender if sender!=None else 'CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>'
     msg = EmailMultiAlternatives(subject, '', thesender, emails)
     msg.attach_alternative(rendered, "text/html")
     msg.send()
