@@ -93,7 +93,7 @@ def add_global_news(request):
                 new.link = request.GET['link'] if validate_parameter(request.GET,'link') else None
                 if validate_parameter(request.GET,'destiner'):
                     if request.GET['destiner']!=0:
-                        new.auth = request.GET['destiner']
+                        new.auth_id = request.GET['destiner']
                 new.date=datetime.utcnow()
                 new.save()
                 data=json.dumps({'status': 'success', 'response':'new_added', 'data':{'id':new.id}})

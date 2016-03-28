@@ -34,7 +34,7 @@ function loadNews() {
 		if(data.status=='success'){
 			var cad = '<option vaue="0">TODOS</option>';
 			$.each(data.data.list, function(index, cus) {
-				cad = cad + '<option vaue="'+cus.id+'">'+cus.name+'</option>';
+				cad = cad + '<option vaue="'+cus.id+'">'+cus.name+' '+cus.surname+'</option>';
 			});
 			$('#new_destiner').html(cad);
 		}
