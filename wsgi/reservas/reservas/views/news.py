@@ -62,7 +62,7 @@ def list_news(request):
                 items_list = []
 
                 for item in items:
-                    if item.auth==None || item.auth.id==auth.id:
+                    if item.auth==None or item.auth.id==auth.id:
                         date = item.date
                         items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date)})
 
