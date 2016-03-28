@@ -141,6 +141,14 @@ def edit_customer_b(auth_id,data):
             if customer.direccion!=data['direccion']:
                 changed=True
                 customer.direccion=data['direccion']
+        if validate_parameter(data,'emailnotif'):
+            if customer.emailnotif!=getBoolValue(data['emailnotif']):
+                changed=True
+                customer.emailnotif=getBoolValue(data['emailnotif'])
+        if validate_parameter(data,'telegramnotif'):
+            if customer.telegramnotif!=getBoolValue(data['telegramnotif']):
+                changed=True
+                customer.telegramnotif=getBoolValue(data['telegramnotif'])
         if not found:
             return {'status':'failed','response':'parameter_not_found'}
 

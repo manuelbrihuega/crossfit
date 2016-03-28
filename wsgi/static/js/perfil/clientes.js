@@ -22,6 +22,16 @@ function get_content() {
 								$('#new_customer_phone').val(data.data.auth_profile.phone);
 								$('#new_customer_email').val(data.data.auth_profile.email);
 								$('#new_customer_direccion').val(data.data.customer_profile.direccion);
+								if(data.data.customer_profile.telegramnotif){
+ 									$( "#new_customer_telegram" ).prop( "checked", true );
+   								}else{
+  									$( "#new_customer_telegram" ).prop( "checked", false );
+   								}
+   								if(data.data.customer_profile.emailnotif){
+ 									$( "#new_customer_emailnotif" ).prop( "checked", true );
+   								}else{
+  									$( "#new_customer_emailnotif" ).prop( "checked", false );
+   								}
 								if(data.data.customer_profile.photo!=''){
 									$('#photo_viewer').css('background', 'url('+data.data.customer_profile.photo+') no-repeat');
             						$('#photo_viewer').attr('data-image', data.data.customer_profile.photo);
@@ -78,6 +88,9 @@ function edit_customer() {
 	var passwordrepeat=$('#new_customer_passwordrepeat').val();
 	var birthdate=$('#new_customer_birthdate').val();
 	var direccion=$('#new_customer_direccion').val();
+	var telegramnotif = $( "#new_customer_telegram" ).prop( "checked");
+	var emailnotif = $( "#new_customer_emailnotif" ).prop( "checked");
+   								
 	if (name.length>0){
 		if (surname.length>0){
 			if (nif.length>0){
@@ -94,7 +107,9 @@ function edit_customer() {
 																							email:email,
 																							birthdate:birthdate,
 																							direccion:direccion,
-																							password:password}, function(data){
+																							password:password,
+																							emailnotif:emailnotif,
+																							telegramnotif: telegramnotif}, function(data){
 																								
 											if(data.status=='success'){
 												$('#botonenviar').html('GUARDAR');

@@ -77,6 +77,8 @@ class U_Customers(models.Model):
     nota_especial = models.TextField(default="")
     photo = models.CharField(default="",max_length=250)
     pago_en_curso = models.ForeignKey('Pagos', null=True, blank=True,on_delete = models.SET_NULL)
+    emailnotif = models.BooleanField(default=True)
+    telegramnotif = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.auth.name+" "+self.auth.surname
