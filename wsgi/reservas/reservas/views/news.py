@@ -30,8 +30,8 @@ def list_news_foreign(request):
 
                 for item in items:
                     date = item.date
-                    if item.auth!=None:
-                        items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date), 'name':item.auth.name + ' ' + item.auth.surname})
+                    if item.u_customer!=None:
+                        items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date), 'name':item.u_customer.auth.name + ' ' + item.u_customer.auth.surname})
                     else:
                         items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date)})
                 data=json.dumps({'status': 'success', 'response':'news_list', 'data':{'news':items_list} })
@@ -67,7 +67,7 @@ def list_news(request):
                 for c in cu:
                     idfin = c.id
                 for item in items:
-                    if item.auth==None or item.auth.id==idfin:
+                    if item.u_customer==None or item.u_customer.id==idfin:
                         date = item.date
                         items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date)})
 
@@ -99,7 +99,7 @@ def add_global_news(request):
                 new.link = request.GET['link'] if validate_parameter(request.GET,'link') else None
                 if validate_parameter(request.GET,'destiner'):
                     if request.GET['destiner']!=0:
-                        new.auth_id = request.GET['destiner']
+                        new.u_customer_id = request.GET['destiner']
                 new.date=datetime.utcnow()
                 new.save()
                 data=json.dumps({'status': 'success', 'response':'new_added', 'data':{'id':new.id}})

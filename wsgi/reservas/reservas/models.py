@@ -165,7 +165,7 @@ class News(models.Model):
     link = models.CharField(default=None,null=True,max_length=255)
     date = models.DateTimeField(default=None,null=True)
     role = models.ForeignKey('Roles',null=True,blank=True,on_delete=models.CASCADE)
-    auth = models.ForeignKey('Auth',null=True,blank=True,on_delete=models.CASCADE)
+    u_customer = models.ForeignKey('U_Customers',null=True,blank=True,on_delete=models.CASCADE)
 
     def __unicode__(self):
         return "Title: "+self.title+" Body: "+self.body
