@@ -102,7 +102,7 @@ def add_global_news(request):
                 new.body = request.GET['body'] if validate_parameter(request.GET,'body') else None
                 new.link = request.GET['link'] if validate_parameter(request.GET,'link') else None
                 if validate_parameter(request.GET,'destiner'):
-                    if request.GET['destiner']!=0:
+                    if request.GET['destiner']!="0":
                         new.u_customer_id = request.GET['destiner']
                         cus = U_Customers.objects.get(id=request.GET['destiner'])
                         cus.newscomunications = cus.newscomunications + 1
