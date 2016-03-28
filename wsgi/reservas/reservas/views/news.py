@@ -60,9 +60,12 @@ def list_news(request):
                 # TODO: contemplar noticias para radios
 
                 items_list = []
-
+                cu = U_Customers.objects.filter(Q(auth__id=auth.id))
+                idfin = 0
+                for c in cu:
+                    idfin = c.id
                 for item in items:
-                    if item.auth==None or item.auth.id==auth.id:
+                    if item.auth==None or item.auth.id==idfin:
                         date = item.date
                         items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date)})
 
