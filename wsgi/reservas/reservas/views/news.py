@@ -97,8 +97,8 @@ def add_global_news(request):
                 new.date=datetime.utcnow()
                 new.save()
                 data=json.dumps({'status': 'success', 'response':'new_added', 'data':{'id':new.id}})
-            except:
-                data=json.dumps({'status': 'failed', 'response':'model_failure'})
+            except Exception as e:
+                data=json.dumps({'status': 'failed', 'response':e.args[0]})
         else:
             data=json.dumps({'status': 'failed', 'response':'unauthorized_add_global_news'})
     else:
