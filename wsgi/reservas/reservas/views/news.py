@@ -62,8 +62,9 @@ def list_news(request):
                 items_list = []
 
                 for item in items:
-                    date = item.date
-                    items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date)})
+                    if item.auth==None || item.auth.id==auth.id:
+                        date = item.date
+                        items_list.append({'id':item.id, 'title':item.title, 'body':item.body, 'link':item.link, 'date':get_string_from_date(date)})
 
                 data=json.dumps({'status': 'success', 'response':'news_list', 'data':{'news':items_list} })
 
