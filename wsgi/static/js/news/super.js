@@ -32,9 +32,9 @@ function loadNews() {
 	$('#news_wrapper').empty();
 	$.getJSON(api_url+'customers/search?callback=?', {lookup:'*',filtro:'todos',order:'nombreDESC'}, function(data){
 		if(data.status=='success'){
-			var cad = '<option vaue="0">TODOS</option>';
+			var cad = '<option value="0">TODOS</option>';
 			$.each(data.data.list, function(index, cus) {
-				cad = cad + '<option vaue="'+cus.id+'">'+cus.name+' '+cus.surname+'</option>';
+				cad = cad + '<option value="'+cus.id+'">'+cus.name+' '+cus.surname+'</option>';
 			});
 			$('#new_destiner').html(cad);
 		}
