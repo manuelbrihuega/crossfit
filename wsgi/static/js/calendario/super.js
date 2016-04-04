@@ -328,7 +328,7 @@ function loadCalendar() {
 			var dia = parseInt(data.data.dia_hoy);
 			var mes = parseInt(data.data.mes_hoy);
 			var year = parseInt(data.data.year_hoy);
-			
+			var width = 0;
 			for(var i=0; i<data.data.dias_a_mostrar; i++){
 				var idgen = 'day'+ dia + '-' + mes + '-' + year + '-' + diasemana;
 				var nombredia = 'Lunes';
@@ -388,7 +388,7 @@ function loadCalendar() {
 					nombremes = 'Diciembre';
 				}
 				$('#reservas-tabla').append('<div id="' + idgen + '" class="colday"><div class="daybasic" id="'+idgen+'head"><span>'+nombredia+' '+dia+' '+nombremes+' '+year+'</span></div><div id="'+idgen+'hour07" style="width:auto;"></div><div id="'+idgen+'hour08" style="width:auto;"></div><div id="'+idgen+'hour09" style="width:auto;"></div><div id="'+idgen+'hour10" style="width:auto;"></div><div id="'+idgen+'hour11" style="width:auto;"></div><div id="'+idgen+'hour12" style="width:auto;"></div><div id="'+idgen+'hour13" style="width:auto;"></div><div id="'+idgen+'hour14" style="width:auto;"></div><div id="'+idgen+'hour15" style="width:auto;"></div><div id="'+idgen+'hour16" style="width:auto;"></div><div id="'+idgen+'hour17" style="width:auto;"></div><div id="'+idgen+'hour18" style="width:auto;"></div><div id="'+idgen+'hour19" style="width:auto;"></div><div id="'+idgen+'hour20" style="width:auto;"></div><div id="'+idgen+'hour21" style="width:auto;"></div></div>');
-
+				width = width + $('#'+idgen).width();
 				diasemana = diasemana + 1;
 				dia = dia + 1;
 				mes = mes - 1;
@@ -408,6 +408,7 @@ function loadCalendar() {
 				
 
 			}
+			$('#reservas-tabla').css('width',width+1);
 			/*$('#mycalendar').monthly({
 				mode: 'event',
 				weekStart: 'Mon',
