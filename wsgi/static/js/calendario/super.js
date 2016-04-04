@@ -390,18 +390,18 @@ function loadCalendar() {
 				$('#reservas-tabla').append('<div id="' + idgen + '" class="colday"><div class="daybasic" id="'+idgen+'head"><span>'+nombredia+' '+dia+' '+nombremes+' '+year+'</span></div><div id="'+idgen+'hour07" style="width:auto;"></div><div id="'+idgen+'hour08" style="width:auto;"></div><div id="'+idgen+'hour09" style="width:auto;"></div><div id="'+idgen+'hour10" style="width:auto;"></div><div id="'+idgen+'hour11" style="width:auto;"></div><div id="'+idgen+'hour12" style="width:auto;"></div><div id="'+idgen+'hour13" style="width:auto;"></div><div id="'+idgen+'hour14" style="width:auto;"></div><div id="'+idgen+'hour15" style="width:auto;"></div><div id="'+idgen+'hour16" style="width:auto;"></div><div id="'+idgen+'hour17" style="width:auto;"></div><div id="'+idgen+'hour18" style="width:auto;"></div><div id="'+idgen+'hour19" style="width:auto;"></div><div id="'+idgen+'hour20" style="width:auto;"></div><div id="'+idgen+'hour21" style="width:auto;"></div></div>');
 
 				diasemana = diasemana + 1;
-				var fechajavascript = new Date(year, mes, dia, 12, 12, 12, 12);
-				if(diasemana==6){
-					diasemana = 0;
-					fechajavascript.setDate(fechajavascript.getDay()+1);
-					year = fechajavascript.getFullYear();
-					dia = fechajavascript.getDay();
-					mes = fechajavascript.getMonth();
-				}
-				fechajavascript.setDate(fechajavascript.getDay()+1);
+				var fechajavascript = new Date(year, mes, dia + 1, 12, 12, 12, 12);
 				year = fechajavascript.getFullYear();
 				dia = fechajavascript.getDay();
 				mes = fechajavascript.getMonth();
+				if(diasemana==6){
+					diasemana = 0;
+					var fechajavascriptdos = new Date(year, mes, dia + 1, 12, 12, 12, 12);
+					year = fechajavascriptdos.getFullYear();
+					dia = fechajavascriptdos.getDay();
+					mes = fechajavascriptdos.getMonth();
+				}
+				
 
 			}
 			/*$('#mycalendar').monthly({
