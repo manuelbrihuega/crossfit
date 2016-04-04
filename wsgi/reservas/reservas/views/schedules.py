@@ -18,6 +18,7 @@ from reservas.aux.tasks import add_task
 from reservas.aux.date import *
 from datetime import *
 from django.conf import settings
+from django.utils import timezone
 
 #TAREA: cuando hacemos una reserva en cola hay que añadir una tarea que compruebe cuando acabe el plazo, si estamos ya dentro de la clase, si seguimos en la cola hay que borra la reserva y aumentar el credito consumido
 #TAREA: hay que lanzar una tarea el dia 1 de cada mes para que se restablezca el crédito a cada usuario
@@ -239,10 +240,9 @@ def list_all_tabla(request):
 
         user,auth = get_user_and_auth(request.session['auth_id'])
         schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1)).order_by('time_start')
-        cad ='<?xml version="1.0"?><monthly>'
         conf = Configuration.objects.get(id=1)
-        hoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
-        next = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_table_show)
+        hoy = datetime(int(timezone.now().year),int(timezone.now().month),int(timezone.now().day),0,0,0)
+        next = datetime(int(timezone.now().year),int(timezone.now().month),int(timezone.now().day),0,0,0) + timedelta(days=conf.days_table_show)
         dia_semana_inicio = datetime.weekday(hoy)
         dias_a_mostrar = conf.days_table_show
         listacts=[]
@@ -310,7 +310,7 @@ def list_all_tabla(request):
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         data = json.dumps({
             'status':'failed',
-            'response': e.args[0]+str(exc_tb.tb_lineno)+cad
+            'response': e.args[0]+str(exc_tb.tb_lineno)
         })
 
     return APIResponse(request,data)
