@@ -324,10 +324,10 @@ function loadCalendar() {
 			$('.waiting').hide();
 			$('#enterprises_accordion').append('<div id="reservas-tabla"></div>');
 			$('#reservas-tabla').append('<div id="hours" class="colday"><div id="hournona"></div><div id="hour07" class="hourbasic"><span>07:00 - 08:00</span></div><div id="hour08" class="hourbasic"><span>08:00 - 09:00</span></div><div id="hour09" class="hourbasic"><span>09:00 - 10:00</span></div><div id="hour10" class="hourbasic"><span>10:00 - 11:00</span></div><div id="hour11" class="hourbasic"><span>11:00 - 12:00</span></div><div id="hour12" class="hourbasic"><span>12:00 - 13:00</span></div><div id="hour13" class="hourbasic"><span>13:00 - 14:00</span></div><div id="hour14" class="hourbasic"><span>14:00 - 15:00</span></div><div id="hour15" class="hourbasic"><span>15:00 - 16:00</span></div><div id="hour16" class="hourbasic"><span>16:00 - 17:00</span></div><div id="hour17" class="hourbasic"><span>17:00 - 18:00</span></div><div id="hour18" class="hourbasic"><span>18:00 - 19:00</span></div><div id="hour19" class="hourbasic"><span>19:00 - 20:00</span></div><div id="hour20" class="hourbasic"><span>20:00 - 21:00</span></div><div id="hour21" class="hourbasic"><span>21:00 - 22:00</span></div></div>');
-			var diasemana = data.data.dia_semana_inicio;
-			var dia = data.data.dia_hoy;
-			var mes = data.data.mes_hoy;
-			var year = data.data.year_hoy;
+			var diasemana = parseInt(data.data.dia_semana_inicio);
+			var dia = parseInt(data.data.dia_hoy);
+			var mes = parseInt(data.data.mes_hoy);
+			var year = parseInt(data.data.year_hoy);
 			
 			for(var i=0; i<data.data.dias_a_mostrar; i++){
 				var idgen = 'day'+ dia + '-' + mes + '-' + year + '-' + diasemana;
