@@ -402,7 +402,7 @@ function loadCalendar() {
 					mes = mes - 1;
 					var fechajavascriptdos = new Date(year, mes, dia, 12, 12, 12);
 					year = fechajavascriptdos.getFullYear();
-					dia = fechajavascriptdos.getDay();
+					dia = fechajavascriptdos.getDate();
 					mes = fechajavascriptdos.getMonth() + 1;
 				}
 				
