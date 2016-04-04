@@ -316,19 +316,101 @@ function listarActividades() {
 function loadCalendar() {
 	
 	$('.waiting').show();
-	if($('#mycalendar').length){
-		$('#mycalendar').remove();
+	if($('#reservas-tabla').length){
+		$('#reservas-tabla').remove();
 	}
-	$.getJSON(api_url+'schedules/list_all?callback=?', {}, function(data){
+	$.getJSON(api_url+'schedules/list_all_tabla?callback=?', {}, function(data){
 		if(data.status=='success'){
 			$('.waiting').hide();
-			$('#enterprises_accordion').append('<div id="mycalendar" class="monthly"></div>');
-			$('#mycalendar').monthly({
+			$('#enterprises_accordion').append('<div id="reservas-tabla"></div>');
+			$('#reservas-tabla').append('<div id="hours" class="colday"><div id="hournona"></div><div id="hour07" class="hourbasic"><span>07:00 - 08:00</span></div><div id="hour08" class="hourbasic"><span>08:00 - 09:00</span></div><div id="hour09" class="hourbasic"><span>09:00 - 10:00</span></div><div id="hour10" class="hourbasic"><span>10:00 - 11:00</span></div><div id="hour11" class="hourbasic"><span>11:00 - 12:00</span></div><div id="hour12" class="hourbasic"><span>12:00 - 13:00</span></div><div id="hour13" class="hourbasic"><span>13:00 - 14:00</span></div><div id="hour14" class="hourbasic"><span>14:00 - 15:00</span></div><div id="hour15" class="hourbasic"><span>15:00 - 16:00</span></div><div id="hour16" class="hourbasic"><span>16:00 - 17:00</span></div><div id="hour17" class="hourbasic"><span>17:00 - 18:00</span></div><div id="hour18" class="hourbasic"><span>18:00 - 19:00</span></div><div id="hour19" class="hourbasic"><span>19:00 - 20:00</span></div><div id="hour20" class="hourbasic"><span>20:00 - 21:00</span></div><div id="hour21" class="hourbasic"><span>21:00 - 22:00</span></div></div>');
+			var diasemana = data.data.dia_semana_inicio;
+			var dia = data.data.dia_hoy;
+			var mes = data.data.mes_hoy;
+			var year = data.data.year_hoy;
+			
+			for(var i=0; i<data.data.dias_a_mostrar; i++){
+				var idgen = 'day'+ dia + '-' + mes + '-' + year + '-' + diasemana;
+				var nombredia = 'Lunes';
+				var nombremes = 'Enero';
+				if (diasemana == 0){
+					nombredia = 'Lunes';
+				}
+				if (diasemana == 1){
+					nombredia = 'Martes';
+				}
+				if (diasemana == 2){
+					nombredia = 'Miércoles';
+				}
+				if (diasemana == 3){
+					nombredia = 'Jueves';
+				}
+				if (diasemana == 4){
+					nombredia = 'Viernes';
+				}
+				if (diasemana == 5){
+					nombredia = 'Sábado';
+				}
+				if (mes == 1){
+					nombremes = 'Enero';
+				}
+				if (mes == 2){
+					nombremes = 'Febrero';
+				}
+				if (mes == 3){
+					nombremes = 'Marzo';
+				}
+				if (mes == 4){
+					nombremes = 'Abril';
+				}
+				if (mes == 5){
+					nombremes = 'Mayo';
+				}
+				if (mes == 6){
+					nombremes = 'Junio';
+				}
+				if (mes == 7){
+					nombremes = 'Julio';
+				}
+				if (mes == 8){
+					nombremes = 'Agosto';
+				}
+				if (mes == 9){
+					nombremes = 'Septiembre';
+				}
+				if (mes == 10){
+					nombremes = 'Octubre';
+				}
+				if (mes == 11){
+					nombremes = 'Noviembre';
+				}
+				if (mes == 12){
+					nombremes = 'Diciembre';
+				}
+				$('#reservas-tabla').append('<div id="' + idgen + '" class="colday"><div class="daybasic" id="'+idgen+'head"><span>'+nombredia+' '+dia+' '+nombremes+' '+year+'</span></div><div id="'+idgen+'hour07" style="width:auto;"></div><div id="'+idgen+'hour08" style="width:auto;"></div><div id="'+idgen+'hour09" style="width:auto;"></div><div id="'+idgen+'hour10" style="width:auto;"></div><div id="'+idgen+'hour11" style="width:auto;"></div><div id="'+idgen+'hour12" style="width:auto;"></div><div id="'+idgen+'hour13" style="width:auto;"></div><div id="'+idgen+'hour14" style="width:auto;"></div><div id="'+idgen+'hour15" style="width:auto;"></div><div id="'+idgen+'hour16" style="width:auto;"></div><div id="'+idgen+'hour17" style="width:auto;"></div><div id="'+idgen+'hour18" style="width:auto;"></div><div id="'+idgen+'hour19" style="width:auto;"></div><div id="'+idgen+'hour20" style="width:auto;"></div><div id="'+idgen+'hour21" style="width:auto;"></div></div>');
+
+				diasemana = diasemana + 1;
+				var fechajavascript = new Date(year, mes, dia, 12, 12, 12, 12);
+				if(diasemana==6){
+					diasemana = 0;
+					fechajavascript.setDate(fechajavascript.getDate()+1);
+					year = fechajavascript.getFullYear();
+					dia = fechajavascript.getDay();
+					mes = fechajavascript.getMonth();
+				}
+				var fechajavascript = new Date(year, mes, dia, 12, 12, 12, 12);
+				fechajavascript.setDate(fechajavascript.getDate()+1);
+				year = fechajavascript.getFullYear();
+				dia = fechajavascript.getDay();
+				mes = fechajavascript.getMonth();
+
+			}
+			/*$('#mycalendar').monthly({
 				mode: 'event',
 				weekStart: 'Mon',
 				disablePast: true,
 				xmlUrl: data.data
-			});
+			});*/
 		}
 	});
 }

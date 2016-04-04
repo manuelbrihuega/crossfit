@@ -227,6 +227,96 @@ def list_all(request):
     return APIResponse(request,data)
 
 
+def list_all_tabla(request):
+    """
+    List all schedules info
+    """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not have_permission(request.session['auth_id'],'list_all_schedules'):
+            raise Exception('unauthorized_list_all_schedules')
+
+        user,auth = get_user_and_auth(request.session['auth_id'])
+        schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1)).order_by('time_start')
+        cad ='<?xml version="1.0"?><monthly>'
+        conf = Configuration.objects.get(id=1)
+        hoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
+        next = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_table_show)
+        dia_semana_inicio = datetime.weekday(hoy)
+        dias_a_mostrar = conf.days_table_show
+        listacts=[]
+        for sch in schedule_time:
+            if sch.schedule.date >= hoy and sch.schedule.date <= next:
+                '''fechaact = datetime(int(sch.schedule.date.year),int(sch.schedule.date.month),int(sch.schedule.date.day),0,0,0)
+                fechahoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) - timedelta(days=conf.days_pre_show)
+                fechanext = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_pre)
+                
+                if fechahoy<=fechaact and fechanext>=fechaact:'''
+                fechita = sch.schedule.date
+                startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
+                ocupadas = 0
+                disponibles = 0
+                aforo = sch.schedule.activity.max_capacity
+                aforocola = sch.schedule.activity.queue_capacity
+                reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
+                for res in reservations:
+                    ocupadas = ocupadas + 1
+                disponibles = aforo - ocupadas
+                if disponibles < 0:
+                    disponibles = 0;
+                discol = ocupadas-aforo
+                if discol < 0:
+                    discol=0
+                discol = aforocola - discol
+                estado = 'DISPONIBLE'
+                if disponibles == 0:
+                    estado = 'COMPLETA'
+                if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=conf.minutes_pre)):
+                    estado = 'CERRADA'
+                if datetime.now() >= datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0):
+                    estado = 'FINALIZADA'
+                listacts.append({'id':str(sch.id),
+                         'name':str(sch.schedule.activity),
+                         'year':str(fechita.year),
+                         'month':str(fechita.month),
+                         'day':str(fechita.day),
+                         'dayweek':str(datetime.weekday(fechita)),
+                         'time_start':str(sch.time_start),
+                         'time_end':str(sch.time_end),
+                         'ocupadas':str(ocupadas),
+                         'disponibles':str(disponibles),
+                         'aforo':str(aforo),
+                         'aforocola':str(aforocola),
+                         'estado':estado,
+                         'disponiblecola':str(discol)})
+        festivos=Parties.objects.all()
+        listfest=[]
+        for fest in festivos:
+            fechi = fest.date
+            festfech=str(fechi.year)+'-'+str(fechi.month)+'-'+str(fechi.day)
+            listfest.append({
+                'id':str(fest.id),
+                'name':str(fest.name),
+                'year':str(fechi.year),
+                'month':str(fechi.month),
+                'day':str(fechi.day),
+                'dayweek':str(datetime.weekday(fechi))})
+    
+        data=json.dumps({'status':'success','response':'list_all_schedules','data':{ 'dia_hoy':str(hoy.day), 'mes_hoy':str(hoy.month), 'year_hoy':str(hoy.year), 'hora_hoy':str(datetime.now().hour), 'minuto_hoy':str(datetime.now().minute), 'dia_semana_inicio': str(dia_semana_inicio), 'dias_a_mostrar':str(dias_a_mostrar), 'actividades':listacts, 'festivos':listfest}})
+
+    except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        data = json.dumps({
+            'status':'failed',
+            'response': e.args[0]+str(exc_tb.tb_lineno)+cad
+        })
+
+    return APIResponse(request,data)
+
+
+
 def list_all_for_customers(request):
     """
     List all schedules info for customers

@@ -184,6 +184,7 @@ class Configuration(models.Model):
     minutes_post = models.IntegerField(default=0,null=False)
     minutes_pre = models.IntegerField(default=0,null=False)
     email = models.EmailField(max_length=100,default="")
+    days_table_show = models.IntegerField(default=0,null=False)
 
 
 class Parties(models.Model):
