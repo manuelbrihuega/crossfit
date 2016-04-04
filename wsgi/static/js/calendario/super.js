@@ -393,13 +393,12 @@ function loadCalendar() {
 				var fechajavascript = new Date(year, mes, dia, 12, 12, 12, 12);
 				if(diasemana==6){
 					diasemana = 0;
-					fechajavascript.setDate(fechajavascript.getDate()+1);
+					fechajavascript.setDate(fechajavascript.getDay()+1);
 					year = fechajavascript.getFullYear();
 					dia = fechajavascript.getDay();
 					mes = fechajavascript.getMonth();
 				}
-				var fechajavascript = new Date(year, mes, dia, 12, 12, 12, 12);
-				fechajavascript.setDate(fechajavascript.getDate()+1);
+				fechajavascript.setDate(fechajavascript.getDay()+1);
 				year = fechajavascript.getFullYear();
 				dia = fechajavascript.getDay();
 				mes = fechajavascript.getMonth();
