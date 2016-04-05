@@ -396,7 +396,7 @@ def list_all_tabla_for_customers(request):
                 'day':str(fechi.day),
                 'dayweek':str(datetime.weekday(fechi))})
 
-        data=json.dumps({'status':'success','response':'list_all_schedules','data':{ 'dia_hoy':str(hoy.day), 'mes_hoy':str(hoy.month), 'year_hoy':str(hoy.year), 'hora_hoy':str(datetime.now().hour), 'minuto_hoy':str(datetime.now().minute), 'dia_semana_inicio': str(dia_semana_inicio), 'dias_a_mostrar':str(dias_a_mostrar), 'actividades':listacts, 'festivos':listfest}})
+        data=json.dumps({'status':'success','response':'list_all_schedules','data':{ 'dia_hoy':str(hoy.day), 'mes_hoy':str(hoy.month), 'year_hoy':str(hoy.year), 'hora_hoy':str(datetime.now().hour), 'minuto_hoy':str(datetime.now().minute), 'dia_semana_inicio': str(dia_semana_inicio), 'dias_a_mostrar':str(conf.days_pre), 'actividades':listacts, 'festivos':listfest}})
 
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
