@@ -447,6 +447,19 @@ function loadCalendar() {
 					cadestadodos = 'spanfinalizada';
 				}
 				$('#'+idcontainer).append('<div id="'+data.data.actividades[i].id+'" class="'+cadestado+'"><div class="actup"><div class="nombreactividad">'+data.data.actividades[i].name+' <span class="nombreactividadspan">'+data.data.actividades[i].time_start.split(':')[0]+':'+data.data.actividades[i].time_start.split(':')[1]+'</span></div></div><div class="actdown"><div class="capacidadactividad"><span class="'+cadestadodos+'">'+data.data.actividades[i].estado+'</span>'+data.data.actividades[i].disponibles+'/'+data.data.actividades[i].aforo+'</div></div></div>');
+				
+			}
+
+			// SEGUNDA VUELTA
+			for (var i=0; i<data.data.actividades.length; i++){
+				var horastart = parseInt(data.data.actividades[i].time_start.split(':')[0]);
+				var horaend = parseInt(data.data.actividades[i].time_end.split(':')[0]);
+				var minutostart = parseInt(data.data.actividades[i].time_start.split(':')[1]);
+				var minutoend = parseInt(data.data.actividades[i].time_end.split(':')[1]);
+				var fechatimestart = new Date(2016, 5, 5, horastart, minutostart, 0);
+				var fechatimeend = new Date(2016, 5, 5, horaend, minutoend, 0);
+				var duration = (fechatimeend - fechatimestart)/(1000*60*60)
+				var idcontainer = 'day'+data.data.actividades[i].day+'-'+data.data.actividades[i].month+'-'+data.data.actividades[i].year+'-'+data.data.actividades[i].dayweek+'hour'+data.data.actividades[i].time_start.split(':')[0];
 				if(duration > 1){
 					$('#'+data.data.actividades[i].id).attr('style','height:70px !important;');
 					$('#'+data.data.actividades[i].id+' > .actup').attr('style','margin-top: 15px;');
@@ -457,26 +470,89 @@ function loadCalendar() {
             			if($(this).attr('data-contad')==conty){
             				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
             				if($(this).hasClass('unaact')){
-            					$(this).children('div').attr('style','width:auto;');
+            					$(this).children('div').attr('style','width:auto !important;');
             				}
             			}
         			})
-					if($('#'+idcontainer).hasClass('unaact')){
-
-					}
-					if($('#'+idcontainer).hasClass('dosaact')){
-
-					}
+        			$(".unaact").each(function (index) 
+        			{ 
+            			if($(this).attr('data-contad')==conty){
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
+            				if($(this).hasClass('unaact')){
+            					$(this).children('div').attr('style','width:auto !important;');
+            				}
+            			}
+        			})
+        			$(".dosact").each(function (index) 
+        			{ 
+            			if($(this).attr('data-contad')==conty){
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
+            				if($(this).hasClass('unaact')){
+            					$(this).children('div').attr('style','width:auto !important;');
+            				}
+            			}
+        			})
 				}
 				if(duration > 2){
 					$('#'+data.data.actividades[i].id).attr('style','height:105px !important;');
 					$('#'+data.data.actividades[i].id+' > .actup').attr('style','margin-top: 30px;');
-					if($('#'+idcontainer).hasClass('unaact')){
-
-					}
-					if($('#'+idcontainer).hasClass('dosaact')){
-
-					}
+					var conty = parseInt($('#'+idcontainer).attr('data-contad'));
+					var conty = conty + 1;
+					$(".horavacia").each(function (index) 
+        			{ 
+            			if($(this).attr('data-contad')==conty){
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				if($(this).hasClass('unaact')){
+            					$(this).children('div').attr('style','width:auto !important;');
+            				}
+            			}
+        			})
+        			$(".unaact").each(function (index) 
+        			{ 
+            			if($(this).attr('data-contad')==conty){
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				if($(this).hasClass('unaact')){
+            					$(this).children('div').attr('style','width:auto !important;');
+            				}
+            			}
+        			})
+        			$(".dosact").each(function (index) 
+        			{ 
+            			if($(this).attr('data-contad')==conty){
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				if($(this).hasClass('unaact')){
+            					$(this).children('div').attr('style','width:auto !important;');
+            				}
+            			}
+        			})
+        			var conty = conty + 1;
+					$(".horavacia").each(function (index) 
+        			{ 
+            			if($(this).attr('data-contad')==conty){
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				if($(this).hasClass('unaact')){
+            					$(this).children('div').attr('style','width:auto !important;');
+            				}
+            			}
+        			})
+					$(".unaact").each(function (index) 
+        			{ 
+            			if($(this).attr('data-contad')==conty){
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				if($(this).hasClass('unaact')){
+            					$(this).children('div').attr('style','width:auto !important;');
+            				}
+            			}
+        			})
+        			$(".dosact").each(function (index) 
+        			{ 
+            			if($(this).attr('data-contad')==conty){
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				if($(this).hasClass('unaact')){
+            					$(this).children('div').attr('style','width:auto !important;');
+            				}
+            			}
+        			})
 				}
 			}
 			//$('#reservas-tabla').css('width',width+100);
