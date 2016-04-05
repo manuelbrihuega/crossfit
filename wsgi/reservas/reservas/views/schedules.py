@@ -330,7 +330,7 @@ def list_all_tabla_for_customers(request):
         user,auth = get_user_and_auth(request.session['auth_id'])
         schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1)).order_by('-schedule__activity__name')
         conf = Configuration.objects.get(id=1)
-        #hoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
+        hoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
         #next = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_table_show)
         dia_semana_inicio = datetime.weekday(hoy)
         #dias_a_mostrar = conf.days_table_show
