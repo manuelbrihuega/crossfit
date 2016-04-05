@@ -417,7 +417,8 @@ function loadCalendar() {
 				var fechatimestart = new Date(2016, 5, 5, horastart, minutostart, 0);
 				var fechatimeend = new Date(2016, 5, 5, horaend, minutoend, 0);
 				var duration = (fechatimeend - fechatimestart)/(1000*60*60)
-				
+				var idcontainer = 'day'+data.data.actividades[i].day+'-'+data.data.actividades[i].month+'-'+data.data.actividades[i].year+'-'+data.data.actividades[i].dayweek+'hour'+data.data.actividades[i].time_start.split(':')[0];
+				$('#'+idcontainer).append('<div id="'+dara.data.actividades[i].id+'" class="actividad"><div class="actup"><div class="nombreactividad">'+dara.data.actividades[i].name+' <span class="nombreactividadspan">'+dara.data.actividades[i].time_start.split(':')[0]+':'+dara.data.actividades[i].time_start.split(':')[1]+'</span></div></div><div class="actdown"><div class="capacidadactividad"><span class="spandisponible">'+dara.data.actividades[i].estado+'</span>'+dara.data.actividades[i].disponibles+'/'+dara.data.actividades[i].aforo+'</div></div></div>');
 			}
 			//$('#reservas-tabla').css('width',width+100);
 			/*$('#mycalendar').monthly({
