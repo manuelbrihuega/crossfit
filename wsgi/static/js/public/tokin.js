@@ -6,7 +6,7 @@ function tokin() {
 	var token = $('#launcher').attr('data-token');
 	if(token!=undefined){
 		$.getJSON( api_url+'auth/tokin?callback=?', {token:token}, function(data){
-			if(data.status=='success') window.location=base_url+'/calendario';
+			if(data.status=='success') window.location=base_url+'/reservas';
 			else{
 				$('#title').text('ERROR AL AUTENTICAR');
 				$('#subtitle').hide();

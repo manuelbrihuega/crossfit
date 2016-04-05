@@ -444,9 +444,9 @@ function loadCalendar() {
 						}
 					}
 					if(diasemana==5){
-						$('#'+idgen+'hour13').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-right: 1px solid white;border-top: 2px solid white;');
-						$('#'+idgen+'hour14').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-right: 1px solid white;');
-						$('#'+idgen+'hour15').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-right: 1px solid white;border-bottom: 1px solid white;');
+						$('#'+idgen+'hour13').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-right: 2px solid white;border-top: 2px solid white;');
+						$('#'+idgen+'hour14').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-right: 2px solid white;');
+						$('#'+idgen+'hour15').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-right: 2px solid white;border-bottom: 1px solid white;');
 					}
 					if(i==1){
 						$('#'+idgen+'hour14').html('Box cerrado');
