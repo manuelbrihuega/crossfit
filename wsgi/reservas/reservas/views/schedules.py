@@ -645,7 +645,7 @@ def get_foreign(request):
                                         'schedule_id':schedule_time.schedule.id,
                                         'date':get_string_from_date(schedule_time.schedule.date),
                                         'activity_id':schedule_time.schedule.activity.id,
-                                        'activity_name':schedule_time.schedule.activity,
+                                        'activity_name':schedule_time.schedule.activity.name,
                                         'activity_description':schedule_time.schedule.activity.description,
                                         'activity_id_max_capacity':schedule_time.schedule.activity.max_capacity,
                                         'activity_id_min_capacity':schedule_time.schedule.activity.min_capacity,
