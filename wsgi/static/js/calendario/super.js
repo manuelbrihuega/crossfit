@@ -409,7 +409,7 @@ function loadCalendar() {
 
 			}
 
-			for (var i=0; i<data.data.actividades.lenght; i++){
+			for (var i=0; i<data.data.actividades.length; i++){
 				var horastart = parseInt(data.data.actividades[i].time_start.split(':')[0]);
 				var horaend = parseInt(data.data.actividades[i].time_end.split(':')[0]);
 				var minutostart = parseInt(data.data.actividades[i].time_start.split(':')[1]);
