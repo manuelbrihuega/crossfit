@@ -277,6 +277,8 @@ def list_all_tabla(request):
                     estado = 'CERRADA'
                 if datetime.now() >= datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0):
                     estado = 'FINALIZADA'
+                seco = sch.time_end - sch.time_start
+                sec = seco.second
                 listacts.append({'id':str(sch.id),
                          'name':str(sch.schedule.activity),
                          'year':str(fechita.year),
@@ -285,6 +287,7 @@ def list_all_tabla(request):
                          'dayweek':str(datetime.weekday(fechita)),
                          'time_start':str(sch.time_start),
                          'time_end':str(sch.time_end),
+                         'duration':str(sec),
                          'ocupadas':str(ocupadas),
                          'disponibles':str(disponibles),
                          'aforo':str(aforo),

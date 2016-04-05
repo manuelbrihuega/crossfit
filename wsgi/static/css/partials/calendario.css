@@ -1,6 +1,6 @@
 #new_enterprise_wrapper{margin-bottom: 30px; display: none;}
 #result_enterprises .item{ height: 76px; overflow: hidden;}
-.colday{float:left; width:auto;}
+.colday{display:inline-table; width:auto;}
 #hournona{width: 75px;height: 24px;color: #1579c0;background-color: white;font-size: 10px;text-align: center;font-weight: 600;border-right: 1px solid white;border-bottom: 1px solid white;}
 .hourbasic{width: 75px;height: 35px;color: #1579c0;background-color: #e2dfcb;font-size: 10px;text-align: center;font-weight: 600;border-right: 1px solid white;padding-top: 10px;border-bottom: 1px solid white;border-top: 2px solid white;}
 .daybasic{width:auto;background-color: #eeece1;border-bottom: 1px solid white;border-right: 1px solid white;border-left: 2px solid white;height: 24px;font-size: 11px;font-weight: 700;color: black;text-align: center;padding-top: 4px;}
