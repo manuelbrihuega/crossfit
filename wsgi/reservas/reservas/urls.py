@@ -230,7 +230,7 @@ urlpatterns = patterns('',
     #PUBLIC
     url(r'^restorepass/(?P<token>\w+)$', 'reservas.views.auth.restorepassview'),
     url(r'^tarifas$', 'reservas.views.dashboard.tarifas'),
-    url(r'^calendario$', 'reservas.views.dashboard.calendario'),
+    url(r'^reservas$', 'reservas.views.dashboard.calendario'),
     url(r'^actividades$', 'reservas.views.dashboard.actividades'),
     url(r'^test$', 'reservas.views.public.test'),
     url(r'^login$', 'reservas.views.public.login'),
