@@ -418,14 +418,15 @@ function loadCalendar() {
 				var fechatimeend = new Date(2016, 5, 5, horaend, minutoend, 0);
 				var duration = (fechatimeend - fechatimestart)/(1000*60*60)
 				var idcontainer = 'day'+data.data.actividades[i].day+'-'+data.data.actividades[i].month+'-'+data.data.actividades[i].year+'-'+data.data.actividades[i].dayweek+'hour'+data.data.actividades[i].time_start.split(':')[0];
-				if($('#'+idcontainer).hasClass('horavacia')){
-					$('#'+idcontainer).removeClass('horavacia');
-					$('#'+idcontainer).addClass('unaact');
-				}
 				if($('#'+idcontainer).hasClass('unaact')){
 					$('#'+idcontainer).removeClass('unaact');
 					$('#'+idcontainer).addClass('dosact');
 				}
+				if($('#'+idcontainer).hasClass('horavacia')){
+					$('#'+idcontainer).removeClass('horavacia');
+					$('#'+idcontainer).addClass('unaact');
+				}
+				
 				var cadestado = '';
 				var cadestadodos = '';
 				if(data.data.actividades[i].estado=='DISPONIBLE'){
