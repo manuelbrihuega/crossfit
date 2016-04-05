@@ -298,7 +298,7 @@ def list_all_tabla(request):
             festfech=str(fechi.year)+'-'+str(fechi.month)+'-'+str(fechi.day)
             listfest.append({
                 'id':str(fest.id),
-                'name':str(fest.name),
+                'name':fest.name,
                 'year':str(fechi.year),
                 'month':str(fechi.month),
                 'day':str(fechi.day),
