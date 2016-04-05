@@ -618,6 +618,17 @@ function loadCalendar() {
 					}
 				})
         	})
+        	
+			for (var i=0; i<data.data.festivos.length; i++){
+				var identifier= 'day'+data.data.festivos[i].day+'-'+data.data.festivos[i].month+'-'+data.data.festivos[i].year+'-'+data.data.festivos[i].dayweek;
+				$('#'+identifier).children().each(function (index){ 
+					if(!$(this).hasClass('daybasic')){
+						$(this).remove();
+					}
+				})
+				$('#'+identifier).append('<div style="background-color:#f5f5f5;border-left: 2px solid white;border-right: 1px solid white;border-top: 2px solid white;text-transform: uppercase;padding-top: 231px;padding-bottom: 250px;text-align: center;font-size: 14px;padding-left: 15px;padding-right: 15px;color: black;font-weight: 600;"><span style="text-decoration: underline;">Día Festivo:</span><br><span>'+data.data.festivos[i].name+'</span></div>');
+			}
+
 			//$('#reservas-tabla').css('width',width+100);
 			/*$('#mycalendar').monthly({
 				mode: 'event',
@@ -665,7 +676,8 @@ function restarHoras() {
 	}
 }
 
-function deleteHorario(id) {
+function deleteHorario() {
+	var id = $('#idscheduletime').val();
 	var confirmacion=confirm('¿Seguro que quieres eliminar este evento?');
 	if (confirmacion==true)
 	{
