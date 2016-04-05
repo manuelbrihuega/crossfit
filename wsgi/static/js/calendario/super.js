@@ -408,6 +408,17 @@ function loadCalendar() {
 				
 
 			}
+
+			for (var i=0; i<data.data.actividades.lenght; i++){
+				var horastart = parseInt(data.data.actividades[i].time_start.split(':')[0]);
+				var horaend = parseInt(data.data.actividades[i].time_end.split(':')[0]);
+				var minutostart = parseInt(data.data.actividades[i].time_start.split(':')[1]);
+				var minutoend = parseInt(data.data.actividades[i].time_end.split(':')[1]);
+				var fechatimestart = new Date(2016, 5, 5, horastart, minutostart, 0);
+				var fechatimeend = new Date(2016, 5, 5, horaend, minutoend, 0);
+				var duration = (fechatimeend - fechatimestart)/(1000*60*60)
+				
+			}
 			//$('#reservas-tabla').css('width',width+100);
 			/*$('#mycalendar').monthly({
 				mode: 'event',
