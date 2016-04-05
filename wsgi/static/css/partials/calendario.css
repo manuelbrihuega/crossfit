@@ -9,6 +9,7 @@
 .actividadcompleta{min-width: 105px; float:left;cursor: pointer;width:auto;background-color: #f3dcdc;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
 .actividadfinalizada{min-width: 105px; float:left;cursor: pointer;width:auto;background-color: #f2f2f2;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
 .actividadcerrada{min-width: 105px; float:left;cursor: pointer;width:auto;background-color: #f2f2f2;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
+.actividadreservada{min-width: 105px; float:left;cursor: pointer;width:auto;background-color: #fbd4b4;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
 .actup{width: auto; margin-left: auto; margin-right: auto; overflow: auto; text-align: center; height: 18px; line-height: 17px;}
 .nombreactividad{font-weight: 700; color: black; font-size: 14px; display: inline-block; margin-left: auto; width: auto; margin-right: auto;}
 .nombreactividadspan{font-size: 11px; color: black; font-weight: 500;}
@@ -17,6 +18,7 @@
 .spandisponible{background-color: #92d050; color: white; font-size: 12px; font-weight: 600; margin-right: 1px;}
 .spancompleta{background-color: #c00000; color: white; font-size: 12px; font-weight: 600; margin-right: 1px;}
 .spancerrada{background-color: #7f7f7f; color: white; font-size: 12px; font-weight: 600; margin-right: 1px;}
+.spanreservada{background-color: #e36c0a; color: white; font-size: 12px; font-weight: 600; margin-right: 1px;}
 .spanfinalizada{background-color: #7f7f7f; color: white; font-size: 12px; font-weight: 600; margin-right: 1px;}
 .horavacia{height: 35px; overflow: auto;}
 .unaact > div {width: 100% !important;}
