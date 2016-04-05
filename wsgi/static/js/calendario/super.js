@@ -389,6 +389,7 @@ function loadCalendar() {
 					nombremes = 'Diciembre';
 				}
 				$('#reservas-tabla').append('<div id="' + idgen + '" class="colday"><div class="daybasic" id="'+idgen+'head"><span>'+nombredia+' '+dia+' '+nombremes+' '+year+'</span></div><div id="'+idgen+'hour07" data-contad="'+String(contador+1)+'" class="horavacia" style="width:auto; overflow:auto;"></div><div id="'+idgen+'hour08" data-contad="'+String(contador+2)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour09" data-contad="'+String(contador+3)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour10" data-contad="'+String(contador+4)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour11" data-contad="'+String(contador+5)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour12" data-contad="'+String(contador+6)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour13" data-contad="'+String(contador+7)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour14" data-contad="'+String(contador+8)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour15" data-contad="'+String(contador+9)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour16" data-contad="'+String(contador+10)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour17" data-contad="'+String(contador+11)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour18" data-contad="'+String(contador+12)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour19" data-contad="'+String(contador+13)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour20" data-contad="'+String(contador+14)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour21" data-contad="'+String(contador+15)+'" class="horavacia" style="width:auto;overflow:auto;"></div></div>');
+				contador = contador + 15;
 				width = width + $('#'+idgen).width();
 				diasemana = diasemana + 1;
 				dia = dia + 1;
@@ -448,7 +449,28 @@ function loadCalendar() {
 				$('#'+idcontainer).append('<div id="'+data.data.actividades[i].id+'" class="'+cadestado+'"><div class="actup"><div class="nombreactividad">'+data.data.actividades[i].name+' <span class="nombreactividadspan">'+data.data.actividades[i].time_start.split(':')[0]+':'+data.data.actividades[i].time_start.split(':')[1]+'</span></div></div><div class="actdown"><div class="capacidadactividad"><span class="'+cadestadodos+'">'+data.data.actividades[i].estado+'</span>'+data.data.actividades[i].disponibles+'/'+data.data.actividades[i].aforo+'</div></div></div>');
 				if(duration > 1){
 					$('#'+data.data.actividades[i].id).attr('style','height:70px !important;');
-					$('#'+data.data.actividades[i].id+' > actup').attr('style','margin-top: 15px;');
+					$('#'+data.data.actividades[i].id+' > .actup').attr('style','margin-top: 15px;');
+					var conty = parseInt($('#'+idcontainer).attr('data-contad'));
+					var conty = conty + 1;
+					$(".horavacia").each(function (index) 
+        			{ 
+            			if($(this).attr('data-contad')==conty){
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
+            				if($(this).hasClass('unaact')){
+            					$(this).children('div').attr('style','width:auto;');
+            				}
+            			}
+        			})
+					if($('#'+idcontainer).hasClass('unaact')){
+
+					}
+					if($('#'+idcontainer).hasClass('dosaact')){
+
+					}
+				}
+				if(duration > 2){
+					$('#'+data.data.actividades[i].id).attr('style','height:105px !important;');
+					$('#'+data.data.actividades[i].id+' > .actup').attr('style','margin-top: 30px;');
 					if($('#'+idcontainer).hasClass('unaact')){
 
 					}
