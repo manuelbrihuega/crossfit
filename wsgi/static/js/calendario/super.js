@@ -394,9 +394,9 @@ function loadCalendar() {
 					$('#'+idgen+'hour08').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white; text-align: center; color: black;font-weight: 600;font-size: 11px;padding-top: 8px;');
 					$('#'+idgen+'hour08').html('Box cerrado');
 					$('#'+idgen+'hour09').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white; border-bottom: 1px solid white;');
-					$('#'+idgen+'hour13').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 3px solid white; border-right: 3px solid white; border-top: 2px solid white;');
-					$('#'+idgen+'hour14').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 3px solid white; border-right: 3px solid white;');
-					$('#'+idgen+'hour15').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 3px solid white; border-right: 3px solid white;');
+					$('#'+idgen+'hour13').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 2px solid white; border-top: 2px solid white;');
+					$('#'+idgen+'hour14').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 2px solid white;');
+					$('#'+idgen+'hour15').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 2px solid white;');
 					$('#'+idgen+'hour16').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white;');
 					$('#'+idgen+'hour17').attr('style', 'text-align: center; color: black;font-weight: 600;font-size: 11px;padding-top: 8px; width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white;');
 					$('#'+idgen+'hour17').html('Box cerrado');
@@ -406,6 +406,9 @@ function loadCalendar() {
 					$('#'+idgen+'hour21').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white; border-bottom: 1px solid white;');
 				}
 				if(diasemana==4){
+					$('#'+idgen+'hour13').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2;  border-right: 1px solid white; border-top: 2px solid white;');
+					$('#'+idgen+'hour14').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2;  border-right: 1px solid white;');
+					$('#'+idgen+'hour15').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2;  border-right: 1px solid white;');
 					$('#'+idgen+'hour21').attr('style', 'width:auto;text-align: center;overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white; border-top: 2px solid white; border-bottom: 1px solid white;color: black;font-weight: 600;font-size: 11px;padding-top: 8px;');
 					$('#'+idgen+'hour21').html('Box cerrado');
 				}
