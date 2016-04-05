@@ -387,7 +387,7 @@ function loadCalendar() {
 				if (mes == 12){
 					nombremes = 'Diciembre';
 				}
-				$('#reservas-tabla').append('<div id="' + idgen + '" class="colday"><div class="daybasic" id="'+idgen+'head"><span>'+nombredia+' '+dia+' '+nombremes+' '+year+'</span></div><div id="'+idgen+'hour07" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour08" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour09" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour10" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour11" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour12" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour13" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour14" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour15" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour16" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour17" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour18" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour19" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour20" class="horavacia" style="width:auto;"></div><div id="'+idgen+'hour21" class="horavacia" style="width:auto;"></div></div>');
+				$('#reservas-tabla').append('<div id="' + idgen + '" class="colday"><div class="daybasic" id="'+idgen+'head"><span>'+nombredia+' '+dia+' '+nombremes+' '+year+'</span></div><div id="'+idgen+'hour07" class="horavacia" style="width:auto; overflow:auto;"></div><div id="'+idgen+'hour08" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour09" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour10" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour11" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour12" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour13" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour14" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour15" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour16" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour17" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour18" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour19" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour20" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour21" class="horavacia" style="width:auto;overflow:auto;"></div></div>');
 				width = width + $('#'+idgen).width();
 				diasemana = diasemana + 1;
 				dia = dia + 1;
@@ -421,7 +421,25 @@ function loadCalendar() {
 				if($('#'+idcontainer).hasClass('horavacia')){
 					$('#'+idcontainer).removeClass('horavacia');
 				}
-				$('#'+idcontainer).append('<div id="'+data.data.actividades[i].id+'" class="actividad"><div class="actup"><div class="nombreactividad">'+data.data.actividades[i].name+' <span class="nombreactividadspan">'+data.data.actividades[i].time_start.split(':')[0]+':'+data.data.actividades[i].time_start.split(':')[1]+'</span></div></div><div class="actdown"><div class="capacidadactividad"><span class="spandisponible">'+data.data.actividades[i].estado+'</span>'+data.data.actividades[i].disponibles+'/'+data.data.actividades[i].aforo+'</div></div></div>');
+				var cadestado = '';
+				var cadestadodos = '';
+				if(data.data.actividades[i].estado=='DISPONIBLE'){
+					cadestado = 'actividad';
+					cadestadodos = 'spandisponible';
+				}
+				if(data.data.actividades[i].estado=='COMPLETA'){
+					cadestado = 'actividadcompleta';
+					cadestadodos = 'spancompleta';
+				}
+				if(data.data.actividades[i].estado=='CERRADA'){
+					cadestado = 'actividadcerrada';
+					cadestadodos = 'spancerrada';
+				}
+				if(data.data.actividades[i].estado=='FINALIZADA'){
+					cadestado = 'actividadfinalizada';
+					cadestadodos = 'spanfinalizada';
+				}
+				$('#'+idcontainer).append('<div id="'+data.data.actividades[i].id+'" class="'+cadestado+'"><div class="actup"><div class="nombreactividad">'+data.data.actividades[i].name+' <span class="nombreactividadspan">'+data.data.actividades[i].time_start.split(':')[0]+':'+data.data.actividades[i].time_start.split(':')[1]+'</span></div></div><div class="actdown"><div class="capacidadactividad"><span class="'+cadestadodos+'">'+data.data.actividades[i].estado+'</span>'+data.data.actividades[i].disponibles+'/'+data.data.actividades[i].aforo+'</div></div></div>');
 			}
 			//$('#reservas-tabla').css('width',width+100);
 			/*$('#mycalendar').monthly({
