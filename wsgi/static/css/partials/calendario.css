@@ -12,6 +12,7 @@
 .actdown{width: auto; overflow: auto; text-align: center; line-height: 13px; height: 14px;}
 .capacidadactividad{display: inline-block; width: auto; font-size: 11px; color: black;}
 .spandisponible{background-color: #92d050; color: white; font-size: 12px; font-weight: 600; margin-right: 1px;}
+.horavacia{height: 35px;}
 #new_employee .form-group{padding-right: 0px;}
 #employees_list{ font-size: 12px;}
 #employees_list tr.active{color: #000; font-weight: bold;}
