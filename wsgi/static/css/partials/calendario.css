@@ -5,10 +5,10 @@
 .hourbasic{width: 75px;height: 35px;color: #1579c0;background-color: #e2dfcb;font-size: 10px;text-align: center;font-weight: 600;border-right: 1px solid white;padding-top: 10px;border-bottom: 1px solid white;border-top: 2px solid white;}
 .daybasic{width:auto;background-color: #eeece1;border-bottom: 1px solid white;border-right: 1px solid white;border-left: 2px solid white;height: 24px;font-size: 11px;font-weight: 700;color: black;text-align: center;padding-top: 4px;}
 #new_employee{}
-.actividad{min-width: 98px; float:left;cursor: pointer;width:auto;background-color: #e5f4d4;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
-.actividadcompleta{min-width: 98px; float:left;cursor: pointer;width:auto;background-color: #f3dcdc;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
-.actividadfinalizada{min-width: 98px; float:left;cursor: pointer;width:auto;background-color: #f2f2f2;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
-.actividadcerrada{min-width: 98px; float:left;cursor: pointer;width:auto;background-color: #f2f2f2;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
+.actividad{min-width: 105px; float:left;cursor: pointer;width:auto;background-color: #e5f4d4;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
+.actividadcompleta{min-width: 105px; float:left;cursor: pointer;width:auto;background-color: #f3dcdc;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
+.actividadfinalizada{min-width: 105px; float:left;cursor: pointer;width:auto;background-color: #f2f2f2;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
+.actividadcerrada{min-width: 105px; float:left;cursor: pointer;width:auto;background-color: #f2f2f2;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
 .actup{width: auto; margin-left: auto; margin-right: auto; overflow: auto; text-align: center; height: 18px; line-height: 17px;}
 .nombreactividad{font-weight: 700; color: black; font-size: 14px; display: inline-block; margin-left: auto; width: auto; margin-right: auto;}
 .nombreactividadspan{font-size: 11px; color: black; font-weight: 500;}

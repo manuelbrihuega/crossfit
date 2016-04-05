@@ -431,6 +431,10 @@ function loadCalendar() {
 					$('#'+idcontainer).addClass('unaact');
 					izqoder = 1;
 				}
+				if(izqoder==3){
+					$('#'+idcontainer).parent().addClass('marcado');
+					$('#'+idcontainer).addClass('tresact');
+				}
 				var cadestado = '';
 				var cadestadodos = '';
 				if(data.data.actividades[i].estado=='DISPONIBLE'){
@@ -604,6 +608,16 @@ function loadCalendar() {
         			})
 				}
 			}
+			// TERCERA VUELTA (POR DIVS)
+			$(".marcado").each(function (index){ 
+				$(this).children().each(function (index){ 
+					if($(this).hasClass('dosact') && !$(this).hasClass('tresact')){
+						$(this).children().each(function (index){ 
+							$(this).attr('style','width:50%;');
+						})
+					}
+				})
+        	})
 			//$('#reservas-tabla').css('width',width+100);
 			/*$('#mycalendar').monthly({
 				mode: 'event',
