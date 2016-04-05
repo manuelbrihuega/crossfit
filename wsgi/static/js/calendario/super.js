@@ -420,6 +420,11 @@ function loadCalendar() {
 				var idcontainer = 'day'+data.data.actividades[i].day+'-'+data.data.actividades[i].month+'-'+data.data.actividades[i].year+'-'+data.data.actividades[i].dayweek+'hour'+data.data.actividades[i].time_start.split(':')[0];
 				if($('#'+idcontainer).hasClass('horavacia')){
 					$('#'+idcontainer).removeClass('horavacia');
+					$('#'+idcontainer).addClass('unaact');
+				}
+				if($('#'+idcontainer).hasClass('unaact')){
+					$('#'+idcontainer).removeClass('unaact');
+					$('#'+idcontainer).addClass('dosact');
 				}
 				var cadestado = '';
 				var cadestadodos = '';
