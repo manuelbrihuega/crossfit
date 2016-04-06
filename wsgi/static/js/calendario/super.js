@@ -790,7 +790,7 @@ function loadCalendar() {
 						$(this).children().each(function (index){ 
 							$(this).css('width','50%');
 							if($(this).attr('data-izqoder')=='2' && $(this).css('height')=='70px'){
-								alert("SI");
+								
 								var contadhunt = parseInt($(this).parent().attr('data-contad'))+1;
 								$(".marcado").each(function (index){ 
 									$(this).children().each(function (index){ 
@@ -798,7 +798,7 @@ function loadCalendar() {
 											if($(this).attr('id').split('hour')[1]!='13' && $(this).attr('id').split('hour')[1]!='14' && $(this).attr('id').split('hour')[1]!='15'){
 												$(this).children().each(function (index){ 
 													$(this).attr('style','width: 50% !important');
-													alert("CONFIRM");
+
 												})
 											}
 										}
