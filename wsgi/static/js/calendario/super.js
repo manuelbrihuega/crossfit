@@ -27,15 +27,11 @@ function get_content() {
 			});
 				
 			
-			$( ".horainiaction" ).change(function() {
-				var idcad = $(this).attr('id');
-				idcad = idcad.replace('horaini','');
-  				restarHoras(idcad);
+			$( "#horaini" ).change(function() {
+				restarHoras('');
 			});
-			$( ".horafinaction" ).change(function() {
-  				var idcad = $(this).attr('id');
-				idcad = idcad.replace('horafin','');
-  				restarHoras(idcad);
+			$( "#horafin" ).change(function() {
+  				restarHoras('');
 			});
 
 			if (!Modernizr.inputtypes.date) {
@@ -351,7 +347,7 @@ function addnewhorario(){
 			$( "#horafin"+String(i) ).change(function() {
   				restarHoras(i);
 			});
-			i=101;
+			break;
 		}
 	}
 }
