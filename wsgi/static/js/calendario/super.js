@@ -162,6 +162,42 @@ function new_horario() {
 											$('#horaini'+i).val('');
 											$('#horafin'+i).val('');
 											$('#duracion'+i).val('');
+											var hayotro = false;
+													for(var j=0; j<100; j++){
+														if(j>i){
+															if($('#horaini'+j).length){
+																hayotro = true;
+															}
+														}
+													}
+													if(!hayotro){
+														$('#botonadd').html('Enviar');
+														show_new();
+														$('#activity_id').val('-1');
+														$('#fecha').val('');
+														$('#lunes').prop('checked','');
+														$('#martes').prop('checked','');
+														$('#miercoles').prop('checked','');
+														$('#jueves').prop('checked','');
+														$('#viernes').prop('checked','');
+														$('#sabado').prop('checked','');
+														$('#domingo').prop('checked','');
+														$('#todoslosdias').prop('checked','');
+
+														$('#enero').prop('checked','');
+														$('#febrero').prop('checked','');
+														$('#marzo').prop('checked','');
+														$('#abril').prop('checked','');
+														$('#mayo').prop('checked','');
+														$('#junio').prop('checked','');
+														$('#julio').prop('checked','');
+														$('#agosto').prop('checked','');
+														$('#septiembre').prop('checked','');
+														$('#octubre').prop('checked','');
+														$('#noviembre').prop('checked','');
+														$('#diciembre').prop('checked','');
+														$('#todoslosmeses').prop('checked','');
+													}
 										}else{
 											error = true;
 											launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonadd').html('Enviar');}
@@ -254,6 +290,42 @@ function new_horario() {
 													$('#horaini'+i).val('');
 													$('#horafin'+i).val('');
 													$('#duracion'+i).val('');
+													var hayotro = false;
+													for(var j=0; j<100; j++){
+														if(j>i){
+															if($('#horaini'+j).length){
+																hayotro = true;
+															}
+														}
+													}
+													if(!hayotro){
+														$('#botonadd').html('Enviar');
+														show_new();
+														$('#activity_id').val('-1');
+														$('#fecha').val('');
+														$('#lunes').prop('checked','');
+														$('#martes').prop('checked','');
+														$('#miercoles').prop('checked','');
+														$('#jueves').prop('checked','');
+														$('#viernes').prop('checked','');
+														$('#sabado').prop('checked','');
+														$('#domingo').prop('checked','');
+														$('#todoslosdias').prop('checked','');
+
+														$('#enero').prop('checked','');
+														$('#febrero').prop('checked','');
+														$('#marzo').prop('checked','');
+														$('#abril').prop('checked','');
+														$('#mayo').prop('checked','');
+														$('#junio').prop('checked','');
+														$('#julio').prop('checked','');
+														$('#agosto').prop('checked','');
+														$('#septiembre').prop('checked','');
+														$('#octubre').prop('checked','');
+														$('#noviembre').prop('checked','');
+														$('#diciembre').prop('checked','');
+														$('#todoslosmeses').prop('checked','');
+													}
 
 								
 												}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');}
@@ -270,34 +342,6 @@ function new_horario() {
 
 				}		
 			}
-		}	
-		if(i==99){
-			$('#botonadd').html('Enviar');
-			show_new();
-			$('#activity_id').val('-1');
-			$('#fecha').val('');
-			$('#lunes').prop('checked','');
-			$('#martes').prop('checked','');
-			$('#miercoles').prop('checked','');
-			$('#jueves').prop('checked','');
-			$('#viernes').prop('checked','');
-			$('#sabado').prop('checked','');
-			$('#domingo').prop('checked','');
-			$('#todoslosdias').prop('checked','');
-
-			$('#enero').prop('checked','');
-			$('#febrero').prop('checked','');
-			$('#marzo').prop('checked','');
-			$('#abril').prop('checked','');
-			$('#mayo').prop('checked','');
-			$('#junio').prop('checked','');
-			$('#julio').prop('checked','');
-			$('#agosto').prop('checked','');
-			$('#septiembre').prop('checked','');
-			$('#octubre').prop('checked','');
-			$('#noviembre').prop('checked','');
-			$('#diciembre').prop('checked','');
-			$('#todoslosmeses').prop('checked','');
 		}	
 	}	
 	
