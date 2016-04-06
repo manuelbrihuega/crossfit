@@ -229,14 +229,15 @@ function loadCalendar() {
 					cadestado = 'actividadcerrada';
 					cadestadodos = 'spancerrada';
 				}
-				if(data.data.actividades[i].estado=='FINALIZADA'){
-					cadestado = 'actividadfinalizada';
-					cadestadodos = 'spanfinalizada';
-				}
+				
 				if(data.data.actividades[i].estado=='MI RESERVA'){
 					cadestado = 'actividadreservada';
 					cadestadodos = 'spanreservada';
 					onclick = 'deleteMiReserva('+data.data.actividades[i].id+');';
+				}
+				if(data.data.actividades[i].estado=='FINALIZADA'){
+					cadestado = 'actividadfinalizada';
+					cadestadodos = 'spanfinalizada';
 				}
 				$('#'+idcontainer).append('<div id="'+data.data.actividades[i].id+'" onclick="'+onclick+'" data-izqoder="'+String(izqoder)+'" class="'+cadestado+'"><div class="actup"><div class="nombreactividad">'+data.data.actividades[i].name+' <span class="nombreactividadspan">'+data.data.actividades[i].time_start.split(':')[0]+':'+data.data.actividades[i].time_start.split(':')[1]+'</span></div></div><div class="actdown"><div class="capacidadactividad"><span class="'+cadestadodos+'">'+data.data.actividades[i].estado+'</span>'+data.data.actividades[i].disponibles+'/'+data.data.actividades[i].aforo+'</div></div></div>');
 				

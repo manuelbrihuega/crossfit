@@ -1791,7 +1791,7 @@ function deleteMiReserva(id_schedule_time){
 	var confirmacion=confirm('¿Está seguro de que quiere cancelar la reserva? Su plaza quedará disponible para otro usuario.');
 	if(confirmacion){
 		$('.waiting').show();
-		$('#mycalendar').hide();
+		$('#reservas-tabla').hide();
 		$.getJSON(api_url+'schedules/delete_reservation_client?callback=?', {schedule_time_id:id_schedule_time}, function(data){
 			if(data.status=='success'){
 				launch_alert('<i class="fa fa-smile-o"></i> Reserva cancelada con éxito. Su plaza se ha liberado','');
@@ -1800,7 +1800,7 @@ function deleteMiReserva(id_schedule_time){
 			else{ 
 				launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); 
 				$('.waiting').hide();
-				$('#mycalendar').show();
+				$('#reservas-tabla').show();
 			}
 			
 		});
@@ -1811,7 +1811,7 @@ function deleteMiReserva(id_schedule_time){
 function addReservaCliente(id){
 	var confirmacion=confirm('¿Está seguro de que quiere reservar plaza para esta actividad?');
 	if(confirmacion){
-		$('#mycalendar').hide();
+		$('#reservas-tabla').hide();
 		$('.waiting').show();
 		$.getJSON(api_url+'schedules/hay_plazas?callback=?', {id:id}, function(data){
 			if(data.status=='success'){
@@ -1835,13 +1835,13 @@ function addReservaCliente(id){
 											location.reload();
 										}
 										else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
-									$('#mycalendar').show();}
+									$('#reservas-tabla').show();}
 			
 									});
 								}else{
 									launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
 									$('.waiting').hide();
-									$('#mycalendar').show();
+									$('#reservas-tabla').show();
 									
 								}
 							}else{
@@ -1854,12 +1854,12 @@ function addReservaCliente(id){
 												location.reload();
 											}
 											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
-									$('#mycalendar').show();}
+									$('#reservas-tabla').show();}
 										});
 									}else{
 										launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
 										$('.waiting').hide();
-										$('#mycalendar').show();
+										$('#reservas-tabla').show();
 									}
 								}else{
 									if(credit_wod>=consume_wod && credit_box>=consume_box && credit_box!=0 && credit_wod!=0){
@@ -1870,13 +1870,13 @@ function addReservaCliente(id){
 												location.reload();
 											}
 											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
-									$('#mycalendar').show();}
+									$('#reservas-tabla').show();}
 			
 										});
 									}else{
 										launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');	
 										$('.waiting').hide();
-										$('#mycalendar').show();
+										$('#reservas-tabla').show();
 									}
 								}
 							}
@@ -1902,13 +1902,13 @@ function addReservaCliente(id){
 													location.reload();
 												}
 												else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
-									$('#mycalendar').show();}
+									$('#reservas-tabla').show();}
 			
 											});
 										}else{
 											launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
 											$('.waiting').hide();
-											$('#mycalendar').show();
+											$('#reservas-tabla').show();
 										}
 									}else{
 										if(consume_box==0){
@@ -1920,13 +1920,13 @@ function addReservaCliente(id){
 														location.reload();
 													}
 													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
-									$('#mycalendar').show();}
+									$('#reservas-tabla').show();}
 			
 												});
 											}else{
 												launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
 												$('.waiting').hide();
-												$('#mycalendar').show();
+												$('#reservas-tabla').show();
 											}
 										}else{
 											if(credit_wod>=consume_wod && credit_box>=consume_box && credit_box!=0 && credit_wod!=0){
@@ -1937,20 +1937,20 @@ function addReservaCliente(id){
 														location.reload();
 													}
 													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
-									$('#mycalendar').show();}
+									$('#reservas-tabla').show();}
 			
 												});
 											}else{
 												launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');	
 												$('.waiting').hide();
-												$('#mycalendar').show();
+												$('#reservas-tabla').show();
 											}
 										}
 									}
 								}
 								else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 									$('.waiting').hide();
-									$('#mycalendar').show();
+									$('#reservas-tabla').show();
 								}
 								
 							});
@@ -1961,13 +1961,13 @@ function addReservaCliente(id){
 					}else{
 						launch_alert('No hay plazas disponibles para esta actividad y la cola está completa.','warning');
 						$('.waiting').hide();
-						$('#mycalendar').show();
+						$('#reservas-tabla').show();
 					}
 				}
 			}
 			else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 				$('.waiting').hide();
-				$('#mycalendar').show();
+				$('#reservas-tabla').show();
 			}
 		
 		});

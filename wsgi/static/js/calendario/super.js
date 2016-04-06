@@ -25,11 +25,15 @@ function get_content() {
     			myPosition: 'left top',
     			atPosition: 'left bottom'
 			});
-			$( "#horaini" ).change(function() {
-  				restarHoras();
+			$( ".horainiaction" ).change(function() {
+				var idcad = $(this).attr('id');
+				idcad = idcad.replace('horaini','');
+  				restarHoras(idcad);
 			});
-			$( "#horafin" ).change(function() {
-  				restarHoras();
+			$( ".horafinaction" ).change(function() {
+  				var idcad = $(this).attr('id');
+				idcad = idcad.replace('horafin','');
+  				restarHoras(idcad);
 			});
 
 			if (!Modernizr.inputtypes.date) {
@@ -311,6 +315,15 @@ function listarActividades() {
 		}
 		else super_error('Search failure');
 	});
+}
+
+function addnewhorario(){
+	for(var i=0; i<100; i++){
+		if(!$('#horaini'+i).length)){
+			$('#mastercontainer').append('<div class="row"><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de inicio: </label><input style="width: 78px;" id="horaini'+i+'" class="horainiaction" type="time" name="horaini'+i+'"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de fin: </label><input style="width: 78px;" id="horafin'+i+'" class="horafinaction" type="time" name="horafin'+i+'"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Duración: </label><input style="width: 78px; float:left;" id="duracion'+i+'" type="text" name="duracion'+i+'" readonly><input id="duracionhide'+i+'" type="hidden"><div class="item" onclick="addnewhorario();" style="float: left; margin-left: 11px;"><span class="fa-stack fa"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i></span></div></div></div><br>');
+			i=101;
+		}
+	}
 }
 
 function loadCalendar() {
@@ -694,10 +707,10 @@ function loadCalendar() {
 	});
 }
 
-function restarHoras() {
-	if($('#horaini').val().length>0 && $('#horafin').val().length>0){
-		var inicio=$('#horaini').val();
-		var fin=$('#horafin').val();
+function restarHoras(id) {
+	if($('#horaini'+id).val().length>0 && $('#horafin'+id).val().length>0){
+		var inicio=$('#horaini'+id).val();
+		var fin=$('#horafin'+id).val();
 		var inicioMinutos = parseInt(inicio.substr(3,2));
 		var inicioHoras = parseInt(inicio.substr(0,2));
 		  
@@ -723,9 +736,9 @@ function restarHoras() {
 		  minutos = "0"+minutos;
 		}
 		  
-		$('#duracion').val(horas+':'+minutos);
+		$('#duracion'+id).val(horas+':'+minutos);
 		var total = (transcurridoHoras*60)+transcurridoMinutos;
-		$('#duracionhide').val(total);
+		$('#duracionhide'+id).val(total);
 		}
 	}
 }
