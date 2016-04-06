@@ -11,24 +11,22 @@ function get_content() {
 		$.post('partials/calendario_super', function(template, textStatus, xhr) {
 			$('#main').html(template);
 			listarActividades();
-			for(var j=0; j<100; j++){
-				if($('#horaini'+j).length){
-					$('#horaini'+j).timepicker({
+			$('#horaini').timepicker({
 		    			showPeriodLabels: false,
 		    			hourText: 'Hora',
 		    			minuteText: 'Minutos',
 		    			myPosition: 'left top',
 		    			atPosition: 'left bottom' 
-						});
-					$('#horafin'+j).timepicker({
+			});
+			$('#horafin').timepicker({
 		    			showPeriodLabels: false,
 		    			hourText: 'Hora',
 		    			minuteText: 'Minutos',
 		    			myPosition: 'left top',
 		    			atPosition: 'left bottom'
-						});
-				}
-			}
+			});
+				
+			
 			$( ".horainiaction" ).change(function() {
 				var idcad = $(this).attr('id');
 				idcad = idcad.replace('horaini','');
@@ -163,7 +161,9 @@ function new_horario() {
 																							 activity_id:activity_id,
 																							 date:fecha}, function(data){
 																												
-										if(data.status!='success'){
+										if(data.status=='success'){
+											launch_alert('<i class="fa fa-smile-o"></i> Horario añadido','');
+										}else{
 											error = true;
 											launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonadd').html('Enviar');}
 									});
@@ -249,37 +249,11 @@ function new_horario() {
 																								 weekly:cad_dias}, function(data){
 																													
 												if(data.status=='success'){
-													$('#botonadd').html('Enviar');
-													show_new();
+													
 													launch_alert('<i class="fa fa-smile-o"></i> Horario añadido','');
 													//searchRates();
-													$('#horaini').val('');
-													$('#horafin').val('');
-													$('#duracion').val('');
-													$('#activity_id').val('-1');
-													$('#lunes').prop('checked','');
-													$('#martes').prop('checked','');
-													$('#miercoles').prop('checked','');
-													$('#jueves').prop('checked','');
-													$('#viernes').prop('checked','');
-													$('#sabado').prop('checked','');
-													$('#domingo').prop('checked','');
-													$('#todoslosdias').prop('checked','');
 
-													$('#enero').prop('checked','');
-													$('#febrero').prop('checked','');
-													$('#marzo').prop('checked','');
-													$('#abril').prop('checked','');
-													$('#mayo').prop('checked','');
-													$('#junio').prop('checked','');
-													$('#julio').prop('checked','');
-													$('#agosto').prop('checked','');
-													$('#septiembre').prop('checked','');
-													$('#octubre').prop('checked','');
-													$('#noviembre').prop('checked','');
-													$('#diciembre').prop('checked','');
-													$('#todoslosmeses').prop('checked','');
-													location.reload();
+								
 												}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');}
 											});
 										}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar una actividad','warning');}
@@ -298,14 +272,41 @@ function new_horario() {
 	}	
 	$('#botonadd').html('Enviar');
 	show_new();
-	launch_alert('<i class="fa fa-smile-o"></i> Horario añadido','');
+	for(var i=0; i<100; i++){
+		if($('#horaini'+i).length){
+			$('#horaini'+i).val('');
+			$('#horafin'+i).val('');
+			$('#duracion'+i).val('');
+		}
+	}
 	//searchRates();
-	//$('#horaini').val('');
-	//$('#horafin').val('');
-	//$('#duracion').val('');
-	//$('#activity_id').val('-1');
-	//$('#fecha').val('');
-	location.reload();	
+	
+													
+	$('#activity_id').val('-1');
+	$('#fecha').val('');
+	$('#lunes').prop('checked','');
+	$('#martes').prop('checked','');
+	$('#miercoles').prop('checked','');
+	$('#jueves').prop('checked','');
+	$('#viernes').prop('checked','');
+	$('#sabado').prop('checked','');
+	$('#domingo').prop('checked','');
+	$('#todoslosdias').prop('checked','');
+
+	$('#enero').prop('checked','');
+	$('#febrero').prop('checked','');
+	$('#marzo').prop('checked','');
+	$('#abril').prop('checked','');
+	$('#mayo').prop('checked','');
+	$('#junio').prop('checked','');
+	$('#julio').prop('checked','');
+	$('#agosto').prop('checked','');
+	$('#septiembre').prop('checked','');
+	$('#octubre').prop('checked','');
+	$('#noviembre').prop('checked','');
+	$('#diciembre').prop('checked','');
+	$('#todoslosmeses').prop('checked','');
+		
 }
 
 
@@ -330,6 +331,20 @@ function addnewhorario(){
 	for(var i=0;i<100; i++){
 		if(!$('#horaini'+String(i)).length){
 			$('#mastercontainer').append('<div class="row"><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de inicio: </label><input style="width: 78px;" id="horaini'+i+'" class="horainiaction" type="time" name="horaini'+i+'"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de fin: </label><input style="width: 78px;" id="horafin'+i+'" class="horafinaction" type="time" name="horafin'+i+'"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Duración: </label><input style="width: 78px; float:left;" id="duracion'+i+'" type="text" name="duracion'+i+'" readonly><input id="duracionhide'+i+'" type="hidden"><div class="item" onclick="addnewhorario();" style="cursor:pointer; float: left; margin-left: 11px;"><span class="fa-stack fa"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i></span></div></div></div><br>');
+			$('#horaini'+String(i)).timepicker({
+		    			showPeriodLabels: false,
+		    			hourText: 'Hora',
+		    			minuteText: 'Minutos',
+		    			myPosition: 'left top',
+		    			atPosition: 'left bottom' 
+			});
+			$('#horafin'+String(i)).timepicker({
+		    			showPeriodLabels: false,
+		    			hourText: 'Hora',
+		    			minuteText: 'Minutos',
+		    			myPosition: 'left top',
+		    			atPosition: 'left bottom'
+			});
 			i=101;
 		}
 	}
