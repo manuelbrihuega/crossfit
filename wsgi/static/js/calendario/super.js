@@ -790,20 +790,22 @@ function loadCalendar() {
 						$(this).children().each(function (index){ 
 							$(this).css('width','50%');
 							if($(this).attr('data-izqoder')=='2' && $(this).css('height')=='70px'){
+								alert("SI");
 								var contadhunt = parseInt($(this).parent().attr('data-contad'))+1;
 								$(".marcado").each(function (index){ 
 									$(this).children().each(function (index){ 
 										if($(this).attr('data-contad')==contadhunt){
-											if($(this).attr('id').split('hour')[1]!=13 && $(this).attr('id').split('hour')[1]!=14 && $(this).attr('id').split('hour')[1]!=15){
+											if($(this).attr('id').split('hour')[1]!='13' && $(this).attr('id').split('hour')[1]!='14' && $(this).attr('id').split('hour')[1]!='15'){
 												$(this).children().each(function (index){ 
-													$(this).css('width','50% !important');
+													$(this).attr('style','width: 50% !important');
+													alert("CONFIRM");
 												})
 											}
 										}
 									})
 								})
 							}
-							if($(this).attr('data-izqoder')=='1' && $(this).css('height')=='70px'){
+							/*if($(this).attr('data-izqoder')=='1' && $(this).css('height')=='70px'){
 								var contadhunt = parseInt($(this).parent().attr('data-contad'))+1;
 								$(".marcado").each(function (index){ 
 									$(this).children().each(function (index){ 
@@ -817,7 +819,7 @@ function loadCalendar() {
 										}
 									})
 								})
-							}
+							}*/
 						})
 					}
 				})
