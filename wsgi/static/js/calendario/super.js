@@ -173,13 +173,9 @@ function new_horario() {
 																												
 										if(data.status=='success'){
 											launch_alert('<i class="fa fa-smile-o"></i> Horario añadido','');
-											for(var i=0; i<100; i++){
-												if($('#horaini'+i).length){
-													$('#horaini'+i).val('');
-													$('#horafin'+i).val('');
-													$('#duracion'+i).val('');
-												}
-											}
+											$('#mastercontainer').html('');
+											$('#mastercontainer').append('<div class="row"><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de inicio: </label><input style="width: 78px;" id="horaini0" class="horainiaction" type="time" name="horaini0"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de fin: </label><input style="width: 78px;" id="horafin0" class="horafinaction" type="time" name="horafin0"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Duración: </label><input style="width: 78px; float:left;" id="duracion0" type="text" name="duracion0" readonly><input id="duracionhide0" type="hidden"><div class="item" onclick="addnewhorario();" style="cursor:pointer; float: left; margin-left: 11px;"><span class="fa-stack fa"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i></span></div></div></div><br>');
+			
 														$('#botonadd').html('Enviar');
 														show_new();
 														$('#activity_id').val('-1');
@@ -301,13 +297,9 @@ function new_horario() {
 													
 													launch_alert('<i class="fa fa-smile-o"></i> Horario añadido','');
 													//searchRates();
-													for(var i=0; i<100; i++){
-														if($('#horaini'+i).length){
-															$('#horaini'+i).val('');
-															$('#horafin'+i).val('');
-															$('#duracion'+i).val('');
-														}
-													}
+													$('#mastercontainer').html('');
+													$('#mastercontainer').append('<div class="row"><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de inicio: </label><input style="width: 78px;" id="horaini0" class="horainiaction" type="time" name="horaini0"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de fin: </label><input style="width: 78px;" id="horafin0" class="horafinaction" type="time" name="horafin0"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Duración: </label><input style="width: 78px; float:left;" id="duracion0" type="text" name="duracion0" readonly><input id="duracionhide0" type="hidden"><div class="item" onclick="addnewhorario();" style="cursor:pointer; float: left; margin-left: 11px;"><span class="fa-stack fa"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i></span></div></div></div><br>');
+			
 														$('#botonadd').html('Enviar');
 														show_new();
 														$('#activity_id').val('-1');
