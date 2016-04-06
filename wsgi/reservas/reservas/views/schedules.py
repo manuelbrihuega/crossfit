@@ -1293,7 +1293,7 @@ def edit_config(request):
     if not have_permission(request.session['auth_id'],'edit_config'):
         data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_config'})
 
-    for field in ('minutos_reserva','minutos_cancela','dias_reserva','dias_atras', 'dias_pago'):
+    for field in ('dias_reserva','dias_atras', 'dias_pago'):
         if not validate_parameter(request.GET, field):
             raise Exception(field+'_missed')
                 

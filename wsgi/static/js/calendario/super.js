@@ -159,12 +159,17 @@ function new_horario() {
 							if(duracion.length>0){
 								if(activity_id!=-1){
 									$('#botonadd').html('<i class="fa fa-cog fa-spin"></i>');
+									var minutes_pre = $('#minutos_reserva').val();
+									var minutes_post = $('#minutos_cancela').val();
+
 									$.getJSON(api_url+'schedules/add_concrete?callback=?', { time_start:horaini, 
 																							 time_end:horafin,
 																							 duration:duracionhide,
 																							 activity_id:activity_id,
 																							 date:fecha,
-																							 numerodetramos: numerodetramos}, function(data){
+																							 numerodetramos: numerodetramos,
+																							 minutes_pre:minutes_pre,
+																							 minutes_post:minutes_post}, function(data){
 																												
 										if(data.status=='success'){
 											launch_alert('<i class="fa fa-smile-o"></i> Horario añadido','');
@@ -275,6 +280,8 @@ function new_horario() {
 							var m11 = noviembre ? 1 : 0;
 							var m12 = diciembre ? 1 : 0;
 							var cad_meses = m1+','+m2+','+m3+','+m4+','+m5+','+m6+','+m7+','+m8+','+m9+','+m10+','+m11+','+m12;
+							var minutes_pre = $('#minutos_reserva').val();
+							var minutes_post = $('#minutos_cancela').val();
 							if(horaini.length>0){
 								if(horafin.length>0){
 									if(duracion.length>0){
@@ -286,7 +293,9 @@ function new_horario() {
 																								 activity_id:activity_id,
 																								 monthly:cad_meses,
 																								 weekly:cad_dias,
-																								 numerodetramos:numerodetramos}, function(data){
+																								 numerodetramos:numerodetramos,
+																								 minutes_pre:minutes_pre,
+																								 minutes_post:minutes_post}, function(data){
 																													
 												if(data.status=='success'){
 													
