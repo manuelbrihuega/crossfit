@@ -345,6 +345,12 @@ function addnewhorario(){
 		    			myPosition: 'left top',
 		    			atPosition: 'left bottom'
 			});
+			$( "#horaini"+String(i) ).change(function() {
+				restarHoras(i);
+			});
+			$( "#horafin"+String(i) ).change(function() {
+  				restarHoras(i);
+			});
 			i=101;
 		}
 	}
