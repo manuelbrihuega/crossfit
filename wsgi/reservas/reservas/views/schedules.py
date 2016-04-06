@@ -55,6 +55,8 @@ def add_concrete(request):
         schedule_time.time_start=request.GET['time_start']
         schedule_time.time_end=request.GET['time_end']
         schedule_time.duration=request.GET['duration']
+        schedule_time.minutes_pre=request.GET['minutes_pre']
+        schedule_time.minutes_post=request.GET['minutes_post']
         schedule_time.schedule=schedule
         schedule_time.save()
 
@@ -99,6 +101,8 @@ def add_interval(request):
             schedule_time.time_start=time_start_sp[contadortramos]
             schedule_time.time_end=time_end_sp[contadortramos]
             schedule_time.duration=duration_sp[contadortramos]
+            schedule_time.minutes_pre=request.GET['minutes_pre']
+            schedule_time.minutes_post=request.GET['minutes_post']
             schedule_time.schedule=schedule
             schedule_time.save()
 
@@ -131,6 +135,8 @@ def add_interval(request):
                             schedule_timeaux.time_start=time_start_sp[contadortramos]
                             schedule_timeaux.time_end=time_end_sp[contadortramos]
                             schedule_timeaux.duration=duration_sp[contadortramos]
+                            schedule_timeaux.minutes_pre=request.GET['minutes_pre']
+                            schedule_timeaux.minutes_post=request.GET['minutes_post']
                             schedule_timeaux.schedule=scheduleaux
                             schedule_timeaux.save()
 
