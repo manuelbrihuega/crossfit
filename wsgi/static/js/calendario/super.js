@@ -11,14 +11,14 @@ function get_content() {
 		$.post('partials/calendario_super', function(template, textStatus, xhr) {
 			$('#main').html(template);
 			listarActividades();
-			$('#horaini').timepicker({
+			$('#horaini0').timepicker({
 		    			showPeriodLabels: false,
 		    			hourText: 'Hora',
 		    			minuteText: 'Minutos',
 		    			myPosition: 'left top',
 		    			atPosition: 'left bottom' 
 			});
-			$('#horafin').timepicker({
+			$('#horafin0').timepicker({
 		    			showPeriodLabels: false,
 		    			hourText: 'Hora',
 		    			minuteText: 'Minutos',
@@ -27,11 +27,11 @@ function get_content() {
 			});
 				
 			
-			$( "#horaini" ).change(function() {
-				restarHoras('');
+			$( "#horaini0" ).change(function() {
+				restarHoras(0);
 			});
-			$( "#horafin" ).change(function() {
-  				restarHoras('');
+			$( "#horafin0" ).change(function() {
+  				restarHoras(0);
 			});
 
 			if (!Modernizr.inputtypes.date) {
