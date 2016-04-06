@@ -801,18 +801,7 @@ function loadCalendar() {
 									})
 								})
 							}
-							if($(this).attr('data-izqoder')=='1' && $(this).css('height')=='70px'){
-								var contadhunt = parseInt($(this).parent().attr('data-contad'))+1;
-								$(".marcado").each(function (index){ 
-									$(this).children().each(function (index){ 
-										if($(this).attr('data-contad')==contadhunt){
-											if($(this).attr('id').split('hour')[1]!=13 && $(this).attr('id').split('hour')[1]!=14 && $(this).attr('id').split('hour')[1]!=15){
-												$(this).attr('style','width:50% !important; float: right;');
-											}
-										}
-									})
-								})
-							}
+							
 						})
 					}
 				})
