@@ -345,11 +345,11 @@ def list_all_tabla_for_customers(request):
                 fechasepuedecancelar = fechaparaactividad - timedelta(minutes=conf.minutes_post)
                 fechasepuedereservar = fechaparaactividad - timedelta(minutes=conf.minutes_pre)
                 estado = 'DISPONIBLE'
+                fechita = sch.schedule.date
                 if fechasepuedecancelar <= ahoramismo:
                     estado = 'FINALIZADA'
                 if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=conf.minutes_pre)):
                     estado = 'CERRADA'
-                fechita = sch.schedule.date
                 startdate=str(fechita.year)+'-'+str(fechita.month)+'-'+str(fechita.day)
                 ocupadas = 0
                 disponibles = 0
