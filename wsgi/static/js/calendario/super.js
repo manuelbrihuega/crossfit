@@ -699,7 +699,7 @@ function loadCalendar() {
         			{ 
             			if($(this).attr('data-contad')==conty){
             				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
-            				
+
             				if($(this).hasClass('unaact')){
             					if(izqoder=="1"){
             						$(this).children('div').attr('style','width:auto !important; float:right;');
@@ -789,6 +789,30 @@ function loadCalendar() {
 					if($(this).hasClass('dosact') && !$(this).hasClass('tresact')){
 						$(this).children().each(function (index){ 
 							$(this).css('width','50%');
+							if($(this).attr('data-izqoder')=='2' && $(this).css('height')=='70px'){
+								var contadhunt = parseInt($(this).parent().attr('data-contad'))+1;
+								$(".marcado").each(function (index){ 
+									$(this).children().each(function (index){ 
+										if($(this).attr('data-contad')==contadhunt){
+											if($(this).attr('id').split('hour')[1]!=13 && $(this).attr('id').split('hour')[1]!=14 && $(this).attr('id').split('hour')[1]!=15){
+												$(this).attr('style','width:50% !important;');
+											}
+										}
+									})
+								})
+							}
+							if($(this).attr('data-izqoder')=='1' && $(this).css('height')=='70px'){
+								var contadhunt = parseInt($(this).parent().attr('data-contad'))+1;
+								$(".marcado").each(function (index){ 
+									$(this).children().each(function (index){ 
+										if($(this).attr('data-contad')==contadhunt){
+											if($(this).attr('id').split('hour')[1]!=13 && $(this).attr('id').split('hour')[1]!=14 && $(this).attr('id').split('hour')[1]!=15){
+												$(this).attr('style','width:50% !important; float: right;');
+											}
+										}
+									})
+								})
+							}
 						})
 					}
 				})
