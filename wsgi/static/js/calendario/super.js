@@ -699,6 +699,7 @@ function loadCalendar() {
         			{ 
             			if($(this).attr('data-contad')==conty){
             				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
+            				
             				if($(this).hasClass('unaact')){
             					if(izqoder=="1"){
             						$(this).children('div').attr('style','width:auto !important; float:right;');
@@ -787,7 +788,7 @@ function loadCalendar() {
 				$(this).children().each(function (index){ 
 					if($(this).hasClass('dosact') && !$(this).hasClass('tresact')){
 						$(this).children().each(function (index){ 
-							$(this).attr('style','width:50%;');
+							$(this).css('width','50%');
 						})
 					}
 				})
