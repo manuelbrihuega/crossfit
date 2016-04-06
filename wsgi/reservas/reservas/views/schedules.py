@@ -80,55 +80,63 @@ def add_interval(request):
             if not validate_parameter(request.GET, field):
                 raise Exception(field+'_missed')
         
-        activity=Activities.objects.get(id=request.GET['activity_id'])
-        schedule=Schedules()
-        schedule.concrete=False
-        schedule.monthly=request.GET['monthly']
-        schedule.weekly=request.GET['weekly']
-        schedule.activity=activity
-        schedule.save()
-        
-        schedule_time=Schedules_times()
-        schedule_time.time_start=request.GET['time_start']
-        schedule_time.time_end=request.GET['time_end']
-        schedule_time.duration=request.GET['duration']
-        schedule_time.schedule=schedule
-        schedule_time.save()
+        num = int(request.GET['numerodetramos'])
+        contadortramos = 0
+        time_start_sp = request.GET['time_start'].split(',')
+        time_end_sp = request.GET['time_end'].split(',')
+        duration_sp = request.GET['duration'].split(',')
+        while contadortramos < num:
 
-        ahora=datetime.now()
-        ano=ahora.year
-        fechprox=datetime(ano+1,1,1)
-        queda=fechprox-ahora
-        dias=queda.days
-        contador=1
-        fechaprincipal=datetime.now()
-        cadmeses=request.GET['monthly'].split(',')
-        cadsemana=request.GET['weekly'].split(',')
-        festivos = Parties.objects.all()
-        while contador<=dias:
-            if cadmeses[fechaprincipal.month-1]=='1':
-                if cadsemana[fechaprincipal.weekday()]=='1':
-                    scheduleaux=Schedules()
-                    scheduleaux.concrete=True
-                    scheduleaux.date=fechaprincipal
-                    scheduleaux.activity=activity
-                    timbre = True
-                    for fest in festivos:
-                        if fest.date.year==fechaprincipal.year:
-                            if fest.date.month==fechaprincipal.month:
-                                if fest.date.day==fechaprincipal.day:
-                                    timbre = False
-                    if timbre:
-                        scheduleaux.save()
-                        schedule_timeaux=Schedules_times()
-                        schedule_timeaux.time_start=request.GET['time_start']
-                        schedule_timeaux.time_end=request.GET['time_end']
-                        schedule_timeaux.duration=request.GET['duration']
-                        schedule_timeaux.schedule=scheduleaux
-                        schedule_timeaux.save()
+            activity=Activities.objects.get(id=request.GET['activity_id'])
+            schedule=Schedules()
+            schedule.concrete=False
+            schedule.monthly=request.GET['monthly']
+            schedule.weekly=request.GET['weekly']
+            schedule.activity=activity
+            schedule.save()
+            
+            schedule_time=Schedules_times()
+            schedule_time.time_start=time_start_sp[contadortramos]
+            schedule_time.time_end=time_end_sp[contadortramos]
+            schedule_time.duration=duration_sp[contadortramos]
+            schedule_time.schedule=schedule
+            schedule_time.save()
 
-            fechaprincipal = fechaprincipal + timedelta(days=1)
-            contador=contador+1
+            ahora=datetime.now()
+            ano=ahora.year
+            fechprox=datetime(ano+1,1,1)
+            queda=fechprox-ahora
+            dias=queda.days
+            contador=1
+            fechaprincipal=datetime.now()
+            cadmeses=request.GET['monthly'].split(',')
+            cadsemana=request.GET['weekly'].split(',')
+            festivos = Parties.objects.all()
+            while contador<=dias:
+                if cadmeses[fechaprincipal.month-1]=='1':
+                    if cadsemana[fechaprincipal.weekday()]=='1':
+                        scheduleaux=Schedules()
+                        scheduleaux.concrete=True
+                        scheduleaux.date=fechaprincipal
+                        scheduleaux.activity=activity
+                        timbre = True
+                        for fest in festivos:
+                            if fest.date.year==fechaprincipal.year:
+                                if fest.date.month==fechaprincipal.month:
+                                    if fest.date.day==fechaprincipal.day:
+                                        timbre = False
+                        if timbre:
+                            scheduleaux.save()
+                            schedule_timeaux=Schedules_times()
+                            schedule_timeaux.time_start=time_start_sp[contadortramos]
+                            schedule_timeaux.time_end=time_end_sp[contadortramos]
+                            schedule_timeaux.duration=duration_sp[contadortramos]
+                            schedule_timeaux.schedule=scheduleaux
+                            schedule_timeaux.save()
+
+                fechaprincipal = fechaprincipal + timedelta(days=1)
+                contador=contador+1
+            contadortramos = contadortramos+1
             
         data=json.dumps({'status':'success','response':'schedule_time_created','data':{'id':schedule_time.id}})
     

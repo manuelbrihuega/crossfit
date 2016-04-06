@@ -136,12 +136,20 @@ function show_new() {
 
 function new_horario() {
 	var error = false;
+	var numerodetramos = 0;
+	var horaini='';
+	var horafin='';
+	var duracion='';
+	var duracionhide='';
 	for(var i=0; i<100; i++){
 		if($('#horaini'+i).length){
-			var horaini=$('#horaini'+i).val();
-			var horafin=$('#horafin'+i).val();
-			var duracion=$('#duracion'+i).val();
-			var duracionhide=$('#duracionhide'+i).val();
+			numerodetramos = numerodetramos + 1;
+			horaini=horaini + $('#horaini'+i).val() + ',';
+			horafin=horafin + $('#horafin'+i).val() + ',';
+			duracion= duracion + $('#duracion'+i).val() + ',';
+			duracionhide= duracionhide + $('#duracionhide'+i).val() + ',';
+		}
+	}
 			var activity_id=$('#actividad').val();
 			if($('#fechaconcreta').is(":checked")){
 				var fecha = $('#fecha').val();
@@ -155,22 +163,18 @@ function new_horario() {
 																							 time_end:horafin,
 																							 duration:duracionhide,
 																							 activity_id:activity_id,
-																							 date:fecha}, function(data){
+																							 date:fecha,
+																							 numerodetramos: numerodetramos}, function(data){
 																												
 										if(data.status=='success'){
 											launch_alert('<i class="fa fa-smile-o"></i> Horario añadido','');
-											$('#horaini'+i).val('');
-											$('#horafin'+i).val('');
-											$('#duracion'+i).val('');
-											var hayotro = false;
-													for(var j=0; j<100; j++){
-														if(j>i){
-															if($('#horaini'+j).length){
-																hayotro = true;
-															}
-														}
-													}
-													if(!hayotro){
+											for(var i=0; i<100; i++){
+												if($('#horaini'+i).length){
+													$('#horaini'+i).val('');
+													$('#horafin'+i).val('');
+													$('#duracion'+i).val('');
+												}
+											}
 														$('#botonadd').html('Enviar');
 														show_new();
 														$('#activity_id').val('-1');
@@ -197,7 +201,7 @@ function new_horario() {
 														$('#noviembre').prop('checked','');
 														$('#diciembre').prop('checked','');
 														$('#todoslosmeses').prop('checked','');
-													}
+													
 										}else{
 											error = true;
 											launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonadd').html('Enviar');}
@@ -281,24 +285,20 @@ function new_horario() {
 																								 duration:duracionhide,
 																								 activity_id:activity_id,
 																								 monthly:cad_meses,
-																								 weekly:cad_dias}, function(data){
+																								 weekly:cad_dias,
+																								 numerodetramos:numerodetramos}, function(data){
 																													
 												if(data.status=='success'){
 													
 													launch_alert('<i class="fa fa-smile-o"></i> Horario añadido','');
 													//searchRates();
-													$('#horaini'+i).val('');
-													$('#horafin'+i).val('');
-													$('#duracion'+i).val('');
-													var hayotro = false;
-													for(var j=0; j<100; j++){
-														if(j>i){
-															if($('#horaini'+j).length){
-																hayotro = true;
-															}
+													for(var i=0; i<100; i++){
+														if($('#horaini'+i).length){
+															$('#horaini'+i).val('');
+															$('#horafin'+i).val('');
+															$('#duracion'+i).val('');
 														}
 													}
-													if(!hayotro){
 														$('#botonadd').html('Enviar');
 														show_new();
 														$('#activity_id').val('-1');
@@ -325,7 +325,7 @@ function new_horario() {
 														$('#noviembre').prop('checked','');
 														$('#diciembre').prop('checked','');
 														$('#todoslosmeses').prop('checked','');
-													}
+													
 
 								
 												}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');}
@@ -342,8 +342,7 @@ function new_horario() {
 
 				}		
 			}
-		}	
-	}	
+		
 	
 		
 }
