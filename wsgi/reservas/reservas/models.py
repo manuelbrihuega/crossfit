@@ -136,6 +136,8 @@ class Schedules_times(models.Model):
     duration = models.IntegerField(default=0,null=False)
     schedule = models.ForeignKey('Schedules', null=False, blank=False,on_delete=models.CASCADE)
     cursada = models.BooleanField(default=False)
+    minutes_pre = models.IntegerField(default=0,null=False)
+    minutes_post = models.IntegerField(default=0,null=False)
 
 #RESERVATIONS
 class Reservations(models.Model):
@@ -181,8 +183,6 @@ class Configuration(models.Model):
     days_pre = models.IntegerField(default=0,null=False)
     days_pre_show = models.IntegerField(default=0,null=False)
     dias_pago = models.IntegerField(default=0,null=False)
-    minutes_post = models.IntegerField(default=0,null=False)
-    minutes_pre = models.IntegerField(default=0,null=False)
     email = models.EmailField(max_length=100,default="")
     days_table_show = models.IntegerField(default=0,null=False)
 

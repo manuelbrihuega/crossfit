@@ -36,7 +36,7 @@ def revise_reservations():
     conf=Configuration.objects.get(id=1)
     for res in reservas:
         fechaparaactividad = datetime(res.schedule_time.schedule.date.year, res.schedule_time.schedule.date.month, res.schedule_time.schedule.date.day, res.schedule_time.time_start.hour, res.schedule_time.time_start.minute, 0)
-        fechasepuedecancelar = fechaparaactividad - timedelta(minutes=conf.minutes_pre)
+        fechasepuedecancelar = fechaparaactividad - timedelta(minutes=res.schedule_time.minutes_pre)
         if datetime.today() >= fechasepuedecancelar:
             if res.queue:
                 customer=U_Customers.objects.filter(Q(auth__id=res.auth.id))
@@ -105,7 +105,7 @@ def revise_reservations():
         if not sch.cursada:
             print 'DENTRO'
             fechaparaactividaddos = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
-            fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=conf.minutes_pre)
+            fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=sch.minutes_pre)
             if datetime.today() >= fechasepuedecancelardos:
                 rssdos = Reservations.objects.filter(Q(schedule_time__id=sch.id))
                 numplazasdos = 0

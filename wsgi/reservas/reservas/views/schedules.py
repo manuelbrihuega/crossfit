@@ -281,7 +281,7 @@ def list_all_tabla(request):
                 estado = 'DISPONIBLE'
                 if disponibles == 0:
                     estado = 'COMPLETA'
-                if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=conf.minutes_pre)):
+                if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=sch.minutes_pre)):
                     estado = 'CERRADA'
                 if datetime.now() >= datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0):
                     estado = 'FINALIZADA'
@@ -350,11 +350,11 @@ def list_all_tabla_for_customers(request):
             if fechahoy<=fechaact and fechanext>=fechaact:
                 ahoramismo = datetime.today()
                 fechaparaactividad = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
-                fechasepuedecancelar = fechaparaactividad - timedelta(minutes=conf.minutes_post)
-                fechasepuedereservar = fechaparaactividad - timedelta(minutes=conf.minutes_pre)
+                fechasepuedecancelar = fechaparaactividad - timedelta(minutes=sch.minutes_post)
+                fechasepuedereservar = fechaparaactividad - timedelta(minutes=sch.minutes_pre)
                 estado = 'DISPONIBLE'
                 fechita = sch.schedule.date
-                if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=conf.minutes_pre)):
+                if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=sch.minutes_pre)):
                     estado = 'CERRADA'
                 if datetime.now() >= datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0):
                     estado = 'FINALIZADA'
@@ -440,8 +440,8 @@ def list_all_for_customers(request):
                 conf = Configuration.objects.get(id=1)
                 ahoramismo = datetime.today()
                 fechaparaactividad = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
-                fechasepuedecancelar = fechaparaactividad - timedelta(minutes=conf.minutes_post)
-                fechasepuedereservar = fechaparaactividad - timedelta(minutes=conf.minutes_pre)
+                fechasepuedecancelar = fechaparaactividad - timedelta(minutes=sch.minutes_post)
+                fechasepuedereservar = fechaparaactividad - timedelta(minutes=sch.minutes_pre)
                 cadsepuedereservar = '<sepuedereservar>SI</sepuedereservar>'
                 if fechasepuedereservar <= ahoramismo:
                     cadsepuedereservar = '<sepuedereservar>NO</sepuedereservar>'
@@ -606,7 +606,7 @@ def delete_reservation(request):
                     nick = 'User_Id'+str(res.auth.id)
                     phone = '+34'+str(res.auth.phone)
                     conf=Configuration.objects.get(id=1)
-                    minutitos=str(conf.minutes_post)
+                    minutitos=str(res.schedule_time.minutes_post)
                     message = 'Ha quedado libre una plaza para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Acabamos de registrar su reserva. Puedes cancelar la reserva hasta '+minutitos+' minutos antes de la actividad'
                     cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
                     for c in cu:
@@ -653,7 +653,7 @@ def delete_reservation_client(request):
         for reservation in reservations:
             ahoramismo = datetime.today()
             fechaparaactividad = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, schedule_time.time_start.hour, schedule_time.time_start.minute, 0)
-            fechaparaactividad = fechaparaactividad - timedelta(minutes=conf.minutes_post)
+            fechaparaactividad = fechaparaactividad - timedelta(minutes=schedule_time.minutes_post)
             if fechaparaactividad <= ahoramismo:
                 raise Exception('Ya es demasiado tarde para cancelar su reserva')
             if reservation.queue:
@@ -702,7 +702,7 @@ def delete_reservation_client(request):
                         nick = 'User_Id'+str(res.auth.id)
                         phone = '+34'+str(res.auth.phone)
                         conf=Configuration.objects.get(id=1)
-                        minutitos=str(conf.minutes_post)
+                        minutitos=str(res.schedule_time.minutes_post)
                         message = 'Ha quedado libre una plaza para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Acabamos de registrar su reserva. Puedes cancelar la reserva hasta '+minutitos+' minutos antes de la actividad'
                         cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
                         for c in cu:
@@ -870,7 +870,7 @@ def hay_plazas(request):
                             ocupadas = ocupadas + 1  
                     disponibles=aforo - ocupadas
                     disponiblescola=aforocola - ocupadascola
-                    data=json.dumps({'status':'success','response':'hay_plazas_schedule','data':{'consume_box':schedule_time.schedule.activity.credit_box, 'consume_wod':schedule_time.schedule.activity.credit_wod, 'aforo':str(aforo), 'minutos':configuration.minutes_post, 'aforo_cola':str(aforocola), 'disponibles':str(disponibles), 'disponibles_cola':str(disponiblescola), 'ocupadas':str(ocupadas), 'ocupadas_cola':str(ocupadascola)}})
+                    data=json.dumps({'status':'success','response':'hay_plazas_schedule','data':{'consume_box':schedule_time.schedule.activity.credit_box, 'consume_wod':schedule_time.schedule.activity.credit_wod, 'aforo':str(aforo), 'minutos':schedule_time.minutes_post, 'aforo_cola':str(aforocola), 'disponibles':str(disponibles), 'disponibles_cola':str(disponiblescola), 'ocupadas':str(ocupadas), 'ocupadas_cola':str(ocupadascola)}})
                 except Exception as e:
                     data=json.dumps({'status':'failed','response':e.args[0]})
             else:
@@ -935,7 +935,7 @@ def add_reservation(request):
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
             conf=Configuration.objects.get(id=1)
-            minutitos=str(conf.minutes_post)
+            minutitos=str(reservation.schedule_time.minutes_post)
             message = 'Acabas de realizar una reserva para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Te recordamos que si deseas cancelarla, puedes hacerlo hasta '+minutitos+' minutos antes de la actividad.'
             if customer.emailnotif:
                 add_task(datetime.utcnow(),'send_email_new_reservation_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
@@ -1005,7 +1005,7 @@ def add_reservation_client(request):
         conf = Configuration.objects.get(id=1)
         ahoramismo = datetime.today()
         fechaparaactividad = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, schedule_time.time_start.hour, schedule_time.time_start.minute, 0)
-        fechaparaactividad = fechaparaactividad - timedelta(minutes=conf.minutes_pre)
+        fechaparaactividad = fechaparaactividad - timedelta(minutes=schedule_time.minutes_pre)
         
         consumo_wod = schedule_time.schedule.activity.credit_wod
         consumo_box = schedule_time.schedule.activity.credit_box
@@ -1039,7 +1039,7 @@ def add_reservation_client(request):
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
             conf=Configuration.objects.get(id=1)
-            minutitos=str(conf.minutes_post)
+            minutitos=str(reservation.schedule_time.minutes_post)
             message = 'Acabas de realizar una reserva para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Te recordamos que si deseas cancelarla, puedes hacerlo hasta '+minutitos+' minutos antes de la actividad.'
             if customer.emailnotif:
                 add_task(datetime.utcnow(),'send_email_new_reservation_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
@@ -1061,7 +1061,7 @@ def add_reservation_client(request):
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
             conf=Configuration.objects.get(id=1)
-            minutitos=str(conf.minutes_post)
+            minutitos=str(reservation.schedule_time.minutes_post)
             message = 'Acabas de ponerte en cola para '+str(schedule_time.schedule.activity)+' el '+str(schedule_time.schedule.date.day)+'-'+str(schedule_time.schedule.date.month)+'-'+str(schedule_time.schedule.date.year)+' de '+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[1]+'. Cuando alguna plaza quede libre, su petición se procesará y se realizará la reserva.'
             if customer.emailnotif:
                 add_task(datetime.utcnow(),'send_email_new_reservation_cola_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
@@ -1301,8 +1301,6 @@ def edit_config(request):
         config=Configuration.objects.get(id=1)
         config.days_pre = request.GET['dias_reserva']
         config.days_pre_show = request.GET['dias_atras']
-        config.minutes_post = request.GET['minutos_cancela']
-        config.minutes_pre = request.GET['minutos_reserva']
         config.dias_pago = request.GET['dias_pago']
         config.save()
         data=json.dumps({'status':'success','response':'configuration_modified'})
@@ -1355,8 +1353,6 @@ def get_configuration(request):
                 config_profile={'dias_reserva':config.days_pre,
                                 'dias_atras':config.days_pre_show,
                                 'dias_pago':config.dias_pago,
-                                'minutos_cancela':config.minutes_post,
-                                'minutos_reserva':config.minutes_pre,
                                 'email':config.email,
                                 'telefono_coach': auth.phone}
                 data=json.dumps({'status':'success','response':'get_configuration','data': config_profile})

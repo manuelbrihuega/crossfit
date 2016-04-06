@@ -201,7 +201,7 @@ function new_horario() {
 														$('#noviembre').prop('checked','');
 														$('#diciembre').prop('checked','');
 														$('#todoslosmeses').prop('checked','');
-													
+											loadCalendar();		
 										}else{
 											error = true;
 											launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#botonadd').html('Enviar');}
@@ -325,7 +325,7 @@ function new_horario() {
 														$('#noviembre').prop('checked','');
 														$('#diciembre').prop('checked','');
 														$('#todoslosmeses').prop('checked','');
-													
+													loadCalendar();
 
 								
 												}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');}
