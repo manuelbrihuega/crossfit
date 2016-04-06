@@ -310,7 +310,7 @@ function loadCalendar() {
 					$(".horavacia").each(function (index) 
         			{ 
             			if($(this).attr('data-contad')==conty){
-            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
             				if($(this).hasClass('unaact')){
             					if(izqoder=="1"){
             						$(this).children('div').attr('style','width:auto !important; float:right;');
@@ -324,7 +324,7 @@ function loadCalendar() {
         			$(".unaact").each(function (index) 
         			{ 
             			if($(this).attr('data-contad')==conty){
-            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
             				if($(this).hasClass('unaact')){
             					if(izqoder=="1"){
             						$(this).children('div').attr('style','width:auto !important; float:right;');
@@ -338,7 +338,7 @@ function loadCalendar() {
         			$(".dosact").each(function (index) 
         			{ 
             			if($(this).attr('data-contad')==conty){
-            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
             				if($(this).hasClass('unaact')){
             					if(izqoder=="1"){
             						$(this).children('div').attr('style','width:auto !important; float:right;');
@@ -353,7 +353,7 @@ function loadCalendar() {
 					$(".horavacia").each(function (index) 
         			{ 
             			if($(this).attr('data-contad')==conty){
-            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
             				if($(this).hasClass('unaact')){
             					if(izqoder=="1"){
             						$(this).children('div').attr('style','width:auto !important; float:right;');
@@ -367,7 +367,7 @@ function loadCalendar() {
 					$(".unaact").each(function (index) 
         			{ 
             			if($(this).attr('data-contad')==conty){
-            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
             				if($(this).hasClass('unaact')){
             					if(izqoder=="1"){
             						$(this).children('div').attr('style','width:auto !important; float:right;');
@@ -381,7 +381,7 @@ function loadCalendar() {
         			$(".dosact").each(function (index) 
         			{ 
             			if($(this).attr('data-contad')==conty){
-            				$(this).attr('style','width:auto; overflow:auto; margin-top:-70px;');
+            				$(this).attr('style','width:auto; overflow:auto; margin-top:-35px;');
             				if($(this).hasClass('unaact')){
             					if(izqoder=="1"){
             						$(this).children('div').attr('style','width:auto !important; float:right;');
