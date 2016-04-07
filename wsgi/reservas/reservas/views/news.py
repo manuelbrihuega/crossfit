@@ -128,10 +128,11 @@ def add_global_news(request):
                         new.title = request.GET['title'] if validate_parameter(request.GET,'title') else None
                         new.body = request.GET['body'] if validate_parameter(request.GET,'body') else None
                         new.link = request.GET['link'] if validate_parameter(request.GET,'link') else None
-                        customerguay = U_Customers.objects.get(id=res.auth.id)
-                        new.u_customer_id = customerguay.id
-                        customerguay.newscomunications = customerguay.newscomunications + 1
-                        customerguay.save()
+                        customerguay = U_Customers.objects.filter(Q(auth__id=res.auth.id))
+                        for cucu in customerguay:
+                            new.u_customer_id = cucu.id
+                            cucu.newscomunications = cucu.newscomunications + 1
+                            cucu.save()
                         new.date=datetime.utcnow()
                         new.save()
                 
