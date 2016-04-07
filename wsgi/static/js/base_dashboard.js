@@ -62,7 +62,7 @@ function identify(role) {
 		case 'U_Customers': 	var method_url=api_url+'customers/get?callback=?';
 								//update_tickets_badge();
 								update_pending_drivers_badge();
-								//ninja_jumps();
+								ninja_jumps();
 								break;
 
 		default: ninja_jumps();
