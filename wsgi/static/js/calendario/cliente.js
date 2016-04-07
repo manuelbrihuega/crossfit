@@ -184,11 +184,7 @@ function loadCalendar() {
 					
 					if(i==1){
 						$('#'+idgen+'hour14').html('Box cerrado');
-						$('#'+idgen+'hour14').css('text-align','center');
-						$('#'+idgen+'hour14').css('color','black');
-						$('#'+idgen+'hour14').css('font-weight','600');
-						$('#'+idgen+'hour14').css('font-size','11px');
-						$('#'+idgen+'hour14').css('padding-top','8px');
+						$('#'+idgen+'hour14').addClass('boxcerrado');
 						$('#'+idgen+'hour14').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2;');
 					
 					}
