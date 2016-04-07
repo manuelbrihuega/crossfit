@@ -96,29 +96,45 @@ def add_global_news(request):
     if 'auth_id' in request.session:
         if have_permission(request.session['auth_id'],'add_global_news'):
             try:
-                new=News()
-                new.title = request.GET['title'] if validate_parameter(request.GET,'title') else None
-                new.title = request.GET['title'] if validate_parameter(request.GET,'title') else None
-                new.body = request.GET['body'] if validate_parameter(request.GET,'body') else None
-                new.link = request.GET['link'] if validate_parameter(request.GET,'link') else None
-                if validate_parameter(request.GET,'destiner'):
-                    if request.GET['destiner']!="0":
-                        new.u_customer_id = request.GET['destiner']
-                        cus = U_Customers.objects.get(id=request.GET['destiner'])
-                        cus.newscomunications = cus.newscomunications + 1
-                        cus.save()
+                if request.GET['agrupo'] == 'NO':
+                    new=News()
+                    new.title = request.GET['title'] if validate_parameter(request.GET,'title') else None
+                    new.title = request.GET['title'] if validate_parameter(request.GET,'title') else None
+                    new.body = request.GET['body'] if validate_parameter(request.GET,'body') else None
+                    new.link = request.GET['link'] if validate_parameter(request.GET,'link') else None
+                    if validate_parameter(request.GET,'destiner'):
+                        if request.GET['destiner']!="0":
+                            new.u_customer_id = request.GET['destiner']
+                            cus = U_Customers.objects.get(id=request.GET['destiner'])
+                            cus.newscomunications = cus.newscomunications + 1
+                            cus.save()
+                        else:
+                            customers = U_Customers.objects.all()
+                            for cus in customers:
+                                cus.newscomunications = cus.newscomunications + 1
+                                cus.save()
                     else:
                         customers = U_Customers.objects.all()
                         for cus in customers:
                             cus.newscomunications = cus.newscomunications + 1
                             cus.save()
-                else:
-                    customers = U_Customers.objects.all()
-                    for cus in customers:
-                        cus.newscomunications = cus.newscomunications + 1
-                        cus.save()
-                new.date=datetime.utcnow()
-                new.save()
+                    new.date=datetime.utcnow()
+                    new.save()
+                elif request.GET['agrupo'] == 'SI':
+                    reservations=Reservations.objects.filter(Q(schedule_time__id=request.GET['destiner']))
+                    for res in reservations:
+                        new=News()
+                        new.title = request.GET['title'] if validate_parameter(request.GET,'title') else None
+                        new.title = request.GET['title'] if validate_parameter(request.GET,'title') else None
+                        new.body = request.GET['body'] if validate_parameter(request.GET,'body') else None
+                        new.link = request.GET['link'] if validate_parameter(request.GET,'link') else None
+                        customerguay = U_Customers.objects.get(id=res.auth.id)
+                        new.u_customer_id = customerguay.id
+                        customerguay.newscomunications = customerguay.newscomunications + 1
+                        customerguay.save()
+                        new.date=datetime.utcnow()
+                        new.save()
+                
                 data=json.dumps({'status': 'success', 'response':'new_added', 'data':{'id':new.id}})
             except Exception as e:
                 data=json.dumps({'status': 'failed', 'response':e.args[0]})

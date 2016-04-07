@@ -20,12 +20,12 @@ function loadTemplate() {
 			return false;
 		});
 		$( "#clientes" ).click(function() {
-			$('#grupos').slideUp();
-  			$('#usuarios').slideDown();
+			$('#gruposdiv').slideUp();
+  			$('#usuariosdiv').slideDown();
 		});
 		$( "#grupos" ).click(function() {
-  			$('#usuarios').slideUp();
-  			$('#grupos').slideDown();
+  			$('#usuariosdiv').slideUp();
+  			$('#gruposdiv').slideDown();
   		});
 		loadNews();
 		
@@ -144,9 +144,18 @@ function new_communication() {
 	var title=$('#new_title').val();
 	var body=$('#new_body').val();
 	var link=$('#new_link').val();
-	var destiner=$('#new_destiner').val();
+	var agrupo = 'NO';
+	var destiner = '';
+	if($('#clientes').is(':checked')){
+		agrupo = 'NO';
+		destiner = $('#new_destiner').val();
+	}
+	if($('#grupos').is(':checked')){
+		agrupo = 'SI'; 
+		destiner = $('#new_destiner_dos').val();
+	}
 		if (title.length>0 || body.length>0){
-			var params = {title:title, body:body, link:link, destiner:destiner};
+			var params = {title:title, body:body, link:link, destiner:destiner, agrupo:agrupo};
 			$('#botonnuevacom').html('<i class="fa fa-cog fa-spin"></i>');
 			$.getJSON(api_url+'news/add_global_news?callback=?', params, function(data){
 				if(data.status=='success'){
