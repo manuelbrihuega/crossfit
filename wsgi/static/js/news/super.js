@@ -5,6 +5,14 @@ function get_content() {
         $.ready.promise()
     ).then(function(){
 		loadTemplate();
+		$( "#clientes" ).click(function() {
+			$('#grupos').slideUp();
+  			$('#usuarios').slideDown();
+		});
+		$( "#grupos" ).click(function() {
+  			$('#usuarios').slideUp();
+  			$('#grupos').slideDown();
+  		});
     });
 	
 }
@@ -35,6 +43,35 @@ function loadNews() {
 			var cad = '<option value="0">TODOS</option>';
 			$.each(data.data.list, function(index, cus) {
 				cad = cad + '<option value="'+cus.id+'">'+cus.name+' '+cus.surname+'</option>';
+			});
+			$('#new_destiner').html(cad);
+		}
+		else super_error('Customers failure');
+	});
+	$.getJSON(api_url+'schedules/list_all_tabla?callback=?', {}, function(data){
+		if(data.status=='success'){
+			var cad = '';
+			$.each(data.data.actividades, function(index, act) {
+				var diasemana = '';
+				if(act.dayweek=="0"){
+					diasemana = 'Lunes';
+				}
+				if(act.dayweek=="1"){
+					diasemana = 'Martes';
+				}
+				if(act.dayweek=="2"){
+					diasemana = 'Miércoles';
+				}
+				if(act.dayweek=="3"){
+					diasemana = 'Jueves';
+				}
+				if(act.dayweek=="4"){
+					diasemana = 'Viernes';
+				}
+				if(act.dayweek=="5"){
+					diasemana = 'Sábado';
+				}
+				cad = cad + '<option value="'+act.id+'">Grupo '+act.name+' '+diasemana+' '+act.day+'/'+act.month+'/'+act.year+' ('+act.time_start.split(':')[0]+':'+act.time_start.split(':')[1]+' - '+act.time_end.split(':')[0]+':'+act.time_end.split(':')[1]+')'+'</option>';
 			});
 			$('#new_destiner').html(cad);
 		}
