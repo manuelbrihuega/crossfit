@@ -228,6 +228,10 @@ def send_email_ticket_message_task(email, title, text):
     from reservas.aux.emails import send_email_ticket_message
     send_email_ticket_message(email,title,text)
 
+def send_email_new_comunication_task(email, title, text):
+    from reservas.aux.emails import send_email_new_comunication
+    send_email_new_comunication(email,title,text)
+
 def send_email_ticket_message_supporter_task(email, title, text, auth_id):
     from reservas.aux.emails import send_email_ticket_message_supporter
     from reservas.models import *

@@ -33,6 +33,11 @@ def send_email_ticket_message(email,title,text):
     content = render_to_string("emails/new_ticket_message.html", {'title':title,'text':text})
     send_email(content,'Respuesta incidencia', [email],'RESPUESTA INCIDENCIA','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
 
+def send_email_new_comunication(email,title,text):
+    """Send an email to announce there is a new ticket message"""
+    content = render_to_string("emails/new_comunication.html", {'title':title,'text':text})
+    send_email(content,'Nuevo mensaje de Crossfit', [email],'Nuevo mensaje de Crossfit','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+
 def send_email_ticket_message_supporter(email,title,text,user):
     """Send an email to announce there is a new ticket message"""
     content = render_to_string("emails/new_ticket_message_supporter.html", {'title':title,'text':text, 'user':user})
