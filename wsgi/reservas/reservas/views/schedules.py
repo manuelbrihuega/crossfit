@@ -36,29 +36,35 @@ def add_concrete(request):
         for field in ('time_start','time_end','duration','date','activity_id'):
             if not validate_parameter(request.GET, field):
                 raise Exception(field+'_missed')
-        
-        activity=Activities.objects.get(id=request.GET['activity_id'])
-        schedule=Schedules()
-        schedule.concrete=True
-        fechazocad=str(request.GET['date']).split('-')
-        schedule.date=datetime(int(fechazocad[0]), int(fechazocad[1]),int(fechazocad[2]), 12, 12, 12)
-        festivos=Parties.objects.all()
-        for fest in festivos:
-            if int(fechazocad[0])==fest.date.year:
-                if int(fechazocad[1])==fest.date.month:
-                    if int(fechazocad[2])==fest.date.day:
-                        raise Exception('El día seleccionado es festivo')
-        schedule.activity=activity
-        schedule.save()
-        
-        schedule_time=Schedules_times()
-        schedule_time.time_start=request.GET['time_start']
-        schedule_time.time_end=request.GET['time_end']
-        schedule_time.duration=request.GET['duration']
-        schedule_time.minutes_pre=request.GET['minutes_pre']
-        schedule_time.minutes_post=request.GET['minutes_post']
-        schedule_time.schedule=schedule
-        schedule_time.save()
+        num = int(request.GET['numerodetramos'])
+        contadortramos = 0
+        time_start_sp = request.GET['time_start'].split(',')
+        time_end_sp = request.GET['time_end'].split(',')
+        duration_sp = request.GET['duration'].split(',')
+        while contadortramos < num:
+            activity=Activities.objects.get(id=request.GET['activity_id'])
+            schedule=Schedules()
+            schedule.concrete=True
+            fechazocad=str(request.GET['date']).split('-')
+            schedule.date=datetime(int(fechazocad[0]), int(fechazocad[1]),int(fechazocad[2]), 12, 12, 12)
+            festivos=Parties.objects.all()
+            for fest in festivos:
+                if int(fechazocad[0])==fest.date.year:
+                    if int(fechazocad[1])==fest.date.month:
+                        if int(fechazocad[2])==fest.date.day:
+                            raise Exception('El día seleccionado es festivo')
+            schedule.activity=activity
+            schedule.save()
+            
+            schedule_time=Schedules_times()
+            schedule_time.time_start=time_start_sp[contadortramos]
+            schedule_time.time_end=time_end_sp[contadortramos]
+            schedule_time.duration=duration_sp[contadortramos]
+            schedule_time.minutes_pre=request.GET['minutes_pre']
+            schedule_time.minutes_post=request.GET['minutes_post']
+            schedule_time.schedule=schedule
+            schedule_time.save()
+            contadortramos = contadortramos + 1
 
         data=json.dumps({'status':'success','response':'schedule_time_created','data':{'id':schedule_time.id}})
     
