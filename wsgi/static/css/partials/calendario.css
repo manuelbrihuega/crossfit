@@ -3,7 +3,7 @@
 .colday{display:inline-table; width:auto;}
 #hournona{width: 75px;height: 24px;color: #1579c0;background-color: white;font-size: 10px;text-align: center;font-weight: 600;border-right: 1px solid white;border-bottom: 1px solid white;}
 .hourbasic{width: 75px;height: 35px;color: #1579c0;background-color: #e2dfcb;font-size: 10px;text-align: center;font-weight: 600;border-right: 1px solid white;padding-top: 10px;border-bottom: 1px solid white;border-top: 2px solid white;}
-.daybasic{width:auto;background-color: #eeece1;border-bottom: 1px solid white;border-right: 1px solid white;border-left: 2px solid white;height: 24px;font-size: 11px;font-weight: 700;color: black;text-align: center;padding-top: 4px;}
+.daybasic{min-width:150px; width:auto;background-color: #eeece1;border-bottom: 1px solid white;border-right: 1px solid white;border-left: 2px solid white;height: 24px;font-size: 11px;font-weight: 700;color: black;text-align: center;padding-top: 4px;}
 #new_employee{}
 .actividad{min-width: 105px; float:left;cursor: pointer;width:auto;background-color: #e5f4d4;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}
 .actividadcompleta{min-width: 105px; float:left;cursor: pointer;width:auto;background-color: #f3dcdc;height: 35px;border-top: 2px solid white;border-left: 2px solid white;border-bottom: 1px solid white;border-right: 1px solid white;}

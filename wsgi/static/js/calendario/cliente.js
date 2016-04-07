@@ -114,14 +114,24 @@ function loadCalendar() {
 				$('#reservas-tabla').append('<div id="' + idgen + '" class="colday"><div class="daybasic" id="'+idgen+'head"><span>'+nombredia+' '+dia+' '+nombremes+' '+year+'</span></div><div id="'+idgen+'hour07" data-contad="'+String(contador+1)+'" class="horavacia" style="width:auto; overflow:auto;"></div><div id="'+idgen+'hour08" data-contad="'+String(contador+2)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour09" data-contad="'+String(contador+3)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour10" data-contad="'+String(contador+4)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour11" data-contad="'+String(contador+5)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour12" data-contad="'+String(contador+6)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour13" data-contad="'+String(contador+7)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour14" data-contad="'+String(contador+8)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour15" data-contad="'+String(contador+9)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour16" data-contad="'+String(contador+10)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour17" data-contad="'+String(contador+11)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour18" data-contad="'+String(contador+12)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour19" data-contad="'+String(contador+13)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour20" data-contad="'+String(contador+14)+'" class="horavacia" style="width:auto;overflow:auto;"></div><div id="'+idgen+'hour21" data-contad="'+String(contador+15)+'" class="horavacia" style="width:auto;overflow:auto;"></div></div>');
 				if(diasemana==5){
 					$('#'+idgen+'hour07').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white; border-top: 2px solid white;');
-					$('#'+idgen+'hour08').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white; text-align: center; color: black;font-weight: 600;font-size: 11px;padding-top: 8px;');
+					$('#'+idgen+'hour08').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white;');
+					$('#'+idgen+'hour08').css('text-align','center');
+					$('#'+idgen+'hour08').css('color','black');
+					$('#'+idgen+'hour08').css('font-weight','600');
+					$('#'+idgen+'hour08').css('font-size','11px');
+					$('#'+idgen+'hour08').css('padding-top','8px');
 					$('#'+idgen+'hour08').html('Box cerrado');
 					$('#'+idgen+'hour09').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white; border-bottom: 1px solid white;');
 					$('#'+idgen+'hour13').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 2px solid white; border-top: 2px solid white;');
 					$('#'+idgen+'hour14').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 2px solid white;');
 					$('#'+idgen+'hour15').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 2px solid white;');
 					$('#'+idgen+'hour16').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white;');
-					$('#'+idgen+'hour17').attr('style', 'text-align: center; color: black;font-weight: 600;font-size: 11px;padding-top: 8px; width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white;');
+					$('#'+idgen+'hour17').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white;');
+					$('#'+idgen+'hour17').css('text-align','center');
+					$('#'+idgen+'hour17').css('color','black');
+					$('#'+idgen+'hour17').css('font-weight','600');
+					$('#'+idgen+'hour17').css('font-size','11px');
+					$('#'+idgen+'hour17').css('padding-top','8px');
 					$('#'+idgen+'hour17').html('Box cerrado');
 					$('#'+idgen+'hour18').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white;');
 					$('#'+idgen+'hour19').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white;');
@@ -129,7 +139,12 @@ function loadCalendar() {
 					$('#'+idgen+'hour21').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white; border-bottom: 1px solid white;');
 				}
 				if(diasemana==4){
-					$('#'+idgen+'hour21').attr('style', 'width:auto;text-align: center;overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white; border-top: 2px solid white; border-bottom: 1px solid white;color: black;font-weight: 600;font-size: 11px;padding-top: 8px;');
+					$('#'+idgen+'hour21').attr('style', 'width:auto;text-align: center;overflow:auto; background-color: #f2f2f2; border-left: 2px solid white; border-right: 1px solid white; border-top: 2px solid white; border-bottom: 1px solid white;color:');
+					$('#'+idgen+'hour21').css('text-align','center');
+					$('#'+idgen+'hour21').css('color','black');
+					$('#'+idgen+'hour21').css('font-weight','600');
+					$('#'+idgen+'hour21').css('font-size','11px');
+					$('#'+idgen+'hour21').css('padding-top','8px');
 					$('#'+idgen+'hour21').html('Box cerrado');
 				}
 				contador = contador + 15;
@@ -169,7 +184,12 @@ function loadCalendar() {
 					
 					if(i==1){
 						$('#'+idgen+'hour14').html('Box cerrado');
-						$('#'+idgen+'hour14').attr('style', 'text-align: center; color: black;font-weight: 600;font-size: 11px;padding-top: 8px; width:auto; overflow:auto; background-color: #f2f2f2;');
+						$('#'+idgen+'hour14').css('text-align','center');
+						$('#'+idgen+'hour14').css('color','black');
+						$('#'+idgen+'hour14').css('font-weight','600');
+						$('#'+idgen+'hour14').css('font-size','11px');
+						$('#'+idgen+'hour14').css('padding-top','8px');
+						$('#'+idgen+'hour14').attr('style', 'width:auto; overflow:auto; background-color: #f2f2f2;');
 					
 					}
 				}
@@ -399,7 +419,38 @@ function loadCalendar() {
 				$(this).children().each(function (index){ 
 					if($(this).hasClass('dosact') && !$(this).hasClass('tresact')){
 						$(this).children().each(function (index){ 
-							$(this).attr('style','width:50%;');
+							$(this).css('width','50%');
+							if($(this).attr('data-izqoder')=='2' && $(this).css('height')=='70px'){
+								
+								var contadhunt = parseInt($(this).parent().attr('data-contad'))+1;
+								$(".marcado").each(function (index){ 
+									$(this).children().each(function (index){ 
+										if($(this).attr('data-contad')==contadhunt){
+											if($(this).attr('id').split('hour')[1]!='13' && $(this).attr('id').split('hour')[1]!='14' && $(this).attr('id').split('hour')[1]!='15'){
+												$(this).children().each(function (index){ 
+													$(this).attr('style','width: 50% !important');
+
+												})
+											}
+										}
+									})
+								})
+							}
+							/*if($(this).attr('data-izqoder')=='1' && $(this).css('height')=='70px'){
+								var contadhunt = parseInt($(this).parent().attr('data-contad'))+1;
+								$(".marcado").each(function (index){ 
+									$(this).children().each(function (index){ 
+										if($(this).attr('data-contad')==contadhunt){
+											if($(this).attr('id').split('hour')[1]!=13 && $(this).attr('id').split('hour')[1]!=14 && $(this).attr('id').split('hour')[1]!=15){
+												$(this).children().each(function (index){ 
+													$(this).css('width','50% !important');
+													$(this).css('float','right');
+												})
+											}
+										}
+									})
+								})
+							}*/
 						})
 					}
 				})
