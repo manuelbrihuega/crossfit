@@ -9,6 +9,7 @@ from reservas.aux.permissions import *
 from reservas.aux.general import *
 from reservas.aux.date import *
 from reservas.aux.auth import *
+from reservas.aux.tasks import *
 
 
 def default(request):
