@@ -18,7 +18,7 @@ function get_content() {
 						$.getJSON(api_url+'schedules/get_configuration?callback=?', {}, function(data){
 							if(data.status=='success'){
 								$('#dias_reserva').val(data.data.dias_reserva);
-								$('#dias_atras').val(data.data.dias_atras);
+								$('#dias_a_mostrar').val(data.data.dias_a_mostrar);
 								$('#dias_pago').val(data.data.dias_pago);
 								$('#email_coach').val(data.data.email);
 								$('#telefono_coach').val(data.data.telefono_coach);				
@@ -246,15 +246,15 @@ function new_dni() {
 
 function edit_configuracion() {
 	var dias_reserva=$('#dias_reserva').val();
-	var dias_atras=$('#dias_atras').val();
+	var dias_a_mostrar=$('#dias_a_mostrar').val();
 	var dias_pago=$('#dias_pago').val();
 	
 			if (dias_reserva.length>0){
-				if (dias_atras.length>0){
+				if (dias_a_mostrar.length>0){
 					if (dias_pago.length>0){
 					$('#botonenviar').html('<i class="fa fa-cog fa-spin"></i>');
 					$.getJSON(api_url+'schedules/edit_config?callback=?', { dias_reserva:dias_reserva,
-																		    dias_atras:dias_atras,
+																		    dias_a_mostrar:dias_a_mostrar,
 																		    dias_pago:dias_pago}, function(data){
 																								
 						if(data.status=='success'){
