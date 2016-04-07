@@ -5,14 +5,6 @@ function get_content() {
         $.ready.promise()
     ).then(function(){
 		loadTemplate();
-		$( "#clientes" ).click(function() {
-			$('#grupos').slideUp();
-  			$('#usuarios').slideDown();
-		});
-		$( "#grupos" ).click(function() {
-  			$('#usuarios').slideUp();
-  			$('#grupos').slideDown();
-  		});
     });
 	
 }
@@ -27,6 +19,14 @@ function loadTemplate() {
 			new_communication();
 			return false;
 		});
+		$( "#clientes" ).click(function() {
+			$('#grupos').slideUp();
+  			$('#usuarios').slideDown();
+		});
+		$( "#grupos" ).click(function() {
+  			$('#usuarios').slideUp();
+  			$('#grupos').slideDown();
+  		});
 		loadNews();
 		
 	});
@@ -73,7 +73,7 @@ function loadNews() {
 				}
 				cad = cad + '<option value="'+act.id+'">Grupo '+act.name+' '+diasemana+' '+act.day+'/'+act.month+'/'+act.year+' ('+act.time_start.split(':')[0]+':'+act.time_start.split(':')[1]+' - '+act.time_end.split(':')[0]+':'+act.time_end.split(':')[1]+')'+'</option>';
 			});
-			$('#new_destiner').html(cad);
+			$('#new_destiner_dos').html(cad);
 		}
 		else super_error('Customers failure');
 	});
