@@ -129,18 +129,18 @@
 /*@media (max-width: 767px) {
     #level1{min-height: 380px;}
 }
-
-@media (max-width: 480px) {
-    #logo{ height: 174px; width: 313px;}
+*/
+@media (max-width: 440px) {
+    #logo{ width: 100%;}
 }
-
+/*
 @media (max-width: 355px) {
     #logo{ height: 142px; width: 265px;}
 }
 */
-@media (max-width: 305px) {
+@media (max-width: 347px) {
     /*#logo{ height: 132px; width: 100%; margin-top: 35px; background-repeat: no-repeat;}*/
-    #level1{ min-height: 302px; }
+    #level1{ height: 241px; }
 }
 
 /*FIN LEVEL 3*/
