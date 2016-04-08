@@ -172,7 +172,11 @@ margin: 10px 15px;
 }
 
 @media (max-width: 767px) {
-    #logologin{width:100%;}
+    #logologin{width:100%; background-size: 16%;}
+}
+
+@media (max-width: 549px) {
+    #logologin{background-size: 22%;}
 }
 
 @media (max-width: 480px) {
