@@ -11,7 +11,9 @@ body { -webkit-font-smoothing: antialiased; height: 100%; }
 #alert.warning{background-color: #903B41;}
 #content{padding-top:39px;}
 #push{height: 105px;}
-#logologin{background: url("http://crossfit-reservasjerez.rhcloud.com/static/img/i18n/icono_mini_es.png") no-repeat scroll 0 0 / 100% auto; height: 121px; margin-bottom: 35px; width: 575px;}
+/*#logologin{background: url("http://crossfit-reservasjerez.rhcloud.com/static/img/i18n/icono_mini_es.png") no-repeat scroll 0 0 / 100% auto; height: 121px; margin-bottom: 35px; width: 575px;}
+*/
+#logologin{ background-position-x: center; background: rgba(0, 0, 0, 0) url("http://crossfit-reservasjerez.rhcloud.com/static/img/i18n/icono_mini_ppal.png") no-repeat scroll center center / 20% auto; height: 162px; margin-bottom: 20px; width: 575px;}
 /*NAVBAR*/
 .navbar{ background-color: black; color: #fff; border-radius: 0px; min-height:37px;margin-bottom: 0px;width: 100%; position: fixed; z-index: 1000;}
 #brand{ font-family: impact,impact-w01-2010,impact-w02-2010,impact-w10-2010,sans-serif; font-weight: 500; font-size: 18px; height: 37px;line-height: 37px; padding: 0; margin: 0;vertical-align: middle; color: #fff; border: 0px solid #999; }
@@ -180,14 +182,14 @@ margin: 10px 15px;
     #mce-EMAIL{width: 135px;}
 }
 
-@media (max-width: 433px) {
+/*@media (max-width: 433px) {
     #logologin{background: url("http://crossfit-reservasjerez.rhcloud.com/static/img/i18n/icono_adaptado.png") no-repeat scroll 0 0 / 100% auto; height: 209px; margin-bottom: 35px; width: 83%;}
-}
+}*/
 
-@media (max-width: 433px) {
+/*@media (max-width: 433px) {
     #logologin{height: 155px;}
 }
 
 @media (max-width: 276px) {
     #logologin{height: 117px;}
-}
+}*/
