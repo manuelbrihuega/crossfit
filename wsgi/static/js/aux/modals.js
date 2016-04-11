@@ -1812,12 +1812,15 @@ function addReserva(){
 function deleteMiReserva(id_schedule_time){
 	var confirmacion=confirm('¿Está seguro de que quiere cancelar la reserva? Su plaza quedará disponible para otro usuario.');
 	if(confirmacion){
-		$('.waiting').show();
+		//$('.waiting').show();
 		$('#reservas-tabla').hide();
+		$('#reserva_propia_modal .modal-body').html('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
 		$.getJSON(api_url+'schedules/delete_reservation_client?callback=?', {schedule_time_id:id_schedule_time}, function(data){
 			if(data.status=='success'){
 				launch_alert('<i class="fa fa-smile-o"></i> Reserva cancelada con éxito. Su plaza se ha liberado','');
-				location.reload();
+				$('#reserva_propia_modal .modal-body').html('<div style="text-align: center;margin-top: 9px;font-size: 16px;color: #ff0000;font-weight: 600;">RESERVA CANCELADA</div><div style="text-align: center;font-size: 11px;color: black;margin-top: 8px;">Al cancelar la reserva de esta actividad dentro del plazo permitido, no se consumirá el crédito que habías dedicado para ello y lo tienes disponible para más adelante.</div>');
+				$('#reserva_propia_modal .close').show();
+				loadCalendar();
 			}
 			else{ 
 				launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); 
