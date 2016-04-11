@@ -1809,7 +1809,13 @@ function deleteMiReserva(id_schedule_time){
 
 
 function addReservaCliente(id){
-	var confirmacion=confirm('¿Está seguro de que quiere reservar plaza para esta actividad?');
+	var mymodal=newModal('reserva_cliente_modal',true, true);
+	modalAddTitle(mymodal,'');
+	doModalBigger(mymodal);
+	modalAddBody(mymodal,'<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
+	mymodal.modal('show');
+	
+	/*var confirmacion=confirm('¿Está seguro de que quiere reservar plaza para esta actividad?');
 	if(confirmacion){
 		$('#reservas-tabla').hide();
 		$('.waiting').show();
@@ -1972,7 +1978,7 @@ function addReservaCliente(id){
 		
 		});
 	}
-	
+	*/
 }
 
 
