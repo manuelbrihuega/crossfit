@@ -1814,7 +1814,123 @@ function addReservaCliente(id){
 	doModalBigger(mymodal);
 	modalAddBody(mymodal,'<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
 	mymodal.modal('show');
-	
+	$('.close').hide();
+	$('.modal-dialog').attr('style','width: 330px');
+	$('.modal-content').css('border-radius','12px !important');
+	$('.modal-footer').hide();
+	$('.modal-title').attr('style','text-transform: capitalize; color: black; text-align: center; font-weight: 600; font-size: 15px; margin-top: 8px;')
+	$.getJSON(api_url+'schedules/hay_plazas?callback=?', {id:id}, function(data){
+		if(data.status=='success'){
+			var cad = data.data.activity + ' ';
+			if(data.data.dia_semana==0){
+				cad = cad + 'Lunes';
+			}
+			if(data.data.dia_semana==1){
+				cad = cad + 'Martes';
+			}
+			if(data.data.dia_semana==2){
+				cad = cad + 'Miércoles';
+			}
+			if(data.data.dia_semana==3){
+				cad = cad + 'Jueves';
+			}
+			if(data.data.dia_semana==4){
+				cad = cad + 'Viernes';
+			}
+			if(data.data.dia_semana==5){
+				cad = cad + 'Sábado';
+			}
+			cad = cad + data.data.day + ' ';
+			if(data.data.mes==0){
+				cad = cad + 'Enero';
+			}
+			if(data.data.mes==1){
+				cad = cad + 'Febrero';
+			}
+			if(data.data.mes==2){
+				cad = cad + 'Marzo';
+			}
+			if(data.data.mes==3){
+				cad = cad + 'Abril';
+			}
+			if(data.data.mes==4){
+				cad = cad + 'Mayo';
+			}
+			if(data.data.mes==5){
+				cad = cad + 'Junio';
+			}
+			if(data.data.mes==6){
+				cad = cad + 'Julio';
+			}
+			if(data.data.mes==7){
+				cad = cad + 'Agosto';
+			}
+			if(data.data.mes==8){
+				cad = cad + 'Septiembre';
+			}
+			if(data.data.mes==9){
+				cad = cad + 'Octubre';
+			}
+			if(data.data.mes==10){
+				cad = cad + 'Noviembre';
+			}
+			if(data.data.mes==11){
+				cad = cad + 'Diciembre';
+			}
+			cad = cad + ' ' + data.data.year;
+			modalAddTitle(mymodal,cad);
+			var disponibles = data.data.disponibles;
+			var cadbono = '';
+
+			if(parseInt(disponibles)>0){
+				if(parseInt(data.data.consume_wod)>0){
+					if( (parseInt(data.data.credit_wod)>=parseInt(data.data.consume_wod)) || (parseInt(data.data.credit_bono)>=parseInt(data.data.consume_wod)) ){
+						var contadoraso = 0;
+						var reservadores = '';
+						for(var i=0; i<data.data.customers.length; i++){
+							contadoraso = contadoraso + 1;
+							reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. '+data.data.customers[i].name+'</li>';
+						}
+						contadoraso = contadoraso + 1;
+						while (contadoraso<=parseInt(data.data.aforo)){
+							reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. -</li>'; 
+							contadoraso++;
+						}
+						$('.modal-body').html('  <div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #07b255;font-weight: 600;font-size: 14px;">DISPONIBLE <i class="fa fa-smile-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 16px;color: #1e497d;font-weight: 600;">VAS A EFECTUAR UNA RESERVA PARA ESTA ACTIVIDAD</div><div style="text-align: center;font-size: 11px;color: black;margin-top: 8px;">Actualmente dispones de los siguientes créditos:</div><div style="text-align: center;font-size: 11px;margin-top: 3px;color: black;">WOD: '+data.data.credit_wod+' de un total de '+data.data.credit_wod_total+'</div><div style="text-align: center;font-size: 11px; color: black;">OPEN BOX: '+data.data.credit_box+' de un total de '+data.data.credit_box_total+'</div><div style="text-align: center;font-size: 11px;color: black;">BONO PREPAGO: '+data.data.credit_bono+' créditos</div><div style="font-size: 11px;color: black;text-align: center;margin-top: 8px;">Mantener la reserva de actividad hasta su finalización, consumirá uno de tus créditos.</div><div style="overflow: auto;margin-top: 8px;"><div style="float: left;padding-left: 6px;color: white;background-color: #92d050;font-weight: 700;font-size: 20px;text-align: center;padding-right: 6px;margin-left: 26px;cursor: pointer;" onclick="addReservaClienteFinal('+id+');">ACEPTAR</div><div style="float: left;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;" onclick="cerrarDialogoReserva();">CANCELAR</div></div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfo();" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo();" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');
+					}else{
+						// No tiene creditos
+						$('.modal-body').html('  <div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #07b255;font-weight: 600;font-size: 14px;">DISPONIBLE <i class="fa fa-smile-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 16px;color: #ff0000;font-weight: 600;">NO DISPONES DE CRÉDITOS SUFICIENTES PARA REALIZAR UNA RESERVA</div><div style="text-align: center;font-size: 11px;color: black;margin-top: 8px;">Actualmente dispones de los siguientes créditos:</div><div style="text-align: center;font-size: 11px;margin-top: 3px;color: black;">WOD: '+data.data.credit_wod+' de un total de '+data.data.credit_wod_total+'</div><div style="text-align: center;font-size: 11px; color: black;">OPEN BOX: '+data.data.credit_box+' de un total de '+data.data.credit_box_total+'</div><div style="text-align: center;font-size: 11px;color: black;">BONO PREPAGO: '+data.data.credit_bono+' créditos</div><div style="overflow: auto;margin-top: 8px;"><div style="float: left;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;" onclick="cerrarDialogoReserva();">CANCELAR</div></div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfo();" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo();" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');
+					}
+				}else{
+					if(parseInt(data.data.consume_box)>0){
+						if( (parseInt(data.data.credit_box)>=parseInt(data.data.consume_box)) || (parseInt(data.data.credit_bono)>=parseInt(data.data.consume_box)) ){
+							var contadoraso = 0;
+							var reservadores = '';
+							for(var i=0; i<data.data.customers.length; i++){
+								contadoraso = contadoraso + 1;
+								reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. '+data.data.customers[i].name+'</li>';
+							}
+							contadoraso = contadoraso + 1;
+							while (contadoraso<=parseInt(data.data.aforo)){
+								reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. -</li>'; 
+								contadoraso++;
+							}
+							$('.modal-body').html('  <div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #07b255;font-weight: 600;font-size: 14px;">DISPONIBLE <i class="fa fa-smile-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 16px;color: #1e497d;font-weight: 600;">VAS A EFECTUAR UNA RESERVA PARA ESTA ACTIVIDAD</div><div style="text-align: center;font-size: 11px;color: black;margin-top: 8px;">Actualmente dispones de los siguientes créditos:</div><div style="text-align: center;font-size: 11px;margin-top: 3px;color: black;">WOD: '+data.data.credit_wod+' de un total de '+data.data.credit_wod_total+'</div><div style="text-align: center;font-size: 11px; color: black;">OPEN BOX: '+data.data.credit_box+' de un total de '+data.data.credit_box_total+'</div><div style="text-align: center;font-size: 11px;color: black;">BONO PREPAGO: '+data.data.credit_bono+' créditos</div><div style="font-size: 11px;color: black;text-align: center;margin-top: 8px;">Mantener la reserva de actividad hasta su finalización, consumirá uno de tus créditos.</div><div style="overflow: auto;margin-top: 8px;"><div style="float: left;padding-left: 6px;color: white;background-color: #92d050;font-weight: 700;font-size: 20px;text-align: center;padding-right: 6px;margin-left: 26px;cursor: pointer;" onclick="addReservaClienteFinal('+id+');">ACEPTAR</div><div style="float: left;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;" onclick="cerrarDialogoReserva();">CANCELAR</div></div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfo();" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo();" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');
+						}else{
+							// No tiene creditos
+							$('.modal-body').html('  <div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #07b255;font-weight: 600;font-size: 14px;">DISPONIBLE <i class="fa fa-smile-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 16px;color: #ff0000;font-weight: 600;">NO DISPONES DE CRÉDITOS SUFICIENTES PARA REALIZAR UNA RESERVA</div><div style="text-align: center;font-size: 11px;color: black;margin-top: 8px;">Actualmente dispones de los siguientes créditos:</div><div style="text-align: center;font-size: 11px;margin-top: 3px;color: black;">WOD: '+data.data.credit_wod+' de un total de '+data.data.credit_wod_total+'</div><div style="text-align: center;font-size: 11px; color: black;">OPEN BOX: '+data.data.credit_box+' de un total de '+data.data.credit_box_total+'</div><div style="text-align: center;font-size: 11px;color: black;">BONO PREPAGO: '+data.data.credit_bono+' créditos</div><div style="overflow: auto;margin-top: 8px;"><div style="float: left;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;" onclick="cerrarDialogoReserva();">CANCELAR</div></div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfo();" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo();" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');
+						}
+					}
+				}	
+			}else{
+				if(parseInt(disponibles_cola)>0){
+					//Hay en cola
+				}else{
+					//No hay en cola
+				}
+			}
+		}else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+	});
 	/*var confirmacion=confirm('¿Está seguro de que quiere reservar plaza para esta actividad?');
 	if(confirmacion){
 		$('#reservas-tabla').hide();

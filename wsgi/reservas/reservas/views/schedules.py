@@ -868,6 +868,7 @@ def hay_plazas(request):
         if have_permission(request.session['auth_id'],'hay_plazas_schedule'):
             if validate_parameter(request.GET,'id'):
                 try:
+                    customer=get_user(request.session['auth_id'])
                     schedule_time=Schedules_times.objects.get(id=request.GET['id'])
                     configuration=Configuration.objects.get(id=1)
                     aforo=schedule_time.schedule.activity.max_capacity
@@ -875,14 +876,16 @@ def hay_plazas(request):
                     reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time.id))
                     ocupadas=0
                     ocupadascola=0
+                    list=[]
                     for res in reservations:
+                        list.append({'id':res.id, 'name':res.auth.name + ' ' + res.auth.surname})
                         if res.queue:
                             ocupadascola = ocupadascola + 1
                         else:
                             ocupadas = ocupadas + 1  
                     disponibles=aforo - ocupadas
                     disponiblescola=aforocola - ocupadascola
-                    data=json.dumps({'status':'success','response':'hay_plazas_schedule','data':{'consume_box':schedule_time.schedule.activity.credit_box, 'consume_wod':schedule_time.schedule.activity.credit_wod, 'aforo':str(aforo), 'minutos':schedule_time.minutes_post, 'aforo_cola':str(aforocola), 'disponibles':str(disponibles), 'disponibles_cola':str(disponiblescola), 'ocupadas':str(ocupadas), 'ocupadas_cola':str(ocupadascola)}})
+                    data=json.dumps({'status':'success','response':'hay_plazas_schedule','data':{'customers':list, 'minutes_pre':schedule_time.minutes_pre, 'minutes_post':schedule_time.minutes_post, 'credit_bono':customer.credit_bono, 'credit_wod':customer.credit_wod, 'credit_box':customer.credit_box, 'credit_box_total':customer.rate.credit_box, 'credit_wod_total':customer.rate.credit_wod, 'time_end':get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[1], 'time_start':get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[1], 'year':schedule_time.schedule.date.year, 'mes':schedule_time.schedule.date.month, 'dia':schedule_time.schedule.date.day, 'dia_semana':datatime.weekday(schedule_time.schedule.date), 'activity':schedule_time.schedule.activity.name, 'consume_box':schedule_time.schedule.activity.credit_box, 'consume_wod':schedule_time.schedule.activity.credit_wod, 'aforo':str(aforo), 'minutos':schedule_time.minutes_post, 'aforo_cola':str(aforocola), 'disponibles':str(disponibles), 'disponibles_cola':str(disponiblescola), 'ocupadas':str(ocupadas), 'ocupadas_cola':str(ocupadascola)}})
                 except Exception as e:
                     data=json.dumps({'status':'failed','response':e.args[0]})
             else:
