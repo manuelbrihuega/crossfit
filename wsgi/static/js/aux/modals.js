@@ -1840,7 +1840,7 @@ function addReservaCliente(id){
 			if(data.data.dia_semana==5){
 				cad = cad + 'Sábado';
 			}
-			cad = cad + data.data.day + ' ';
+			cad = cad + data.data.dia + ' ';
 			if(data.data.mes==0){
 				cad = cad + 'Enero';
 			}
@@ -1925,8 +1925,48 @@ function addReservaCliente(id){
 			}else{
 				if(parseInt(disponibles_cola)>0){
 					//Hay en cola
+					if(parseInt(data.data.consume_wod)>0){
+						if( (parseInt(data.data.credit_wod)>=parseInt(data.data.consume_wod)) || (parseInt(data.data.credit_bono)>=parseInt(data.data.consume_wod)) ){
+							var contadoraso = 0;
+							var reservadores = '';
+							for(var i=0; i<data.data.customers.length; i++){
+								contadoraso = contadoraso + 1;
+								reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. '+data.data.customers[i].name+'</li>';
+							}
+							contadoraso = contadoraso + 1;
+							while (contadoraso<=parseInt(data.data.aforo)){
+								reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. -</li>'; 
+								contadoraso++;
+							}
+							$('.modal-body').html('  <div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #ff0000;font-weight: 600;font-size: 14px;">NO DISPONIBLE <i class="fa fa-frown-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 19px;color: black;margin-bottom: 8px;font-weight: 600;">AFORO COMPLETO</div><div style="text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="cerrarDialogoReserva();">ACEPTAR</div><div style="margin-top:20px;text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #214b7f;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="ponerseencola('+data.data.credit_wod+','+data.data.credit_box+','+data.data.credit_bono+','+data.data.disponibles_cola+');">PONERME EN COLA</div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfo();" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo();" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');	
+						}else{
+						// No tiene creditos
+						$('.modal-body').html('  <div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #ff0000;font-weight: 600;font-size: 14px;">NO DISPONIBLE <i class="fa fa-frown-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 19px;color: black;margin-bottom: 8px;font-weight: 600;">AFORO COMPLETO</div><div style="text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="cerrarDialogoReserva();">ACEPTAR</div><div style="margin-top:20px;text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #214b7f;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="ponerseencola('+data.data.credit_wod+','+data.data.credit_box+','+data.data.credit_bono+','+data.data.disponibles_cola+');">PONERME EN COLA</div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfo();" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo();" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');	
+						}
+					}else{
+						if(parseInt(data.data.consume_box)>0){
+							if( (parseInt(data.data.credit_box)>=parseInt(data.data.consume_box)) || (parseInt(data.data.credit_bono)>=parseInt(data.data.consume_box)) ){
+								var contadoraso = 0;
+								var reservadores = '';
+								for(var i=0; i<data.data.customers.length; i++){
+									contadoraso = contadoraso + 1;
+									reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. '+data.data.customers[i].name+'</li>';
+								}
+								contadoraso = contadoraso + 1;
+								while (contadoraso<=parseInt(data.data.aforo)){
+									reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. -</li>'; 
+									contadoraso++;
+								}
+								$('.modal-body').html('<div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #ff0000;font-weight: 600;font-size: 14px;">NO DISPONIBLE <i class="fa fa-frown-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 19px;color: black;margin-bottom: 8px;font-weight: 600;">AFORO COMPLETO</div><div style="text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="cerrarDialogoReserva();">ACEPTAR</div><div style="margin-top:20px;text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #214b7f;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="ponerseencola('+data.data.credit_wod+','+data.data.credit_box+','+data.data.credit_bono+','+data.data.disponibles_cola+');">PONERME EN COLA</div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfo();" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo();" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');	
+							}else{
+								// No tiene creditos
+								$('.modal-body').html('<div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #ff0000;font-weight: 600;font-size: 14px;">NO DISPONIBLE <i class="fa fa-frown-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 19px;color: black;margin-bottom: 8px;font-weight: 600;">AFORO COMPLETO</div><div style="text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="cerrarDialogoReserva();">ACEPTAR</div><div style="margin-top:20px;text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #214b7f;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="ponerseencola('+data.data.credit_wod+','+data.data.credit_box+','+data.data.credit_bono+','+data.data.disponibles_cola+');">PONERME EN COLA</div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfo();" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo();" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');	
+							}
+						}
+					}		
 				}else{
 					//No hay en cola
+					$('.modal-body').html('<div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #ff0000;font-weight: 600;font-size: 14px;">NO DISPONIBLE <i class="fa fa-frown-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 19px;color: black;margin-bottom: 8px;font-weight: 600;">AFORO COMPLETO</div><div style="text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="cerrarDialogoReserva();">ACEPTAR</div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfo();" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo();" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');	
 				}
 			}
 		}else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
