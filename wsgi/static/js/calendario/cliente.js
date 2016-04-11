@@ -249,7 +249,8 @@ function loadCalendar() {
 				if(data.data.actividades[i].estado=='MI RESERVA'){
 					cadestado = 'actividadreservada';
 					cadestadodos = 'spanreservada';
-					onclick = 'deleteMiReserva('+data.data.actividades[i].id+');';
+					//onclick = 'deleteMiReserva('+data.data.actividades[i].id+');';
+					onclick = 'mostrarDialogoMiReserva('+data.data.actividades[i].id+');';
 				}
 				if(data.data.actividades[i].estado=='FINALIZADA'){
 					cadestado = 'actividadfinalizada';

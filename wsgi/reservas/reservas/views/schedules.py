@@ -878,7 +878,7 @@ def hay_plazas(request):
                     ocupadascola=0
                     list=[]
                     for res in reservations:
-                        list.append({'id':res.id, 'name':res.auth.name + ' ' + res.auth.surname})
+                        list.append({'id':res.auth.id, 'name':res.auth.name + ' ' + res.auth.surname})
                         if res.queue:
                             ocupadascola = ocupadascola + 1
                         else:
