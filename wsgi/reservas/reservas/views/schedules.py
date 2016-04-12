@@ -378,7 +378,9 @@ def list_all_tabla_for_customers(request):
                 reservations=Reservations.objects.filter(Q(schedule_time__id=sch.id))
                 for res in reservations:
                     ocupadas = ocupadas + 1
-                    if res.auth.id==auth.id:
+                    if res.auth.id==auth.id and res.position_queue:
+                        estado='EN COLA'
+                    elif res.auth.id==auth.id and not res.position_queue:
                         estado='MI RESERVA'
                 disponibles = aforo - ocupadas
                 if disponibles < 1:

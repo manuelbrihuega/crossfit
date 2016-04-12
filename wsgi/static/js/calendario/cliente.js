@@ -252,6 +252,12 @@ function loadCalendar() {
 					//onclick = 'deleteMiReserva('+data.data.actividades[i].id+');';
 					onclick = 'mostrarDialogoMiReserva('+data.data.actividades[i].id+');';
 				}
+				if(data.data.actividades[i].estado=='EN COLA'){
+					cadestado = 'actividadreservada';
+					cadestadodos = 'spanreservada';
+					//onclick = 'deleteMiReserva('+data.data.actividades[i].id+');';
+					onclick = 'mostrarDialogoMiReservaEnCola('+data.data.actividades[i].id+');';
+				}
 				if(data.data.actividades[i].estado=='FINALIZADA'){
 					cadestado = 'actividadfinalizada';
 					cadestadodos = 'spanfinalizada';

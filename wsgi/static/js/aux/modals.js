@@ -1808,6 +1808,29 @@ function addReserva(){
 	});
 }
 
+function deleteMiReservaCola(id_schedule_time){
+	var confirmacion=confirm('¿Está seguro de que quieres salirte de la cola? Perderás la opción a obtener una plaza si alguna reserva es cancelada.');
+	if(confirmacion){
+		//$('.waiting').show();
+		$('#reservas-tabla').hide();
+		$('#reserva_propia_modal .modal-body').html('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
+		$.getJSON(api_url+'schedules/delete_reservation_client?callback=?', {schedule_time_id:id_schedule_time}, function(data){
+			if(data.status=='success'){
+				launch_alert('<i class="fa fa-smile-o"></i> Plaza en la cola eliminada con éxito. Su plaza se ha liberado','');
+				$('#reserva_propia_modal .modal-body').html('<div style="text-align: center;margin-top: 9px;font-size: 16px;color: #ff0000;font-weight: 600;">RESERVA CANCELADA</div><div style="text-align: center;font-size: 11px;color: black;margin-top: 8px;">Al cancelar la reserva de esta actividad dentro del plazo permitido, no se consumirá el crédito que habías dedicado para ello y lo tienes disponible para más adelante.</div>');
+				$('#reserva_propia_modal .close').show();
+				loadCalendar();
+			}
+			else{ 
+				launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); 
+				$('.waiting').hide();
+				$('#reservas-tabla').show();
+			}
+			
+		});
+	}
+}
+
 
 function deleteMiReserva(id_schedule_time){
 	var confirmacion=confirm('¿Está seguro de que quiere cancelar la reserva? Su plaza quedará disponible para otro usuario.');
@@ -1860,6 +1883,119 @@ function mostrarDialogoInfo(cad,cad2,desc,aforo,minimo,disponibles,totales,diasa
 	$('#reserva_info_modal .modal-body').html('<div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">Con horario '+cad2+'</div><div style="text-align: center;font-size: 11px;color: black;margin-top: 8px;">'+desc+'</div><div style="text-align: center;font-size: 11px;margin-top: 3px;color: black;">Aforo máximo de: '+aforo+' personas</div><div style="text-align: center;font-size: 11px;color: black;">Reservas mínimas para que haya clase: '+minimo+'</div><div style="text-align: center;font-size: 11px;color: black;">Plazas disponibles: '+disponibles+' / Plazas totales: '+totales+'</div><div style="font-size: 11px;color: black;font-weight: 700;text-align: left;margin-top: 8px;">Condiciones básicas de la reserva:</div><div style="font-size: 11px;color: black;text-align: left;margin-top: 8px;">La reservas de esta actividad y tramo horario puede hacerse con un máximo de '+diasantelacion+' días y un mínimo de '+minutostope+' minutos de antelación a su comienzo.</div><div style="font-size: 11px;color: black;text-align: left;margin-top: 8px;">Actualmente hay plazas disponibles y es posible reservar la actividad.</div><div style="font-size: 11px;color: black;text-align: left;margin-top: 8px;">De mantener la reserva de esta actividad hasta el cierre del periodo de cancelación para la misma, se '+consumocad+'.</div><div style="font-size: 11px;color: black;text-align: left;margin-top: 8px;">Se puede cancelar la reserva de esta actividad hasta el cierre del periodo de cancelación: un máximo de '+cancelacionminutos+' minutos antes del inicio de la misma.</div><div style="text-align: center;text-transform: uppercase;background-color: #4bacc6;color: white;font-weight: 700;font-size: 12px;margin-top: 10px;cursor: pointer;margin-bottom: 10px;" onclick="modal_eula(\'condiciones_uso\');">ir a condiciones y términos generales</div>');
 
 }
+
+function mostrarDialogoMiReservaEnCola(id){
+	var mymodal=newModal('reserva_propia_modal',true, true);
+	modalAddTitle(mymodal,'');
+	doModalBigger(mymodal);
+	modalAddBody(mymodal,'<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
+	mymodal.modal('show');
+	$('#reserva_propia_modal .close').hide();
+	$('#reserva_propia_modal .modal-dialog').attr('style','width: 330px');
+	$('#reserva_propia_modal .modal-content').attr('border-radius','12px !important');
+	$('#reserva_propia_modal .modal-footer').hide();
+	$('#reserva_propia_modal .modal-title').attr('style','text-transform: capitalize; color: black; text-align: center; font-weight: 600; font-size: 15px; margin-top: 8px;')
+	$.getJSON(api_url+'schedules/hay_plazas?callback=?', {id:id}, function(data){
+		if(data.status=='success'){
+			var cad = data.data.activity + ' ';
+			if(data.data.dia_semana==0){
+				cad = cad + 'Lunes';
+			}
+			if(data.data.dia_semana==1){
+				cad = cad + 'Martes';
+			}
+			if(data.data.dia_semana==2){
+				cad = cad + 'Miércoles';
+			}
+			if(data.data.dia_semana==3){
+				cad = cad + 'Jueves';
+			}
+			if(data.data.dia_semana==4){
+				cad = cad + 'Viernes';
+			}
+			if(data.data.dia_semana==5){
+				cad = cad + 'Sábado';
+			}
+			cad = cad + ' ' + data.data.dia + ' ';
+			if(data.data.mes==0){
+				cad = cad + 'Enero';
+			}
+			if(data.data.mes==1){
+				cad = cad + 'Febrero';
+			}
+			if(data.data.mes==2){
+				cad = cad + 'Marzo';
+			}
+			if(data.data.mes==3){
+				cad = cad + 'Abril';
+			}
+			if(data.data.mes==4){
+				cad = cad + 'Mayo';
+			}
+			if(data.data.mes==5){
+				cad = cad + 'Junio';
+			}
+			if(data.data.mes==6){
+				cad = cad + 'Julio';
+			}
+			if(data.data.mes==7){
+				cad = cad + 'Agosto';
+			}
+			if(data.data.mes==8){
+				cad = cad + 'Septiembre';
+			}
+			if(data.data.mes==9){
+				cad = cad + 'Octubre';
+			}
+			if(data.data.mes==10){
+				cad = cad + 'Noviembre';
+			}
+			if(data.data.mes==11){
+				cad = cad + 'Diciembre';
+			}
+			cad = cad + ' ' + data.data.year;
+			modalAddTitle(mymodal,cad);
+			var disponibles = data.data.disponibles;
+			var cadbono = '';
+			var contadoraso = 0;
+			var reservadores = '';
+			var idauth = $('body').attr('data-auth-id');
+			for(var i=0; i<data.data.customers.length; i++){
+				contadoraso = contadoraso + 1;
+				if(idauth==data.data.customers[i].id){
+					reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: #e36c0a;"> '+contadoraso+'. '+data.data.customers[i].name+'</li>';
+				}else{
+					reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. '+data.data.customers[i].name+'</li>';
+				}
+			}
+			contadoraso = contadoraso + 1;
+			while (contadoraso<=parseInt(data.data.aforo)){
+				reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. -</li>'; 
+				contadoraso++;
+			}
+			var consumocad = '';
+			if(data.data.consume_wod>0){
+				if(data.data.consume_wod>1){
+					consumocad = 'consumirán '+data.data.consume_wod+' créditos';
+				}else{
+					consumocad = 'consumirá '+data.data.consume_wod+' crédito';
+				}
+			}
+			if(data.data.consume_box>0){
+				if(data.data.consume_box>1){
+					consumocad = 'consumirán '+data.data.consume_box+' créditos';
+				}else{
+					consumocad = 'consumirá '+data.data.consume_box+' crédito';
+				}
+			}
+
+
+						
+			$('#reserva_propia_modal .modal-body').html('  <div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #07b255;font-weight: 600;font-size: 14px;">DISPONIBLE <i class="fa fa-smile-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 16px;color: #1e497d;font-weight: 600;">ESTÁS EN COLA PARA ESTA ACTIVIDAD</div><div style="text-align: center;font-size: 11px;color: black;margin-top: 8px;">Actualmente dispones de los siguientes créditos:</div><div style="text-align: center;font-size: 11px;margin-top: 3px;color: black;">WOD: '+data.data.credit_wod+' de un total de '+data.data.credit_wod_total+'</div><div style="text-align: center;font-size: 11px; color: black;">OPEN BOX: '+data.data.credit_box+' de un total de '+data.data.credit_box_total+'</div><div style="text-align: center;font-size: 11px;color: black;">BONO PREPAGO: '+data.data.credit_bono+' créditos</div><div style="font-size: 11px;color: black;text-align: center;margin-top: 8px;">Si la cola avanza y consigues obtener plaza para la reserva de actividad, se consumirá uno de tus créditos, a menos que canceles dicha reserva antes de que termine el plazo.</div><div style="overflow: auto;margin-top: 8px;"><div style="clear: both;color: white;background-color: #e36c0a;font-weight: 700;font-size: 20px;text-align: center;padding-right: 6px;margin-left: auto;cursor: pointer;margin-right: auto;" onclick="cerrarDialogoMiReserva();">MANTENERME EN COLA</div><div style="font-size: 20px;text-align: center;clear: both;font-weight: 700;color: white;background-color: #ff0000;cursor: pointer;margin-left: auto;margin-right: auto;margin-top: 15px;" onclick="deleteMiReservaCola('+id+');">SALIRME DE LA COLA</div></div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfo(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');
+		}else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+	});
+}
+
 
 function mostrarDialogoMiReserva(id){
 	var mymodal=newModal('reserva_propia_modal',true, true);
@@ -2157,7 +2293,7 @@ function addReservaCliente(id){
 							}else{
 								consumocad = 'consumirá '+data.data.consume_wod+' crédito';
 							}
-							$('#reserva_cliente_modal .modal-body').html('  <div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #ff0000;font-weight: 600;font-size: 14px;">NO DISPONIBLE <i class="fa fa-frown-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 19px;color: black;margin-bottom: 8px;font-weight: 600;">AFORO COMPLETO</div><div style="text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="cerrarDialogoReserva();">ACEPTAR</div><div style="margin-top:20px;text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #214b7f;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="addReservaClienteFinal('+id+');">PONERME EN COLA</div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfoCompleta(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfoCompleta(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');	
+							$('#reserva_cliente_modal .modal-body').html('  <div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #ff0000;font-weight: 600;font-size: 14px;">NO DISPONIBLE <i class="fa fa-frown-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 19px;color: black;margin-bottom: 8px;font-weight: 600;">AFORO COMPLETO</div><div style="text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="cerrarDialogoReserva();">ACEPTAR</div><div style="margin-top:20px;text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #214b7f;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="addReservaColaFinal('+id+');">PONERME EN COLA</div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfoCompleta(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfoCompleta(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');	
 						}else{
 							var contadoraso = 0;
 							var reservadores = '';
@@ -2200,7 +2336,7 @@ function addReservaCliente(id){
 								}else{
 									consumocad = 'consumirá '+data.data.consume_box+' crédito';
 								}
-								$('#reserva_cliente_modal .modal-body').html('<div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #ff0000;font-weight: 600;font-size: 14px;">NO DISPONIBLE <i class="fa fa-frown-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 19px;color: black;margin-bottom: 8px;font-weight: 600;">AFORO COMPLETO</div><div style="text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="cerrarDialogoReserva();">ACEPTAR</div><div style="margin-top:20px;text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #214b7f;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="addReservaClienteFinal('+id+');">PONERME EN COLA</div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfoCompleta(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfoCompleta(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');	
+								$('#reserva_cliente_modal .modal-body').html('<div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #ff0000;font-weight: 600;font-size: 14px;">NO DISPONIBLE <i class="fa fa-frown-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 19px;color: black;margin-bottom: 8px;font-weight: 600;">AFORO COMPLETO</div><div style="text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="cerrarDialogoReserva();">ACEPTAR</div><div style="margin-top:20px;text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #214b7f;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="addReservaColaFinal('+id+');">PONERME EN COLA</div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfoCompleta(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfoCompleta(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');	
 							}else{
 								var contadoraso = 0;
 								var reservadores = '';
@@ -2233,6 +2369,172 @@ function addReservaCliente(id){
 	});
 	/*
 	*/
+}
+
+function addReservaColaFinal(id){
+	
+		$.getJSON(api_url+'schedules/hay_plazas?callback=?', {id:id}, function(data){
+			if(data.status=='success'){
+				var disponibles = data.data.disponibles;
+				var disponibles_cola = data.data.disponibles_cola;
+				var minutos = data.data.minutos;
+				var consume_wod = parseInt(data.data.consume_wod);
+				var consume_box = parseInt(data.data.consume_box);
+				if(parseInt(disponibles)>0){
+
+					$.getJSON(api_url+'customers/get?callback=?', {}, function(data){
+						if(data.status=='success'){
+							var credit_box = parseInt(data.data.customer_profile.credit_box);
+							var credit_wod = parseInt(data.data.customer_profile.credit_wod);
+							if(consume_wod==0){
+								if(credit_box>=consume_box && credit_box!=0){
+									$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+										if(data.status=='success'){
+											launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+											alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+											location.reload();
+										}
+										else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#reservas-tabla').show();}
+			
+									});
+								}else{
+									launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+									$('.waiting').hide();
+									$('#reservas-tabla').show();
+									
+								}
+							}else{
+								if(consume_box==0){
+									if(credit_wod>=consume_wod && credit_wod!=0){
+										$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+											if(data.status=='success'){
+												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+												alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+												location.reload();
+											}
+											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#reservas-tabla').show();}
+										});
+									}else{
+										launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+										$('.waiting').hide();
+										$('#reservas-tabla').show();
+									}
+								}else{
+									if(credit_wod>=consume_wod && credit_box>=consume_box && credit_box!=0 && credit_wod!=0){
+										$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+											if(data.status=='success'){
+												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+												alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+												location.reload();
+											}
+											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#reservas-tabla').show();}
+			
+										});
+									}else{
+										launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');	
+										$('.waiting').hide();
+										$('#reservas-tabla').show();
+									}
+								}
+							}
+						}
+						else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+			
+					});
+
+				}else{
+					if(parseInt(disponibles_cola)>0){
+						var confirmacioncola=confirm('Esta actividad ya tiene todas sus plazas reservadas. ¿Está seguro de colocarse en cola para esta actividad? Realizaremos su reserva de forma automática si alguna plaza queda libre. En el caso de no liberarse ninguna plaza, cancelaremos su reserva y le avisaremos '+minutos+' minutos antes del inicio de la actividad. Las notificaciones se realizarán por Email y Telegram.');
+						if(confirmacioncola){
+							$('#reserva_cliente_modal .modal-body').html('<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
+							$.getJSON(api_url+'customers/get?callback=?', {}, function(data){
+								if(data.status=='success'){
+									var credit_box = parseInt(data.data.customer_profile.credit_box);
+									var credit_wod = parseInt(data.data.customer_profile.credit_wod);
+									if(consume_wod==0){
+										if(credit_box>=consume_box && credit_box!=0){
+											$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+												if(data.status=='success'){
+													launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+													loadCalendar();
+													alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													$('#reserva_cliente_modal .modal-body').html('<div style="text-align: center;color: #0bb358;font-weight: 600;font-size: 14px;">HAS SIDO AÑADIDO A LA COLA<i class="fa fa-smile-o"></i></div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Recuerda que desde este momento, si una plaza queda libre, el sistema asignará automáticamente la plaza por orden de cola. Si esto sucede se te notificará vía e-mail o Telegram (según tengas configurado). Si te llega la notificación, significará que ya dispondrás de tu reserva y se consumirá el crédito que corresponda, por ello, si no puedes acudir deberás cancelar tu reserva antes de que concluya el plazo de cancelación.</div>');
+													$('#reserva_cliente_modal .close').show();
+												}
+												else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#reservas-tabla').show();}
+			
+											});
+										}else{
+											launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+											$('.waiting').hide();
+											$('#reservas-tabla').show();
+										}
+									}else{
+										if(consume_box==0){
+											if(credit_wod>=consume_wod && credit_wod!=0){
+												$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+													if(data.status=='success'){
+														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+														alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														location.reload();
+													}
+													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#reservas-tabla').show();}
+			
+												});
+											}else{
+												launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+												$('.waiting').hide();
+												$('#reservas-tabla').show();
+											}
+										}else{
+											if(credit_wod>=consume_wod && credit_box>=consume_box && credit_box!=0 && credit_wod!=0){
+												$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+													if(data.status=='success'){
+														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+														alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														location.reload();
+													}
+													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#reservas-tabla').show();}
+			
+												});
+											}else{
+												launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');	
+												$('.waiting').hide();
+												$('#reservas-tabla').show();
+											}
+										}
+									}
+								}
+								else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+									$('.waiting').hide();
+									$('#reservas-tabla').show();
+								}
+								
+							});
+
+						}else{
+							location.reload();
+						}
+					}else{
+						launch_alert('No hay plazas disponibles para esta actividad y la cola está completa.','warning');
+						$('.waiting').hide();
+						$('#reservas-tabla').show();
+					}
+				}
+			}
+			else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
+				$('.waiting').hide();
+				$('#reservas-tabla').show();
+			}
+		
+		});
+	
 }
 
 
