@@ -2159,6 +2159,17 @@ function addReservaCliente(id){
 							}
 							$('#reserva_cliente_modal .modal-body').html('  <div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #ff0000;font-weight: 600;font-size: 14px;">NO DISPONIBLE <i class="fa fa-frown-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 19px;color: black;margin-bottom: 8px;font-weight: 600;">AFORO COMPLETO</div><div style="text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="cerrarDialogoReserva();">ACEPTAR</div><div style="margin-top:20px;text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #214b7f;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="addReservaClienteFinal('+id+');">PONERME EN COLA</div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfoCompleta(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');	
 						}else{
+							var contadoraso = 0;
+							var reservadores = '';
+							for(var i=0; i<data.data.customers.length; i++){
+								contadoraso = contadoraso + 1;
+								reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. '+data.data.customers[i].name+'</li>';
+							}
+							contadoraso = contadoraso + 1;
+							while (contadoraso<=parseInt(data.data.aforo)){
+								reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. -</li>'; 
+								contadoraso++;
+							}
 							var consumocad = '';
 							if(data.data.consume_wod>1){
 								consumocad = 'consumirán '+data.data.consume_wod+' créditos';
@@ -2191,6 +2202,17 @@ function addReservaCliente(id){
 								}
 								$('#reserva_cliente_modal .modal-body').html('<div style="text-align: center; margin-top: -16px; color: black; font-size: 13px; font-weight: 500;">'+data.data.time_start+' - '+data.data.time_end+'</div><div style="text-align: center;color: #ff0000;font-weight: 600;font-size: 14px;">NO DISPONIBLE <i class="fa fa-frown-o"></i></div><div style="text-align: center;margin-top: 9px;font-size: 19px;color: black;margin-bottom: 8px;font-weight: 600;">AFORO COMPLETO</div><div style="text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #ff0000;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="cerrarDialogoReserva();">ACEPTAR</div><div style="margin-top:20px;text-align:center;overflow:auto;font-size: 20px;padding-left: 2px;font-weight: 700;color: white;background-color: #214b7f;padding-right: 2px;cursor: pointer;margin-left: 16px;clear:both;" onclick="addReservaClienteFinal('+id+');">PONERME EN COLA</div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Actividad actualmente también reservada por:</div><ol style="display: block;padding-left: 27px;margin-top: 6px;">'+reservadores+'</ol><div style="text-align: center;"><i onclick="mostrarDialogoInfoCompleta(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" class="fa fa-info-circle" style="cursor: pointer; font-size: 26px; color: black;"></i></div><div onclick="mostrarDialogoInfo(\''+cad+'\',\''+data.data.time_start+' - '+data.data.time_end+'\',\''+data.data.activity_desc+'\','+data.data.aforo+','+data.data.minimo+','+disponibles+','+data.data.aforo+','+data.data.days_pre+','+data.data.minutes_pre+',\''+consumocad+'\','+data.data.minutes_post+');" style="text-align: center;text-transform: uppercase;background-color: #8064a2;color: white;font-weight: 700;font-size: 12px;cursor: pointer;margin-bottom: 10px;">Ver condiciones e información adicional</div>');	
 							}else{
+								var contadoraso = 0;
+								var reservadores = '';
+								for(var i=0; i<data.data.customers.length; i++){
+									contadoraso = contadoraso + 1;
+									reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. '+data.data.customers[i].name+'</li>';
+								}
+								contadoraso = contadoraso + 1;
+								while (contadoraso<=parseInt(data.data.aforo)){
+									reservadores = reservadores + '<li style="clear: both; display: block; font-size: 11px; color: black;"> '+contadoraso+'. -</li>'; 
+									contadoraso++;
+								}
 							var consumocad = '';
 							if(data.data.consume_box>1){
 								consumocad = 'consumirán '+data.data.consume_box+' créditos';
