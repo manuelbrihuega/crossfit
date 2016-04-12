@@ -381,7 +381,7 @@ def list_all_tabla_for_customers(request):
                     if res.auth.id==auth.id:
                         estado='MI RESERVA'
                 disponibles = aforo - ocupadas
-                if disponibles < 0:
+                if disponibles < 1:
                     disponibles = 0;
                     if estado != 'MI RESERVA':
                         estado='COMPLETA'
