@@ -88,12 +88,17 @@ def send_email_new_reservation(cus_id, res_id):
         res=Reservations.objects.get(id=res_id)
         cus=U_Customers.objects.get(id=cus_id)
         conf=Configuration.objects.get(id=1)
+        cadminutos = ''
+        if res.schedule_time.minutes_post > 99:
+          cadminutos = str(res.schedule_time.minutes_post/60) + ' horas'
+        else:
+          cadminutos = str(res.schedule_time.minutes_post) + ' minutos'
         content = render_to_string("emails/new_reservation.html",
                                    {'name':cus.auth.name,
                                    'actividad':res.schedule_time.schedule.activity.name,
                                    'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
                                    'horario': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1],
-                                   'minutos': str(res.schedule_time.minutes_post)})
+                                   'minutos': str(cadminutos)})
         send_email(content,'Nueva reserva realizada', [cus.auth.email],'Nueva reserva','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
@@ -105,12 +110,17 @@ def send_email_new_reservation_cola(cus_id, res_id):
         res=Reservations.objects.get(id=res_id)
         cus=U_Customers.objects.get(id=cus_id)
         conf=Configuration.objects.get(id=1)
+        cadminutos = ''
+        if res.schedule_time.minutes_post > 99:
+          cadminutos = str(res.schedule_time.minutes_post/60) + ' horas'
+        else:
+          cadminutos = str(res.schedule_time.minutes_post) + ' minutos'
         content = render_to_string("emails/new_reservation_cola.html",
                                    {'name':cus.auth.name,
                                    'actividad':res.schedule_time.schedule.activity.name,
                                    'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
                                    'horario': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1],
-                                   'minutos': str(res.schedule_time.minutes_post)})
+                                   'minutos': str(cadminutos)})
         send_email(content,'Nueva reserva realizada', [cus.auth.email],'Nueva reserva','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
@@ -122,12 +132,17 @@ def send_email_cancel_reservation_cola(cus_id, res_id):
         res=Reservations.objects.get(id=res_id)
         cus=U_Customers.objects.get(id=cus_id)
         conf=Configuration.objects.get(id=1)
+        cadminutos = ''
+        if res.schedule_time.minutes_post > 99:
+          cadminutos = str(res.schedule_time.minutes_post/60) + ' horas'
+        else:
+          cadminutos = str(res.schedule_time.minutes_post) + ' minutos'
         content = render_to_string("emails/cancel_reservation_cola.html",
                                    {'name':cus.auth.name,
                                    'actividad':res.schedule_time.schedule.activity.name,
                                    'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
                                    'horario':get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1],
-                                   'minutos': str(res.schedule_time.minutes_post)})
+                                   'minutos': str(cadminutos)})
         send_email(content,'Reserva en cola cancelada', [cus.auth.email],'Reserva cancelada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
@@ -139,12 +154,17 @@ def send_email_cancel_reservation_cola_fin(auth_id, res_id):
         res=Reservations.objects.get(id=res_id)
         auth=Auth.objects.get(id=auth_id)
         conf=Configuration.objects.get(id=1)
+        cadminutos = ''
+        if res.schedule_time.minutes_post > 99:
+          cadminutos = str(res.schedule_time.minutes_post/60) + ' horas'
+        else:
+          cadminutos = str(res.schedule_time.minutes_post) + ' minutos'
         content = render_to_string("emails/cancel_reservation_cola_fin.html",
                                    {'name':auth.name,
                                    'actividad':res.schedule_time.schedule.activity.name,
                                    'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
                                    'horario': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1],
-                                   'minutos': str(res.schedule_time.minutes_post)})
+                                   'minutos': str(cadminutos)})
         send_email(content,'Reserva en cola cancelada', [auth.email],'Reserva cancelada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
@@ -156,13 +176,18 @@ def send_email_confirm_reservation(auth_id, res_id):
         res=Reservations.objects.get(id=res_id)
         auth=Auth.objects.get(id=auth_id)
         conf=Configuration.objects.get(id=1)
+        cadminutos = ''
+        if res.schedule_time.minutes_post > 99:
+          cadminutos = str(res.schedule_time.minutes_post/60) + ' horas'
+        else:
+          cadminutos = str(res.schedule_time.minutes_post) + ' minutos'
         content = render_to_string("emails/confirm_reservation.html",
                                    {'name':auth.name,
                                    'horaempiezo': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1],
                                    'actividad':res.schedule_time.schedule.activity.name,
                                    'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
                                    'horario': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1],
-                                   'minutos': str(res.schedule_time.minutes_post)})
+                                   'minutos': str(cadminutos)})
         send_email(content,'Reserva confirmada', [auth.email],'Reserva confirmada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
@@ -175,13 +200,18 @@ def send_email_cambiocolaareserva_reservation(auth_id, res_id):
         res=Reservations.objects.get(id=res_id)
         auth=Auth.objects.get(id=auth_id)
         conf=Configuration.objects.get(id=1)
+        cadminutos = ''
+        if res.schedule_time.minutes_post > 99:
+          cadminutos = str(res.schedule_time.minutes_post/60) + ' horas'
+        else:
+          cadminutos = str(res.schedule_time.minutes_post) + ' minutos'
         content = render_to_string("emails/confirm_cambio.html",
                                    {'name':auth.name,
                                    'horaempiezo': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1],
                                    'actividad':res.schedule_time.schedule.activity.name,
                                    'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
                                    'horario': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1],
-                                   'minutos': str(res.schedule_time.minutes_post)})
+                                   'minutos': str(cadminutos)})
         send_email(content,'Reserva realizada', [auth.email],'Reserva realizada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
@@ -193,12 +223,17 @@ def send_email_cancel_reservation(auth_id, res_id):
         res=Reservations.objects.get(id=res_id)
         auth=Auth.objects.get(id=auth_id)
         conf=Configuration.objects.get(id=1)
+        cadminutos = ''
+        if res.schedule_time.minutes_post > 99:
+          cadminutos = str(res.schedule_time.minutes_post/60) + ' horas'
+        else:
+          cadminutos = str(res.schedule_time.minutes_post) + ' minutos'
         content = render_to_string("emails/cancel_reservation.html",
                                    {'name':auth.name,
                                    'actividad':res.schedule_time.schedule.activity.name,
                                    'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
                                    'horario': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1],
-                                   'minutos': str(res.schedule_time.minutes_post)})
+                                   'minutos': str(cadminutos)})
         send_email(content,'Reserva cancelada', [auth.email],'Reserva cancelada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
@@ -210,12 +245,17 @@ def send_email_cancel_reservation_minimo(auth_id, res_id):
         res=Reservations.objects.get(id=res_id)
         auth=Auth.objects.get(id=auth_id)
         conf=Configuration.objects.get(id=1)
+        cadminutos = ''
+        if res.schedule_time.minutes_post > 99:
+          cadminutos = str(res.schedule_time.minutes_post/60) + ' horas'
+        else:
+          cadminutos = str(res.schedule_time.minutes_post) + ' minutos'
         content = render_to_string("emails/cancel_reservation_minimo.html",
                                    {'name':auth.name,
                                    'actividad':res.schedule_time.schedule.activity.name,
                                    'fecha': str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year),
                                    'horario': get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1],
-                                   'minutos': str(res.schedule_time.minutes_post)})
+                                   'minutos': str(cadminutos)})
         send_email(content,'Reserva cancelada', [auth.email],'Reserva cancelada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
@@ -227,11 +267,16 @@ def send_email_cancel_reservation_minimo_super(sch_id):
     try:
         conf=Configuration.objects.get(id=1)
         sch=Schedules_times.objects.get(id=sch_id)
+        cadminutos = ''
+        if sch.minutes_post > 99:
+          cadminutos = str(sch.minutes_post/60) + ' horas'
+        else:
+          cadminutos = str(sch.minutes_post) + ' minutos'
         content = render_to_string("emails/cancel_reservation_minimo_super.html",
                                    {'actividad':sch.schedule.activity.name,
                                    'fecha': str(sch.schedule.date.day)+'-'+str(sch.schedule.date.month)+'-'+str(sch.schedule.date.year),
                                    'horario': get_string_from_date(sch.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(sch.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_end).split(' ')[1].split(':')[1],
-                                   'minutos': str(sch.minutes_post)})
+                                   'minutos': str(cadminutos)})
         conf=Configuration.objects.get(id=1)
         send_email(content,'Actividad cancelada', [conf.email],'Actividad cancelada','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
@@ -242,6 +287,11 @@ def send_email_confirm_class_super(sch_id, asistentes, numplazasdos):
     try:
         conf=Configuration.objects.get(id=1)
         sch=Schedules_times.objects.get(id=sch_id)
+        cadminutos = ''
+        if sch.minutes_post > 99:
+          cadminutos = str(sch.minutes_post/60) + ' horas'
+        else:
+          cadminutos = str(sch.minutes_post) + ' minutos'
         cad=asistentes.split(',')
         finalcad=''
         for ass in cad:
@@ -251,7 +301,7 @@ def send_email_confirm_class_super(sch_id, asistentes, numplazasdos):
                                    {'actividad':sch.schedule.activity.name,
                                    'fecha': str(sch.schedule.date.day)+'-'+str(sch.schedule.date.month)+'-'+str(sch.schedule.date.year),
                                    'horario': get_string_from_date(sch.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(sch.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_end).split(' ')[1].split(':')[1],
-                                   'minutos': str(sch.minutes_post),
+                                   'minutos': str(cadminutos),
                                    'asistentes': finalcad,
                                    'numeroasis':numplazasdos})
         conf=Configuration.objects.get(id=1)

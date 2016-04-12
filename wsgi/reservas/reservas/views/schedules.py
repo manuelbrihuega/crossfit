@@ -620,8 +620,14 @@ def delete_reservation(request):
                     nick = 'User_Id'+str(res.auth.id)
                     phone = '+34'+str(res.auth.phone)
                     conf=Configuration.objects.get(id=1)
-                    minutitos=str(res.schedule_time.minutes_post)
-                    message = 'Ha quedado libre una plaza para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Acabamos de registrar su reserva. Puedes cancelar la reserva hasta '+minutitos+' minutos antes de la actividad'
+                    minutitos=res.schedule_time.minutes_post
+                    cadminutitos = ''
+                    if minutitos >=100:
+                        cadminutitos = str(minutitos/60) + ' horas'
+                    else:
+                        cadminutitos = str(minutitos) + ' minutos'
+    
+                    message = 'Ha quedado libre una plaza para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Acabamos de registrar su reserva. Puedes cancelar la reserva hasta '+cadminutitos+' antes de la actividad'
                     cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
                     for c in cu:
                         if c.emailnotif:
@@ -716,8 +722,13 @@ def delete_reservation_client(request):
                         nick = 'User_Id'+str(res.auth.id)
                         phone = '+34'+str(res.auth.phone)
                         conf=Configuration.objects.get(id=1)
-                        minutitos=str(res.schedule_time.minutes_post)
-                        message = 'Ha quedado libre una plaza para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Acabamos de registrar su reserva. Puedes cancelar la reserva hasta '+minutitos+' minutos antes de la actividad'
+                        minutitos=res.schedule_time.minutes_post
+                        cadminutitos = ''
+                        if minutitos >=100:
+                            cadminutitos = str(minutitos/60) + ' horas'
+                        else:
+                            cadminutitos = str(minutitos) + ' minutos'
+                        message = 'Ha quedado libre una plaza para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Acabamos de registrar su reserva. Puedes cancelar la reserva hasta '+cadminutitos+' antes de la actividad'
                         cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
                         for c in cu:
                             if c.emailnotif:
@@ -955,8 +966,13 @@ def add_reservation(request):
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
             conf=Configuration.objects.get(id=1)
-            minutitos=str(reservation.schedule_time.minutes_post)
-            message = 'Acabas de realizar una reserva para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Te recordamos que si deseas cancelarla, puedes hacerlo hasta '+minutitos+' minutos antes de la actividad.'
+            minutitos=reservation.schedule_time.minutes_post
+            cadminutitos = ''
+            if minutitos >=100:
+                cadminutitos = str(minutitos/60) + ' horas'
+            else:
+                cadminutitos = str(minutitos) + ' minutos'
+            message = 'Acabas de realizar una reserva para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Te recordamos que si deseas cancelarla, puedes hacerlo hasta '+cadminutitos+' antes de la actividad.'
             if customer.emailnotif:
                 add_task(datetime.utcnow(),'send_email_new_reservation_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
             if customer.telegramnotif:
@@ -1059,8 +1075,13 @@ def add_reservation_client(request):
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
             conf=Configuration.objects.get(id=1)
-            minutitos=str(reservation.schedule_time.minutes_post)
-            message = 'Acabas de realizar una reserva para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Te recordamos que si deseas cancelarla, puedes hacerlo hasta '+minutitos+' minutos antes de la actividad.'
+            minutitos=reservation.schedule_time.minutes_post
+            cadminutitos = ''
+            if minutitos >=100:
+                cadminutitos = str(minutitos/60) + ' horas'
+            else:
+                cadminutitos = str(minutitos) + ' minutos'
+            message = 'Acabas de realizar una reserva para '+str(reservation.schedule_time.schedule.activity)+' el '+str(reservation.schedule_time.schedule.date.day)+'-'+str(reservation.schedule_time.schedule.date.month)+'-'+str(reservation.schedule_time.schedule.date.year)+' de '+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(reservation.schedule_time.time_end).split(' ')[1].split(':')[1]+'. Te recordamos que si deseas cancelarla, puedes hacerlo hasta '+cadminutitos+' antes de la actividad.'
             if customer.emailnotif:
                 add_task(datetime.utcnow(),'send_email_new_reservation_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
             if customer.telegramnotif:
@@ -1081,7 +1102,12 @@ def add_reservation_client(request):
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
             conf=Configuration.objects.get(id=1)
-            minutitos=str(reservation.schedule_time.minutes_post)
+            minutitos=reservation.schedule_time.minutes_post
+            cadminutitos = ''
+            if minutitos >=100:
+                cadminutitos = str(minutitos/60) + ' horas'
+            else:
+                cadminutitos = str(minutitos) + ' minutos'
             message = 'Acabas de ponerte en cola para '+str(schedule_time.schedule.activity)+' el '+str(schedule_time.schedule.date.day)+'-'+str(schedule_time.schedule.date.month)+'-'+str(schedule_time.schedule.date.year)+' de '+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[1]+'. Cuando alguna plaza quede libre, su petición se procesará y se realizará la reserva.'
             if customer.emailnotif:
                 add_task(datetime.utcnow(),'send_email_new_reservation_cola_task(cus_id="'+str(customer.id)+'",res_id="'+str(reservation.id)+'")')
