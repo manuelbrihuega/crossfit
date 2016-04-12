@@ -2031,6 +2031,7 @@ function addReservaCliente(id){
 			cad = cad + ' ' + data.data.year;
 			modalAddTitle(mymodal,cad);
 			var disponibles = data.data.disponibles;
+			var disponibles_cola = data.data.disponibles_cola;
 			var cadbono = '';
 
 			if(parseInt(disponibles)>0){
