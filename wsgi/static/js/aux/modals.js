@@ -1937,14 +1937,14 @@ function mostrarDialogoMiReserva(id){
 				contadoraso++;
 			}
 			var consumocad = '';
-			if(data.data.consume_wod>1){
+			if(data.data.consume_wod>0){
 				if(data.data.consume_wod>1){
 					consumocad = 'consumirán '+data.data.consume_wod+' créditos';
 				}else{
 					consumocad = 'consumirá '+data.data.consume_wod+' crédito';
 				}
 			}
-			if(data.data.consume_box>1){
+			if(data.data.consume_box>0){
 				if(data.data.consume_box>1){
 					consumocad = 'consumirán '+data.data.consume_box+' créditos';
 				}else{
