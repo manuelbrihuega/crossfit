@@ -832,6 +832,40 @@ def get_foreign_reservations_customer(request):
         data=json.dumps({'status':'failed','response':'not_logged'})
     return APIResponse(request,data)
 
+def get_reservations_customer(request):
+    """
+    Get foreign reservations
+    """
+    if 'auth_id' not in request.session:
+        raise Exception('not_logged')
+
+    if not have_permission(request.session['auth_id'], 'delete_reservation_client'):
+        raise Exception('unauthorized_delete_reservation_client')
+
+    try:
+        user,auth = get_user_and_auth(request.session['auth_id'])
+        reservations=Reservations.objects.filter(Q(auth_id=auth.id))
+        reservations_profile=[]
+        for res in reservations:
+            reservations_profile.append({'id':res.id,
+                                 'name':res.auth.name,
+                                 'surname':res.auth.surname,
+                                 'email':res.auth.email,
+                                 'queue':res.queue,
+                                 'position_queue':res.position_queue,
+                                 'date':get_string_from_date(res.date),
+                                 'phone':res.auth.phone,
+                                 'time_start':get_string_from_date(res.schedule_time.time_start),
+                                 'time_end':get_string_from_date(res.schedule_time.time_end),
+                                 'activity':res.schedule_time.schedule.activity.name})  
+
+        data=json.dumps({'status':'success','response':'get_foreign_reservations_customer','data':{'reservations':reservations_profile}})
+    except Exception as e:
+        data=json.dumps({'status':'failed','response':e.args[0]})
+            
+    return APIResponse(request,data)
+
+
 
 def get_foreign_pagos_customer(request):
     """

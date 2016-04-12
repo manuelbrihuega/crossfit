@@ -84,6 +84,11 @@ def perfil(request):
     content = RequestContext(request,{'section':'perfil','css':['partials/modals.css']})
     return HttpResponse(template.render(content)) 
 
+def historial(request):
+    template = loader.get_template('completes/base_dashboard.html')
+    content = RequestContext(request,{'section':'historial','css':['partials/modals.css']})
+    return HttpResponse(template.render(content)) 
+
 def configuracion(request):
     template = loader.get_template('completes/base_dashboard.html')
     content = RequestContext(request,{'section':'configuracion','css':['partials/modals.css']})

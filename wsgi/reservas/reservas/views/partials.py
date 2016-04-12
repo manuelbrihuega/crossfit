@@ -118,6 +118,11 @@ def perfil_clientes(request):
     content = RequestContext(request)
     return HttpResponse(template.render(content))
 
+def historial_clientes(request):
+    template = loader.get_template('partials/historial_clientes.html')
+    content = RequestContext(request)
+    return HttpResponse(template.render(content))
+
 def configuracion_super(request):
     template = loader.get_template('partials/configuracion_super.html')
     content = RequestContext(request)
