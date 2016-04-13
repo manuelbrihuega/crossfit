@@ -32,7 +32,14 @@ function loadTemplate() {
 	});
 }
 
-
+function ordenarSelect(id_componente)
+    {
+      var selectToSort = jQuery('#' + id_componente);
+      var optionActual = selectToSort.val();
+      selectToSort.html(selectToSort.children('option').sort(function (a, b) {
+        return a.text === b.text ? 0 : a.text < b.text ? -1 : 1;
+      })).val(optionActual);
+    }
 
 
 function loadNews() {
@@ -74,6 +81,7 @@ function loadNews() {
 				cad = cad + '<option value="'+act.id+'">Grupo '+act.name+' '+diasemana+' '+act.day+'/'+act.month+'/'+act.year+' ('+act.time_start.split(':')[0]+':'+act.time_start.split(':')[1]+' - '+act.time_end.split(':')[0]+':'+act.time_end.split(':')[1]+')'+'</option>';
 			});
 			$('#new_destiner_dos').html(cad);
+			ordenarSelect('new_destiner_dos');
 		}
 		else super_error('Customers failure');
 	});
