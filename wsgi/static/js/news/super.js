@@ -39,7 +39,7 @@ function ordenarSelect(id_componente)
       selectToSort.html(selectToSort.children('option').sort(function (a, b) {
         return a.text === b.text ? 0 : a.text < b.text ? -1 : 1;
       })).val(optionActual);
-    }
+    } 
 
 
 function loadNews() {
