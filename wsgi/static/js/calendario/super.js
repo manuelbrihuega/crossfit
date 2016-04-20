@@ -439,6 +439,7 @@ function loadCalendar() {
 		$('#reservas-tabla').remove();
 	}
 	$.getJSON(api_url+'schedules/list_all_tabla?callback=?', {}, function(data){
+		$.ajaxSetup({ cache: true });
 		if(data.status=='success'){
 			$('.waiting').hide();
 			$('#enterprises_accordion').append('<div id="reservas-tabla" style="overflow-x: scroll; white-space: nowrap;"></div>');
