@@ -2455,7 +2455,8 @@ function addReservaColaFinal(id){
 										if(data.status=='success'){
 											launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 											alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
-											location.reload();
+											//location.reload();
+											loadCalendar();
 										}
 										else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
 									$('#reservas-tabla').show();}
@@ -2474,7 +2475,8 @@ function addReservaColaFinal(id){
 											if(data.status=='success'){
 												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 												alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
-												location.reload();
+												//location.reload();
+												loadCalendar();
 											}
 											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
 									$('#reservas-tabla').show();}
@@ -2490,7 +2492,8 @@ function addReservaColaFinal(id){
 											if(data.status=='success'){
 												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 												alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
-												location.reload();
+												//location.reload();
+												loadCalendar();
 											}
 											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
 									$('#reservas-tabla').show();}
@@ -2543,7 +2546,8 @@ function addReservaColaFinal(id){
 													if(data.status=='success'){
 														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 														alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
-														location.reload();
+														//location.reload();
+														loadCalendar();
 													}
 													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
 									$('#reservas-tabla').show();}
@@ -2560,7 +2564,8 @@ function addReservaColaFinal(id){
 													if(data.status=='success'){
 														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 														alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
-														location.reload();
+														//location.reload();
+														loadCalendar();
 													}
 													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
 									$('#reservas-tabla').show();}
@@ -2582,7 +2587,8 @@ function addReservaColaFinal(id){
 							});
 
 						}else{
-							location.reload();
+							//location.reload();
+							loadCalendar();
 						}
 					}else{
 						launch_alert('No hay plazas disponibles para esta actividad y la cola está completa.','warning');
@@ -2626,7 +2632,8 @@ function addReservaClienteFinal(id){
 										if(data.status=='success'){
 											launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 											alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
-											location.reload();
+											//location.reload();
+											loadCalendar();
 										}
 										else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
 									$('#reservas-tabla').show();}
@@ -2645,7 +2652,8 @@ function addReservaClienteFinal(id){
 											if(data.status=='success'){
 												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 												alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
-												location.reload();
+												//location.reload();
+												loadCalendar();
 											}
 											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
 									$('#reservas-tabla').show();}
@@ -2661,7 +2669,8 @@ function addReservaClienteFinal(id){
 											if(data.status=='success'){
 												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 												alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
-												location.reload();
+												//location.reload();
+												loadCalendar();
 											}
 											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
 									$('#reservas-tabla').show();}
@@ -2714,7 +2723,8 @@ function addReservaClienteFinal(id){
 													if(data.status=='success'){
 														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 														alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
-														location.reload();
+														//location.reload();
+														loadCalendar();
 													}
 													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
 									$('#reservas-tabla').show();}
@@ -2731,7 +2741,8 @@ function addReservaClienteFinal(id){
 													if(data.status=='success'){
 														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 														alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
-														location.reload();
+														//location.reload();
+														loadCalendar();
 													}
 													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
 									$('#reservas-tabla').show();}
@@ -2753,7 +2764,8 @@ function addReservaClienteFinal(id){
 							});
 
 						}else{
-							location.reload();
+							//location.reload();
+							loadCalendar();
 						}
 					}else{
 						launch_alert('No hay plazas disponibles para esta actividad y la cola está completa.','warning');
