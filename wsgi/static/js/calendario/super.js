@@ -10,7 +10,6 @@ function get_content() {
     ).then(function(){
 		$.post('partials/calendario_super', function(template, textStatus, xhr) {
 			$('#main').html(template);
-			listarActividades();
 			$('#horaini0').timepicker({
 		    			showPeriodLabels: false,
 		    			hourText: 'Hora',
@@ -857,6 +856,7 @@ function loadCalendar() {
 				disablePast: true,
 				xmlUrl: data.data
 			});*/
+		listarActividades();
 		}
 	});
 }
