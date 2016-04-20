@@ -20,6 +20,7 @@ def revise_tasks():
             print 'EXEC: '+task.method
         except:
             print 'ERROR EXEC: '+task.method
+    revise_reservations()
 
     return True
 
@@ -32,7 +33,8 @@ def revise_reservations():
     from reservas.aux.date import *
 
     hoy=datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
-    reservas=Reservations.objects.filter(Q(schedule_time__schedule__date__gt=hoy) & Q(cursada=False))
+    hoymasuno=datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=1)  
+    reservas=Reservations.objects.filter(Q(schedule_time__schedule__date__gt=hoy) & Q(cursada=False) & Q(schedule_time__schedule__date__lt=hoymasuno))
     conf=Configuration.objects.get(id=1)
     for res in reservas:
         fechaparaactividad = datetime(res.schedule_time.schedule.date.year, res.schedule_time.schedule.date.month, res.schedule_time.schedule.date.day, res.schedule_time.time_start.hour, res.schedule_time.time_start.minute, 0)
@@ -99,7 +101,7 @@ def revise_reservations():
                             add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     res.delete()
 
-    schedules_timess=Schedules_times.objects.filter(Q(schedule__date__gt=hoy))
+    schedules_timess=Schedules_times.objects.filter(Q(schedule__date__gt=hoy) & Q(cursada=False) & Q(schedule__date__lt=hoymasuno))
     for sch in schedules_timess:
         print 'RECORRIENDO'
         if not sch.cursada:
