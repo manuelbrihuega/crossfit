@@ -103,9 +103,7 @@ def revise_reservations():
 
     schedules_timess=Schedules_times.objects.filter(Q(schedule__date__gt=hoy) & Q(cursada=False) & Q(schedule__date__lt=hoymasuno))
     for sch in schedules_timess:
-        print 'RECORRIENDO'
         if not sch.cursada:
-            print 'DENTRO'
             fechaparaactividaddos = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
             fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=sch.minutes_pre)
             if datetime.today() >= fechasepuedecancelardos:
