@@ -20,7 +20,7 @@ def revise_tasks():
             print 'EXEC: '+task.method
         except:
             print 'ERROR EXEC: '+task.method
-    revise_reservations()
+    """revise_reservations()"""
 
     return True
 
@@ -137,6 +137,41 @@ def revise_reservations():
 
                     #aqui estamos avisando al super de que la clase se cancela xq no hay gente
                 
+def revise_schedule(idschedule):
+    sch = Schedules_times.objects.get(id=idschedule)
+    if not sch.cursada:
+        fechaparaactividaddos = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
+        fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=sch.minutes_pre)
+        if datetime.today() >= fechasepuedecancelardos:
+            rssdos = Reservations.objects.filter(Q(schedule_time__id=sch.id))
+            numplazasdos = 0
+            asistentes = ''
+            for rsdos in rssdos:
+                numplazasdos = numplazasdos + 1
+                asistentes = asistentes + rsdos.auth.name + ' ' + rsdos.auth.surname + ', '
+            minimumdos = sch.schedule.activity.min_capacity
+            if numplazasdos < minimumdos:
+                authito = Auth.objects.get(id=1)
+                name = 'User_Id'+str(authito.id)
+                nick = 'User_Id'+str(authito.id)
+                phone = '+34'+str(authito.phone)
+                message = 'La actividad '+str(sch.schedule.activity.name)+' del '+str(sch.schedule.date.day)+'-'+str(sch.schedule.date.month)+'-'+str(sch.schedule.date.year)+' de '+get_string_from_date(sch.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(sch.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA debido a que la actividad no ha cubierto el cupo mínimo de participantes.'
+                send_email_cancel_reservation_minimo_super(str(sch.id))
+                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                sch.cursada=True
+                sch.save()
+            else:
+                authito = Auth.objects.get(id=1)
+                name = 'User_Id'+str(authito.id)
+                nick = 'User_Id'+str(authito.id)
+                phone = '+34'+str(authito.phone)
+                message = 'La actividad '+str(sch.schedule.activity.name)+' del '+str(sch.schedule.date.day)+'-'+str(sch.schedule.date.month)+'-'+str(sch.schedule.date.year)+' de '+get_string_from_date(sch.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(sch.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_end).split(' ')[1].split(':')[1]+' ha sido CONFIRMADA. Asistirán '+str(numplazasdos)+' personas.'
+                add_task(datetime.utcnow(),'send_email_confirm_class_super_task(sch_id="'+str(sch.id)+'",asistentes="'+asistentes+'",numplazasdos="'+str(numplazasdos)+'")')
+                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                sch.cursada=True
+                sch.save()
+
+
 
 def reload_credit_users_task():
     from reservas.models import *
