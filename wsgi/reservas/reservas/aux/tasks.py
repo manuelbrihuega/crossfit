@@ -232,9 +232,10 @@ def pruebarapida():
     schedules_times = Schedules_times.objects.all()
     for schedule_time in schedules_times:
         if not schedule_time.cursada:
-            fechaparaactividaddos = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, int(schedule_time.time_start.split(':')[0]), int(schedule_time.time_start.split(':')[1]), 0)
-            fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=int(schedule_time.minutes_pre))
-            add_task(fechasepuedecancelardos,'revise_schedule_task(idschedule="'+str(schedule_time.id)+'")')
+            if schedule_time.schedule.concrete:
+                fechaparaactividaddos = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, int(schedule_time.time_start.split(':')[0]), int(schedule_time.time_start.split(':')[1]), 0)
+                fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=int(schedule_time.minutes_pre))
+                add_task(fechasepuedecancelardos,'revise_schedule_task(idschedule="'+str(schedule_time.id)+'")')
 
 def not_pay_not_valid_task():
     from reservas.models import *
