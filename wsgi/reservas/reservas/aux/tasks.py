@@ -233,7 +233,7 @@ def pruebarapida():
     for schedule_time in schedules_times:
         if not schedule_time.cursada:
             if schedule_time.schedule.concrete:
-                fechaparaactividaddos = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, int(schedule_time.time_start.split(':')[0]), int(schedule_time.time_start.split(':')[1]), 0)
+                fechaparaactividaddos = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, schedule_time.time_start.hour, schedule_time.time_start.minutes, 0)
                 fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=int(schedule_time.minutes_pre))
                 add_task(fechasepuedecancelardos,'revise_schedule_task(idschedule="'+str(schedule_time.id)+'")')
 
