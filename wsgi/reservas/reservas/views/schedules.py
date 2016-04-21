@@ -148,6 +148,10 @@ def add_interval(request):
                             schedule_timeaux.minutes_post=request.GET['minutes_post']
                             schedule_timeaux.schedule=scheduleaux
                             schedule_timeaux.save()
+                            fechaparaactividaddos = datetime(schedule_timeaux.schedule.date.year, schedule_timeaux.schedule.date.month, schedule_timeaux.schedule.date.day, int(schedule_timeaux.time_start.split(':')[0]), int(schedule_timeaux.time_start.split(':')[1]), 0)
+                            fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=int(schedule_timeaux.minutes_pre))
+                            add_task(fechasepuedecancelardos,'revise_schedule_task(idschedule="'+str(schedule_timeaux.id)+'")')
+            
 
                 fechaprincipal = fechaprincipal + timedelta(days=1)
                 contador=contador+1
