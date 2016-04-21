@@ -17,7 +17,7 @@ def getLang(request):
             lang = 'pe'
         if request.session.get('django_language') == 'ad':
             lang = 'ad'
-
+    lang = 'es'
     setLang(request,lang)
     return lang
     
