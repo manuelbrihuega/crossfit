@@ -2932,7 +2932,8 @@ function showHorario(id) {
 	modalAddBody(mymodal,'<div class="waiting"><i class="fa fa-cog fa-spin"></i></div>');
 	mymodal.modal('show');
 	$('#horario_details_modal .close').click(function(){
-		location.reload();
+		//location.reload();
+		loadCalendar();
 	});
 	
 	$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:id}, function(data){

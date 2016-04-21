@@ -908,7 +908,8 @@ function deleteHorario() {
 		$.getJSON(api_url+'schedules/delete?callback=?', {id:id}, function(data){
 			if(data.status=='success'){
 				launch_alert('<i class="fa fa-smile-o"></i> Evento eliminado','');
-				location.reload();
+				//location.reload();
+				loadCalendar();
 			}
 			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 		});
