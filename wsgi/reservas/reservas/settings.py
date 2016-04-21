@@ -9,6 +9,7 @@ ALLOWED_HOSTS = [
     'api.taxible.com',
     'crossfit-reservasjerez.rhcloud.com/api/',
     'crossfit-reservasjerez.rhcloud.com',
+    'crossfitjerez.com'
     'api.taxibleapp.com',
     'taxible.com',
     'taxibleapp.com',
