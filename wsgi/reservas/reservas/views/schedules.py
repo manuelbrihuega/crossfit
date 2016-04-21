@@ -8,7 +8,7 @@ import os
 import sys
 from django.core.files import File
 from reservas.models import *
-
+import pytz
 from reservas.aux.auth import *
 #from api.aux.rates import *
 from reservas.aux.permissions import *
@@ -64,9 +64,12 @@ def add_concrete(request):
             schedule_time.minutes_post=request.GET['minutes_post']
             schedule_time.schedule=schedule
             schedule_time.save()
+            spa = pytz.timezone('Europe/Madrid')
             fechaparaactividaddos = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, int(schedule_time.time_start.split(':')[0]), int(schedule_time.time_start.split(':')[1]), 0)
             fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=int(schedule_time.minutes_pre))
-            add_task(fechasepuedecancelardos,'revise_schedule_task(idschedule="'+str(schedule_time.id)+'")')
+            semidefinitiva=spa.localize(fechasepuedecancelardos)
+            definitiva = semidefinitiva.astimezone(pytz.utc)
+            add_task(definitiva,'revise_schedule_task(idschedule="'+str(schedule_time.id)+'")')
             contadortramos = contadortramos + 1
 
         data=json.dumps({'status':'success','response':'schedule_time_created','data':{'id':schedule_time.id}})
@@ -148,9 +151,12 @@ def add_interval(request):
                             schedule_timeaux.minutes_post=request.GET['minutes_post']
                             schedule_timeaux.schedule=scheduleaux
                             schedule_timeaux.save()
+                            spa = pytz.timezone('Europe/Madrid')
                             fechaparaactividaddos = datetime(schedule_timeaux.schedule.date.year, schedule_timeaux.schedule.date.month, schedule_timeaux.schedule.date.day, int(schedule_timeaux.time_start.split(':')[0]), int(schedule_timeaux.time_start.split(':')[1]), 0)
                             fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=int(schedule_timeaux.minutes_pre))
-                            add_task(fechasepuedecancelardos,'revise_schedule_task(idschedule="'+str(schedule_timeaux.id)+'")')
+                            semidefinitiva=spa.localize(fechasepuedecancelardos)
+                            definitiva = semidefinitiva.astimezone(pytz.utc)
+                            add_task(definitiva,'revise_schedule_task(idschedule="'+str(schedule_timeaux.id)+'")')
             
 
                 fechaprincipal = fechaprincipal + timedelta(days=1)
@@ -1003,9 +1009,12 @@ def add_reservation(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            spa = pytz.timezone('Europe/Madrid')
             fechaparaactividad = datetime(reservation.schedule_time.schedule.date.year, reservation.schedule_time.schedule.date.month, reservation.schedule_time.schedule.date.day, int(reservation.schedule_time.time_start.split(':')[0]), int(reservation.schedule_time.time_start.split(':')[1]), 0)
             fechasepuedecancelar = fechaparaactividad - timedelta(minutes=reservation.schedule_time.minutes_pre)
-            add_task(fechasepuedecancelardos,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
+            semidefinitiva=spa.localize(fechasepuedecancelar)
+            definitiva = semidefinitiva.astimezone(pytz.utc)
+            add_task(definitiva,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
             name = 'User_Id'+str(auth.id)
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
@@ -1033,9 +1042,12 @@ def add_reservation(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            spa = pytz.timezone('Europe/Madrid')
             fechaparaactividad = datetime(reservation.schedule_time.schedule.date.year, reservation.schedule_time.schedule.date.month, reservation.schedule_time.schedule.date.day, int(reservation.schedule_time.time_start.split(':')[0]), int(reservation.schedule_time.time_start.split(':')[1]), 0)
             fechasepuedecancelar = fechaparaactividad - timedelta(minutes=reservation.schedule_time.minutes_pre)
-            add_task(fechasepuedecancelardos,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
+            semidefinitiva=spa.localize(fechasepuedecancelar)
+            definitiva = semidefinitiva.astimezone(pytz.utc)
+            add_task(definitiva,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
             name = 'User_Id'+str(auth.id)
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
@@ -1118,9 +1130,12 @@ def add_reservation_client(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            spa = pytz.timezone('Europe/Madrid')
             fechaparaactividad = datetime(reservation.schedule_time.schedule.date.year, reservation.schedule_time.schedule.date.month, reservation.schedule_time.schedule.date.day, int(reservation.schedule_time.time_start.split(':')[0]), int(reservation.schedule_time.time_start.split(':')[1]), 0)
             fechasepuedecancelar = fechaparaactividad - timedelta(minutes=reservation.schedule_time.minutes_pre)
-            add_task(fechasepuedecancelardos,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
+            semidefinitiva=spa.localize(fechasepuedecancelar)
+            definitiva = semidefinitiva.astimezone(pytz.utc)
+            add_task(definitiva,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
             name = 'User_Id'+str(auth.id)
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
@@ -1148,9 +1163,12 @@ def add_reservation_client(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            spa = pytz.timezone('Europe/Madrid')
             fechaparaactividad = datetime(reservation.schedule_time.schedule.date.year, reservation.schedule_time.schedule.date.month, reservation.schedule_time.schedule.date.day, int(reservation.schedule_time.time_start.split(':')[0]), int(reservation.schedule_time.time_start.split(':')[1]), 0)
             fechasepuedecancelar = fechaparaactividad - timedelta(minutes=reservation.schedule_time.minutes_pre)
-            add_task(fechasepuedecancelardos,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
+            semidefinitiva=spa.localize(fechasepuedecancelar)
+            definitiva = semidefinitiva.astimezone(pytz.utc)
+            add_task(definitiva,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
             name = 'User_Id'+str(auth.id)
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)

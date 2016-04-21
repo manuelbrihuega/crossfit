@@ -219,6 +219,12 @@ def revise_reservation(idreservation):
 
 
 def revise_schedule(idschedule):
+    from django.db.models import Q
+    from reservas.models import *
+    from datetime import *
+    from reservas.aux.emails import *
+    from reservas.aux.general import *
+    from reservas.aux.date import *
     try:
         sch = Schedules_times.objects.get(id=idschedule)
         if not sch.cursada:
