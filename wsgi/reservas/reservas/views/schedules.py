@@ -64,6 +64,9 @@ def add_concrete(request):
             schedule_time.minutes_post=request.GET['minutes_post']
             schedule_time.schedule=schedule
             schedule_time.save()
+            fechaparaactividaddos = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, schedule_time.time_start.hour, schedule_time.time_start.minute, 0)
+            fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=schedule_time.minutes_pre)
+            add_task(fechasepuedecancelardos,'revise_schedule_task(idschedule="'+str(schedule_time.id)+'")')
             contadortramos = contadortramos + 1
 
         data=json.dumps({'status':'success','response':'schedule_time_created','data':{'id':schedule_time.id}})

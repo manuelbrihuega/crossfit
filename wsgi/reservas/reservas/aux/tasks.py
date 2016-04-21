@@ -243,6 +243,9 @@ def not_pay_not_valid_task():
 #   EMAIL    #
 ##############
 
+def revise_schedule_task(idschedule):
+    revise_schedule(idschedule)
+
 def send_email_new_customer_task(customer_id):
     from reservas.aux.emails import send_email_new_customer
     send_email_new_customer(customer_id)
