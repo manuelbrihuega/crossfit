@@ -1187,6 +1187,7 @@ function saveNameActivity() {
 			$('#nameactivity').show();
 			$('#nameactivityinput').hide();
 			$('#disquete').hide();
+			loadCalendar();
 		}else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 	});
 }
@@ -1762,6 +1763,7 @@ function addReserva(){
 					launch_alert('<i class="fa fa-smile-o"></i> Reserva añadida','');
 					var schedule_time_id_important = $('#idscheduletime').val();
 				$('#tableweyclientes').html('<i class="fa fa-cog fa-spin"></i>');
+				loadCalendar();
 
 				$.getJSON( api_url+'schedules/hay_plazas?callback=?', {id:schedule_time_id_important}, function(data){
 					if(data.status=='success'){
@@ -2933,7 +2935,7 @@ function showHorario(id) {
 	mymodal.modal('show');
 	$('#horario_details_modal .close').click(function(){
 		//location.reload();
-		loadCalendar();
+		//loadCalendar();
 	});
 	
 	$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:id}, function(data){

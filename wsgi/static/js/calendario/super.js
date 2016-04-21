@@ -910,6 +910,7 @@ function deleteHorario() {
 				launch_alert('<i class="fa fa-smile-o"></i> Evento eliminado','');
 				//location.reload();
 				loadCalendar();
+				$('#horario_details_modal').modal('hide');
 			}
 			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 		});
