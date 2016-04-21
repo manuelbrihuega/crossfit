@@ -1003,6 +1003,9 @@ def add_reservation(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            fechaparaactividad = datetime(reservation.schedule_time.schedule.date.year, reservation.schedule_time.schedule.date.month, reservation.schedule_time.schedule.date.day, int(reservation.schedule_time.time_start.split(':')[0]), int(reservation.schedule_time.time_start.split(':')[1]), 0)
+            fechasepuedecancelar = fechaparaactividad - timedelta(minutes=reservation.schedule_time.minutes_pre)
+            add_task(fechasepuedecancelardos,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
             name = 'User_Id'+str(auth.id)
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
@@ -1030,6 +1033,9 @@ def add_reservation(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            fechaparaactividad = datetime(reservation.schedule_time.schedule.date.year, reservation.schedule_time.schedule.date.month, reservation.schedule_time.schedule.date.day, int(reservation.schedule_time.time_start.split(':')[0]), int(reservation.schedule_time.time_start.split(':')[1]), 0)
+            fechasepuedecancelar = fechaparaactividad - timedelta(minutes=reservation.schedule_time.minutes_pre)
+            add_task(fechasepuedecancelardos,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
             name = 'User_Id'+str(auth.id)
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
@@ -1112,6 +1118,9 @@ def add_reservation_client(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            fechaparaactividad = datetime(reservation.schedule_time.schedule.date.year, reservation.schedule_time.schedule.date.month, reservation.schedule_time.schedule.date.day, int(reservation.schedule_time.time_start.split(':')[0]), int(reservation.schedule_time.time_start.split(':')[1]), 0)
+            fechasepuedecancelar = fechaparaactividad - timedelta(minutes=reservation.schedule_time.minutes_pre)
+            add_task(fechasepuedecancelardos,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
             name = 'User_Id'+str(auth.id)
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
@@ -1139,6 +1148,9 @@ def add_reservation_client(request):
                 customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
+            fechaparaactividad = datetime(reservation.schedule_time.schedule.date.year, reservation.schedule_time.schedule.date.month, reservation.schedule_time.schedule.date.day, int(reservation.schedule_time.time_start.split(':')[0]), int(reservation.schedule_time.time_start.split(':')[1]), 0)
+            fechasepuedecancelar = fechaparaactividad - timedelta(minutes=reservation.schedule_time.minutes_pre)
+            add_task(fechasepuedecancelardos,'revise_reservation_task(idreservation="'+str(reservation.id)+'")')
             name = 'User_Id'+str(auth.id)
             nick = 'User_Id'+str(auth.id)
             phone = '+34'+str(auth.phone)
