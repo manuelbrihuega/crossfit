@@ -101,7 +101,7 @@ def revise_reservations():
                             add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     res.delete()
 
-    schedules_timess=Schedules_times.objects.filter(Q(schedule__date__gt=hoy) & Q(cursada=False) & Q(schedule__date__lt=hoymasuno))
+    """schedules_timess=Schedules_times.objects.filter(Q(schedule__date__gt=hoy) & Q(cursada=False) & Q(schedule__date__lt=hoymasuno))
     for sch in schedules_timess:
         if not sch.cursada:
             fechaparaactividaddos = datetime(sch.schedule.date.year, sch.schedule.date.month, sch.schedule.date.day, sch.time_start.hour, sch.time_start.minute, 0)
@@ -135,7 +135,7 @@ def revise_reservations():
                     sch.cursada=True
                     sch.save()
 
-                    #aqui estamos avisando al super de que la clase se cancela xq no hay gente
+                    #aqui estamos avisando al super de que la clase se cancela xq no hay gente"""
                 
 def revise_schedule(idschedule):
     sch = Schedules_times.objects.get(id=idschedule)
@@ -225,6 +225,16 @@ def not_pay_task():
     conf = Configuration.objects.get(id=1)
     fechanotvalid = hoy + timedelta(days=conf.dias_pago)
     add_task(fechanotvalid,'not_pay_not_valid_task()')
+
+def pruebarapida():
+    from reservas.models import *
+    from datetime import *
+    schedules_times = Schedules_times.objects.all()
+    for schedule_time in schedules_times:
+        if not schedule_time.cursada:
+            fechaparaactividaddos = datetime(schedule_time.schedule.date.year, schedule_time.schedule.date.month, schedule_time.schedule.date.day, int(schedule_time.time_start.split(':')[0]), int(schedule_time.time_start.split(':')[1]), 0)
+            fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=int(schedule_time.minutes_pre))
+            add_task(fechasepuedecancelardos,'revise_schedule_task(idschedule="'+str(schedule_time.id)+'")')
 
 def not_pay_not_valid_task():
     from reservas.models import *
