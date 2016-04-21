@@ -329,7 +329,8 @@ def pruebarapida():
                 fechasepuedecancelardos = fechaparaactividaddos - timedelta(minutes=int(schedule_time.minutes_pre))
                 semidefinitiva=spa.localize(fechasepuedecancelardos)
                 definitiva = semidefinitiva.astimezone(pytz.utc)
-                add_task(definitiva,'revise_schedule_task(idschedule="'+str(schedule_time.id)+'")')
+                fechita = datetime(definitiva.year, definitiva.month, definitiva.day, definitiva.hour, definitiva.minute, 0)
+                add_task(fechita,'revise_schedule_task(idschedule="'+str(schedule_time.id)+'")')
 
 def not_pay_not_valid_task():
     from reservas.models import *
