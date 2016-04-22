@@ -55,7 +55,7 @@ def add(request):
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         data = json.dumps({
             'status':'failed',
-            'response': 'errorB'+e.args[0]+str(exc_tb.tb_lineno) + str(fname)
+            'response': e.args[0]
         })
 
 
