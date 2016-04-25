@@ -1604,12 +1604,12 @@ function eliminarReserva(id,obj) {
 	if (confirmacion==true)
 	{
 		$(obj).parent().html('<i class="fa fa-cog fa-spin"></i>');
+		$('#tituloreservas').html('Reservas <i class="fa fa-cog fa-spin"></i>');
 		$.getJSON(api_url+'schedules/delete_reservation?callback=?', {id:id}, function(data){
 			if(data.status=='success'){
 				launch_alert('<i class="fa fa-smile-o"></i> Reserva eliminada','');
 				//$('#horario_details_modal').modal('hide');
 				$('#celda_'+id).remove();
-				$('#tituloreservas').html('Reservas <i onclick="addReserva();" style="cursor:pointer;" class="fa fa-plus-square"></i>');
 				if(parseInt($('#disponibles_cola').val())==0){
 					$('#disponibles_cola').val(1);
 					var ocupacol = parseInt($('#ocupadas_cola').val());
@@ -1642,10 +1642,11 @@ function eliminarReserva(id,obj) {
 				$('#tableweyclientes').html('<i class="fa fa-cog fa-spin"></i>');
 				$.getJSON( api_url+'schedules/hay_plazas?callback=?', {id:schedule_time_id_important}, function(data){
 					if(data.status=='success'){
+						var cadenapasalir = '';
 						if(parseInt(data.data.disponibles)>0 || parseInt(data.data.disponibles_cola)>0){
-							$('#tituloreservas').html('Reservas <i onclick="addReserva();" style="cursor:pointer;" class="fa fa-plus-square"></i>');
+							cadenapasalir = 'Reservas <i onclick="addReserva();" style="cursor:pointer;" class="fa fa-plus-square"></i>';
 						}else{
-							$('#tituloreservas').html('Reservas:');
+							cadenapasalir = 'Reservas:';
 						}
 						$('#disponibles').val(data.data.disponibles);
 						$('#disponibles_cola').val(data.data.disponibles_cola);
@@ -1653,24 +1654,26 @@ function eliminarReserva(id,obj) {
 						$('#ocupadas_cola').val(data.data.ocupadas_cola);
 						$('#aforo').val(data.data.aforo);
 						$('#aforo_cola').val(data.data.aforo_cola);
+						$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:schedule_time_id_important}, function(data){
+							if(data.status=='success'){
+								$('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Acción</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
+        						var cadcola = '';
+								$.each(data.data.reservations, function(index, res) {
+									if(res.queue==true){
+										cadcola = res.position_queue+'º';
+									}else{
+										cadcola = 'NO';
+									}
+									$('#tableweyclientesbody').append('<tr id="celda_'+res.id+'" style="cursor:pointer;" data-id="'+res.id+'">'+'<td>'+res.name+'</td>'+'<td>'+res.surname+'</td>'+'<td>'+res.email+'</td>'+'<td>'+res.phone+'</td>'+'<td>'+cadcola+'</td>'+'<td><i style="cursor:pointer; font-size:18px;" onclick=eliminarReserva("'+res.id+'",this); class="fa fa-trash-o"></i></td>'+'</tr>');
+								});
+								$('#tableweyclientes').tablesorter();
+								$('#tituloreservas').html(cadenapasalir);
+							}
+						});
 					}
 					else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos de la actividad','warning')
 				});
-				$.getJSON( api_url+'schedules/get_foreign?callback=?', {id:schedule_time_id_important}, function(data){
-					if(data.status=='success'){
-						$('#tableweyclientes').html('<thead><tr><th>Nombre</th><th>Apellidos</th><th>Email</th><th>Teléfono</th><th>En cola</th><th>Acción</th></tr></thead><tbody id="tableweyclientesbody"></tbody>');
-        				var cadcola = '';
-						$.each(data.data.reservations, function(index, res) {
-							if(res.queue==true){
-								cadcola = res.position_queue+'º';
-							}else{
-								cadcola = 'NO';
-							}
-							$('#tableweyclientesbody').append('<tr id="celda_'+res.id+'" style="cursor:pointer;" data-id="'+res.id+'">'+'<td>'+res.name+'</td>'+'<td>'+res.surname+'</td>'+'<td>'+res.email+'</td>'+'<td>'+res.phone+'</td>'+'<td>'+cadcola+'</td>'+'<td><i style="cursor:pointer; font-size:18px;" onclick=eliminarReserva("'+res.id+'",this); class="fa fa-trash-o"></i></td>'+'</tr>');
-						});
-						$('#tableweyclientes').tablesorter();
-					}
-				});
+				
 
 			}
 			else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
