@@ -45,7 +45,7 @@ if($('#password').val()==$('#password_repeat').val()){
         surname: $('#apellidos').val(),
         phone: $('#movil').val(),
         direccion: $('#direccion').val(),
-        nif: $('#nif').val(),
+        nif: $('#nif').val().toUpperCase(),
         birthdate: $('#birthdate').val(),
         rate_id:tarifa_id
     };
@@ -70,6 +70,7 @@ if($('#password').val()==$('#password_repeat').val()){
             var img = $('<img>').attr({'src':base_url+'/static/img/i18n/icono_mini_ppal.png'}); 
             img.attr('style', 'width: 110px; margin-top: -36px; margin-left: auto; margin-right: auto; overflow: auto;');
             botonera.append(img);
+            $("html, body").animate({ scrollTop: 0 }, 600);
             
         }
 

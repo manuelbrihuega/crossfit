@@ -260,7 +260,7 @@ function new_customer() {
 											$('#botonenviar').html('<i class="fa fa-cog fa-spin"></i> ENVIANDO');
 											$.getJSON(api_url+'customers/add_super?callback=?', {name:name, 
 																							surname:surname,
-																							nif:nif,
+																							nif:nif.toUpperCase(),
 																							phone:phone,
 																							email:email,
 																							birthdate:birthdate,
