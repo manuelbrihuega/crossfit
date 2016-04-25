@@ -7,7 +7,7 @@
 	<link href='//cdn.jsdelivr.net/animatecss/0.1/animate.min.css' rel='stylesheet' type='text/css'>
 	<style type="text/css" media="screen">
 		html { margin: 0; height: 100%; background-color: #000;}
-		body {  -webkit-font-smoothing: antialiased; font-family: Arial !important; height: 100%;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;background-color: white !important;background: center top fixed url(http://crossfit-reservasjerez.rhcloud.com/static/img/i18n/level1_bg_lg_deg.jpg) no-repeat; color: #fff;}
+		body {  -webkit-font-smoothing: antialiased; font-family: Arial !important; height: 100%;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;background-color: white !important;background: center top fixed url(http://crossfitjerez.com/static/img/i18n/level1_bg_lg_deg.jpg) no-repeat; color: #fff;}
 		#content{margin-top: 100px;text-align: center;}
 		#content h3{color: #FFF;font-weight: 400;font-size: 31px;margin: 10px 0px 0px 0px;padding: 0px;text-shadow: 0px 0px 5px #666;filter: dropshadow(color=#666, offx=0, offy=0);}
 		#new_pass{margin: 30px auto;height: 40px;line-height: 40px;font-size: 30px; vertical-align: middle; outline: none;border:none !important;  box-shadow:none !important; border-radius: 0px;}
@@ -75,7 +75,7 @@
 			$.getJSON('../api/auth/edit_password', {token:token, newpass:newpass}, function(json, textStatus) {
 				if(json.status=='success'){
 					$('#mensaje').removeClass().addClass('success').html('<i class="fa fa-thumbs-up"></i> Contraseña cambiada');
-					setTimeout(function(){ window.location = "http://crossfit-reservasjerez.rhcloud.com/" },2000);
+					setTimeout(function(){ window.location = "http://crossfitjerez.com/" },2000);
 				}
 				else{
 					$('#mensaje').removeClass().addClass('error').html('<i class="fa fa-thumbs-up"></i> Contraseña cambiada');

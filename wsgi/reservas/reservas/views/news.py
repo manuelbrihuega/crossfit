@@ -115,7 +115,7 @@ def add_global_news(request):
                                 name = 'User_Id'+str(cus.auth.id)
                                 nick = 'User_Id'+str(cus.auth.id)
                                 phone = '+34'+str(cus.auth.phone)
-                                message = 'Tiene un nuevo mensaje de Crossfit. Para leerlo accede en tu cuenta al apartado Comunicaciones. http://crossfit-reservasjerez.rhcloud.com/news '
+                                message = 'Tiene un nuevo mensaje de Crossfit. Para leerlo accede en tu cuenta al apartado Comunicaciones. http://crossfitjerez.com/news '
                                 add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                         else:
                             customers = U_Customers.objects.all()
@@ -128,7 +128,7 @@ def add_global_news(request):
                                     name = 'User_Id'+str(cus.auth.id)
                                     nick = 'User_Id'+str(cus.auth.id)
                                     phone = '+34'+str(cus.auth.phone)
-                                    message = 'Tiene un nuevo mensaje de Crossfit. Para leerlo accede en tu cuenta al apartado Comunicaciones. http://crossfit-reservasjerez.rhcloud.com/news '
+                                    message = 'Tiene un nuevo mensaje de Crossfit. Para leerlo accede en tu cuenta al apartado Comunicaciones. http://crossfitjerez.com/news '
                                     add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     else:
                         customers = U_Customers.objects.all()
@@ -141,7 +141,7 @@ def add_global_news(request):
                                 name = 'User_Id'+str(cus.auth.id)
                                 nick = 'User_Id'+str(cus.auth.id)
                                 phone = '+34'+str(cus.auth.phone)
-                                message = 'Tiene un nuevo mensaje de Crossfit. Para leerlo accede en tu cuenta al apartado Comunicaciones. http://crossfit-reservasjerez.rhcloud.com/news '
+                                message = 'Tiene un nuevo mensaje de Crossfit. Para leerlo accede en tu cuenta al apartado Comunicaciones. http://crossfitjerez.com/news '
                                 add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     new.date=datetime.utcnow()
                     new.save()
@@ -164,7 +164,7 @@ def add_global_news(request):
                                 name = 'User_Id'+str(cucu.auth.id)
                                 nick = 'User_Id'+str(cucu.auth.id)
                                 phone = '+34'+str(cucu.auth.phone)
-                                message = 'Tiene un nuevo mensaje de Crossfit. Para leerlo accede en tu cuenta al apartado Comunicaciones. http://crossfit-reservasjerez.rhcloud.com/news '
+                                message = 'Tiene un nuevo mensaje de Crossfit. Para leerlo accede en tu cuenta al apartado Comunicaciones. http://crossfitjerez.com/news '
                                 add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                         new.date=datetime.utcnow()
                         new.save()

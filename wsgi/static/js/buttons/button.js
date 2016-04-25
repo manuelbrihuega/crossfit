@@ -11,7 +11,7 @@ function cierraPadre () {
     window.opener.cierra();
 }
 
-var api_url='http://crossfit-reservasjerez.rhcloud.com/api/';
+var api_url='http://crossfitjerez.com/api/';
 var offset = getLocalOffset();
 var myenterprise = false;
 
