@@ -9,6 +9,10 @@ $(document).ready(function(){
         $('#ui-datepicker-div').css('padding','15px');
         $('#ui-datepicker-div').css('border-radius','8px');
     }
+    if ( $('[type="date"]').prop('type') != 'date' ) {
+        $('[type="date"]').datepicker();
+        
+    }
 });
 
 var prefix=34;

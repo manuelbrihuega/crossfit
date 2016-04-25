@@ -325,6 +325,11 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 	.modal-dialog{ width: 100%; margin-left: 0px; margin-right: 0px;}
 	#actividad_details_wrapper .form-group { overflow: auto; padding-left: 0; padding-right: 0;}
 	#actividad_details_wrapper .table-responsive {overflow: visible; display: inline-block; width: auto;}
+	#tituloreservas .fa {font-size: 25px;}
+	#lapiz {font-size: 25px;}
+	#basura {font-size: 25px;}
+	#disquete {font-size: 25px;}
+	#tableweyclientesbody .fa {font-size: 25px;}
 }
 
 @media (max-width: 260px) {
