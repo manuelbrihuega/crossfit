@@ -321,6 +321,11 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
     #nombre_festivo{ width: 100% !important; margin-bottom: 15px !important;}
 }
 
+@media (max-width: 400px) {
+	.modal-dialog{ width: 100%; margin-left: 0px; margin-right: 0px;}
+	#actividad_details_wrapper .form-group { overflow: auto; padding-left: 0; padding-right: 0;}
+}
+
 @media (max-width: 260px) {
     #fecha{width: 100% !important;}
     #dia_festivo{ width: 100% !important; margin-bottom: 15px !important;}

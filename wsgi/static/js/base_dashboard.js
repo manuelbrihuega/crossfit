@@ -32,6 +32,7 @@ function status() {
 }
 
 function logout() {
+	$('#main').html('<div style="text-align: center;margin-top: 83px;"><i class="fa fa-cog fa-spin" style="font-size: 70px;margin-left: auto;margin-right: auto;"></i><span style="width: 100%;display: block;font-size: 20px;">Saliendo...</span></div>');
 	$.getJSON( api_url+'auth/logout?callback=?', '', function(data){
 		if(data.status=='success' || data.response=='not_logged'){
 			$.jCookie('U_Super',null);
