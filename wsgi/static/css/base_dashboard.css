@@ -324,7 +324,7 @@ a:hover, a:focus { color: #075a8f; text-decoration: underline; }
 @media (max-width: 400px) {
 	.modal-dialog{ width: 100%; margin-left: 0px; margin-right: 0px;}
 	#actividad_details_wrapper .form-group { overflow: auto; padding-left: 0; padding-right: 0;}
-	#actividad_details_wrapper .table-responsive {overflow: visible; display: inline-block; }
+	#actividad_details_wrapper .table-responsive {overflow: visible; display: inline-block; width: auto;}
 }
 
 @media (max-width: 260px) {
