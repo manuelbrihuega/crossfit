@@ -10,6 +10,7 @@ ALLOWED_HOSTS = [
     'crossfit-reservasjerez.rhcloud.com/api/',
     'crossfit-reservasjerez.rhcloud.com',
     'crossfitjerez.com',
+    'crossfitjerez.com/api/',
     'api.taxibleapp.com',
     'taxible.com',
     'taxibleapp.com',
@@ -27,7 +28,7 @@ _ = lambda s: s
 STATIC_URL = '/static/'
 STATIC_ROOT = (PROJECT_PATH + '/../static')
 TEMPLATE_DIRS = (PROJECT_PATH+'/templates')
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 31 * 24 * 60 * 60 #
 INSTALLED_APPS = (
