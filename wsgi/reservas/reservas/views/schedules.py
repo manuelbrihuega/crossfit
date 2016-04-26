@@ -400,7 +400,7 @@ def list_all_tabla_for_customers(request):
                 disponibles = aforo - ocupadas
                 if disponibles < 1:
                     disponibles = 0;
-                    if estado != 'MI RESERVA' and estado != 'EN COLA':
+                    if estado != 'MI RESERVA' and estado != 'EN COLA' and estado != 'CERRADA' and estado != 'FINALIZADA':
                         estado='COMPLETA'
                 discol = ocupadas-aforo
                 if discol < 0:
