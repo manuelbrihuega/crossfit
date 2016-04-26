@@ -45,6 +45,19 @@ def send_email_ticket_message_supporter(email,title,text,user):
     send_email(content,'Nueva incidencia', [conf.email],'NUEVA INCIDENCIA','CrossFit Jerez WEBAPP <crossfitjerezdelafrontera@gmail.com>')
        
 
+def send_email_new_customer_for_super(auth_id):
+    """Send an email when a customer is created"""
+    from reservas.models import Auth
+    try:
+        au=Auth.objects.get(id=auth_id)
+        content = render_to_string("emails/new_driver_for_super.html",
+                                   {'name':auth.name,
+                                    'token':auth.token})
+        send_email(content,'Se ha registrado un nuevo cliente', [auth.email],'Se ha registrado un nuevo cliente ','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
+    except:
+        pass
+
+
 def send_email_new_customer(customer_id):
     """Send an email when a customer is created"""
     from reservas.models import U_Customers

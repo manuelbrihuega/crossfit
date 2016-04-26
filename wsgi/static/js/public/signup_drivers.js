@@ -35,7 +35,7 @@ function list_radios(){
 
 
 function enviar() {
-
+if( $('#exoneracioncheck').is(':checked') ){
 if($('#password').val()==$('#password_repeat').val()){
     var tarifa_id=$('#radio').val();
     var datainput = {
@@ -97,5 +97,7 @@ if($('#password').val()==$('#password_repeat').val()){
 }else{
     launch_alert('Las contraseñas no coinciden','warning');
 }
-
+}else{
+    launch_alert('Debe aceptar las condiciones de uso','warning');   
+}
 }

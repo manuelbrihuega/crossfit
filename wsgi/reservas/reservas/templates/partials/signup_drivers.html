@@ -63,6 +63,11 @@
 	    		<input id="birthdate" style="height: 22px; text-transform: uppercase; border: none; color: gray; font-family: Arial;" type="date" name="birthdate" step="1" min="1800-01-01" max="2016-12-31">
 	  		</div>
         </div>
+        <div class="row">
+        	<div class="form-group  col-sm-12">
+        		<input type="checkbox" id="exoneracioncheck"> Acepto las <a><span style="cursor:pointer;" onclick="modal_eula('condiciones_uso');">condiciones de uso</span></a> y el <a><span style="cursor:pointer;" onclick="OpenInNewTabExo('http://crossfitjerez.com/static/docs/exoneracion.pdf');">documento de exoneración.</span></a>
+        	</div>
+        </div>
         <br><br>
             <center>
                 <div id="enviar" class="btn btn-default" onclick="enviar();" style="padding-left: 20px; padding-right: 20px;">ENVIAR</div>

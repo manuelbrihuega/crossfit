@@ -43,6 +43,15 @@ def add(request):
                     phone = '+34'+str(result_auth['response'].phone)
                     message = 'Gracias por registrate en el sistema de reservas de CrossFit Jerez. Podrá comenzar a utilizarlo cuando validemos su registro.'
                     add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                    autito = Auth.objects.get(id=1)
+                    add_task(datetime.utcnow(),'send_email_new_customer_for_super_task(auth_id='+str(autito.id)+')')
+                    name = 'User_Id'+str(autito.id)
+                    nick = 'User_Id'+str(autito.id)
+                    phone = '+34'+str(autito.phone)
+                    message = 'Se acaba de realizar un registro en el sistema. Un cliente espera ser validado.'
+                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                    
+
                     data=json.dumps({'status':'success','response':'created','data':{'auth_id':result_auth['response'].id,'customer_id':r_customer['response'].id}})
             else:
                 raise Exception(result_auth['response'])

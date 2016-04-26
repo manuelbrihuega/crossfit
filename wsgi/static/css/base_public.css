@@ -200,6 +200,11 @@ margin: 10px 15px;
     #bloglinkreg {width: 135px; margin-left: 10px;}
     #bloglinkacc {width: 135px; margin-right: 10px;}
 }
+
+@media (max-width: 290px) {
+    #bloglinkreg {width: 111px; margin-top: -30px;}
+    #bloglinkacc {width: 111px; margin-top: -30px;}
+}
 /*@media (max-width: 433px) {
     #logologin{background: url("http://crossfitjerez.com/static/img/i18n/icono_adaptado.png") no-repeat scroll 0 0 / 100% auto; height: 209px; margin-bottom: 35px; width: 83%;}
 }*/
