@@ -144,6 +144,8 @@ function show_preview_photo_enterprise(input) {
 
         reader.onload = function (e) {
             $('#photo_viewer').css('background', 'url('+e.target.result+') no-repeat');
+            $('#photo_viewer').css('background-color', 'gray');
+			$('#photo_viewer').css('background-size', '100%');
             $('#photo_viewer').attr('data-image', e.target.result);
         };
 

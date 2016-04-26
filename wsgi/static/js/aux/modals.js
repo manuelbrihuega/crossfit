@@ -1018,6 +1018,8 @@ function modal_passenger_details(passenger_id) {
 				$('#passenger_phone').val(data.data.auth_profile.phone);
 				if(data.data.customer_profile.photo!=''){
 					$('#photo_viewer').css('background', 'url('+data.data.customer_profile.photo+') no-repeat');
+					$('#photo_viewer').css('background-color', 'gray');
+									$('#photo_viewer').css('background-size', '100%');
             		$('#photo_viewer').attr('data-image', data.data.customer_profile.photo);
 				}else{
 					$('#photo_viewer').css('background', 'url('+'http://f.cl.ly/items/0Y2k2I3K373a1u2K3H1d/placeholder1.gif'+') no-repeat');
@@ -4002,6 +4004,8 @@ function modal_enterprise_details(enterprise_id) {
 				$('#enterprise_postal_code').val(data.data.enterprise.postal_code);
 				$('#enterprise_country_code').val(data.data.enterprise.country_code);
                 $('#photo_viewer').css('background', 'url('+data.data.enterprise.logo+') no-repeat');
+                $('#photo_viewer').css('background-color', 'gray');
+									$('#photo_viewer').css('background-size', '100%');
 
 				$.each(data.data.list_buttons, function(index, pulsador) {
 					dibujaFormularioPulsador(pulsador);
