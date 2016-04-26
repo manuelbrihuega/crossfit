@@ -34,6 +34,8 @@ function get_content() {
    								}
 								if(data.data.customer_profile.photo!=''){
 									$('#photo_viewer').css('background', 'url('+data.data.customer_profile.photo+') no-repeat');
+									$('#photo_viewer').css('background-color', 'gray');
+									$('#photo_viewer').css('background-size', '100%');
             						$('#photo_viewer').attr('data-image', data.data.customer_profile.photo);
 								}else{
 									$('#photo_viewer').css('background', 'url('+'http://f.cl.ly/items/0Y2k2I3K373a1u2K3H1d/placeholder1.gif'+') no-repeat');
