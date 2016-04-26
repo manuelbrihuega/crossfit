@@ -191,10 +191,14 @@ margin: 10px 15px;
     #level1_1 {margin-top: 10px !important; margin-bottom: 0px !important;}
     #level1 {min-height: 400px !important; }
     #bloglink {display: none;}
-    #bloglinkreg {float: left; display: block; width: 145px; margin-left: 20px; margin-top: -54px; cursor: pointer;}
-    #bloglinkacc {display: block; width: 145px; float: right; margin-right: 20px; margin-top: -54px; cursor: pointer;}
+    #bloglinkreg {float: left; display: block; width: 145px; margin-left: 20px; margin-top: -18px; cursor: pointer;}
+    #bloglinkacc {display: block; width: 145px; float: right; margin-right: 20px; margin-top: -18px; cursor: pointer;}
     #bloglinkreg button {background-color: rgb(7, 90, 143); border: 1px solid rgb(7, 90, 143); font-weight: 600; width: 100%; white-space: normal;}
     #bloglinkacc button {background-color: rgb(7, 90, 143); border: 1px solid rgb(7, 90, 143); font-weight: 600; white-space: normal;}
+}
+@media (max-width: 330px) {
+    #bloglinkreg {width: 135px; margin-left: 10px;}
+    #bloglinkacc {width: 135px; margin-right: 10px;}
 }
 /*@media (max-width: 433px) {
     #logologin{background: url("http://crossfitjerez.com/static/img/i18n/icono_adaptado.png") no-repeat scroll 0 0 / 100% auto; height: 209px; margin-bottom: 35px; width: 83%;}
