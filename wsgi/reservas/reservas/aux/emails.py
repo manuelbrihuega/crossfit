@@ -49,7 +49,7 @@ def send_email_new_customer_for_super(auth_id):
     """Send an email when a customer is created"""
     from reservas.models import *
     try:
-        au=Auth.objects.get(id=auth_id)
+        au=Configuration.objects.get(id=1)
         content = render_to_string("emails/new_driver_for_super.html",
                                    {})
         send_email(content,'Se ha registrado un nuevo cliente', [au.email],'Se ha registrado un nuevo cliente ','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
