@@ -118,6 +118,8 @@ def edit_customer(auth_id,data,rate):
                 customer.credit_wod = rate.credit_wod
             if rate.credit_box < customer.credit_box:
                 customer.credit_box = rate.credit_box
+            if rate.credit_bono < customer.credit_bono:
+                customer.credit_bono = rate.credit_bono
             customer.save()
             return {'status':'success','response':'changed'}
 
