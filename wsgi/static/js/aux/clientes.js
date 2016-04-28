@@ -15,7 +15,7 @@ function draw_passenger_sm(passenger, wrapper) {
 			})*/
 			$('#tableweybody2').append('<tr style="cursor:pointer; '+cad+'" data-id="'+passenger.id+'">'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.name+'</td>'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.surname+'</td>'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.credit_wod+'/'+passenger.credit_wod_tarifa+'</td>'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.credit_box+'/'+passenger.credit_box_tarifa+'</td>'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.credit_bono+'/'+passenger.credit_bono_tarifa+'</td>'+'<td onclick="modal_passenger_details('+passenger.id+');">'+passenger.tarifa_vigente+' ('+passenger.tarifa_vigente_precio+'€)'+'</td>'+'<td '+color+' class="pagador '+classpagado+'">'+pay+'</td>'+'</tr>');
 			
-			$('#tablewey2').tablesorter();
+			
 			$(".pagador").hover(function(){
     			if($(this).hasClass('paid')){
     				$(this).html('<button onclick="revertirPago(this);" style="color:red; margin-top:0px; margin-bottom: 0px; margin-left:auto; margin-right: auto;">REVERTIR</button>');
@@ -33,6 +33,7 @@ function draw_passenger_sm(passenger, wrapper) {
     				}
     			}
 			});
+			$('#tablewey2').tablesorter();
 }
 
 
