@@ -1,4 +1,10 @@
 <div class="buttons_tools pull-right">
+	<!--<div class="item" onclick="show_delete();"> 
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-minus fa-stack-1x fa-inverse"></i>
+		</span>
+	</div>-->
 	<div class="item" onclick="show_new();"><!-- Nueva --> 
 		<span class="fa-stack fa-lg">
 			<i class="fa fa-circle fa-stack-2x"></i>
@@ -9,6 +15,88 @@
 
 <h1 id="headertarifas" class="page-header">Reservas</h1>
 
+<div id="rm_enterprise_wrapper">
+	<h3 class="sub-header">Eliminar intervalo horario</h3>
+	<form id="rm_enterprise_form" role="form">
+		<div id="rmmastercontainer">
+		<div class="row">
+			<div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de inicio: </label><input style="width: 78px;" id="rmhoraini0" class="horainiaction" type="time" name="horaini"></div>
+		  	<div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de fin: </label><input style="width: 78px;" id="rmhorafin0" class="horafinaction" type="time" name="horafin"></div>
+		  	<div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Duración: </label><input style="width: 78px; float:left;" id="rmduracion0" type="text" name="duracion" readonly><input id="rmduracionhide0" type="hidden">
+		  		<div class="item" onclick="rmnewhorario();" style="cursor:pointer; float: left; margin-left: 11px;"><!-- Nueva --> 
+					<span class="fa-stack fa">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+					</span>
+				</div>
+		  	</div>
+		</div><br>
+		</div>
+		
+		<h3 class="sub-header">Actividad</h3>
+		<div class="row">
+			<div class="col-md-8">
+				<select id="rmactividad"><option value="-1">-------</option></select>
+			</div>
+		</div>
+		<br>
+		<h3 class="sub-header">Fecha</h3>
+		<div class="row">
+			<div class="col-md-3"><input id="rmfechaconcreta" type="radio" name="fechaconcreta">Introducir una fecha concreta</div>
+			<div class="col-md-3"><input id="rmfechapatron" type="radio" name="fechaconcreta">Introducir un patrón de tiempo</div>
+		</div><br>
+		<div class="row" id="rmdivfecha" style="display:none;">
+			<div class="col-md-4"><input type="date" class="form-control" id="rmfecha" placeholder="Fecha"></div>
+		</div>
+		<div id="rmdivpatron" style="display:none;">
+			<h3 class="sub-header">Día de la semana</h3>
+		<div class="row">
+			<div class="col-md-2"><input class="dia" type="checkbox" id="rmlunes"> Lunes</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="rmmartes"> Martes</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="rmmiercoles"> Miércoles</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="rmjueves"> Jueves</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2"><input class="dia" type="checkbox" id="rmviernes"> Viernes</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="rmsabado"> Sábado</div>
+			<div class="col-md-2"><input class="dia" type="checkbox" id="rmdomingo"> Domingo</div>
+			<div class="col-md-2"><input type="checkbox" id="rmtodoslosdias"> Todos los días</div>
+		</div>
+		<br>
+		<h3 class="sub-header">Mes</h3>
+		<div class="row">
+			<div class="col-md-2"><input class="mes" type="checkbox" id="rmenero"> Enero</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="rmfebrero"> Febrero</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="rmmarzo"> Marzo</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="rmabril"> Abril</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="rmmayo"> Mayo</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-2"><input class="mes" type="checkbox" id="rmjunio"> Junio</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="rmjulio"> Julio</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="rmagosto"> Agosto</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="rmseptiembre"> Septiembre</div>
+			<div class="col-md-2"><input class="mes" type="checkbox" id="rmoctubre"> Octubre</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2"><input class="mes" type="checkbox" id="rmnoviembre"> Noviembre</div>
+			<div class="col-md-2"><input crmlass="mes" type="checkbox" id="rmdiciembre"> Diciembre</div>
+			<div class="col-md-2"><input type="checkbox" id="rmtodoslosmeses"> Todos los meses</div>
+		</div>
+		<br>
+		</div>
+
+		<div class="row" id="rmmarru" style="display:none;">
+			<br>
+			<div class="col-md-4">
+				<button id="rmbotonadd" type="submit" class="btn btn-default">Enviar</button>
+		  	</div>
+		</div>
+		
+		
+	</form>
+</div>
 <div id="new_enterprise_wrapper">
 	<h3 class="sub-header">Nuevo intervalo horario</h3>
 	<form id="new_enterprise_form" role="form">

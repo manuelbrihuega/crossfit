@@ -32,6 +32,28 @@ function get_content() {
 			$( "#horafin0" ).change(function() {
   				restarHoras(0);
 			});
+			$('#rmhoraini0').timepicker({
+		    			showPeriodLabels: false,
+		    			hourText: 'Hora',
+		    			minuteText: 'Minutos',
+		    			myPosition: 'left top',
+		    			atPosition: 'left bottom' 
+			});
+			$('#rmhorafin0').timepicker({
+		    			showPeriodLabels: false,
+		    			hourText: 'Hora',
+		    			minuteText: 'Minutos',
+		    			myPosition: 'left top',
+		    			atPosition: 'left bottom'
+			});
+				
+			
+			$( "#rmhoraini0" ).change(function() {
+				rmrestarHoras(0);
+			});
+			$( "#rmhorafin0" ).change(function() {
+  				rmrestarHoras(0);
+			});
 
 			if (!Modernizr.inputtypes.date) {
     			$('input[type=date]').datepicker({
@@ -53,14 +75,31 @@ function get_content() {
   				$('#divpatron').slideDown();
   				$('#marru').slideDown();
 			});
+			$( "#rmfechaconcreta" ).click(function() {
+				$('#rmdivpatron').slideUp();
+  				$('#rmdivfecha').slideDown();
+  				$('#rmmarru').slideDown();
+			});
+			$( "#rmfechapatron" ).click(function() {
+  				$('#rmdivfecha').slideUp();
+  				$('#rmdivpatron').slideDown();
+  				$('#rmmarru').slideDown();
+			});
 			$('.waiting').hide();
 			active_new_enterprise_form();
+			active_rm_enterprise_form();
 			loadCalendar();
 			$( ".mes" ).click(function() {
 				$('#todoslosmeses').prop('checked','');
 			});
 			$( ".dia" ).click(function() {
 				$('#todoslosdias').prop('checked','');
+			});
+			$( ".mes" ).click(function() {
+				$('#rmtodoslosmeses').prop('checked','');
+			});
+			$( ".dia" ).click(function() {
+				$('#rmtodoslosdias').prop('checked','');
 			});
 			$( "#todoslosmeses" ).click(function() {
   				if($('#todoslosmeses').is(":checked")){
@@ -91,6 +130,35 @@ function get_content() {
   					$('#diciembre').prop('checked','');
   				}
 			});
+			$( "#rmtodoslosmeses" ).click(function() {
+  				if($('#rmtodoslosmeses').is(":checked")){
+  					$('#rmenero').prop('checked','checked');
+  					$('#rmfebrero').prop('checked','checked');
+  					$('#rmmarzo').prop('checked','checked');
+  					$('#rmabril').prop('checked','checked');
+  					$('#rmmayo').prop('checked','checked');
+  					$('#rmjunio').prop('checked','checked');
+  					$('#rmjulio').prop('checked','checked');
+  					$('#rmagosto').prop('checked','checked');
+  					$('#rmseptiembre').prop('checked','checked');
+  					$('#rmoctubre').prop('checked','checked');
+  					$('#rmnoviembre').prop('checked','checked');
+  					$('#rmdiciembre').prop('checked','checked');
+  				}else{
+  					$('#rmenero').prop('checked','');
+  					$('#rmfebrero').prop('checked','');
+  					$('#rmmarzo').prop('checked','');
+  					$('#rmabril').prop('checked','');
+  					$('#rmmayo').prop('checked','');
+  					$('#rmjunio').prop('checked','');
+  					$('#rmjulio').prop('checked','');
+  					$('#rmagosto').prop('checked','');
+  					$('#rmseptiembre').prop('checked','');
+  					$('#rmoctubre').prop('checked','');
+  					$('#rmnoviembre').prop('checked','');
+  					$('#rmdiciembre').prop('checked','');
+  				}
+			});
 			$( "#todoslosdias" ).click(function() {
   				if($('#todoslosdias').is(":checked")){
   					$('#lunes').prop('checked','checked');
@@ -110,6 +178,25 @@ function get_content() {
   					$('#domingo').prop('checked','');
   				}
 			});
+			$( "#rmtodoslosdias" ).click(function() {
+  				if($('#rmtodoslosdias').is(":checked")){
+  					$('#rmlunes').prop('checked','checked');
+  					$('#rmmartes').prop('checked','checked');
+  					$('#rmmiercoles').prop('checked','checked');
+  					$('#rmjueves').prop('checked','checked');
+  					$('#rmviernes').prop('checked','checked');
+  					$('#rmsabado').prop('checked','checked');
+  					$('#rmdomingo').prop('checked','checked');
+  				}else{
+  					$('#rmlunes').prop('checked','');
+  					$('#rmmartes').prop('checked','');
+  					$('#rmmiercoles').prop('checked','');
+  					$('#rmjueves').prop('checked','');
+  					$('#rmviernes').prop('checked','');
+  					$('#rmsabado').prop('checked','');
+  					$('#rmdomingo').prop('checked','');
+  				}
+			});
 		});
     });
 
@@ -122,6 +209,12 @@ function active_new_enterprise_form() {
 	});
 }
 
+function active_rm_enterprise_form() {
+	$('#rm_enterprise_form').submit(false).submit(function(e){
+		rm_horario();
+		return false;
+	});
+}
 
 
 function show_new() {
@@ -131,7 +224,16 @@ function show_new() {
 	else $('#new_enterprise_wrapper').slideUp();
 }
 
+function show_delete() {
+	if($('#rm_enterprise_wrapper').css('display')=='none'){
+		$('#rm_enterprise_wrapper').slideDown();
+	}
+	else $('#rm_enterprise_wrapper').slideUp();
+}
 
+function rm_horario(){
+
+}
 
 function new_horario() {
 	var error = false;
@@ -388,6 +490,7 @@ function new_horario() {
 
 function listarActividades() {
 	var select = $('#actividad');
+	var selectrm = $('#rmactividad');
 	$.getJSON(api_url+'activities/list_all?callback=?', {}, function(data){
 		////console.log(data.data)
 		if(data.status=='success'){
@@ -396,6 +499,7 @@ function listarActividades() {
             	id=list_tarifas[i].id;
             	nombres=list_tarifas[i].name;
             	var option=$('<option></option>').attr({'value':list_tarifas[i].id}).text(list_tarifas[i].name); select.append(option);
+            	var optionrm=$('<option></option>').attr({'value':list_tarifas[i].id}).text(list_tarifas[i].name); selectrm.append(optionrm);
         	}
 
 		}
@@ -431,6 +535,36 @@ function addnewhorario(){
 		}
 	}
 }
+
+function rmnewhorario(){
+	for(var i=0;i<100; i++){
+		if(!$('#rmhoraini'+String(i)).length){
+			$('#rmmastercontainer').append('<div class="row"><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de inicio: </label><input style="width: 78px;" id="rmhoraini'+i+'" class="horainiaction" type="time" name="horaini'+i+'"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de fin: </label><input style="width: 78px;" id="rmhorafin'+i+'" class="horafinaction" type="time" name="horafin'+i+'"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Duración: </label><input style="width: 78px; float:left;" id="rmduracion'+i+'" type="text" name="duracion'+i+'" readonly><input id="rmduracionhide'+i+'" type="hidden"><div class="item" onclick="rmnewhorario();" style="cursor:pointer; float: left; margin-left: 11px;"><span class="fa-stack fa"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i></span></div></div></div><br>');
+			$('#rmhoraini'+String(i)).timepicker({
+		    			showPeriodLabels: false,
+		    			hourText: 'Hora',
+		    			minuteText: 'Minutos',
+		    			myPosition: 'left top',
+		    			atPosition: 'left bottom' 
+			});
+			$('#rmhorafin'+String(i)).timepicker({
+		    			showPeriodLabels: false,
+		    			hourText: 'Hora',
+		    			minuteText: 'Minutos',
+		    			myPosition: 'left top',
+		    			atPosition: 'left bottom'
+			});
+			$( "#rmhoraini"+String(i) ).change(function() {
+				rmrestarHoras(i);
+			});
+			$( "#rmhorafin"+String(i) ).change(function() {
+  				rmrestarHoras(i);
+			});
+			break;
+		}
+	}
+}
+
 
 function loadCalendar() {
 	
@@ -897,6 +1031,43 @@ function restarHoras(id) {
 		}
 	}
 }
+
+function rmrestarHoras(id) {
+	if($('#rmhoraini'+id).val().length>0 && $('#rmhorafin'+id).val().length>0){
+		var inicio=$('#rmhoraini'+id).val();
+		var fin=$('#rmhorafin'+id).val();
+		var inicioMinutos = parseInt(inicio.substr(3,2));
+		var inicioHoras = parseInt(inicio.substr(0,2));
+		  
+		var finMinutos = parseInt(fin.substr(3,2));
+		var finHoras = parseInt(fin.substr(0,2));
+
+		var transcurridoMinutos = finMinutos - inicioMinutos;
+		var transcurridoHoras = finHoras - inicioHoras;
+		  
+		if (transcurridoMinutos < 0) {
+		  transcurridoHoras--;
+		  transcurridoMinutos = 60 + transcurridoMinutos;
+		}
+		if(transcurridoMinutos >= 0 && transcurridoHoras >= 0){  
+		var horas = transcurridoHoras.toString();
+		var minutos = transcurridoMinutos.toString();
+		  
+		if (horas.length < 2) {
+		  horas = "0"+horas;
+		}
+		  
+		if (minutos.length < 2) {
+		  minutos = "0"+minutos;
+		}
+		  
+		$('#rmduracion'+id).val(horas+':'+minutos);
+		var total = (transcurridoHoras*60)+transcurridoMinutos;
+		$('#rmduracionhide'+id).val(total);
+		}
+	}
+}
+
 
 function deleteHorario() {
 	var id = $('#idscheduletime').val();
