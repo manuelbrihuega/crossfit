@@ -71,16 +71,22 @@ def edit_customer(auth_id,data,rate):
             if customer.credit_wod!=data['credit_wod']:
                 changed=True
                 customer.credit_wod=data['credit_wod']
+            elif rate.credit_wod < customer.credit_wod:
+                customer.credit_wod = rate.credit_wod
         if validate_parameter(data,'credit_box'):
             found=True
             if customer.credit_box!=data['credit_box']:
                 changed=True
                 customer.credit_box=data['credit_box']
+            elif rate.credit_box < customer.credit_box:
+                customer.credit_box = rate.credit_box
         if validate_parameter(data,'credit_bono'):
             found=True
             if customer.credit_bono!=data['credit_bono']:
                 changed=True
                 customer.credit_bono=data['credit_bono']
+            elif rate.credit_bono < customer.credit_bono:
+                customer.credit_bono = rate.credit_bono
         if validate_parameter(data,'birthdate'):
             found=True
             if customer.birthdate!=data['birthdate']:
@@ -114,12 +120,6 @@ def edit_customer(auth_id,data,rate):
             customer.vip=getBoolValue(data['vip'])
             customer.test_user=getBoolValue(data['test_user'])
             customer.rate = rate
-            if rate.credit_wod < customer.credit_wod:
-                customer.credit_wod = rate.credit_wod
-            if rate.credit_box < customer.credit_box:
-                customer.credit_box = rate.credit_box
-            if rate.credit_bono < customer.credit_bono:
-                customer.credit_bono = rate.credit_bono
             customer.save()
             return {'status':'success','response':'changed'}
 
