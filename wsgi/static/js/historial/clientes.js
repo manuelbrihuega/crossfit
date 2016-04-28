@@ -20,6 +20,7 @@ function get_content() {
 									$('#tableweybodyreservas').append('<tr><td>'+data.data.reservations[i].activity+'</td><td>'+data.data.reservations[i].date.split(' ')[0]+'</td><td>'+data.data.reservations[i].time_start.split(' ')[1]+'</td><td>'+data.data.reservations[i].time_end.split(' ')[1]+'</td></tr>');
 								}
 								$('#cargando').hide();
+								$('#tableweybodyreservas').tablesorter();
 							}else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos','warning');
 						});
 						
