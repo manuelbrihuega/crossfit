@@ -1067,6 +1067,7 @@ function modal_passenger_details(passenger_id) {
 							$('#tableweybodyreservas').append('<tr><td>'+data.data.reservations[i].activity+'</td><td>'+data.data.reservations[i].date.split(' ')[0]+'</td><td>'+data.data.reservations[i].time_start.split(' ')[1]+'</td><td>'+data.data.reservations[i].time_end.split(' ')[1]+'</td></tr>');
 						}
 						$('#cargando').hide();
+						$('#tableweyreservas').tablesorter();
 					}else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos','warning');
 				});
 				
@@ -1082,6 +1083,7 @@ function modal_passenger_details(passenger_id) {
 							$('#tableweybodypagos').append('<tr><td>'+data.data.pagos[i].rate+'</td><td>'+data.data.pagos[i].date.split(' ')[0]+'</td><td>'+credwod+'</td><td>'+credbox+'</td><td>'+credbono+'</td></tr>');
 						}
 						$('#cargandodos').hide();
+						$('#tableweypagos').tablesorter();
 					}else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos','warning');
 				});
 

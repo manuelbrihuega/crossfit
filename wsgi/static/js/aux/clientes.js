@@ -33,7 +33,7 @@ function draw_passenger_sm(passenger, wrapper) {
     				}
     			}
 			});
-			$('#tablewey2').tablesorter();
+			
 }
 
 
