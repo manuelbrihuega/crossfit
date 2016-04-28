@@ -76,7 +76,8 @@ if($('#password').val()==$('#password_repeat').val()){
 
         else{
             var message=data.response;
-            var warning='Faltan datos';
+            //var warning='Faltan datos';
+            var warning=data.response;
             if (message == 'email_registered') warning = 'El email está en uso';
             if (message == 'phone_registered') warning = 'El número de teléfono está en uso';
             if (message == 'email_missed') warning = 'Falta el email del usuario';
