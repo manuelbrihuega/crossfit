@@ -1069,7 +1069,7 @@ function modal_passenger_details(passenger_id) {
 						$('#cargando').hide();
 						$('#tableweyreservas').tablesorter();
 					}else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos','warning');
-				});
+				}); 
 				
 				$.getJSON( api_url+'schedules/get_foreign_pagos_customer?callback=?', {id:data.data.auth_profile.auth_id}, function(data){
 					if(data.status=='success'){
