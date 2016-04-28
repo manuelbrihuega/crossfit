@@ -2644,13 +2644,23 @@ function addReservaClienteFinal(id){
 						if(data.status=='success'){
 							var credit_box = parseInt(data.data.customer_profile.credit_box);
 							var credit_wod = parseInt(data.data.customer_profile.credit_wod);
+							var credit_bono = parseInt(data.data.customer_profile.credit_bono);
 							if(consume_wod==0){
 								if(credit_box>=consume_box && credit_box!=0){
 									$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
 										if(data.status=='success'){
 											launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 											loadCalendar();
-											alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+											if(parseInt(minutos)>100){
+													var horas = parseInt(minutos)/60;
+													if(horas>1){
+														alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}else{
+														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}
+												}else{
+													alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+												}
 											//location.reload();
 											
 										}
@@ -2659,10 +2669,33 @@ function addReservaClienteFinal(id){
 			
 									});
 								}else{
-									launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
-									$('.waiting').hide();
-									$('#reservas-tabla').show();
-									
+									if(credit_bono>0){
+										$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+										if(data.status=='success'){
+											launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+											loadCalendar();
+											if(parseInt(minutos)>100){
+													var horas = parseInt(minutos)/60;
+													if(horas>1){
+														alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}else{
+														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}
+												}else{
+													alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+												}
+											//location.reload();
+											
+										}
+										else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#reservas-tabla').show();}
+			
+									});
+									}else{
+										launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+										$('.waiting').hide();
+										$('#reservas-tabla').show();
+									}
 								}
 							}else{
 								if(consume_box==0){
@@ -2671,17 +2704,45 @@ function addReservaClienteFinal(id){
 											if(data.status=='success'){
 												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 												loadCalendar();
-												alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
-												//location.reload();
-												
+												if(parseInt(minutos)>100){
+													var horas = parseInt(minutos)/60;
+													if(horas>1){
+														alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}else{
+														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}
+												}else{
+													alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+												}
 											}
 											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
 									$('#reservas-tabla').show();}
 										});
 									}else{
-										launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
-										$('.waiting').hide();
-										$('#reservas-tabla').show();
+										if(credit_bono>0){
+											$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+											if(data.status=='success'){
+												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+												loadCalendar();
+												if(parseInt(minutos)>100){
+													var horas = parseInt(minutos)/60;
+													if(horas>1){
+														alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}else{
+														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}
+												}else{
+													alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+												}
+											}
+											else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#reservas-tabla').show();}
+										});
+										}else{
+											launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+											$('.waiting').hide();
+											$('#reservas-tabla').show();
+										}
 									}
 								}else{
 									if(credit_wod>=consume_wod && credit_box>=consume_box && credit_box!=0 && credit_wod!=0){
@@ -2689,7 +2750,16 @@ function addReservaClienteFinal(id){
 											if(data.status=='success'){
 												launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 												loadCalendar();
-												alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+												if(parseInt(minutos)>100){
+													var horas = parseInt(minutos)/60;
+													if(horas>1){
+														alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}else{
+														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}
+												}else{
+													alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+												}
 												//location.reload();
 												
 											}
@@ -2718,13 +2788,23 @@ function addReservaClienteFinal(id){
 								if(data.status=='success'){
 									var credit_box = parseInt(data.data.customer_profile.credit_box);
 									var credit_wod = parseInt(data.data.customer_profile.credit_wod);
+									var credit_bono = parseInt(data.data.customer_profile.credit_bono);
 									if(consume_wod==0){
 										if(credit_box>=consume_box && credit_box!=0){
 											$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
 												if(data.status=='success'){
 													launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 													loadCalendar();
-													alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													if(parseInt(minutos)>100){
+														var horas = parseInt(minutos)/60;
+														if(horas>1){
+															alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														}else{
+															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														}
+													}else{
+														alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}
 													$('#reserva_cliente_modal .modal-body').html('<div style="text-align: center;color: #0bb358;font-weight: 600;font-size: 14px;">HAS SIDO AÑADIDO A LA COLA<i class="fa fa-smile-o"></i></div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Recuerda que desde este momento, si una plaza queda libre, el sistema asignará automáticamente la plaza por orden de cola. Si esto sucede se te notificará vía e-mail o Telegram (según tengas configurado). Si te llega la notificación, significará que ya dispondrás de tu reserva y se consumirá el crédito que corresponda, por ello, si no puedes acudir deberás cancelar tu reserva antes de que concluya el plazo de cancelación.</div>');
 													$('#reserva_cliente_modal .close').show();
 												}
@@ -2733,9 +2813,33 @@ function addReservaClienteFinal(id){
 			
 											});
 										}else{
-											launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
-											$('.waiting').hide();
-											$('#reservas-tabla').show();
+											if(credit_bono>0){
+												$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+												if(data.status=='success'){
+													launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+													loadCalendar();
+													if(parseInt(minutos)>100){
+														var horas = parseInt(minutos)/60;
+														if(horas>1){
+															alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														}else{
+															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														}
+													}else{
+														alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}
+													$('#reserva_cliente_modal .modal-body').html('<div style="text-align: center;color: #0bb358;font-weight: 600;font-size: 14px;">HAS SIDO AÑADIDO A LA COLA<i class="fa fa-smile-o"></i></div><div style="font-size: 11px; color: black; padding-left: 13px; margin-top: 10px;">Recuerda que desde este momento, si una plaza queda libre, el sistema asignará automáticamente la plaza por orden de cola. Si esto sucede se te notificará vía e-mail o Telegram (según tengas configurado). Si te llega la notificación, significará que ya dispondrás de tu reserva y se consumirá el crédito que corresponda, por ello, si no puedes acudir deberás cancelar tu reserva antes de que concluya el plazo de cancelación.</div>');
+													$('#reserva_cliente_modal .close').show();
+												}
+												else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#reservas-tabla').show();}
+			
+											});
+											}else{
+												launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+												$('.waiting').hide();
+												$('#reservas-tabla').show();
+											}
 										}
 									}else{
 										if(consume_box==0){
@@ -2744,7 +2848,16 @@ function addReservaClienteFinal(id){
 													if(data.status=='success'){
 														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 														loadCalendar();
+														if(parseInt(minutos)>100){
+														var horas = parseInt(minutos)/60;
+														if(horas>1){
+															alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														}else{
+															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														}
+													}else{
 														alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}
 														//location.reload();
 														
 													}
@@ -2753,9 +2866,33 @@ function addReservaClienteFinal(id){
 			
 												});
 											}else{
-												launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
-												$('.waiting').hide();
-												$('#reservas-tabla').show();
+												if(credit_bono>0){
+													$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
+													if(data.status=='success'){
+														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
+														loadCalendar();
+														if(parseInt(minutos)>100){
+														var horas = parseInt(minutos)/60;
+														if(horas>1){
+															alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														}else{
+															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														}
+													}else{
+														alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}
+														//location.reload();
+														
+													}
+													else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('.waiting').hide();
+									$('#reservas-tabla').show();}
+			
+												});
+												}else{
+													launch_alert('No dispones de créditos suficientes para reservar plaza en esta actividad.','warning');
+													$('.waiting').hide();
+													$('#reservas-tabla').show();
+												}
 											}
 										}else{
 											if(credit_wod>=consume_wod && credit_box>=consume_box && credit_box!=0 && credit_wod!=0){
@@ -2763,7 +2900,16 @@ function addReservaClienteFinal(id){
 													if(data.status=='success'){
 														launch_alert('<i class="fa fa-smile-o"></i> Reserva realizada con éxito','');
 														loadCalendar();
+														if(parseInt(minutos)>100){
+														var horas = parseInt(minutos)/60;
+														if(horas>1){
+															alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														}else{
+															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														}
+													}else{
 														alert('AVISO: Revise su email y/o Telegram '+minutos+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+													}
 														//location.reload();
 														
 													}

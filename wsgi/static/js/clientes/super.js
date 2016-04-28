@@ -163,6 +163,7 @@ function initialsearch() {
 				$.each(data.data.list, function(index, passenger) {
 					draw_passenger_sm(passenger, wrapper);
 				});
+				$('#tablewey2').tablesorter();
 			}
 			else{ wr.empty(); wrapper.empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-frown-o"></i></div><div class="text">No se han encontrado clientes</div></div>');}
 		}
