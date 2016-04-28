@@ -592,8 +592,10 @@ def delete_reservation(request):
             position = reservation.position_queue
             schedule_time_id = reservation.schedule_time.id
             if not user.vip:
-                user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
-                user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
+                if reservation.schedule_time.schedule.activity.credit_wod > 0:
+                    user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
+                if reservation.schedule_time.schedule.activity.credit_box > 0:
+                    user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
                 user.save()
             name = 'User_Id'+str(auth.id)
             nick = 'User_Id'+str(auth.id)
@@ -612,8 +614,10 @@ def delete_reservation(request):
         else:
             schedule_time_id = reservation.schedule_time.id
             if not user.vip:
-                user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
-                user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
+                if reservation.schedule_time.schedule.activity.credit_wod > 0:
+                    user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
+                if reservation.schedule_time.schedule.activity.credit_box > 0:
+                    user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
                 user.save()
             name = 'User_Id'+str(user.auth.id)
             nick = 'User_Id'+str(user.auth.id)
@@ -695,8 +699,10 @@ def delete_reservation_client(request):
                 position = reservation.position_queue
                 schedule_time_id = reservation.schedule_time.id
                 if not user.vip:
-                    user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
-                    user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
+                    if reservation.schedule_time.schedule.activity.credit_wod > 0:
+                        user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
+                    if reservation.schedule_time.schedule.activity.credit_box > 0:
+                        user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
                     user.save()
                 name = 'User_Id'+str(auth.id)
                 nick = 'User_Id'+str(auth.id)
@@ -715,8 +721,10 @@ def delete_reservation_client(request):
             else:
                 schedule_time_id = reservation.schedule_time.id
                 if not user.vip:
-                    user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
-                    user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
+                    if reservation.schedule_time.schedule.activity.credit_wod > 0:
+                        user.credit_wod = user.credit_wod + reservation.schedule_time.schedule.activity.credit_wod
+                    if reservation.schedule_time.schedule.activity.credit_box > 0:
+                        user.credit_box = user.credit_box + reservation.schedule_time.schedule.activity.credit_box
                     user.save()
                 name = 'User_Id'+str(user.auth.id)
                 nick = 'User_Id'+str(user.auth.id)
@@ -1007,8 +1015,16 @@ def add_reservation(request):
             reservation.queue = False
             reservation.schedule_time = schedule_time
             if not customer.vip:
-                customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
-                customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                if schedule_time.schedule.activity.credit_wod > 0:
+                    if customer.credit_wod > 0:
+                        customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
+                    elif customer.credit_bono > 0:
+                        customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_wod
+                if schedule_time.schedule.activity.credit_box > 0:
+                    if customer.credit_box > 0:
+                        customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                    elif customer.credit_bono > 0:
+                        customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
             spa = pytz.timezone('Europe/Madrid')
@@ -1041,8 +1057,16 @@ def add_reservation(request):
             reservation.position_queue = (aforocola - disponiblescola) + 1
             reservation.schedule_time = schedule_time
             if not customer.vip:
-                customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
-                customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                if schedule_time.schedule.activity.credit_wod > 0:
+                    if customer.credit_wod > 0:
+                        customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
+                    elif customer.credit_bono > 0:
+                        customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_wod
+                if schedule_time.schedule.activity.credit_box > 0:
+                    if customer.credit_box > 0:
+                        customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                    elif customer.credit_bono > 0:
+                        customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
             spa = pytz.timezone('Europe/Madrid')
@@ -1110,16 +1134,17 @@ def add_reservation_client(request):
         consumo_box = schedule_time.schedule.activity.credit_box
         mequedanbox = customer.credit_box
         mequedanwod = customer.credit_wod
+        mequedanbono = customer.credit_bono
         if not customer.validated:
             raise Exception('Cliente no validado')
         if not customer.vip:
-            if mequedanwod==0 and mequedanbox==0:
+            if mequedanwod==0 and mequedanbox==0 and mequedanbono==0:
                 raise Exception('No te quedan créditos para reservar')
-            if mequedanwod==0 and mequedanbox<consumo_box:
+            if mequedanwod==0 and mequedanbox<consumo_box and mequedanbono<consumo_box:
                 raise Exception('No te quedan créditos para reservar')
-            if mequedanbox==0 and mequedanwod<consumo_wod:
+            if mequedanbox==0 and mequedanwod<consumo_wod and mequedanbono<consumo_wod:
                 raise Exception('No te quedan créditos para reservar')
-            if mequedanwod!=0 and mequedanbox!=0 and mequedanbox<consumo_box and mequedanwod<consumo_wod:
+            if mequedanwod!=0 and mequedanbox!=0 and mequedanbono!=0 and mequedanbox<consumo_box and mequedanwod<consumo_wod and mequedanbono<consumo_wod and mequedanbono<consumo_box:
                 raise Exception('No te quedan créditos para reservar')
             if fechaparaactividad <= ahoramismo:
                 raise Exception('Ya es demasiado tarde para reservar plaza en esta actividad')
@@ -1130,8 +1155,16 @@ def add_reservation_client(request):
             reservation.queue = False
             reservation.schedule_time = schedule_time
             if not customer.vip:
-                customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
-                customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                if schedule_time.schedule.activity.credit_wod > 0:
+                    if customer.credit_wod > 0:
+                        customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
+                    elif customer.credit_bono > 0:
+                        customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_wod
+                if schedule_time.schedule.activity.credit_box > 0:
+                    if customer.credit_box > 0:
+                        customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                    elif customer.credit_bono > 0:
+                        customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
             spa = pytz.timezone('Europe/Madrid')
@@ -1164,8 +1197,16 @@ def add_reservation_client(request):
             reservation.position_queue = (aforocola - disponiblescola) + 1
             reservation.schedule_time = schedule_time
             if not customer.vip:
-                customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
-                customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                if schedule_time.schedule.activity.credit_wod > 0:
+                    if customer.credit_wod > 0:
+                        customer.credit_wod = customer.credit_wod - schedule_time.schedule.activity.credit_wod
+                    elif customer.credit_bono > 0:
+                        customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_wod
+                if schedule_time.schedule.activity.credit_box > 0:
+                    if customer.credit_box > 0:
+                        customer.credit_box = customer.credit_box - schedule_time.schedule.activity.credit_box
+                    elif customer.credit_bono > 0:
+                        customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_box
                 customer.save()
             reservation.save()
             spa = pytz.timezone('Europe/Madrid')
