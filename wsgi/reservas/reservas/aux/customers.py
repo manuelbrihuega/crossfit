@@ -114,6 +114,10 @@ def edit_customer(auth_id,data,rate):
             customer.vip=getBoolValue(data['vip'])
             customer.test_user=getBoolValue(data['test_user'])
             customer.rate = rate
+            if rate.credit_wod < customer.credit_wod:
+                customer.credit_wod = rate.credit_wod
+            if rate.credit_box < customer.credit_box:
+                customer.credit_box = rate.credit_box
             customer.save()
             return {'status':'success','response':'changed'}
 
