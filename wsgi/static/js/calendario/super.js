@@ -232,7 +232,246 @@ function show_delete() {
 }
 
 function rm_horario(){
+	var error = false;
+	var numerodetramos = 0;
+	var horaini='';
+	var horafin='';
+	var duracion='';
+	var duracionhide='';
+	for(var i=0; i<100; i++){
+		if($('#rmhoraini'+i).length){
+			numerodetramos = numerodetramos + 1;
+			horaini=horaini + $('#rmhoraini'+i).val() + ',';
+			horafin=horafin + $('#rmhorafin'+i).val() + ',';
+			duracion= duracion + $('#rmduracion'+i).val() + ',';
+			duracionhide= duracionhide + $('#rmduracionhide'+i).val() + ',';
+		}
+	}
+	var activity_id=$('#rmactividad').val();
+	if($('#rmfechaconcreta').is(":checked")){
+		var fecha = $('#rmfecha').val();
+		if(fecha.length>0){
+			if(horaini.length>0){
+				if(horafin.length>0){
+					if(duracion.length>0){
+						if(activity_id!=-1){
+							$('#rmbotonadd').html('<i class="fa fa-cog fa-spin"></i>');
+							$.getJSON(api_url+'schedules/rm_concrete?callback=?', { time_start:horaini, 
+																							 time_end:horafin,
+																							 duration:duracionhide,
+																							 activity_id:activity_id,
+																							 date:fecha,
+																							 numerodetramos: numerodetramos,
+																					}, function(data){
+																												
+										if(data.status=='success'){
+											launch_alert('<i class="fa fa-smile-o"></i> Horario eliminado','');
+											$('#rmmastercontainer').html('');
+											$('#rmmastercontainer').append('<div class="row"><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de inicio: </label><input style="width: 78px;" id="rmhoraini0" class="horainiaction" type="time" name="horaini0"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de fin: </label><input style="width: 78px;" id="rmhorafin0" class="horafinaction" type="time" name="horafin0"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Duración: </label><input style="width: 78px; float:left;" id="rmduracion0" type="text" name="duracion0" readonly><input id="rmduracionhide0" type="hidden"><div class="item" onclick="rmnewhorario();" style="cursor:pointer; float: left; margin-left: 11px;"><span class="fa-stack fa"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i></span></div></div></div><br>');
+											$( "#rmhoraini0" ).change(function() {
+												rmrestarHoras(0);
+											});
+											$( "#rmhorafin0" ).change(function() {
+								  				rmrestarHoras(0);
+											});
+											$('#rmhoraini0').timepicker({
+									    			showPeriodLabels: false,
+									    			hourText: 'Hora',
+									    			minuteText: 'Minutos',
+									    			myPosition: 'left top',
+									    			atPosition: 'left bottom' 
+											});
+											$('#rmhorafin0').timepicker({
+										    			showPeriodLabels: false,
+										    			hourText: 'Hora',
+										    			minuteText: 'Minutos',
+										    			myPosition: 'left top',
+										    			atPosition: 'left bottom'
+											});
+											$('#rmbotonadd').html('Enviar');
+											show_delete();
+											$('#rmactivity_id').val('-1');
+											$('#rmfecha').val('');
+											$('#rmlunes').prop('checked','');
+											$('#rmmartes').prop('checked','');
+											$('#rmmiercoles').prop('checked','');
+											$('#rmjueves').prop('checked','');
+											$('#rmviernes').prop('checked','');
+											$('#rmsabado').prop('checked','');
+											$('#rmdomingo').prop('checked','');
+											$('#rmtodoslosdias').prop('checked','');
+											$('#rmenero').prop('checked','');
+											$('#rmfebrero').prop('checked','');
+											$('#rmmarzo').prop('checked','');
+											$('#rmabril').prop('checked','');
+											$('#rmmayo').prop('checked','');
+											$('#rmjunio').prop('checked','');
+											$('#rmjulio').prop('checked','');
+											$('#rmagosto').prop('checked','');
+											$('#rmseptiembre').prop('checked','');
+											$('#rmoctubre').prop('checked','');
+											$('#rmnoviembre').prop('checked','');
+											$('#rmdiciembre').prop('checked','');
+											$('#rmtodoslosmeses').prop('checked','');
+											loadCalendar();		
+										}else{
+											error = true;
+											launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning'); $('#rmbotonadd').html('Enviar');}
+									});
+								}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar una actividad','warning');}
+							}else{launch_alert('<i class="fa fa-frown-o"></i> El intervalo horario es erróneo','warning');}
+						}else{launch_alert('<i class="fa fa-frown-o"></i> Debes añadir una hora de fin para la actividad','warning');}
+					}else{launch_alert('<i class="fa fa-frown-o"></i> Debes añadir una hora de inicio para la actividad','warning');}
+				}else{launch_alert('<i class="fa fa-frown-o"></i> Debes añadir una fecha para la actividad','warning');}
+			}else{
+				if($('#rmfechapatron').is(":checked")){
+					var lunes = false;
+					var martes = false;
+					var miercoles = false;
+					var jueves = false;
+					var viernes = false;
+					var sabado = false;
+					var domingo = false;
+					if($('#rmlunes').is(":checked")){ lunes=true; }
+					if($('#rmmartes').is(":checked")){ martes=true; }
+					if($('#rmmiercoles').is(":checked")){ miercoles=true; }
+					if($('#rmjueves').is(":checked")){ jueves=true; }
+					if($('#rmviernes').is(":checked")){ viernes=true; }
+					if($('#rmsabado').is(":checked")){ sabado=true; }
+					if($('#rmdomingo').is(":checked")){ domingo=true; }
 
+					var enero = false;
+					var febrero = false;
+					var marzo = false;
+					var abril = false;
+					var mayo = false;
+					var junio = false;
+					var julio = false;
+					var agosto = false;
+					var septiembre = false;
+					var octubre = false;
+					var noviembre = false;
+					var diciembre = false;
+					if($('#rmenero').is(":checked")){ enero=true; }
+					if($('#rmfebrero').is(":checked")){ febrero=true; }
+					if($('#rmmarzo').is(":checked")){ marzo=true; }
+					if($('#rmabril').is(":checked")){ abril=true; }
+					if($('#rmmayo').is(":checked")){ mayo=true; }
+					if($('#rmjunio').is(":checked")){ junio=true; }
+					if($('#rmjulio').is(":checked")){ julio=true; }
+					if($('#rmagosto').is(":checked")){ agosto=true; }
+					if($('#rmseptiembre').is(":checked")){ septiembre=true; }
+					if($('#rmoctubre').is(":checked")){ octubre=true; }
+					if($('#rmnoviembre').is(":checked")){ noviembre=true; }
+					if($('#rmdiciembre').is(":checked")){ diciembre=true; }
+					if(enero || febrero || marzo || abril || mayo || junio || julio || agosto || septiembre || octubre || noviembre || diciembre){
+						if(lunes || martes || miercoles || jueves || viernes || sabado || domingo){
+							var d1 = lunes ? 1 : 0;
+							var d2 = martes ? 1 : 0;
+							var d3 = miercoles ? 1 : 0;
+							var d4 = jueves ? 1 : 0;
+							var d5 = viernes ? 1 : 0;
+							var d6 = sabado ? 1 : 0;
+							var d7 = domingo ? 1 : 0;
+							var cad_dias = d1+','+d2+','+d3+','+d4+','+d5+','+d6+','+d7;
+							var m1 = enero ? 1 : 0;
+							var m2 = febrero ? 1 : 0;
+							var m3 = marzo ? 1 : 0;
+							var m4 = abril ? 1 : 0;
+							var m5 = mayo ? 1 : 0;
+							var m6 = junio ? 1 : 0;
+							var m7 = julio ? 1 : 0;
+							var m8 = agosto ? 1 : 0;
+							var m9 = septiembre ? 1 : 0;
+							var m10 = octubre ? 1 : 0;
+							var m11 = noviembre ? 1 : 0;
+							var m12 = diciembre ? 1 : 0;
+							var cad_meses = m1+','+m2+','+m3+','+m4+','+m5+','+m6+','+m7+','+m8+','+m9+','+m10+','+m11+','+m12;
+							if(horaini.length>0){
+								if(horafin.length>0){
+									if(duracion.length>0){
+										if(activity_id!=-1){
+											$('#rmbotonadd').html('<i class="fa fa-cog fa-spin"></i>');
+											$.getJSON(api_url+'schedules/rm_interval?callback=?', { time_start:horaini, 
+																								 time_end:horafin,
+																								 duration:duracionhide,
+																								 activity_id:activity_id,
+																								 monthly:cad_meses,
+																								 weekly:cad_dias,
+																								 numerodetramos:numerodetramos}, function(data){
+																													
+												if(data.status=='success'){
+													
+													launch_alert('<i class="fa fa-smile-o"></i> Horario eliminado','');
+													//searchRates();
+													$('#rmmastercontainer').html('');
+													$('#rmmastercontainer').append('<div class="row"><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de inicio: </label><input style="width: 78px;" id="rmhoraini0" class="horainiaction" type="time" name="horaini0"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de fin: </label><input style="width: 78px;" id="rmhorafin0" class="horafinaction" type="time" name="horafin0"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Duración: </label><input style="width: 78px; float:left;" id="rmduracion0" type="text" name="duracion0" readonly><input id="rmduracionhide0" type="hidden"><div class="item" onclick="rmnewhorario();" style="cursor:pointer; float: left; margin-left: 11px;"><span class="fa-stack fa"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i></span></div></div></div><br>');
+													$( "#rmhoraini0" ).change(function() {
+												rmrestarHoras(0);
+											});
+											$( "#rmhorafin0" ).change(function() {
+								  				rmrestarHoras(0);
+											});
+											$('#rmhoraini0').timepicker({
+									    			showPeriodLabels: false,
+									    			hourText: 'Hora',
+									    			minuteText: 'Minutos',
+									    			myPosition: 'left top',
+									    			atPosition: 'left bottom' 
+											});
+											$('#rmhorafin0').timepicker({
+										    			showPeriodLabels: false,
+										    			hourText: 'Hora',
+										    			minuteText: 'Minutos',
+										    			myPosition: 'left top',
+										    			atPosition: 'left bottom'
+											});
+											$('#rmbotonadd').html('Enviar');
+											show_delete();
+											$('#rmactivity_id').val('-1');
+											$('#rmfecha').val('');
+											$('#rmlunes').prop('checked','');
+											$('#rmmartes').prop('checked','');
+											$('#rmmiercoles').prop('checked','');
+											$('#rmjueves').prop('checked','');
+											$('#rmviernes').prop('checked','');
+											$('#rmsabado').prop('checked','');
+											$('#rmdomingo').prop('checked','');
+											$('#rmtodoslosdias').prop('checked','');
+
+											$('#rmenero').prop('checked','');
+											$('#rmfebrero').prop('checked','');
+											$('#rmmarzo').prop('checked','');
+											$('#rmabril').prop('checked','');
+											$('#rmmayo').prop('checked','');
+											$('#rmjunio').prop('checked','');
+											$('#rmjulio').prop('checked','');
+											$('#rmagosto').prop('checked','');
+											$('#rmseptiembre').prop('checked','');
+											$('#rmoctubre').prop('checked','');
+											$('#rmnoviembre').prop('checked','');
+											$('#rmdiciembre').prop('checked','');
+											$('#rmtodoslosmeses').prop('checked','');
+													loadCalendar();
+
+								
+												}else{ launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');}
+											});
+										}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar una actividad','warning');}
+									}else{launch_alert('<i class="fa fa-frown-o"></i> El intervalo horario es erróneo','warning');}
+								}else{launch_alert('<i class="fa fa-frown-o"></i> Debes añadir una hora de fin para la actividad','warning');}
+							}else{launch_alert('<i class="fa fa-frown-o"></i> Debes añadir una hora de inicio para la actividad','warning');}
+						}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar algun día de la semana para la actividad','warning');}
+					}else{launch_alert('<i class="fa fa-frown-o"></i> Debes seleccionar algun mes para la actividad','warning');}
+
+
+
+
+				}		
+			}
+		
+	
+		
 }
 
 function new_horario() {
