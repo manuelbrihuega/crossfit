@@ -17,9 +17,9 @@ function get_content() {
 						$.getJSON(api_url+'customers/get?callback=?', {}, function(data){
 							if(data.status=='success'){
 								$('#new_customer_name').val(data.data.auth_profile.name);
-								$('#crwod').val('Créditos WOD: '+data.data.customer_profile.credit_wod);
-								$('#cropen').val('Créditos OPEN: '+data.data.customer_profile.credit_box);
-								$('#crbono').val('Créditos Bono: '+data.data.customer_profile.credit_bono);
+								$('#crwod').html('Créditos WOD: '+data.data.customer_profile.credit_wod);
+								$('#cropen').html('Créditos OPEN: '+data.data.customer_profile.credit_box);
+								$('#crbono').html('Créditos Bono: '+data.data.customer_profile.credit_bono);
 								$('#new_customer_surname').val(data.data.auth_profile.surname);
 								$('#new_customer_nif').val(data.data.customer_profile.nif);
 								$('#new_customer_phone').val(data.data.auth_profile.phone);
