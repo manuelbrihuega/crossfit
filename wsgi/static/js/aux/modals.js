@@ -1982,40 +1982,40 @@ function mostrarDialogoMiReservaEnCola(id){
 				cad = cad + 'Sábado';
 			}
 			cad = cad + ' ' + data.data.dia + ' ';
-			if(data.data.mes==0){
+			if(data.data.mes==1){
 				cad = cad + 'Enero';
 			}
-			if(data.data.mes==1){
+			if(data.data.mes==2){
 				cad = cad + 'Febrero';
 			}
-			if(data.data.mes==2){
+			if(data.data.mes==3){
 				cad = cad + 'Marzo';
 			}
-			if(data.data.mes==3){
+			if(data.data.mes==4){
 				cad = cad + 'Abril';
 			}
-			if(data.data.mes==4){
+			if(data.data.mes==5){
 				cad = cad + 'Mayo';
 			}
-			if(data.data.mes==5){
+			if(data.data.mes==6){
 				cad = cad + 'Junio';
 			}
-			if(data.data.mes==6){
+			if(data.data.mes==7){
 				cad = cad + 'Julio';
 			}
-			if(data.data.mes==7){
+			if(data.data.mes==8){
 				cad = cad + 'Agosto';
 			}
-			if(data.data.mes==8){
+			if(data.data.mes==9){
 				cad = cad + 'Septiembre';
 			}
-			if(data.data.mes==9){
+			if(data.data.mes==10){
 				cad = cad + 'Octubre';
 			}
-			if(data.data.mes==10){
+			if(data.data.mes==11){
 				cad = cad + 'Noviembre';
 			}
-			if(data.data.mes==11){
+			if(data.data.mes==12){
 				cad = cad + 'Diciembre';
 			}
 			cad = cad + ' ' + data.data.year;
@@ -2095,40 +2095,40 @@ function mostrarDialogoMiReserva(id){
 				cad = cad + 'Sábado';
 			}
 			cad = cad + ' ' + data.data.dia + ' ';
-			if(data.data.mes==0){
+			if(data.data.mes==1){
 				cad = cad + 'Enero';
 			}
-			if(data.data.mes==1){
+			if(data.data.mes==2){
 				cad = cad + 'Febrero';
 			}
-			if(data.data.mes==2){
+			if(data.data.mes==3){
 				cad = cad + 'Marzo';
 			}
-			if(data.data.mes==3){
+			if(data.data.mes==4){
 				cad = cad + 'Abril';
 			}
-			if(data.data.mes==4){
+			if(data.data.mes==5){
 				cad = cad + 'Mayo';
 			}
-			if(data.data.mes==5){
+			if(data.data.mes==6){
 				cad = cad + 'Junio';
 			}
-			if(data.data.mes==6){
+			if(data.data.mes==7){
 				cad = cad + 'Julio';
 			}
-			if(data.data.mes==7){
+			if(data.data.mes==8){
 				cad = cad + 'Agosto';
 			}
-			if(data.data.mes==8){
+			if(data.data.mes==9){
 				cad = cad + 'Septiembre';
 			}
-			if(data.data.mes==9){
+			if(data.data.mes==10){
 				cad = cad + 'Octubre';
 			}
-			if(data.data.mes==10){
+			if(data.data.mes==11){
 				cad = cad + 'Noviembre';
 			}
-			if(data.data.mes==11){
+			if(data.data.mes==12){
 				cad = cad + 'Diciembre';
 			}
 			cad = cad + ' ' + data.data.year;
@@ -2207,40 +2207,40 @@ function addReservaCliente(id){
 				cad = cad + 'Sábado';
 			}
 			cad = cad + ' ' + data.data.dia + ' ';
-			if(data.data.mes==0){
+			if(data.data.mes==1){
 				cad = cad + 'Enero';
 			}
-			if(data.data.mes==1){
+			if(data.data.mes==2){
 				cad = cad + 'Febrero';
 			}
-			if(data.data.mes==2){
+			if(data.data.mes==3){
 				cad = cad + 'Marzo';
 			}
-			if(data.data.mes==3){
+			if(data.data.mes==4){
 				cad = cad + 'Abril';
 			}
-			if(data.data.mes==4){
+			if(data.data.mes==5){
 				cad = cad + 'Mayo';
 			}
-			if(data.data.mes==5){
+			if(data.data.mes==6){
 				cad = cad + 'Junio';
 			}
-			if(data.data.mes==6){
+			if(data.data.mes==7){
 				cad = cad + 'Julio';
 			}
-			if(data.data.mes==7){
+			if(data.data.mes==8){
 				cad = cad + 'Agosto';
 			}
-			if(data.data.mes==8){
+			if(data.data.mes==9){
 				cad = cad + 'Septiembre';
 			}
-			if(data.data.mes==9){
+			if(data.data.mes==10){
 				cad = cad + 'Octubre';
 			}
-			if(data.data.mes==10){
+			if(data.data.mes==11){
 				cad = cad + 'Noviembre';
 			}
-			if(data.data.mes==11){
+			if(data.data.mes==12){
 				cad = cad + 'Diciembre';
 			}
 			cad = cad + ' ' + data.data.year;
