@@ -428,6 +428,9 @@ def list_all_tabla_for_customers(request):
                 fechasepuedereservar = fechaparaactividad - timedelta(minutes=sch.minutes_pre)
                 estado = 'DISPONIBLE'
                 fechita = sch.schedule.date
+                auxiliador = 'NO'
+                if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=sch.minutes_post)):
+                    auxiliador = 'SI'
                 if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=sch.minutes_pre)):
                     estado = 'CERRADA'
                 if datetime.now() >= datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0):
@@ -466,6 +469,7 @@ def list_all_tabla_for_customers(request):
                          'aforo':str(aforo),
                          'aforocola':str(aforocola),
                          'estado':estado,
+                         'auxiliador':auxiliador,
                          'disponiblecola':str(discol)})
         festivos=Parties.objects.all()
         listfest=[]
