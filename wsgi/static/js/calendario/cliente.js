@@ -252,7 +252,7 @@ function loadCalendar() {
 					cadestadodos = 'spanreservada';
 					//onclick = 'deleteMiReserva('+data.data.actividades[i].id+');';
 					onclick = 'mostrarDialogoMiReserva('+data.data.actividades[i].id+',\''+data.data.actividades[i].auxiliador+'\');';
-				}
+				} 
 				if(data.data.actividades[i].estado=='EN COLA'){
 					cadestado = 'actividadreservada';
 					cadestadodos = 'spanreservada';
