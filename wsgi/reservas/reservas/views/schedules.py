@@ -324,10 +324,14 @@ def list_all_tabla(request):
         conf = Configuration.objects.get(id=1)
         hoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
         next = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_table_show+1)
-        schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1), Q(schedule__date__gte=hoy), Q(schedule__date__lte=next)).order_by('-schedule__activity__name')
         dia_semana_inicio = datetime.weekday(hoy)
         dias_a_mostrar = conf.days_table_show
+        if dia_semana_inicio==6:
+            hoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=1)
+            next = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_table_show+2)
+            dia_semana_inicio = datetime.weekday(hoy)
         listacts=[]
+        schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1), Q(schedule__date__gte=hoy), Q(schedule__date__lte=next)).order_by('-schedule__activity__name')
         for sch in schedule_time:
             fechaact = datetime(int(sch.schedule.date.year),int(sch.schedule.date.month),int(sch.schedule.date.day),0,0,0)
             if fechaact >= hoy and fechaact <= next:
@@ -413,11 +417,17 @@ def list_all_tabla_for_customers(request):
         conf = Configuration.objects.get(id=1)
         fechahoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
         fechanext = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_pre+1)    
-        schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1), Q(schedule__date__gte=fechahoy), Q(schedule__date__lte=fechanext)).order_by('-schedule__activity__name')
         hoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0)
         #next = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_table_show)
         dia_semana_inicio = datetime.weekday(hoy)
         #dias_a_mostrar = conf.days_table_show
+        if dia_semana_inicio==6:
+            fechahoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=1)
+            fechanext = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=conf.days_pre+2)
+            hoy = datetime(int(datetime.today().year),int(datetime.today().month),int(datetime.today().day),0,0,0) + timedelta(days=1)
+            dia_semana_inicio = datetime.weekday(hoy)
+        schedule_time=Schedules_times.objects.filter(Q(schedule__concrete=1), Q(schedule__date__gte=fechahoy), Q(schedule__date__lte=fechanext)).order_by('-schedule__activity__name')
+        
         listacts=[]
         for sch in schedule_time:
             fechaact = datetime(int(sch.schedule.date.year),int(sch.schedule.date.month),int(sch.schedule.date.day),0,0,0)
