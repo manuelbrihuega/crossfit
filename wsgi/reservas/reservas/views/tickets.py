@@ -308,7 +308,7 @@ def respond_foreign(request):
             raise Exception('unauthorized_respond_foreign_ticket')
         ticket=Tickets.objects.get(id=request.GET['id'])
         message=add_message(ticket,request.GET['text'],False,request.GET['offset'])
-        ticket.status=2
+        ticket.status=1
         ticket.save()
 
         data=json.dumps({'status': 'success', 'response':'ticket_responded','data': {'message':message['data']['message']} })
@@ -317,7 +317,7 @@ def respond_foreign(request):
         data=json.dumps({'status':'failed','response':'ticket_not_found'})
 
     except Exception as e:
-        data=json.dumps({'status':'failed','repsonse':e.args[0]})
+        data=json.dumps({'status':'failed','repsonse':e.args[0] + e.args[1]})
 
 
     return APIResponse(request,data)
