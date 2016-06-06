@@ -312,7 +312,7 @@ def respond_foreign(request):
         ticket.status=1
         ticket.save()
 
-        data=json.dumps({'status': 'success', 'response':'ticket_responded','data': {'message':message['data']['message']} })
+        data=json.dumps({'status': 'success', 'response':'ticket_responded','data': {'message':'OK'} })
 
     except Tickets.DoesNotExist:
         data=json.dumps({'status':'failed','response':'ticket_not_found'})
