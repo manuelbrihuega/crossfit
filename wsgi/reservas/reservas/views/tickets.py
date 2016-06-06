@@ -297,6 +297,7 @@ def list_foreign(request):
 
 def respond_foreign(request):
     """ Get every ticket """
+    import sys, os
     try:
         if 'auth_id' not in request.session:
             raise Exception('not_logged')
@@ -317,7 +318,9 @@ def respond_foreign(request):
         data=json.dumps({'status':'failed','response':'ticket_not_found'})
 
     except Exception as e:
-        data=json.dumps({'status':'failed','repsonse':e.args[0] + e.args[1]})
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        data=json.dumps({'status':'failed','repsonse':e.args[0] + str(exc_tb.tb_lineno) + str(fname)})
 
 
     return APIResponse(request,data)
