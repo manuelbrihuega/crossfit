@@ -1064,7 +1064,7 @@ function modal_passenger_details(passenger_id) {
 				$.getJSON( api_url+'schedules/get_foreign_reservations_customer?callback=?', {id:data.data.auth_profile.auth_id}, function(data){
 					if(data.status=='success'){
 						for (var i=0; i<data.data.reservations.length; i++){
-							$('#tableweybodyreservas').append('<tr><td>'+data.data.reservations[i].activity+'</td><td>'+data.data.reservations[i].date.split(' ')[0]+'</td><td>'+data.data.reservations[i].time_start.split(' ')[1]+'</td><td>'+data.data.reservations[i].time_end.split(' ')[1]+'</td></tr>');
+							$('#tableweybodyreservas').append('<tr><td>'+data.data.reservations[i].activity+'</td><td>'+data.data.reservations[i].date.split(' ')[0]+'</td><td>'+data.data.reservations[i].date_activity.split(' ')[0]+'</td><td>'+data.data.reservations[i].time_start.split(' ')[1]+'</td><td>'+data.data.reservations[i].time_end.split(' ')[1]+'</td></tr>');
 						}
 						$('#cargando').hide();
 						$('#tableweyreservas').tablesorter();
