@@ -2736,7 +2736,9 @@ function addReservaClienteFinal(id){
 											if(parseInt(minutos)>100){
 													var horas = parseInt(minutos)/60;
 													if(horas>1){
-														alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var cociente = parseInt(horas);
+														var resto = parseInt(minutos)%60;
+														alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}else{
 														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}
@@ -2759,7 +2761,9 @@ function addReservaClienteFinal(id){
 											if(parseInt(minutos)>100){
 													var horas = parseInt(minutos)/60;
 													if(horas>1){
-														alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var cociente = parseInt(horas);
+														var resto = parseInt(minutos)%60;
+														alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}else{
 														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}
@@ -2789,7 +2793,9 @@ function addReservaClienteFinal(id){
 												if(parseInt(minutos)>100){
 													var horas = parseInt(minutos)/60;
 													if(horas>1){
-														alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var cociente = parseInt(horas);
+														var resto = parseInt(minutos)%60;
+														alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}else{
 														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}
@@ -2809,7 +2815,9 @@ function addReservaClienteFinal(id){
 												if(parseInt(minutos)>100){
 													var horas = parseInt(minutos)/60;
 													if(horas>1){
-														alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var cociente = parseInt(horas);
+														var resto = parseInt(minutos)%60;
+														alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}else{
 														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}
@@ -2835,7 +2843,9 @@ function addReservaClienteFinal(id){
 												if(parseInt(minutos)>100){
 													var horas = parseInt(minutos)/60;
 													if(horas>1){
-														alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var cociente = parseInt(horas);
+														var resto = parseInt(minutos)%60;
+														alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}else{
 														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}
@@ -2880,7 +2890,9 @@ function addReservaClienteFinal(id){
 													if(parseInt(minutos)>100){
 														var horas = parseInt(minutos)/60;
 														if(horas>1){
-															alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+															var cociente = parseInt(horas);
+															var resto = parseInt(minutos)%60;
+															alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}else{
 															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}
@@ -2903,7 +2915,9 @@ function addReservaClienteFinal(id){
 													if(parseInt(minutos)>100){
 														var horas = parseInt(minutos)/60;
 														if(horas>1){
-															alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+															var cociente = parseInt(horas);
+															var resto = parseInt(minutos)%60;
+															alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}else{
 															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}
@@ -2933,7 +2947,9 @@ function addReservaClienteFinal(id){
 														if(parseInt(minutos)>100){
 														var horas = parseInt(minutos)/60;
 														if(horas>1){
-															alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+															var cociente = parseInt(horas);
+															var resto = parseInt(minutos)%60;
+															alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}else{
 															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}
@@ -2956,7 +2972,9 @@ function addReservaClienteFinal(id){
 														if(parseInt(minutos)>100){
 														var horas = parseInt(minutos)/60;
 														if(horas>1){
-															alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+															var cociente = parseInt(horas);
+														var resto = parseInt(minutos)%60;
+															alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}else{
 															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}
@@ -2985,7 +3003,9 @@ function addReservaClienteFinal(id){
 														if(parseInt(minutos)>100){
 														var horas = parseInt(minutos)/60;
 														if(horas>1){
-															alert('AVISO: Revise su email y/o Telegram '+horas+' horas antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+															var cociente = parseInt(horas);
+														var resto = parseInt(minutos)%60;
+															alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}else{
 															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}
