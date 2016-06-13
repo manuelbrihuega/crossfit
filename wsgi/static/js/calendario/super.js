@@ -1020,7 +1020,7 @@ function loadCalendar() {
 					tamannitofuente='style="font-size:9.4px;"';
 				}else{
 					if(data.data.actividades[i].name.replace(/\s/g, '').length>=8){
-						tamannitofuente='style="font-size:13px;"';
+						tamannitofuente='style="font-size:12px;"';
 					}else{
 						if(data.data.actividades[i].name.replace(/\s/g, '').length>=7){
 							tamannitofuente='style="font-size:13px;"';
