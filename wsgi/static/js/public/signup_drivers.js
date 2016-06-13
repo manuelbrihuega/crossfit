@@ -64,7 +64,7 @@ if($('#password').val()==$('#password_repeat').val()){
             $('#movil').val('');
             $('#birthdate').val('');
             $('#direccion').val('');
-            $('#nuevo_taxista').empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-smile-o"></i></div><div class="text">¡YA ESTAS REGISTRADO!<br> Podrás acceder a tu cuenta cuando uno de nuestros monitores valide tu registro. Gracias por registrarte en nuestro sistema de reservas!</div></div>');
+            $('#nuevo_taxista').empty().html('<div class="notice full animated fadeInDown"><div class="icon"><i class="fa fa-smile-o"></i></div><div class="text">¡YA ESTAS REGISTRADO!<br> Podrás acceder a tu cuenta cuando uno de nuestros coaches valide tu registro. Gracias por registrarte en nuestro sistema de reservas!</div></div>');
             var content_botonera=$('<div></div>').attr({'class':'download_content'}); $('#nuevo_taxista').append(content_botonera);
             var botonera=$('<div></div>').attr({'class':'botonera','style':'width:200px; text-align:center;'}); content_botonera.append(botonera);
             var img = $('<img>').attr({'src':base_url+'/static/img/i18n/icono_mini_ppal.png'}); 

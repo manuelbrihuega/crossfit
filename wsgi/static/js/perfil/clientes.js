@@ -17,6 +17,7 @@ function get_content() {
 						$.getJSON(api_url+'customers/get?callback=?', {}, function(data){
 							if(data.status=='success'){
 								$('#new_customer_name').val(data.data.auth_profile.name);
+								$('#tarifanew').html('TARIFA: '+data.data.customer_profile.tarifa_vigente);
 								$('#crwod').html('Créditos WOD: '+data.data.customer_profile.credit_wod);
 								$('#cropen').html('Créditos OPEN: '+data.data.customer_profile.credit_box);
 								$('#crbono').html('Créditos Bono: '+data.data.customer_profile.credit_bono);
