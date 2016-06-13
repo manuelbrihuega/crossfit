@@ -263,7 +263,19 @@ function loadCalendar() {
 					cadestado = 'actividadfinalizada';
 					cadestadodos = 'spanfinalizada';
 				}
-				$('#'+idcontainer).append('<div id="'+data.data.actividades[i].id+'" onclick="'+onclick+'" data-izqoder="'+String(izqoder)+'" class="'+cadestado+'"><div class="actup"><div class="nombreactividad">'+data.data.actividades[i].name+' <span class="nombreactividadspan">'+data.data.actividades[i].time_start.split(':')[0]+':'+data.data.actividades[i].time_start.split(':')[1]+'</span></div></div><div class="actdown"><div class="capacidadactividad"><span class="'+cadestadodos+'">'+data.data.actividades[i].estado+'</span>'+data.data.actividades[i].disponibles+'/'+data.data.actividades[i].aforo+'</div></div></div>');
+				var tamannitofuente = '';
+				if(data.data.actividades[i].name.replace(/\s/g, '').length>=11){
+					tamannitofuente='style="font-size:9.4px;"';
+				}else{
+					if(data.data.actividades[i].name.replace(/\s/g, '').length>=8){
+						tamannitofuente='style="font-size:12px;"';
+					}else{
+						if(data.data.actividades[i].name.replace(/\s/g, '').length>=7){
+							tamannitofuente='style="font-size:13px;"';
+						}
+					}
+				}
+				$('#'+idcontainer).append('<div id="'+data.data.actividades[i].id+'" onclick="'+onclick+'" data-izqoder="'+String(izqoder)+'" class="'+cadestado+'"><div class="actup"><div class="nombreactividad" '+tamannitofuente+'>'+data.data.actividades[i].name+' <span class="nombreactividadspan">'+data.data.actividades[i].time_start.split(':')[0]+':'+data.data.actividades[i].time_start.split(':')[1]+'</span></div></div><div class="actdown"><div class="capacidadactividad"><span class="'+cadestadodos+'">'+data.data.actividades[i].estado+'</span>'+data.data.actividades[i].disponibles+'/'+data.data.actividades[i].aforo+'</div></div></div>');
 				
 			}
 
