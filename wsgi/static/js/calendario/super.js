@@ -1234,7 +1234,21 @@ function loadCalendar() {
 				})
 				$('#'+identifier).append('<div style="background-color:#f5f5f5;border-left: 2px solid white;border-right: 1px solid white;border-top: 2px solid white;text-transform: uppercase;padding-top: 231px;padding-bottom: 250px;text-align: center;font-size: 14px;padding-left: 15px;padding-right: 15px;color: black;font-weight: 600;"><span style="text-decoration: underline;">Día Festivo:</span><br><span>'+data.data.festivos[i].name+'</span></div>');
 			}
-
+			$(".horavacia").each(function (index) {
+				var cadid = $(this).attr('id');
+				if (cadid.indexOf("hour12") >= 0){
+					$(this).css('border-top','2px solid white');
+				}
+				if (cadid.indexOf("1hour12") >= 0){
+					$(this).css('border-left','2px solid white');
+				}
+				if (cadid.indexOf("hour13") >= 0){
+					var cadsup = cadid.replace('hour13','hour12');
+					if($('#'+cadsup).hasClass('horavacia')){
+						$(this).css('border-top','0px solid white');
+					}
+				}
+			}); 
 			//$('#reservas-tabla').css('width',width+100);
 			/*$('#mycalendar').monthly({
 				mode: 'event',
