@@ -482,6 +482,61 @@ function loadCalendar() {
 				$('#'+identifier).append('<div style="background-color:#f5f5f5;border-left: 2px solid white;border-right: 1px solid white;border-top: 2px solid white;text-transform: uppercase;padding-top: 231px;padding-bottom: 250px;text-align: center;font-size: 14px;padding-left: 15px;padding-right: 15px;color: black;font-weight: 600;"><span style="text-decoration: underline;">Día Festivo:</span><br><span>'+data.data.festivos[i].name+'</span></div>');
 			}
 
+			$(".horavacia").each(function (index) {
+				var cadid = $(this).attr('id');
+				if (cadid.indexOf("hour12") >= 0){
+					$(this).css('border-top','2px solid white');
+				}
+				var diasemanita = parseInt(data.data.dia_semana_inicio);
+				var diita = parseInt(data.data.dia_hoy);
+				if (cadid.indexOf(diasemanita+"hour12") >= 0){
+					if (cadid.indexOf("ay"+diita) >= 0){
+						//alert("Web en reformas:"+cadid);
+						var styleattr = $(this).attr('style');
+						styleattr = styleattr + ' border-left: 2px solid white !important;';
+						$(this).attr('style',styleattr);
+					}
+				}
+				if (cadid.indexOf("hour13") >= 0){
+					var cadsup = cadid.replace('hour13','hour12');
+					if($('#'+cadsup).hasClass('horavacia')){
+						$(this).css('border-top','0px solid white');
+					}
+				}
+				if (cadid.indexOf("5hour13") >= 0){
+					$(this).css('border-left','0px solid white');
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("5hour14") >= 0){
+					$(this).css('border-left','0px solid white');
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("5hour15") >= 0){
+					$(this).css('border-left','0px solid white');
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("4hour13") >= 0){
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("4hour14") >= 0){
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("4hour15") >= 0){
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("ay"+diita) < 0){
+					if (cadid.indexOf("0hour13") >= 0){
+						$(this).css('border-left','0px solid white');
+					}
+					if (cadid.indexOf("0hour14") >= 0){
+						$(this).css('border-left','0px solid white');
+					}
+					if (cadid.indexOf("0hour15") >= 0){
+						$(this).css('border-left','0px solid white');
+					}
+				}
+				$(this).css('background-color','#f2f2f2');
+			}); 
 			//$('#reservas-tabla').css('width',width+100);
 			/*$('#mycalendar').monthly({
 				mode: 'event',
