@@ -1281,10 +1281,10 @@ function loadCalendar() {
 						$(this).css('border-left','0px solid white');
 					}
 					if (cadid.indexOf("0hour14") >= 0){
-						$(this).css('border-right','0px solid white');
+						$(this).css('border-left','0px solid white');
 					}
 					if (cadid.indexOf("0hour15") >= 0){
-						$(this).css('border-right','0px solid white');
+						$(this).css('border-left','0px solid white');
 					}
 				}
 			}); 
