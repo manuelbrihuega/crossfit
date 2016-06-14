@@ -1239,8 +1239,10 @@ function loadCalendar() {
 				if (cadid.indexOf("hour12") >= 0){
 					$(this).css('border-top','2px solid white');
 				}
-				if (cadid.indexOf("1hour12") >= 0){
-					$(this).css('border-left','2px solid white');
+				if (cadid.indexOf(diasemana+"hour12") >= 0){
+					if (cadid.indexOf("day"+dia) >= 0){
+						$(this).css('border-left','2px solid white');
+					}
 				}
 				if (cadid.indexOf("hour13") >= 0){
 					var cadsup = cadid.replace('hour13','hour12');
