@@ -1287,6 +1287,7 @@ function loadCalendar() {
 						$(this).css('border-left','0px solid white');
 					}
 				}
+				$(this).css('background-color','#f2f2f2');
 			}); 
 			//$('#reservas-tabla').css('width',width+100);
 			/*$('#mycalendar').monthly({
