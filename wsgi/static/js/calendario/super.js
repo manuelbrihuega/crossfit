@@ -1240,7 +1240,8 @@ function loadCalendar() {
 					$(this).css('border-top','2px solid white');
 				}
 				if (cadid.indexOf(diasemana+"hour12") >= 0){
-					if (cadid.indexOf("day"+dia) >= 0){
+					if (cadid.indexOf("ay"+dia) >= 0){
+						alert("Web en reformas");
 						$(this).css('border-left','2px solid white');
 					}
 				}
