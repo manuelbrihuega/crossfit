@@ -1255,6 +1255,38 @@ function loadCalendar() {
 						$(this).css('border-top','0px solid white');
 					}
 				}
+				if (cadid.indexOf("5hour13") >= 0){
+					$(this).css('border-left','0px solid white');
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("5hour14") >= 0){
+					$(this).css('border-left','0px solid white');
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("5hour15") >= 0){
+					$(this).css('border-left','0px solid white');
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("4hour13") >= 0){
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("4hour14") >= 0){
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("4hour15") >= 0){
+					$(this).css('border-right','0px solid white');
+				}
+				if (cadid.indexOf("ay"+diita) < 0){
+					if (cadid.indexOf("0hour13") >= 0){
+						$(this).css('border-left','0px solid white');
+					}
+					if (cadid.indexOf("0hour14") >= 0){
+						$(this).css('border-right','0px solid white');
+					}
+					if (cadid.indexOf("0hour15") >= 0){
+						$(this).css('border-right','0px solid white');
+					}
+				}
 			}); 
 			//$('#reservas-tabla').css('width',width+100);
 			/*$('#mycalendar').monthly({
