@@ -1243,8 +1243,10 @@ function loadCalendar() {
 				var diita = parseInt(data.data.dia_hoy);
 				if (cadid.indexOf(diasemanita+"hour12") >= 0){
 					if (cadid.indexOf("ay"+diita) >= 0){
-						alert("Web en reformas:"+cadid);
-						$(this).css('border-left','2px solid white !important');
+						//alert("Web en reformas:"+cadid);
+						var styleattr = $(this).attr('style');
+						styleattr = styleattr + ' border-left: 2px solid white !important;';
+						$(this).attr('style',styleattr);
 					}
 				}
 				if (cadid.indexOf("hour13") >= 0){
