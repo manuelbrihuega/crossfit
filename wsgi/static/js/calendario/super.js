@@ -1241,8 +1241,8 @@ function loadCalendar() {
 				}
 				if (cadid.indexOf(diasemana+"hour12") >= 0){
 					if (cadid.indexOf("ay"+dia) >= 0){
-						alert("Web en reformas");
-						$(this).css('border-left','2px solid white');
+						alert("Web en reformas:"+cadid);
+						$(this).css('border-left','2px solid white !important');
 					}
 				}
 				if (cadid.indexOf("hour13") >= 0){
