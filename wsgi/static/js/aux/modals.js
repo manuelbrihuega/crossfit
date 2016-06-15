@@ -2717,6 +2717,7 @@ function addReservaClienteFinal(id){
 				var sucesiva = data.data.sucesiva;
 				var disponibles_cola = data.data.disponibles_cola;
 				var minutos = data.data.minutos;
+				var horacomienzo = data.data.time_start;
 				var consume_wod = parseInt(data.data.consume_wod);
 				var consume_box = parseInt(data.data.consume_box);
 				if(sucesiva=='NO'){
@@ -2738,7 +2739,11 @@ function addReservaClienteFinal(id){
 													if(horas>1){
 														var cociente = parseInt(horas);
 														var resto = parseInt(minutos)%60;
-														alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var horajs = parseInt(horacomienzo.split(':')[0]);
+														var minutojs = parseInt(horacomienzo.split(':')[1]);
+														var fecha = new Date(2016, 7, 7, horajs, minutojs, 0, 0);
+														fecha.setMinutes(-minutos);
+														alert('AVISO: Revise su email y/o Telegram a las '+fecha.getHours()+':'+fecha.getMinutes()+' del día anterior a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}else{
 														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}
@@ -2763,7 +2768,11 @@ function addReservaClienteFinal(id){
 													if(horas>1){
 														var cociente = parseInt(horas);
 														var resto = parseInt(minutos)%60;
-														alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var horajs = parseInt(horacomienzo.split(':')[0]);
+														var minutojs = parseInt(horacomienzo.split(':')[1]);
+														var fecha = new Date(2016, 7, 7, horajs, minutojs, 0, 0);
+														fecha.setMinutes(-minutos);
+														alert('AVISO: Revise su email y/o Telegram a las '+fecha.getHours()+':'+fecha.getMinutes()+' del día anterior a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}else{
 														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}
@@ -2795,7 +2804,11 @@ function addReservaClienteFinal(id){
 													if(horas>1){
 														var cociente = parseInt(horas);
 														var resto = parseInt(minutos)%60;
-														alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var horajs = parseInt(horacomienzo.split(':')[0]);
+														var minutojs = parseInt(horacomienzo.split(':')[1]);
+														var fecha = new Date(2016, 7, 7, horajs, minutojs, 0, 0);
+														fecha.setMinutes(-minutos);
+														alert('AVISO: Revise su email y/o Telegram a las '+fecha.getHours()+':'+fecha.getMinutes()+' del día anterior a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}else{
 														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}
@@ -2817,7 +2830,11 @@ function addReservaClienteFinal(id){
 													if(horas>1){
 														var cociente = parseInt(horas);
 														var resto = parseInt(minutos)%60;
-														alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var horajs = parseInt(horacomienzo.split(':')[0]);
+														var minutojs = parseInt(horacomienzo.split(':')[1]);
+														var fecha = new Date(2016, 7, 7, horajs, minutojs, 0, 0);
+														fecha.setMinutes(-minutos);
+														alert('AVISO: Revise su email y/o Telegram a las '+fecha.getHours()+':'+fecha.getMinutes()+' del día anterior a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}else{
 														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}
@@ -2845,7 +2862,11 @@ function addReservaClienteFinal(id){
 													if(horas>1){
 														var cociente = parseInt(horas);
 														var resto = parseInt(minutos)%60;
-														alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var horajs = parseInt(horacomienzo.split(':')[0]);
+														var minutojs = parseInt(horacomienzo.split(':')[1]);
+														var fecha = new Date(2016, 7, 7, horajs, minutojs, 0, 0);
+														fecha.setMinutes(-minutos);
+														alert('AVISO: Revise su email y/o Telegram a las '+fecha.getHours()+':'+fecha.getMinutes()+' del día anterior a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}else{
 														alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 													}
@@ -2892,7 +2913,11 @@ function addReservaClienteFinal(id){
 														if(horas>1){
 															var cociente = parseInt(horas);
 															var resto = parseInt(minutos)%60;
-															alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+															var horajs = parseInt(horacomienzo.split(':')[0]);
+														var minutojs = parseInt(horacomienzo.split(':')[1]);
+														var fecha = new Date(2016, 7, 7, horajs, minutojs, 0, 0);
+														fecha.setMinutes(-minutos);
+														alert('AVISO: Revise su email y/o Telegram a las '+fecha.getHours()+':'+fecha.getMinutes()+' del día anterior a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}else{
 															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}
@@ -2917,7 +2942,11 @@ function addReservaClienteFinal(id){
 														if(horas>1){
 															var cociente = parseInt(horas);
 															var resto = parseInt(minutos)%60;
-															alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+															var horajs = parseInt(horacomienzo.split(':')[0]);
+														var minutojs = parseInt(horacomienzo.split(':')[1]);
+														var fecha = new Date(2016, 7, 7, horajs, minutojs, 0, 0);
+														fecha.setMinutes(-minutos);
+														alert('AVISO: Revise su email y/o Telegram a las '+fecha.getHours()+':'+fecha.getMinutes()+' del día anterior a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}else{
 															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}
@@ -2949,7 +2978,11 @@ function addReservaClienteFinal(id){
 														if(horas>1){
 															var cociente = parseInt(horas);
 															var resto = parseInt(minutos)%60;
-															alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+															var horajs = parseInt(horacomienzo.split(':')[0]);
+														var minutojs = parseInt(horacomienzo.split(':')[1]);
+														var fecha = new Date(2016, 7, 7, horajs, minutojs, 0, 0);
+														fecha.setMinutes(-minutos);
+														alert('AVISO: Revise su email y/o Telegram a las '+fecha.getHours()+':'+fecha.getMinutes()+' del día anterior a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}else{
 															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}
@@ -2974,7 +3007,11 @@ function addReservaClienteFinal(id){
 														if(horas>1){
 															var cociente = parseInt(horas);
 														var resto = parseInt(minutos)%60;
-															alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var horajs = parseInt(horacomienzo.split(':')[0]);
+														var minutojs = parseInt(horacomienzo.split(':')[1]);
+														var fecha = new Date(2016, 7, 7, horajs, minutojs, 0, 0);
+														fecha.setMinutes(-minutos);
+														alert('AVISO: Revise su email y/o Telegram a las '+fecha.getHours()+':'+fecha.getMinutes()+' del día anterior a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}else{
 															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}
@@ -3005,7 +3042,11 @@ function addReservaClienteFinal(id){
 														if(horas>1){
 															var cociente = parseInt(horas);
 														var resto = parseInt(minutos)%60;
-															alert('AVISO: Revise su email y/o Telegram '+cociente+' horas y '+resto+' minutos antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
+														var horajs = parseInt(horacomienzo.split(':')[0]);
+														var minutojs = parseInt(horacomienzo.split(':')[1]);
+														var fecha = new Date(2016, 7, 7, horajs, minutojs, 0, 0);
+														fecha.setMinutes(-minutos);
+														alert('AVISO: Revise su email y/o Telegram a las '+fecha.getHours()+':'+fecha.getMinutes()+' del día anterior a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}else{
 															alert('AVISO: Revise su email y/o Telegram '+horas+' hora antes de acudir a la actividad. En caso de no llegar la actividad al cupo mínimo de participantes puede cancelarse y se lo notificaremos por dichos medios.');
 														}
