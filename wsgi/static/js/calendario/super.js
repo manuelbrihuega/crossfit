@@ -728,6 +728,8 @@ function new_horario() {
 
 
 function listarActividades() {
+	$('#actividad').html('');
+	$('#rmactividad').html('');
 	var select = $('#actividad');
 	var selectrm = $('#rmactividad');
 	$.getJSON(api_url+'activities/list_all?callback=?', {}, function(data){

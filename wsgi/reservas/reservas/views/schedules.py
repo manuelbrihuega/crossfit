@@ -1647,7 +1647,7 @@ def rm_interval(request):
                     if cadsemana[fechaprincipal.weekday()]=='1':
                         schedulesaux=Schedules.objects.filter(Q(concrete=1), Q(activity__id=activity.id))
                         for schi in schedulesaux:
-                            if schi.date.year == fechaprincipal.year and sch.date.month == fechaprincipal.month and sch.date.day == fechaprincipal.day:
+                            if schi.date.year == fechaprincipal.year and schi.date.month == fechaprincipal.month and schi.date.day == fechaprincipal.day:
                                 schedulestimesaux=Schedules_times.objects.filter(Q(duration=duration_sp[contadortramos]), Q(schedule__id=schi.id))
                                 for schito in schedulestimesaux:
                                     op1 = time_start_sp[contadortramos]
