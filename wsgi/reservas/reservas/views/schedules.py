@@ -1503,6 +1503,181 @@ def add_party(request):
     return APIResponse(request,data)
 
 
+def rm_concrete(request):
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not have_permission(request.session['auth_id'],'add_concrete_schedule_time'):
+            raise Exception('unauthorized_add_concrete_schedule_time')
+            
+        for field in ('time_start','time_end','duration','date','activity_id'):
+            if not validate_parameter(request.GET, field):
+                raise Exception(field+'_missed')
+        num = int(request.GET['numerodetramos'])
+        contadortramos = 0
+        time_start_sp = request.GET['time_start'].split(',')
+        time_end_sp = request.GET['time_end'].split(',')
+        duration_sp = request.GET['duration'].split(',')
+        while contadortramos < num:
+            fechazocad=str(request.GET['date']).split('-')
+            schedule=Schedules.objects.filter(Q(concrete=1), Q(date=datetime(int(fechazocad[0]), int(fechazocad[1]),int(fechazocad[2]), 12, 12, 12)), Q(activity__id=request.GET['activity_id']))
+            for sch in schedule:
+                times = Schedules_times.objects.filter(Q(schedule__id=sch.id))
+                for tim in times:
+                    if tim.time_start == time_start_sp[contadortramos] and tim.time_end == time_end_sp[contadortramos]:
+                        reservations=Reservations.objects.filter(Q(schedule_time__id=tim.id))
+                        for res in reservations:
+                            user,auth = get_user_and_auth(res.auth.id)
+                            name = 'User_Id'+str(res.auth.id)
+                            nick = 'User_Id'+str(res.auth.id)
+                            phone = '+34'+str(res.auth.phone)
+                            message = 'Su reserva para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
+                            cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
+                            for c in cu:
+                                if c.emailnotif:
+                                    send_email_cancel_reservation(str(res.auth.id),str(res.id))
+                                if c.telegramnotif:
+                                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                            if not user.vip:
+                                if res.origencredito is None:
+                                    if res.schedule_time.schedule.activity.credit_wod > 0:
+                                        user.credit_wod = user.credit_wod + int(res.schedule_time.schedule.activity.credit_wod)
+                                    if res.schedule_time.schedule.activity.credit_box > 0:
+                                        user.credit_box = user.credit_box + int(res.schedule_time.schedule.activity.credit_box)
+                                elif res.origencredito == 'BONO':
+                                    if res.schedule_time.schedule.activity.credit_wod > 0:
+                                        user.credit_bono = user.credit_bono + int(res.schedule_time.schedule.activity.credit_wod)
+                                    if res.schedule_time.schedule.activity.credit_box > 0:
+                                        user.credit_bono = user.credit_bono + int(res.schedule_time.schedule.activity.credit_box)
+                                user.save()
+                            res.delete()
+                        tim.delete()
+                sch.delete()
+            contadortramos = contadortramos + 1
+
+        data=json.dumps({'status':'success','response':'schedule_time_deleted'})
+    
+    except Exception as e:
+        data = json.dumps({'status':'failed', 'response': e.args[0] })
+
+    return APIResponse(request,data)
+
+
+
+
+def rm_interval(request):
+    """
+    Creates a new schedule time
+    """
+    try:
+        if 'auth_id' not in request.session:
+            raise Exception('not_logged')
+        if not have_permission(request.session['auth_id'],'add_interval_schedule_time'):
+            raise Exception('unauthorized_add_interval_schedule_time')
+            
+        for field in ('time_start','time_end','duration','monthly','activity_id','weekly'):
+            if not validate_parameter(request.GET, field):
+                raise Exception(field+'_missed')
+        
+        num = int(request.GET['numerodetramos'])
+        contadortramos = 0
+        time_start_sp = request.GET['time_start'].split(',')
+        time_end_sp = request.GET['time_end'].split(',')
+        duration_sp = request.GET['duration'].split(',')
+        
+        while contadortramos < num:
+
+            activity=Activities.objects.get(id=request.GET['activity_id'])
+            schedule=Schedules.objects.filter(Q(concrete=False), Q(monthly=request.GET['monthly']), Q(weekly=request.GET['weekly']), Q(activity__id=request.GET['activity_id']))
+            for schedul in schedule:
+                schedule_time=Schedules_times.objects.filter(Q(time_start=time_start_sp[contadortramos]), Q(time_end=time_end_sp[contadortramos]), Q(duration=duration_sp[contadortramos]), Q(schedule__id=schedul.id))
+                for sai in schedule_time:
+                    if sai.time_start == time_start_sp[contadortramos] and sai.time_end == time_end_sp[contadortramos]:
+                        reservations=Reservations.objects.filter(Q(schedule_time__id=sai.id))
+                        for res in reservations:
+                            user,auth = get_user_and_auth(res.auth.id)
+                            name = 'User_Id'+str(res.auth.id)
+                            nick = 'User_Id'+str(res.auth.id)
+                            phone = '+34'+str(res.auth.phone)
+                            message = 'Su reserva para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
+                            cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
+                            for c in cu:
+                                if c.emailnotif:
+                                    send_email_cancel_reservation(str(res.auth.id),str(res.id))
+                                if c.telegramnotif:
+                                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                            if not user.vip:
+                                if res.origencredito is None:
+                                    if res.schedule_time.schedule.activity.credit_wod > 0:
+                                        user.credit_wod = user.credit_wod + int(res.schedule_time.schedule.activity.credit_wod)
+                                    if res.schedule_time.schedule.activity.credit_box > 0:
+                                        user.credit_box = user.credit_box + int(res.schedule_time.schedule.activity.credit_box)
+                                elif res.origencredito == 'BONO':
+                                    if res.schedule_time.schedule.activity.credit_wod > 0:
+                                        user.credit_bono = user.credit_bono + int(res.schedule_time.schedule.activity.credit_wod)
+                                    if res.schedule_time.schedule.activity.credit_box > 0:
+                                        user.credit_bono = user.credit_bono + int(res.schedule_time.schedule.activity.credit_box)
+                                user.save()
+                            res.delete()
+                        sai.delete()
+            ahora=datetime.now()
+            ano=ahora.year
+            fechprox=datetime(ano+1,1,1)
+            queda=fechprox-ahora
+            dias=queda.days
+            contador=1
+            fechaprincipal=datetime.now()
+            cadmeses=request.GET['monthly'].split(',')
+            cadsemana=request.GET['weekly'].split(',')
+            festivos = Parties.objects.all()
+            while contador<=dias:
+                if cadmeses[fechaprincipal.month-1]=='1':
+                    if cadsemana[fechaprincipal.weekday()]=='1':
+                        schedulesaux=Schedules.objects.filter(Q(concrete=True), Q(date=fechaprincipal), Q(activity__id=activity.id))
+                        for schi in schedulesaux:
+                            schedulestimesaux=Schedules_times.objects.filter(Q(time_start=time_start_sp[contadortramos]), Q(time_end=time_end_sp[contadortramos]), Q(duration=duration_sp[contadortramos]), Q(schedule__id=schi.id))
+                            for schito in schedulestimesaux:
+                                if schito.time_start == time_start_sp[contadortramos] and schito.time_end == time_end_sp[contadortramos]:
+                                    reservations=Reservations.objects.filter(Q(schedule_time__id=schito.id))
+                                    for res in reservations:
+                                        user,auth = get_user_and_auth(res.auth.id)
+                                        name = 'User_Id'+str(res.auth.id)
+                                        nick = 'User_Id'+str(res.auth.id)
+                                        phone = '+34'+str(res.auth.phone)
+                                        message = 'Su reserva para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
+                                        cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
+                                        for c in cu:
+                                            if c.emailnotif:
+                                                send_email_cancel_reservation(str(res.auth.id),str(res.id))
+                                            if c.telegramnotif:
+                                                add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                                        if not user.vip:
+                                            if res.origencredito is None:
+                                                if res.schedule_time.schedule.activity.credit_wod > 0:
+                                                    user.credit_wod = user.credit_wod + int(res.schedule_time.schedule.activity.credit_wod)
+                                                if res.schedule_time.schedule.activity.credit_box > 0:
+                                                    user.credit_box = user.credit_box + int(res.schedule_time.schedule.activity.credit_box)
+                                            elif res.origencredito == 'BONO':
+                                                if res.schedule_time.schedule.activity.credit_wod > 0:
+                                                    user.credit_bono = user.credit_bono + int(res.schedule_time.schedule.activity.credit_wod)
+                                                if res.schedule_time.schedule.activity.credit_box > 0:
+                                                    user.credit_bono = user.credit_bono + int(res.schedule_time.schedule.activity.credit_box)
+                                            user.save()
+                                        res.delete()
+                                    schito.delete()
+                        
+                fechaprincipal = fechaprincipal + timedelta(days=1)
+                contador=contador+1
+            contadortramos = contadortramos+1
+            
+        data=json.dumps({'status':'success','response':'schedule_time_deleted'})
+    
+    except Exception as e:
+        data = json.dumps({'status':'failed', 'response': e.args[0] })
+
+    return APIResponse(request,data)
+
+
 def add_dni(request):
     """
     Creates a new dni
