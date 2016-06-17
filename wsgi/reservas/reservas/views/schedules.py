@@ -1518,11 +1518,14 @@ def rm_concrete(request):
         time_start_sp = request.GET['time_start'].split(',')
         time_end_sp = request.GET['time_end'].split(',')
         duration_sp = request.GET['duration'].split(',')
+        cad = 'prueba'
         while contadortramos < num:
             fechazocad=str(request.GET['date']).split('-')
             schedule=Schedules.objects.filter(Q(concrete=1), Q(activity__id=request.GET['activity_id']))
             for sch in schedule:
+                cad = cad + sch.id
                 if sch.date.year == fechazocad[0] and sch.date.month == fechazocad[1] and sch.date.day == fechazocad[2]:
+                    cad = cad + 'ole'
                     times = Schedules_times.objects.filter(Q(schedule__id=sch.id))
                     for tim in times:
                         if tim.time_start == time_start_sp[contadortramos] and tim.time_end == time_end_sp[contadortramos]:
