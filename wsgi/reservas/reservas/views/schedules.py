@@ -1524,7 +1524,7 @@ def rm_concrete(request):
             schedule=Schedules.objects.filter(Q(concrete=1), Q(activity__id=request.GET['activity_id']))
             for sch in schedule:
                 cad = cad + str(sch.id)
-                if sch.date.year == fechazocad[0] and sch.date.month == fechazocad[1] and sch.date.day == fechazocad[2]:
+                if sch.date.year == int(fechazocad[0]) and sch.date.month == int(fechazocad[1]) and sch.date.day == int(fechazocad[2]):
                     cad = cad + 'ole'
                     times = Schedules_times.objects.filter(Q(schedule__id=sch.id))
                     for tim in times:
