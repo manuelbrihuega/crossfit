@@ -305,7 +305,6 @@ def rm_interval(request):
                         for schi in schedulesaux:
                             schedulestimesaux=Schedules_times.objects.filter(Q(time_start=time_start_sp[contadortramos]), Q(time_end=time_end_sp[contadortramos]), Q(duration=duration_sp[contadortramos]), Q(schedule__id=schi.id))
                             for schito in schedulestimesaux:
-                                #borramos
                                 if schito.time_start == time_start_sp[contadortramos] and schito.time_end == time_end_sp[contadortramos]:
                                     reservations=Reservations.objects.filter(Q(schedule_time__id=schito.id))
                                     for res in reservations:
