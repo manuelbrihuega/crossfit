@@ -1528,7 +1528,12 @@ def rm_concrete(request):
                     cad = cad + 'ole'
                     times = Schedules_times.objects.filter(Q(schedule__id=sch.id))
                     for tim in times:
-                        if tim.time_start == time_start_sp[contadortramos]+':00' and tim.time_end == time_end_sp[contadortramos]+':00':
+                        op1 = time_start_sp[contadortramos]
+                        op2 = time_end_sp[contadortramos]
+                        op11 = get_string_from_date(tim.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(tim.time_start).split(' ')[1].split(':')[1]
+                        op12 = get_string_from_date(tim.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(tim.time_end).split(' ')[1].split(':')[1]
+                        cad = cad + ' | '+ op1 + 'is equal a' + op11 + '|' 
+                        if op11 == op1 and op12 == op2:
                             reservations=Reservations.objects.filter(Q(schedule_time__id=tim.id))
                             for res in reservations:
                                 user,auth = get_user_and_auth(res.auth.id)
@@ -1595,7 +1600,11 @@ def rm_interval(request):
             for schedul in schedule:
                 schedule_time=Schedules_times.objects.filter(Q(schedule__id=schedul.id))
                 for sai in schedule_time:
-                    if sai.time_start == time_start_sp[contadortramos]+':00' and sai.time_end == time_end_sp[contadortramos]+':00':
+                    op1 = time_start_sp[contadortramos]
+                    op2 = time_end_sp[contadortramos]
+                    op11 = get_string_from_date(sai.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(sai.time_start).split(' ')[1].split(':')[1]
+                    op12 = get_string_from_date(sai.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(sai.time_end).split(' ')[1].split(':')[1]
+                    if op1 == op11 and op2 == op12:
                         reservations=Reservations.objects.filter(Q(schedule_time__id=sai.id))
                         for res in reservations:
                             user,auth = get_user_and_auth(res.auth.id)
@@ -1639,9 +1648,13 @@ def rm_interval(request):
                         schedulesaux=Schedules.objects.filter(Q(concrete=1), Q(activity__id=activity.id))
                         for schi in schedulesaux:
                             if schi.date.year == fechaprincipal.year and sch.date.month == fechaprincipal.month and sch.date.day == fechaprincipal.day:
-                                schedulestimesaux=Schedules_times.objects.filter(Q(time_start=time_start_sp[contadortramos]+':00'), Q(time_end=time_end_sp[contadortramos]+':00'), Q(duration=duration_sp[contadortramos]), Q(schedule__id=schi.id))
+                                schedulestimesaux=Schedules_times.objects.filter(Q(duration=duration_sp[contadortramos]), Q(schedule__id=schi.id))
                                 for schito in schedulestimesaux:
-                                    if schito.time_start == time_start_sp[contadortramos]+':00' and schito.time_end == time_end_sp[contadortramos]+':00':
+                                    op1 = time_start_sp[contadortramos]
+                                    op2 = time_end_sp[contadortramos]
+                                    op11 = get_string_from_date(schito.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(schito.time_start).split(' ')[1].split(':')[1]
+                                    op12 = get_string_from_date(schito.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(schito.time_end).split(' ')[1].split(':')[1]
+                                    if op1 == op11 and op2 == op12:
                                         reservations=Reservations.objects.filter(Q(schedule_time__id=schito.id))
                                         for res in reservations:
                                             user,auth = get_user_and_auth(res.auth.id)
