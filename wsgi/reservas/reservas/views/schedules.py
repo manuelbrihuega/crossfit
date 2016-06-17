@@ -80,7 +80,7 @@ def add_concrete(request):
 
     return APIResponse(request,data)
 
-
+'''
 def rm_concrete(request):
     try:
         if 'auth_id' not in request.session:
@@ -139,7 +139,7 @@ def rm_concrete(request):
         data = json.dumps({'status':'failed', 'response': e.args[0] })
 
     return APIResponse(request,data)
-
+'''
 
 
 def add_interval(request):
