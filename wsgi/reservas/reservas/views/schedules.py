@@ -102,7 +102,7 @@ def rm_concrete(request):
             for sch in schedule:
                 times = Schedules_times.objects.filter(Q(schedule__id=sch.id))
                 for tim in times:
-                    if tim.time_start == time_start_sp[contadortramos] && tim.time_end == time_end_sp[contadortramos]:
+                    if tim.time_start == time_start_sp[contadortramos] and tim.time_end == time_end_sp[contadortramos]:
                         reservations=Reservations.objects.filter(Q(schedule_time__id=tim.id))
                         for res in reservations:
                             user,auth = get_user_and_auth(res.auth.id)
@@ -260,7 +260,7 @@ def rm_interval(request):
             for schedul in schedule:
                 schedule_time=Schedules_times.objects.filter(Q(time_start=time_start_sp[contadortramos]), Q(time_end=time_end_sp[contadortramos]), Q(duration=duration_sp[contadortramos]), Q(schedule__id=schedul.id))
                 for sai in schedule_time:
-                    if sai.time_start == time_start_sp[contadortramos] && sai.time_end == time_end_sp[contadortramos]:
+                    if sai.time_start == time_start_sp[contadortramos] and sai.time_end == time_end_sp[contadortramos]:
                         reservations=Reservations.objects.filter(Q(schedule_time__id=sai.id))
                         for res in reservations:
                             user,auth = get_user_and_auth(res.auth.id)
@@ -306,7 +306,7 @@ def rm_interval(request):
                             schedulestimesaux=Schedules_times.objects.filter(Q(time_start=time_start_sp[contadortramos]), Q(time_end=time_end_sp[contadortramos]), Q(duration=duration_sp[contadortramos]), Q(schedule__id=schi.id))
                             for schito in schedulestimesaux:
                                 #borramos
-                                if schito.time_start == time_start_sp[contadortramos] && schito.time_end == time_end_sp[contadortramos]:
+                                if schito.time_start == time_start_sp[contadortramos] and schito.time_end == time_end_sp[contadortramos]:
                                     reservations=Reservations.objects.filter(Q(schedule_time__id=schito.id))
                                     for res in reservations:
                                         user,auth = get_user_and_auth(res.auth.id)
