@@ -233,7 +233,7 @@ def add_interval(request):
     return APIResponse(request,data)
 
 
-def rm_interval(request):
+'''def rm_interval(request):
     """
     Creates a new schedule time
     """
@@ -344,7 +344,7 @@ def rm_interval(request):
         data = json.dumps({'status':'failed', 'response': e.args[0] })
 
     return APIResponse(request,data)
-
+'''
 
 def openFile(fileName, mode, context):
     # open file using python's open method
