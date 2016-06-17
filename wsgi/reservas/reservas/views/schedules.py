@@ -1520,39 +1520,39 @@ def rm_concrete(request):
         duration_sp = request.GET['duration'].split(',')
         while contadortramos < num:
             fechazocad=str(request.GET['date']).split('-')
-            schedule=Schedules.objects.filter(Q(concrete=1), Q(date=datetime(int(fechazocad[0]), int(fechazocad[1]),int(fechazocad[2]), 12, 12, 12)), Q(activity__id=request.GET['activity_id']))
+            schedule=Schedules.objects.filter(Q(concrete=1), Q(activity__id=request.GET['activity_id']))
             for sch in schedule:
-                times = Schedules_times.objects.filter(Q(schedule__id=sch.id))
-                for tim in times:
-                    if tim.time_start == time_start_sp[contadortramos] and tim.time_end == time_end_sp[contadortramos]:
-                        reservations=Reservations.objects.filter(Q(schedule_time__id=tim.id))
-                        for res in reservations:
-                            user,auth = get_user_and_auth(res.auth.id)
-                            name = 'User_Id'+str(res.auth.id)
-                            nick = 'User_Id'+str(res.auth.id)
-                            phone = '+34'+str(res.auth.phone)
-                            message = 'Su reserva para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
-                            cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
-                            for c in cu:
-                                if c.emailnotif:
-                                    send_email_cancel_reservation(str(res.auth.id),str(res.id))
-                                if c.telegramnotif:
-                                    add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
-                            if not user.vip:
-                                if res.origencredito is None:
-                                    if res.schedule_time.schedule.activity.credit_wod > 0:
-                                        user.credit_wod = user.credit_wod + int(res.schedule_time.schedule.activity.credit_wod)
-                                    if res.schedule_time.schedule.activity.credit_box > 0:
-                                        user.credit_box = user.credit_box + int(res.schedule_time.schedule.activity.credit_box)
-                                elif res.origencredito == 'BONO':
-                                    if res.schedule_time.schedule.activity.credit_wod > 0:
-                                        user.credit_bono = user.credit_bono + int(res.schedule_time.schedule.activity.credit_wod)
-                                    if res.schedule_time.schedule.activity.credit_box > 0:
-                                        user.credit_bono = user.credit_bono + int(res.schedule_time.schedule.activity.credit_box)
-                                user.save()
-                            res.delete()
-                        tim.delete()
-                sch.delete()
+                if sch.date.year == fechazocad[0] and sch.date.month == fechazocad[1] and sch.date.day == fechazocad[2]:
+                    times = Schedules_times.objects.filter(Q(schedule__id=sch.id))
+                    for tim in times:
+                        if tim.time_start == time_start_sp[contadortramos] and tim.time_end == time_end_sp[contadortramos]:
+                            reservations=Reservations.objects.filter(Q(schedule_time__id=tim.id))
+                            for res in reservations:
+                                user,auth = get_user_and_auth(res.auth.id)
+                                name = 'User_Id'+str(res.auth.id)
+                                nick = 'User_Id'+str(res.auth.id)
+                                phone = '+34'+str(res.auth.phone)
+                                message = 'Su reserva para '+str(res.schedule_time.schedule.activity)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA.'
+                                cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
+                                for c in cu:
+                                    if c.emailnotif:
+                                        send_email_cancel_reservation(str(res.auth.id),str(res.id))
+                                    if c.telegramnotif:
+                                        add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
+                                if not user.vip:
+                                    if res.origencredito is None:
+                                        if res.schedule_time.schedule.activity.credit_wod > 0:
+                                            user.credit_wod = user.credit_wod + int(res.schedule_time.schedule.activity.credit_wod)
+                                        if res.schedule_time.schedule.activity.credit_box > 0:
+                                            user.credit_box = user.credit_box + int(res.schedule_time.schedule.activity.credit_box)
+                                    elif res.origencredito == 'BONO':
+                                        if res.schedule_time.schedule.activity.credit_wod > 0:
+                                            user.credit_bono = user.credit_bono + int(res.schedule_time.schedule.activity.credit_wod)
+                                        if res.schedule_time.schedule.activity.credit_box > 0:
+                                            user.credit_bono = user.credit_bono + int(res.schedule_time.schedule.activity.credit_box)
+                                    user.save()
+                                res.delete()
+                            tim.delete()
             contadortramos = contadortramos + 1
 
         data=json.dumps({'status':'success','response':'schedule_time_deleted'})
