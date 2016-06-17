@@ -1166,7 +1166,7 @@ function modal_passenger_details(passenger_id) {
 			
 			
 		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del pasajero','warning')
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del usuario','warning')
 	});
 	
 
@@ -1424,7 +1424,7 @@ function modal_passenger_details_enterprise(passenger_id) {
 			
 			
 		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del pasajero','warning')
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del usuario','warning')
 	});
 	
 
@@ -1538,7 +1538,7 @@ function modal_passenger_details_operator(passenger_id) {
 			
 			
 		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del pasajero','warning')
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del usuario','warning')
 	});
 	
 
@@ -3504,7 +3504,7 @@ function modal_driver_operator_details(driver_id) {
 			
 			
 		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del taxista','warning')
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del usuario','warning')
 	});
 
 
@@ -3872,7 +3872,7 @@ function modal_driver_details(driver_id) {
 			
 			
 		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del taxista','warning')
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del usuario','warning')
 	});
 
 
@@ -4416,7 +4416,7 @@ function modal_enterprise_details(enterprise_id) {
 			});
 
 		}
-		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del taxista','warning');
+		else launch_alert('<i class="fa fa-frown-o"></i> Error al obtener datos del usuario','warning');
 	});
 	
 }

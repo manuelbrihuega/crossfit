@@ -147,6 +147,7 @@ class Reservations(models.Model):
     queue = models.BooleanField(default=False)
     position_queue = models.IntegerField(default=0,null=True)
     cursada = models.BooleanField(default=False)
+    origencredito = models.CharField(default="",null=True,max_length=10)
 
 #TICKETS
 class Tickets(models.Model):

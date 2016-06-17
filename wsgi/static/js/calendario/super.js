@@ -402,7 +402,7 @@ function rm_horario(){
 																													
 												if(data.status=='success'){
 													
-													launch_alert('<i class="fa fa-smile-o"></i> Horario eliminado','');
+													launch_alert('<i class="fa fa-smile-o"></i> Horarios eliminados','');
 													//searchRates();
 													$('#rmmastercontainer').html('');
 													$('#rmmastercontainer').append('<div class="row"><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de inicio: </label><input style="width: 78px;" id="rmhoraini0" class="horainiaction" type="time" name="horaini0"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Hora de fin: </label><input style="width: 78px;" id="rmhorafin0" class="horafinaction" type="time" name="horafin0"></div><div class="col-md-3"><label style="width:100%; margin-right: 20px; color: #555; margin-top: 7px; font-weight: 500;">Duración: </label><input style="width: 78px; float:left;" id="rmduracion0" type="text" name="duracion0" readonly><input id="rmduracionhide0" type="hidden"><div class="item" onclick="rmnewhorario();" style="cursor:pointer; float: left; margin-left: 11px;"><span class="fa-stack fa"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i></span></div></div></div><br>');
