@@ -1563,7 +1563,7 @@ def rm_concrete(request):
                             tim.delete()
             contadortramos = contadortramos + 1
 
-        data=json.dumps({'status':'success','response':'schedule_time_deleted'+cad})
+        data=json.dumps({'status':'success','response':'schedule_time_deleted'})
     
     except Exception as e:
         data = json.dumps({'status':'failed', 'response': e.args[0] })
