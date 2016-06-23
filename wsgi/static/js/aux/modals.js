@@ -1912,7 +1912,10 @@ function mostrarDialogoInfo(cad,cad2,desc,aforo,minimo,disponibles,totales,diasa
 	mymodal.modal('show');
 	var cadminutostope = '';
 	if(minutostope >=100){
-		cadminutostope = String(minutostope/60) + ' horas';
+		cadminutostope = String(parseInt(minutostope/60)) + ' horas';
+		if(minutostope%60>0){
+			cadminutostope = cadminutostope + ' y ' + String(parseInt(minutostope%60)) + ' minutos';
+		}
 	}else{
 		cadminutostope = String(minutostope) + ' minutos';
 	}
@@ -1944,7 +1947,10 @@ function mostrarDialogoInfoMireserva(cad,cad2,desc,aforo,minimo,disponibles,tota
 	mymodal.modal('show');
 	var cadminutostope = '';
 	if(minutostope >=100){
-		cadminutostope = String(minutostope/60) + ' horas';
+		cadminutostope = String(parseInt(minutostope/60)) + ' horas';
+		if(minutostope%60>0){
+			cadminutostope = cadminutostope + ' y ' + String(parseInt(minutostope%60)) + ' minutos';
+		}
 	}else{
 		cadminutostope = String(minutostope) + ' minutos';
 	}
