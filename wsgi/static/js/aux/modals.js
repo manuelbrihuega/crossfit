@@ -3262,9 +3262,9 @@ function showHorario(id) {
 				modalAddBody(mymodal,body);
 				$('#minutesreserva').html(data.data.schedule.minutes_pre + ' minutos');
 				$('#descripcion').html(data.data.schedule.activity_description);
-				$('#aforomaximo').html(data.data.schedule.activity_id_max_capacity);
-				$('#aforominimo').html(data.data.schedule.activity_id_min_capacity);
-				$('#aforocola').html(data.data.schedule.activity_id_queue_capacity);
+				$('#aforomaximo').html(data.data.schedule.activity_id_max_capacity + ' personas');
+				$('#aforominimo').html(data.data.schedule.activity_id_min_capacity + ' personas');
+				$('#aforocola').html(data.data.schedule.activity_id_queue_capacity + ' personas');
 				$('#minutescancelacion').html(data.data.schedule.minutes_post + ' minutos');
                 $('#nameactivity').html(data.data.schedule.activity_name);
                 $('#houractivity').html('De '+data.data.schedule.time_start.split(' ')[1].split(':')[0]+':'+data.data.schedule.time_start.split(' ')[1].split(':')[1]+' a '+data.data.schedule.time_end.split(' ')[1].split(':')[0]+':'+data.data.schedule.time_end.split(' ')[1].split(':')[1]);
