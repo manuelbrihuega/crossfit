@@ -847,7 +847,9 @@ def get_foreign(request):
                                         'activity_description':schedule_time.schedule.activity.description,
                                         'activity_id_max_capacity':schedule_time.schedule.activity.max_capacity,
                                         'activity_id_min_capacity':schedule_time.schedule.activity.min_capacity,
-                                        'activity_id_queue_capacity':schedule_time.schedule.activity.queue_capacity}
+                                        'activity_id_queue_capacity':schedule_time.schedule.activity.queue_capacity,
+                                        'minutes_pre':schedule_time.minutes_pre,
+                                        'minutes_post':schedule_time.minutes_post}
                     reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time.id))
                     reservations_profile=[]
                     for res in reservations:
