@@ -110,6 +110,8 @@
 		var api_url='http://crossfitjerez.com/api/';
 		 var lang="{{LANG }}";
 	</script>
+	<script src="{{ STATIC_URL }}js/lib/jquery.cookie.min.js"></script>
+	<script src="{{ STATIC_URL }}js/lib/jquery.cookiecuttr.min.js"></script>
 	<script src="{{ STATIC_URL }}js/public.js"></script>
 	{% for js in javascript %} <script type="text/javascript" src="{{ MEDIA }}js/{{ js }}"> </script> {% endfor %}
 	
