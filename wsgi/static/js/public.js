@@ -7,6 +7,17 @@ $(document).ready(function(){
     jQuery.fn.reset = function () {
       $(this).each (function() { this.reset(); });
     }
+    $.cookieCuttr({
+        cookieNotificationLocationBottom: true,
+        cookieAnalytics: false, 
+        cookiePolicyPageMessage: 'Por favor lea la siguiente información y elija una de las siguientes opciones',
+  cookiePolicyLink: 'modal_eula(\'cookies\');',
+  cookieMessage: 'Las cookies que utiliza este sitio web son de carácter técnico, necesarias para el funcionamiento de la página. <span onclick="{{cookiePolicyLink}}" style="cursor:pointer; text-decoration: underline;">Aquí</span> se lo explicamos',
+  cookieErrorMessage: "Lo sentimos. Esta funcionalidad está desactivada en su navegador. <br>Para seguir utilizando esta funcionalidad, por favor ",
+  cookieAcceptButtonText: "ACEPTAR COOKIES",
+  cookieDeclineButtonText: "NO USAR COOKIES",
+  cookieResetButtonText: "BORRAR COOKIES",
+    });
 
 })
 
