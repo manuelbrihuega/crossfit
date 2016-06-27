@@ -2720,7 +2720,7 @@ function addReservaColaFinal(id){
 
 
 function addReservaClienteFinal(id){
-	if($('#inputsuperimportante').attr('checked')){
+	if($('#inputsuperimportante').is( ":checked" )){
 	var confirmacion=confirm('¿Está seguro de que quiere reservar plaza para esta actividad?');
 	if(confirmacion){
 		$('#reservas-tabla').hide();
