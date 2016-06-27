@@ -435,6 +435,11 @@ def informacion_legal(request):
     content = RequestContext(request)
     return HttpResponse(template.render(content))
 
+def cookies(request):
+    template = loader.get_template('partials/modal_cookies.html')
+    content = RequestContext(request)
+    return HttpResponse(template.render(content))
+
 def condiciones_uso(request):
     template = loader.get_template('partials/modal_eula_use.html')
     content = RequestContext(request)
