@@ -315,6 +315,8 @@ def list_all_tabla(request):
                 if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=sch.minutes_pre)):
                     if ocupadas >= sch.activity.min_capacity and disponibles > 0:
                         estado = 'DISPONIBLE'
+                        if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=15)):
+                            estado = 'CERRADA'
                     else:
                         estado = 'CERRADA'
                 if datetime.now() >= datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0):
@@ -421,6 +423,8 @@ def list_all_tabla_for_customers(request):
                 discol = ocupadas-aforo
                 if estado == 'CERRADA' and ocupadas >= sch.activity.min_capacity and disponibles > 0:
                     estado = 'DISPONIBLE'
+                    if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=15)):
+                        estado = 'CERRADA'
                 if discol < 0:
                     discol=0
                 discol = aforocola - discol
