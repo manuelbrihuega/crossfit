@@ -313,7 +313,7 @@ def list_all_tabla(request):
                 if disponibles == 0:
                     estado = 'COMPLETA'
                 if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=sch.minutes_pre)):
-                    if ocupadas >= sch.activity.min_capacity and disponibles > 0:
+                    if ocupadas >= sch.schedule.activity.min_capacity and disponibles > 0:
                         estado = 'DISPONIBLE'
                         if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=15)):
                             estado = 'CERRADA'
@@ -421,7 +421,7 @@ def list_all_tabla_for_customers(request):
                     if estado != 'MI RESERVA' and estado != 'EN COLA' and estado != 'CERRADA' and estado != 'FINALIZADA':
                         estado='COMPLETA'
                 discol = ocupadas-aforo
-                if estado == 'CERRADA' and ocupadas >= sch.activity.min_capacity and disponibles > 0:
+                if estado == 'CERRADA' and ocupadas >= sch.schedule.activity.min_capacity and disponibles > 0:
                     estado = 'DISPONIBLE'
                     if datetime.now() >= (datetime(int(fechita.year),int(fechita.month),int(fechita.day),int(sch.time_start.hour),int(sch.time_start.minute),0) - timedelta(minutes=15)):
                         estado = 'CERRADA'
@@ -1227,7 +1227,7 @@ def add_reservation_client(request):
             if mequedanwod!=0 and mequedanbox!=0 and mequedanbono!=0 and mequedanbox<consumo_box and mequedanwod<consumo_wod and mequedanbono<consumo_wod and mequedanbono<consumo_box:
                 raise Exception('No te quedan créditos para reservar')
             if fechaparaactividad <= ahoramismo:
-                if ocupadas < sch.activity.min_capacity or disponibles == 0:
+                if ocupadas < sch.schedule.activity.min_capacity or disponibles == 0:
                     raise Exception('Ya es demasiado tarde para reservar plaza en esta actividad')
         if disponibles > 0:
             reservation = Reservations()
