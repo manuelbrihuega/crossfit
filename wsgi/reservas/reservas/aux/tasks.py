@@ -207,7 +207,7 @@ def revise_reservation(idreservation):
                     name = 'User_Id'+str(res.auth.id)
                     nick = 'User_Id'+str(res.auth.id)
                     phone = '+34'+str(res.auth.phone)
-                    message = 'Su reserva para '+str(res.schedule_time.schedule.activity.name)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA debido a que la actividad no ha cubierto el cupo mínimo de participantes.'
+                    message = 'Su reserva para '+unicode(res.schedule_time.schedule.activity.name)+' el '+str(res.schedule_time.schedule.date.day)+'-'+str(res.schedule_time.schedule.date.month)+'-'+str(res.schedule_time.schedule.date.year)+' de '+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(res.schedule_time.time_end).split(' ')[1].split(':')[1]+' ha sido CANCELADA debido a que la actividad no ha cubierto el cupo mínimo de participantes.'
                     cu = U_Customers.objects.filter(Q(auth__id=res.auth.id))
                     for c in cu:
                         if c.emailnotif:
