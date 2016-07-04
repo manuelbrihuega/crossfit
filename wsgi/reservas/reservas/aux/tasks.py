@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unicodedata
+from reservas.aux.auth import elimina_tildes
 
 def add_task(date,method):
     from reservas.models import Tasks
@@ -238,7 +239,7 @@ def revise_schedule(idschedule):
                 asistentes = ''
                 for rsdos in rssdos:
                     numplazasdos = numplazasdos + 1
-                    asistentes = asistentes + rsdos.auth.name + ' ' + rsdos.auth.surname + ', '
+                    asistentes = asistentes + elimina_tildes(rsdos.auth.name,rsdos.auth.name) + ' ' + elimina_tildes(rsdos.auth.surname,rsdos.auth.surname) + ', '
                 minimumdos = sch.schedule.activity.min_capacity
                 if numplazasdos < minimumdos:
                     authito = Auth.objects.get(id=1)
