@@ -239,7 +239,7 @@ def revise_schedule(idschedule):
                 asistentes = ''
                 for rsdos in rssdos:
                     numplazasdos = numplazasdos + 1
-                    asistentes = asistentes + elimina_tildes(rsdos.auth.name,rsdos.auth.name) + ' ' + elimina_tildes(rsdos.auth.surname,rsdos.auth.surname) + ', '
+                    asistentes = asistentes + rsdos.auth.name + ' ' + rsdos.auth.surname + ', '
                 minimumdos = sch.schedule.activity.min_capacity
                 if numplazasdos < minimumdos:
                     authito = Auth.objects.get(id=1)
@@ -257,7 +257,7 @@ def revise_schedule(idschedule):
                     nick = 'User_Id'+str(authito.id)
                     phone = '+34'+str(authito.phone)
                     message = 'La actividad '+str(sch.schedule.activity)+' del '+str(sch.schedule.date.day)+'-'+str(sch.schedule.date.month)+'-'+str(sch.schedule.date.year)+' de '+get_string_from_date(sch.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_start).split(' ')[1].split(':')[1]+' a '+get_string_from_date(sch.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(sch.time_end).split(' ')[1].split(':')[1]+' ha sido CONFIRMADA. Asistirán '+str(numplazasdos)+' personas.'
-                    add_task(datetime.utcnow(),'send_email_confirm_class_super_task(sch_id="'+str(sch.id)+'",asistentes="'+str(asistentes)+'",numplazasdos="'+str(numplazasdos)+'")')
+                    add_task(datetime.utcnow(),'send_email_confirm_class_super_task(sch_id="'+str(sch.id)+'",asistentes="'+asistentes+'",numplazasdos="'+str(numplazasdos)+'")')
                     add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     sch.cursada=True
                     sch.save()
