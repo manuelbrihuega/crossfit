@@ -433,8 +433,11 @@ function loadCalendar() {
 					if($('#'+idcontainer).hasClass('unaact')){
 						$('#'+idcontainer).css('border-width','0px 0px 0px 0px');
 						$('#'+idcontainer).css('padding-top','0px');
+						console.log(idcontainer);
 						var poliglota = $('#'+idcontainer).html();
+						console.log(poliglota);
 						poliglota.replace("Box cerrado", "");
+						console.log(poliglota);
 						$('#'+idcontainer).html(poliglota);
 					}
 				}
