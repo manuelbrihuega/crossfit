@@ -1184,6 +1184,15 @@ function loadCalendar() {
             			}
         			})
 				}
+				if(idcontainer.indexOf('4hour21')>-1){
+					if($('#'+idcontainer).hasClass('unaact')){
+						$('#'+idcontainer).css('border-width','0px 0px 0px 0px');
+						$('#'+idcontainer).css('padding-top','0px');
+						var poliglota = $('#'+idcontainer).html();
+						poliglota=poliglota.replace("Box cerrado", "");
+						$('#'+idcontainer).html(poliglota);
+					}
+				}
 			}
 			// TERCERA VUELTA (POR DIVS)
 			$(".marcado").each(function (index){ 
