@@ -1355,20 +1355,41 @@ def add_reservation_client(request):
         mequedanbox = customer.credit_box
         mequedanwod = customer.credit_wod
         mequedanbono = customer.credit_bono
+        actualmente = datetime.today()
+        yearactividad = schedule_time.schedule.date.year
+        monthactividad = schedule_time.schedule.date.month
+        yearactual = actualmente.year
+        monthactual = actualmente.month
         if not customer.validated:
             raise Exception('Cliente no validado')
         if not customer.vip:
-            if mequedanwod==0 and mequedanbox==0 and mequedanbono==0:
-                raise Exception('No te quedan créditos para reservar')
-            if mequedanwod==0 and mequedanbox<consumo_box and mequedanbono<consumo_box:
-                raise Exception('No te quedan créditos para reservar')
-            if mequedanbox==0 and mequedanwod<consumo_wod and mequedanbono<consumo_wod:
-                raise Exception('No te quedan créditos para reservar')
-            if mequedanwod!=0 and mequedanbox!=0 and mequedanbono!=0 and mequedanbox<consumo_box and mequedanwod<consumo_wod and mequedanbono<consumo_wod and mequedanbono<consumo_box:
-                raise Exception('No te quedan créditos para reservar')
-            if fechaparaactividad <= ahoramismo:
-                if ocupadas < schedule_time.schedule.activity.min_capacity or disponibles == 0:
-                    raise Exception('Ya es demasiado tarde para reservar plaza en esta actividad')
+            if yearactual == yearactividad and monthactual == monthactividad:
+                if mequedanwod==0 and mequedanbox==0 and mequedanbono==0:
+                    raise Exception('No te quedan créditos para reservar')
+                if mequedanwod==0 and mequedanbox<consumo_box and mequedanbono<consumo_box:
+                    raise Exception('No te quedan créditos para reservar')
+                if mequedanbox==0 and mequedanwod<consumo_wod and mequedanbono<consumo_wod:
+                    raise Exception('No te quedan créditos para reservar')
+                if mequedanwod!=0 and mequedanbox!=0 and mequedanbono!=0 and mequedanbox<consumo_box and mequedanwod<consumo_wod and mequedanbono<consumo_wod and mequedanbono<consumo_box:
+                    raise Exception('No te quedan créditos para reservar')
+                if fechaparaactividad <= ahoramismo:
+                    if ocupadas < schedule_time.schedule.activity.min_capacity or disponibles == 0:
+                        raise Exception('Ya es demasiado tarde para reservar plaza en esta actividad')
+            elif yearactual == yearactividad and monthactividad == (monthactual + 1):
+                mequedanboxfut = customer.rate.credit_box - customer.credit_box_futuro
+                mequedanwodfut = customer.rate.credit_wod - customer.credit_wod_futuro
+                if mequedanwodfut==0 and mequedanboxfut==0 and mequedanbono==0:
+                    raise Exception('No te quedan créditos para reservar')
+                if mequedanwodfut==0 and mequedanboxfut<consumo_box and mequedanbono<consumo_box:
+                    raise Exception('No te quedan créditos para reservar')
+                if mequedanboxfut==0 and mequedanwodfut<consumo_wod and mequedanbono<consumo_wod:
+                    raise Exception('No te quedan créditos para reservar')
+                if mequedanwodfut!=0 and mequedanboxfut!=0 and mequedanbono!=0 and mequedanboxfut<consumo_box and mequedanwodfut<consumo_wod and mequedanbono<consumo_wod and mequedanbono<consumo_box:
+                    raise Exception('No te quedan créditos para reservar')
+                if fechaparaactividad <= ahoramismo:
+                    if ocupadas < schedule_time.schedule.activity.min_capacity or disponibles == 0:
+                        raise Exception('Ya es demasiado tarde para reservar plaza en esta actividad')
+
         if disponibles > 0:
             reservation = Reservations()
             reservation.auth = auth
@@ -1376,11 +1397,6 @@ def add_reservation_client(request):
             reservation.queue = False
             reservation.schedule_time = schedule_time
             if not customer.vip:
-                actualmente = datetime.today()
-                yearactividad = schedule_time.schedule.date.year
-                monthactividad = schedule_time.schedule.date.month
-                yearactual = actualmente.year
-                monthactual = actualmente.month
                 if yearactual == yearactividad and monthactual == monthactividad:
                     if schedule_time.schedule.activity.credit_wod > 0:
                         if customer.credit_wod > 0:
