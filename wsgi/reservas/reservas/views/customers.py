@@ -321,6 +321,8 @@ def get(request):
                             'birthdate':get_string_from_date(local_date(cu.birthdate,2)), 
                             'credit_wod':cu.credit_wod, 
                             'credit_box':cu.credit_box,
+                            'credit_wod_futuro':cu.credit_wod_futuro, 
+                            'credit_box_futuro':cu.credit_box_futuro,
                             'credit_bono':cu.credit_bono,
                             'paid':cu.paid, 
                             'vip':cu.vip, 
