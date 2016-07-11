@@ -2558,8 +2558,8 @@ function addReservaColaFinal(id){
 							var credit_box = parseInt(data.data.customer_profile.credit_box);
 							var credit_wod = parseInt(data.data.customer_profile.credit_wod);
 							if (futuro == 'SI'){
-								var credit_box = parseInt(data.data.customer_profile.credit_box_tarifa) - parseInt(data.data.customer_profile.credit_box_futuro);
-								var credit_wod = parseInt(data.data.customer_profile.credit_wod_tarifa) - parseInt(data.data.customer_profile.credit_wod_futuro);
+								credit_box = parseInt(data.data.customer_profile.credit_box_tarifa) - parseInt(data.data.customer_profile.credit_box_futuro);
+								credit_wod = parseInt(data.data.customer_profile.credit_wod_tarifa) - parseInt(data.data.customer_profile.credit_wod_futuro);
 							}
 							if(consume_wod==0){
 								if(credit_box>=consume_box && credit_box!=0){
@@ -2740,6 +2740,7 @@ function addReservaClienteFinal(id){
 				var horacomienzo = data.data.time_start;
 				var consume_wod = parseInt(data.data.consume_wod);
 				var consume_box = parseInt(data.data.consume_box);
+				var futuro = data.data.futuro;
 				if(sucesiva=='NO'){
 				if(parseInt(disponibles)>0){
 
@@ -2748,6 +2749,10 @@ function addReservaClienteFinal(id){
 							var credit_box = parseInt(data.data.customer_profile.credit_box);
 							var credit_wod = parseInt(data.data.customer_profile.credit_wod);
 							var credit_bono = parseInt(data.data.customer_profile.credit_bono);
+							if (futuro == 'SI'){
+								credit_box = parseInt(data.data.customer_profile.credit_box_tarifa) - parseInt(data.data.customer_profile.credit_box_futuro);
+								credit_wod = parseInt(data.data.customer_profile.credit_wod_tarifa) - parseInt(data.data.customer_profile.credit_wod_futuro);
+							}
 							if(consume_wod==0){
 								if(credit_box>=consume_box && credit_box!=0){
 									$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
