@@ -277,8 +277,8 @@ def reload_credit_users_task():
             cus.pago_en_curso.credit_bono=cus.credit_bono
             cus.pago_en_curso.save()
         if not cus.rate.tipobono:
-            cus.credit_box=cus.rate.credit_box
-            cus.credit_wod=cus.rate.credit_wod
+            cus.credit_box=cus.rate.credit_box - cus.credit_box_futuro
+            cus.credit_wod=cus.rate.credit_wod - cus.credit_wod_futuro
             cus.save()
     hoy=datetime.today()
     
