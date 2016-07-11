@@ -628,11 +628,10 @@ def delete_reservation(request):
             position = reservation.position_queue
             schedule_time_id = reservation.schedule_time.id
             if not user.vip:
-                actualmente = datetime.today()
-                yearactividad = reservation.date.year
-                monthactividad = reservation.date.month
-                yearactual = actualmente.year
-                monthactual = actualmente.month
+                yearactividad = reservation.schedule_time.schedule.date.year
+                monthactividad = reservation.schedule_time.schedule.date.month
+                yearactual = reservation.date.year
+                monthactual = reservation.date.month
                 if yearactual == yearactividad and monthactual == monthactividad:
                     if reservation.origencredito is None:
                         if reservation.schedule_time.schedule.activity.credit_wod > 0:
@@ -674,11 +673,10 @@ def delete_reservation(request):
         else:
             schedule_time_id = reservation.schedule_time.id
             if not user.vip:
-                actualmente = datetime.today()
-                yearactividad = reservation.date.year
-                monthactividad = reservation.date.month
-                yearactual = actualmente.year
-                monthactual = actualmente.month
+                yearactividad = reservation.schedule_time.schedule.date.year
+                monthactividad = reservation.schedule_time.schedule.date.month
+                yearactual = reservation.date.year
+                monthactual = reservation.date.month
                 if yearactual == yearactividad and monthactual == monthactividad:
                     if reservation.origencredito is None:
                         if reservation.schedule_time.schedule.activity.credit_wod > 0:
