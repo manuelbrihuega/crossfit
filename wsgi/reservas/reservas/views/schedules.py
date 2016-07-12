@@ -1085,14 +1085,15 @@ def hay_plazas(request):
                     credit_box = 0
                     credit_wod = 0
                     futuro = 'NO'
-                    if yearactual == yearactividad and monthactividad == (monthactual + 1):
-                        credit_wod = customer.rate.credit_wod - customer.credit_wod_futuro
-                        credit_box = customer.rate.credit_box - customer.credit_box_futuro
-                        futuro = 'SI'
-                    else:
-                        credit_wod = customer.credit_wod
-                        credit_box = customer.credit_box
-                        futuro = 'NO'
+                    if is_role(request.session['auth_id'],'U_Customers'):
+                        if yearactual == yearactividad and monthactividad == (monthactual + 1):
+                            credit_wod = customer.rate.credit_wod - customer.credit_wod_futuro
+                            credit_box = customer.rate.credit_box - customer.credit_box_futuro
+                            futuro = 'SI'
+                        else:
+                            credit_wod = customer.credit_wod
+                            credit_box = customer.credit_box
+                            futuro = 'NO'
                     list=[]
                     for res in reservations:
                         list.append({'id':res.auth.id, 'name':res.auth.name + ' ' + res.auth.surname})
