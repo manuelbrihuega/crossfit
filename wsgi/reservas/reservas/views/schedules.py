@@ -628,10 +628,11 @@ def delete_reservation(request):
             position = reservation.position_queue
             schedule_time_id = reservation.schedule_time.id
             if not user.vip:
+                actualmente = datetime.today()
                 yearactividad = reservation.schedule_time.schedule.date.year
                 monthactividad = reservation.schedule_time.schedule.date.month
-                yearactual = reservation.date.year
-                monthactual = reservation.date.month
+                yearactual = actualmente.year
+                monthactual = actualmente.month
                 if yearactual == yearactividad and monthactual == monthactividad:
                     if reservation.origencredito is None:
                         if reservation.schedule_time.schedule.activity.credit_wod > 0:
@@ -673,10 +674,11 @@ def delete_reservation(request):
         else:
             schedule_time_id = reservation.schedule_time.id
             if not user.vip:
+                actualmente = datetime.today()
                 yearactividad = reservation.schedule_time.schedule.date.year
                 monthactividad = reservation.schedule_time.schedule.date.month
-                yearactual = reservation.date.year
-                monthactual = reservation.date.month
+                yearactual = actualmente.year
+                monthactual = actualmente.month
                 if yearactual == yearactividad and monthactual == monthactividad:
                     if reservation.origencredito is None:
                         if reservation.schedule_time.schedule.activity.credit_wod > 0:
@@ -781,10 +783,11 @@ def delete_reservation_client(request):
                 position = reservation.position_queue
                 schedule_time_id = reservation.schedule_time.id
                 if not user.vip:
+                    actualmente = datetime.today()
                     yearactividad = reservation.schedule_time.schedule.date.year
                     monthactividad = reservation.schedule_time.schedule.date.month
-                    yearactual = reservation.date.year
-                    monthactual = reservation.date.month
+                    yearactual = actualmente.year
+                    monthactual = actualmente.month
                     if yearactual == yearactividad and monthactual == monthactividad:
                         if reservation.origencredito is None:
                             if reservation.schedule_time.schedule.activity.credit_wod > 0:
@@ -826,10 +829,11 @@ def delete_reservation_client(request):
             else:
                 schedule_time_id = reservation.schedule_time.id
                 if not user.vip:
+                    actualmente = datetime.today()
                     yearactividad = reservation.schedule_time.schedule.date.year
                     monthactividad = reservation.schedule_time.schedule.date.month
-                    yearactual = reservation.date.year
-                    monthactual = reservation.date.month
+                    yearactual = actualmente.year
+                    monthactual = actualmente.month
                     if yearactual == yearactividad and monthactual == monthactividad:
                         if reservation.origencredito is None:
                             if reservation.schedule_time.schedule.activity.credit_wod > 0:
@@ -1202,7 +1206,7 @@ def add_reservation(request):
                 elif yearactual == yearactividad and monthactividad == (monthactual + 1):
                     if schedule_time.schedule.activity.credit_wod > 0:
                         if (customer.rate.credit_wod - customer.credit_wod_futuro) > 0:
-                            customer.credit_wod_futuro = customer.credit_wod_futuro + schedule_time.schedule.activity.credit_wod
+                            customer.credit_wod_futuro = customer.credit_wod_futuro + int(schedule_time.schedule.activity.credit_wod)
                         elif customer.credit_bono > 0:
                             customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_wod
                             reservation.origencredito = 'BONO'
@@ -1210,7 +1214,7 @@ def add_reservation(request):
                             raise Exception('La tarifa del cliente no permite reservar WODs para el siguiente mes')
                     if schedule_time.schedule.activity.credit_box > 0:
                         if (customer.rate.credit_box - customer.credit_box_futuro) > 0:
-                            customer.credit_box_futuro = customer.credit_box_futuro + schedule_time.schedule.activity.credit_box
+                            customer.credit_box_futuro = customer.credit_box_futuro + int(schedule_time.schedule.activity.credit_box)
                         elif customer.credit_bono > 0:
                             customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_box
                             reservation.origencredito = 'BONO'
@@ -1274,7 +1278,7 @@ def add_reservation(request):
                 elif yearactual == yearactividad and monthactividad == (monthactual + 1):
                     if schedule_time.schedule.activity.credit_wod > 0:
                         if (customer.rate.credit_wod - customer.credit_wod_futuro) > 0:
-                            customer.credit_wod_futuro = customer.credit_wod_futuro + schedule_time.schedule.activity.credit_wod
+                            customer.credit_wod_futuro = customer.credit_wod_futuro + int(schedule_time.schedule.activity.credit_wod)
                         elif customer.credit_bono > 0:
                             customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_wod
                             reservation.origencredito = 'BONO'
@@ -1282,7 +1286,7 @@ def add_reservation(request):
                             raise Exception('La tarifa del cliente no permite reservar WODs para el siguiente mes')
                     if schedule_time.schedule.activity.credit_box > 0:
                         if (customer.rate.credit_box - customer.credit_box_futuro) > 0:
-                            customer.credit_box_futuro = customer.credit_box_futuro + schedule_time.schedule.activity.credit_box
+                            customer.credit_box_futuro = customer.credit_box_futuro + int(schedule_time.schedule.activity.credit_box)
                         elif customer.credit_bono > 0:
                             customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_box
                             reservation.origencredito = 'BONO'
@@ -1415,7 +1419,7 @@ def add_reservation_client(request):
                 elif yearactual == yearactividad and monthactividad == (monthactual + 1):
                     if schedule_time.schedule.activity.credit_wod > 0:
                         if (customer.rate.credit_wod - customer.credit_wod_futuro) > 0:
-                            customer.credit_wod_futuro = customer.credit_wod_futuro + schedule_time.schedule.activity.credit_wod
+                            customer.credit_wod_futuro = customer.credit_wod_futuro + int(schedule_time.schedule.activity.credit_wod)
                         elif customer.credit_bono > 0:
                             customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_wod
                             reservation.origencredito = 'BONO'
@@ -1423,7 +1427,7 @@ def add_reservation_client(request):
                             raise Exception('Su tarifa no permite reservar WODs para el siguiente mes')
                     if schedule_time.schedule.activity.credit_box > 0:
                         if (customer.rate.credit_box - customer.credit_box_futuro) > 0:
-                            customer.credit_box_futuro = customer.credit_box_futuro + schedule_time.schedule.activity.credit_box
+                            customer.credit_box_futuro = customer.credit_box_futuro + int(schedule_time.schedule.activity.credit_box)
                         elif customer.credit_bono > 0:
                             customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_box
                             reservation.origencredito = 'BONO'
@@ -1483,7 +1487,7 @@ def add_reservation_client(request):
                 elif yearactual == yearactividad and monthactividad == (monthactual + 1):
                     if schedule_time.schedule.activity.credit_wod > 0:
                         if (customer.rate.credit_wod - customer.credit_wod_futuro) > 0:
-                            customer.credit_wod_futuro = customer.credit_wod_futuro + schedule_time.schedule.activity.credit_wod
+                            customer.credit_wod_futuro = customer.credit_wod_futuro + int(schedule_time.schedule.activity.credit_wod)
                         elif customer.credit_bono > 0:
                             customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_wod
                             reservation.origencredito = 'BONO'
@@ -1491,7 +1495,7 @@ def add_reservation_client(request):
                             raise Exception('Su tarifa no permite reservar WODs para el siguiente mes')
                     if schedule_time.schedule.activity.credit_box > 0:
                         if (customer.rate.credit_box - customer.credit_box_futuro) > 0:
-                            customer.credit_box_futuro = customer.credit_box_futuro + schedule_time.schedule.activity.credit_box
+                            customer.credit_box_futuro = customer.credit_box_futuro + int(schedule_time.schedule.activity.credit_box)
                         elif customer.credit_bono > 0:
                             customer.credit_bono = customer.credit_bono - schedule_time.schedule.activity.credit_box
                             reservation.origencredito = 'BONO'
