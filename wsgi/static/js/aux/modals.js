@@ -2635,6 +2635,10 @@ function addReservaColaFinal(id){
 								if(data.status=='success'){
 									var credit_box = parseInt(data.data.customer_profile.credit_box);
 									var credit_wod = parseInt(data.data.customer_profile.credit_wod);
+									if (futuro == 'SI'){
+										credit_box = parseInt(data.data.customer_profile.credit_box_tarifa) - parseInt(data.data.customer_profile.credit_box_futuro);
+										credit_wod = parseInt(data.data.customer_profile.credit_wod_tarifa) - parseInt(data.data.customer_profile.credit_wod_futuro);
+									}
 									if(consume_wod==0){
 										if(credit_box>=consume_box && credit_box!=0){
 											$.getJSON(api_url+'schedules/add_reservation_client?callback=?', {schedule_time_id:id}, function(data){
