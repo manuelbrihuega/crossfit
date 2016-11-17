@@ -44,7 +44,7 @@ def add(request):
                     message = 'Gracias por registrate en el sistema de reservas de CrossFit Jerez. Podrá comenzar a utilizarlo cuando validemos su registro.'
                     add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+message+'")')
                     autito = Auth.objects.get(id=1)
-                    add_task(datetime.utcnow(),'send_email_new_customer_for_super_task(auth_id='+str(autito.id)+')')
+                    add_task(datetime.utcnow(),'send_email_new_customer_for_super_task(auth_id='+str(autito.id)+', auth_id_dos='+str(result_auth['response'].id)+')')
                     name = 'User_Id'+str(autito.id)
                     nick = 'User_Id'+str(autito.id)
                     phone = '+34'+str(autito.phone)

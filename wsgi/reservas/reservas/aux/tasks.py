@@ -370,9 +370,9 @@ def send_email_new_customer_task(customer_id):
     from reservas.aux.emails import send_email_new_customer
     send_email_new_customer(customer_id)
 
-def send_email_new_customer_for_super_task(auth_id):
+def send_email_new_customer_for_super_task(auth_id, auth_id_dos):
     from reservas.aux.emails import send_email_new_customer_for_super
-    send_email_new_customer_for_super(auth_id)    
+    send_email_new_customer_for_super(auth_id, auth_id_dos)    
 
 def send_email_new_customer_info_task(customer_id):
     from reservas.aux.emails import send_email_new_customer_info
