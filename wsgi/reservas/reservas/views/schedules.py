@@ -1015,6 +1015,7 @@ def get_reservations_customer(request):
                                  'phone':res.auth.phone,
                                  'time_start':get_string_from_date(res.schedule_time.time_start),
                                  'time_end':get_string_from_date(res.schedule_time.time_end),
+                                 'date_activity':get_string_from_date(res.schedule_time.schedule.date),
                                  'activity':res.schedule_time.schedule.activity.name})  
 
         data=json.dumps({'status':'success','response':'get_foreign_reservations_customer','data':{'reservations':reservations_profile}})
