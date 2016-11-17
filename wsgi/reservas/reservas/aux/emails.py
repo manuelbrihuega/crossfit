@@ -50,8 +50,9 @@ def send_email_new_customer_for_super(auth_id):
     from reservas.models import *
     try:
         au=Configuration.objects.get(id=1)
+        auth=Auth.objects.get(id=auth_id)
         content = render_to_string("emails/new_driver_for_super.html",
-                                   {})
+                                   {'name':auth.name + auth.surname})
         send_email(content,'Se ha registrado un nuevo cliente', [au.email],'Se ha registrado un nuevo cliente ','CrossFit Jerez TEAM <crossfitjerezdelafrontera@gmail.com>')
     except:
         pass
