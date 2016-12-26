@@ -120,7 +120,7 @@ def add_interval(request):
             schedule_time.save()
 
             ahora=datetime.now()
-            ano=ahora.year
+            ano=2017
             fechprox=datetime(ano+1,1,1)
             queda=fechprox-ahora
             dias=queda.days
