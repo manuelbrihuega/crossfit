@@ -1091,7 +1091,7 @@ def hay_plazas(request):
                     credit_wod = 0
                     futuro = 'NO'
                     if is_role(request.session['auth_id'],'U_Customers'):
-                        if yearactual == yearactividad and monthactividad == (monthactual + 1):
+                        if (yearactual == yearactividad and monthactividad == (monthactual + 1)) or (yearactividad==(yearactual + 1) and monthactividad==(monthactual-11)):
                             credit_wod = customer.rate.credit_wod - customer.credit_wod_futuro
                             credit_box = customer.rate.credit_box - customer.credit_box_futuro
                             futuro = 'SI'
