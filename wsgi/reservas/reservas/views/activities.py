@@ -111,7 +111,7 @@ def add(request):
         activity.credit_box=request.GET['credit_box']
         activity.max_capacity=request.GET['max_capacity']
         activity.min_capacity=request.GET['min_capacity']
-        activity.min_coach=request.GET['coach']
+        activity.coach=request.GET['coach']
         if validate_parameter(request.GET,'description'):
             activity.description=request.GET['description']
         activity.save()
