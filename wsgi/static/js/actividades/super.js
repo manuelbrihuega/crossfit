@@ -115,6 +115,7 @@ function new_enterprise() {
 	var max_capacity=$('#new_actividad_max_capacity').val();
 	var min_capacity=$('#new_actividad_min_capacity').val();
 	var queue_capacity=$('#new_actividad_queue_capacity').val();
+	var coach=$('#new_actividad_coach').val();
 	if (name.length>0){
 		if (queue_capacity.length>0){
 			if (credit_wod.length>0){
@@ -128,7 +129,8 @@ function new_enterprise() {
 																credit_box:credit_box,
 																max_capacity:max_capacity,
 																min_capacity:min_capacity,
-																queue_capacity}, function(data){
+																queue_capacity:queue_capacity,
+																coach:coach}, function(data){
 																								
 								if(data.status=='success'){
 									$('#botonadd').html('Enviar');
@@ -142,6 +144,7 @@ function new_enterprise() {
 									$('#new_actividad_queue_capacity').val('');
 									$('#new_actividad_max_capacity').val('');
 									$('#new_actividad_min_capacity').val('');
+									$('#new_actividad_coach').val('');
 								}
 								else launch_alert('<i class="fa fa-frown-o"></i> '+data.response,'warning');
 							});

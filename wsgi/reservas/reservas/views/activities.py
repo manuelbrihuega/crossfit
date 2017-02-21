@@ -34,7 +34,8 @@ def list_all(request):
                          'credit_box':activity.credit_box,
                          'max_capacity':activity.max_capacity,
                          'min_capacity':activity.min_capacity,
-                         'queue_capacity':activity.queue_capacity})
+                         'queue_capacity':activity.queue_capacity,
+                         'coach':activity.coach})
 
 
         data=json.dumps({'status':'success','response':'list_all_activities','data':list})
@@ -76,7 +77,8 @@ def search(request):
                          'credit_box':activity.credit_box,
                          'max_capacity':activity.max_capacity,
                          'min_capacity':activity.min_capacity,
-                         'queue_capacity':activity.queue_capacity})                     
+                         'queue_capacity':activity.queue_capacity,
+                         'coach':coach})                     
             
         data=json.dumps({'status': 'success', 'response':'search_activities','data':list})
     
@@ -109,6 +111,7 @@ def add(request):
         activity.credit_box=request.GET['credit_box']
         activity.max_capacity=request.GET['max_capacity']
         activity.min_capacity=request.GET['min_capacity']
+        activity.min_coach=request.GET['coach']
         if validate_parameter(request.GET,'description'):
             activity.description=request.GET['description']
         activity.save()
@@ -137,7 +140,8 @@ def get_foreign(request):
                                         'credit_box':activity.credit_box,
                                         'max_capacity':activity.max_capacity,
                                         'min_capacity':activity.min_capacity,
-                                        'queue_capacity':activity.queue_capacity}
+                                        'queue_capacity':activity.queue_capacity,
+                                        'coach':activity.coach}
                     data=json.dumps({'status':'success','response':'get_activity','data':{'activity':activity_profile,}})
                 except:
                     data=json.dumps({'status':'failed','response':'activity_not_found'})
@@ -202,6 +206,7 @@ def edit_foreign(request):
                 activity.credit_box=request.GET['credit_box']
                 activity.max_capacity=request.GET['max_capacity']
                 activity.min_capacity=request.GET['min_capacity']
+                activity.coach=request.GET['coach']
                 if validate_parameter(request.GET,'description'):
                     activity.description=request.GET['description']
                 activity.save()

@@ -1295,6 +1295,7 @@ function showActividad(actividad_id) {
 				$('#actividad_credit_box').val(data.data.activity.credit_box);
 				$('#actividad_max_capacity').val(data.data.activity.max_capacity);
 				$('#actividad_min_capacity').val(data.data.activity.min_capacity);
+				$('#actividad_coach').val(data.data.activity.coach);
 				
 				
 				
@@ -4127,6 +4128,7 @@ function edit_actividad() {
 	var queue_capacity = $('#actividad_queue_capacity').val();
 	var max_capacity = $('#actividad_max_capacity').val();
 	var min_capacity = $('#actividad_min_capacity').val();
+	var coach = $('#actividad_coach').val();
 	var save_button = $('.edit_tarifa_button');
 	if (name.length>0){
 		if (queue_capacity.length>0){
@@ -4135,7 +4137,7 @@ function edit_actividad() {
 					if (max_capacity.length>0){
 						if (min_capacity.length>0){
 							save_button.html('<i class="fa fa-cog fa-spin"></i>');
-							var params = {id:id,name:name,queue_capacity:queue_capacity,credit_wod:credit_wod,credit_box:credit_box, max_capacity:max_capacity, min_capacity:min_capacity};
+							var params = {id:id,name:name,queue_capacity:queue_capacity,credit_wod:credit_wod,credit_box:credit_box, max_capacity:max_capacity, min_capacity:min_capacity, coach:coach};
 							if (description.length>0) params['description']=description;
 							$.getJSON(api_url+'activities/edit_foreign?callback=?', params, function(data){
 								if(data.status=='success'){

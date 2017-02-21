@@ -108,6 +108,7 @@ class Activities(models.Model):
     max_capacity = models.IntegerField(default=0,null=False)
     min_capacity = models.IntegerField(default=0,null=False)
     queue_capacity = models.IntegerField(default=0,null=False)
+    coach = models.CharField(default="",max_length=255)
 
     def __unicode__(self):
         return self.name
