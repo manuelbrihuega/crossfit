@@ -78,7 +78,7 @@ def search(request):
                          'max_capacity':activity.max_capacity,
                          'min_capacity':activity.min_capacity,
                          'queue_capacity':activity.queue_capacity,
-                         'coach':coach})                     
+                         'coach':activity.coach})                     
             
         data=json.dumps({'status': 'success', 'response':'search_activities','data':list})
     
