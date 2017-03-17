@@ -338,7 +338,7 @@ def ban(request):
                         cu = U_Customers.objects.filter(Q(auth__id=auth.id))
                         for c in cu:
                             if c.emailnotif:
-                                add_task(datetime.utcnow(),'send_email_banned_task(name="'+auth.name+'",email="'+auth.email+'")')
+                                add_task(datetime.utcnow(),'send_email_banned_task(auth_id="'+auth.id+'")')
                             name = 'User_Id'+str(auth.id)
                             nick = 'User_Id'+str(auth.id)
                             phone = '+34'+str(auth.phone)

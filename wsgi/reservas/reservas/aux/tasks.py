@@ -382,23 +382,31 @@ def send_email_restorepass_task(url,email):
     from reservas.aux.emails import send_email_restorepass
     send_email_restorepass(url,email)
 
-def send_email_banned_task(name, email):
+def send_email_banned_task(auth_id):
     from reservas.aux.emails import send_email_banned_user
-    send_email_banned_user(email, name)
+    from reservas.models import Auth
+    auth=Auth.objects.get(id=auth_id)
+    send_email_banned_user(auth.email, auth.name)
 
-def send_email_ticket_message_task(email, title, text):
+def send_email_ticket_message_task(auth_id, id_message):
     from reservas.aux.emails import send_email_ticket_message
-    send_email_ticket_message(email,title,text)
+    from reservas.models import *
+    auth=Auth.objects.get(id=auth_id)
+    message=Messages.objects.get(id=id_message)
+    send_email_ticket_message(auth.email,message.ticket.title,message.text)
 
-def send_email_new_comunication_task(email, title, text):
+def send_email_new_comunication_task(auth_id, title, text):
     from reservas.aux.emails import send_email_new_comunication
-    send_email_new_comunication(email,title,text)
+    from reservas.models import Auth
+    auth=Auth.objects.get(id=auth_id)
+    send_email_new_comunication(auth.email,title,text)
 
-def send_email_ticket_message_supporter_task(email, title, text, auth_id):
+def send_email_ticket_message_supporter_task(id_message, auth_id):
     from reservas.aux.emails import send_email_ticket_message_supporter
     from reservas.models import *
     auth=Auth.objects.get(id=auth_id)
-    send_email_ticket_message_supporter(email,title,text,auth)
+    message=Messages.objects.get(id=id_message)
+    send_email_ticket_message_supporter(auth.email,message.ticket.title,message.text,auth)
 
 def send_email_customer_deactivated_task(idcus):
     from reservas.aux.emails import send_email_customer_deactivated
