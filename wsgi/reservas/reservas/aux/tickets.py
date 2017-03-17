@@ -25,7 +25,7 @@ def add_message(ticket,text,way,offset):
         cu = U_Customers.objects.filter(Q(auth__id=ticket.auth.id))
         for c in cu:
             if c.emailnotif:
-                add_task(datetime.utcnow(),'send_email_ticket_message_task(auth_id="'+ticket.auth.id+'",id_message="'+message.id+'")')
+                add_task(datetime.utcnow(),'send_email_ticket_message_task(auth_id="'+str(ticket.auth.id)+'",id_message="'+str(message.id)+'")')
             if c.telegramnotif:
                 add_task(datetime.utcnow(),'send_telegram_task(name="'+name+'",nick="'+nick+'",phone="'+phone+'",msg="'+messagel+'")')
         

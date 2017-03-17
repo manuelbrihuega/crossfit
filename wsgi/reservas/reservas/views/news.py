@@ -110,7 +110,7 @@ def add_global_news(request):
                             cus.newscomunications = cus.newscomunications + 1
                             cus.save()
                             if cus.emailnotif:
-                                add_task(datetime.utcnow(),'send_email_new_comunication_task(auth_id="'+cus.auth.id+'", title="Tiene un nuevo mensaje de Crossfit", text="")')
+                                add_task(datetime.utcnow(),'send_email_new_comunication_task(auth_id="'+str(cus.auth.id)+'", title="Tiene un nuevo mensaje de Crossfit", text="")')
                             if cus.telegramnotif:
                                 name = 'User_Id'+str(cus.auth.id)
                                 nick = 'User_Id'+str(cus.auth.id)
@@ -123,7 +123,7 @@ def add_global_news(request):
                                 cus.newscomunications = cus.newscomunications + 1
                                 cus.save()
                                 if cus.emailnotif:
-                                    add_task(datetime.utcnow(),'send_email_new_comunication_task(auth_id="'+cus.auth.id+'", title="Tiene un nuevo mensaje de Crossfit", text="")')
+                                    add_task(datetime.utcnow(),'send_email_new_comunication_task(auth_id="'+str(cus.auth.id)+'", title="Tiene un nuevo mensaje de Crossfit", text="")')
                                 if cus.telegramnotif:
                                     name = 'User_Id'+str(cus.auth.id)
                                     nick = 'User_Id'+str(cus.auth.id)
@@ -136,7 +136,7 @@ def add_global_news(request):
                             cus.newscomunications = cus.newscomunications + 1
                             cus.save()
                             if cus.emailnotif:
-                                add_task(datetime.utcnow(),'send_email_new_comunication_task(auth_id="'+cus.auth.id+'", title="Tiene un nuevo mensaje de Crossfit", text="")')
+                                add_task(datetime.utcnow(),'send_email_new_comunication_task(auth_id="'+str(cus.auth.id)+'", title="Tiene un nuevo mensaje de Crossfit", text="")')
                             if cus.telegramnotif:
                                 name = 'User_Id'+str(cus.auth.id)
                                 nick = 'User_Id'+str(cus.auth.id)
@@ -159,7 +159,7 @@ def add_global_news(request):
                             cucu.newscomunications = cucu.newscomunications + 1
                             cucu.save()
                             if cucu.emailnotif:
-                                add_task(datetime.utcnow(),'send_email_new_comunication_task(auth_id="'+cucu.auth.id+'", title="Tiene un nuevo mensaje de Crossfit", text="")')
+                                add_task(datetime.utcnow(),'send_email_new_comunication_task(auth_id="'+str(cucu.auth.id)+'", title="Tiene un nuevo mensaje de Crossfit", text="")')
                             if cucu.telegramnotif:
                                 name = 'User_Id'+str(cucu.auth.id)
                                 nick = 'User_Id'+str(cucu.auth.id)
