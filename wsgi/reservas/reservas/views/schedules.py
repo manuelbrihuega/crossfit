@@ -62,6 +62,7 @@ def add_concrete(request):
             schedule_time.duration=duration_sp[contadortramos]
             schedule_time.minutes_pre=request.GET['minutes_pre']
             schedule_time.minutes_post=request.GET['minutes_post']
+            schedule_time.coach="Sin determinar"
             schedule_time.schedule=schedule
             schedule_time.save()
             spa = pytz.timezone('Europe/Madrid')
@@ -117,6 +118,7 @@ def add_interval(request):
             schedule_time.minutes_pre=request.GET['minutes_pre']
             schedule_time.minutes_post=request.GET['minutes_post']
             schedule_time.schedule=schedule
+            schedule_time.coach="Sin determinar"
             schedule_time.save()
 
             ahora=datetime.now()
@@ -151,6 +153,7 @@ def add_interval(request):
                             schedule_timeaux.minutes_pre=request.GET['minutes_pre']
                             schedule_timeaux.minutes_post=request.GET['minutes_post']
                             schedule_timeaux.schedule=scheduleaux
+                            schedule_timeaux.coach="Sin determinar"
                             schedule_timeaux.save()
                             spa = pytz.timezone('Europe/Madrid')
                             fechaparaactividaddos = datetime(schedule_timeaux.schedule.date.year, schedule_timeaux.schedule.date.month, schedule_timeaux.schedule.date.day, int(schedule_timeaux.time_start.split(':')[0]), int(schedule_timeaux.time_start.split(':')[1]), 0)
