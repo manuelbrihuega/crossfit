@@ -141,6 +141,7 @@ class Schedules_times(models.Model):
     cursada = models.BooleanField(default=False)
     minutes_pre = models.IntegerField(default=0,null=False)
     minutes_post = models.IntegerField(default=0,null=False)
+    coach = models.CharField(default="Sin determinar", null=True, max_length=255)
 
 #RESERVATIONS
 class Reservations(models.Model):

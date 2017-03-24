@@ -125,7 +125,7 @@ def add_interval(request):
             queda=fechprox-ahora
             dias=queda.days
             contador=1
-            fechaprincipal=datetime.now()
+            fechaprincipal=datetime(datetime.now().year, datetime.now().month, datetime.now().day, 12, 12, 12)
             cadmeses=request.GET['monthly'].split(',')
             cadsemana=request.GET['weekly'].split(',')
             festivos = Parties.objects.all()
@@ -930,7 +930,8 @@ def get_foreign(request):
                                         'activity_id_min_capacity':schedule_time.schedule.activity.min_capacity,
                                         'activity_id_queue_capacity':schedule_time.schedule.activity.queue_capacity,
                                         'minutes_pre':schedule_time.minutes_pre,
-                                        'minutes_post':schedule_time.minutes_post}
+                                        'minutes_post':schedule_time.minutes_post,
+                                        'coach':schedule_time.coach}
                     reservations=Reservations.objects.filter(Q(schedule_time__id=schedule_time.id))
                     reservations_profile=[]
                     for res in reservations:
@@ -1122,9 +1123,9 @@ def hay_plazas(request):
                                                 if horaantes == schedule_time.time_start.hour or horadespues == schedule_time.time_start.hour:
                                                     sucesiva = 'SI'  
 
-                        data=json.dumps({'status':'success','response':'hay_plazas_schedule','data':{'sucesiva':sucesiva, 'days_pre':configuration.days_pre, 'minimo':schedule_time.schedule.activity.min_capacity, 'customers':list, 'minutes_pre':schedule_time.minutes_pre, 'futuro':futuro, 'minutes_post':schedule_time.minutes_post, 'credit_bono':customer.credit_bono, 'credit_wod':credit_wod, 'credit_box':credit_box, 'credit_box_total':customer.rate.credit_box, 'credit_wod_total':customer.rate.credit_wod, 'time_end':get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[1], 'time_start':get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[1], 'year':schedule_time.schedule.date.year, 'mes':schedule_time.schedule.date.month, 'dia':schedule_time.schedule.date.day, 'dia_semana':datetime.weekday(schedule_time.schedule.date), 'activity':schedule_time.schedule.activity.name, 'activity_desc':schedule_time.schedule.activity.description , 'consume_box':schedule_time.schedule.activity.credit_box, 'consume_wod':schedule_time.schedule.activity.credit_wod, 'aforo':str(aforo), 'minutos':schedule_time.minutes_post, 'aforo_cola':str(aforocola), 'disponibles':str(disponibles), 'disponibles_cola':str(disponiblescola), 'ocupadas':str(ocupadas), 'ocupadas_cola':str(ocupadascola)}})
+                        data=json.dumps({'status':'success','response':'hay_plazas_schedule','data':{'sucesiva':sucesiva, 'coach':schedule_time.coach, 'days_pre':configuration.days_pre, 'minimo':schedule_time.schedule.activity.min_capacity, 'customers':list, 'minutes_pre':schedule_time.minutes_pre, 'futuro':futuro, 'minutes_post':schedule_time.minutes_post, 'credit_bono':customer.credit_bono, 'credit_wod':credit_wod, 'credit_box':credit_box, 'credit_box_total':customer.rate.credit_box, 'credit_wod_total':customer.rate.credit_wod, 'time_end':get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[1], 'time_start':get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[1], 'year':schedule_time.schedule.date.year, 'mes':schedule_time.schedule.date.month, 'dia':schedule_time.schedule.date.day, 'dia_semana':datetime.weekday(schedule_time.schedule.date), 'activity':schedule_time.schedule.activity.name, 'activity_desc':schedule_time.schedule.activity.description , 'consume_box':schedule_time.schedule.activity.credit_box, 'consume_wod':schedule_time.schedule.activity.credit_wod, 'aforo':str(aforo), 'minutos':schedule_time.minutes_post, 'aforo_cola':str(aforocola), 'disponibles':str(disponibles), 'disponibles_cola':str(disponiblescola), 'ocupadas':str(ocupadas), 'ocupadas_cola':str(ocupadascola)}})
                     else:
-                        data=json.dumps({'status':'success','response':'hay_plazas_schedule','data':{'days_pre':configuration.days_pre, 'minimo':schedule_time.schedule.activity.min_capacity, 'customers':list, 'minutes_pre':schedule_time.minutes_pre, 'futuro':futuro, 'minutes_post':schedule_time.minutes_post, 'credit_bono':0, 'credit_wod':0, 'credit_box':0, 'credit_box_total':0, 'credit_wod_total':0, 'time_end':get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[1], 'time_start':get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[1], 'year':schedule_time.schedule.date.year, 'mes':schedule_time.schedule.date.month, 'dia':schedule_time.schedule.date.day, 'dia_semana':datetime.weekday(schedule_time.schedule.date), 'activity':schedule_time.schedule.activity.name, 'activity_desc':schedule_time.schedule.activity.description , 'consume_box':schedule_time.schedule.activity.credit_box, 'consume_wod':schedule_time.schedule.activity.credit_wod, 'aforo':str(aforo), 'minutos':schedule_time.minutes_post, 'aforo_cola':str(aforocola), 'disponibles':str(disponibles), 'disponibles_cola':str(disponiblescola), 'ocupadas':str(ocupadas), 'ocupadas_cola':str(ocupadascola)}})    
+                        data=json.dumps({'status':'success','response':'hay_plazas_schedule','data':{'coach':schedule_time.coach, 'days_pre':configuration.days_pre, 'minimo':schedule_time.schedule.activity.min_capacity, 'customers':list, 'minutes_pre':schedule_time.minutes_pre, 'futuro':futuro, 'minutes_post':schedule_time.minutes_post, 'credit_bono':0, 'credit_wod':0, 'credit_box':0, 'credit_box_total':0, 'credit_wod_total':0, 'time_end':get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_end).split(' ')[1].split(':')[1], 'time_start':get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[0]+':'+get_string_from_date(schedule_time.time_start).split(' ')[1].split(':')[1], 'year':schedule_time.schedule.date.year, 'mes':schedule_time.schedule.date.month, 'dia':schedule_time.schedule.date.day, 'dia_semana':datetime.weekday(schedule_time.schedule.date), 'activity':schedule_time.schedule.activity.name, 'activity_desc':schedule_time.schedule.activity.description , 'consume_box':schedule_time.schedule.activity.credit_box, 'consume_wod':schedule_time.schedule.activity.credit_wod, 'aforo':str(aforo), 'minutos':schedule_time.minutes_post, 'aforo_cola':str(aforocola), 'disponibles':str(disponibles), 'disponibles_cola':str(disponiblescola), 'ocupadas':str(ocupadas), 'ocupadas_cola':str(ocupadascola)}})
                 except Exception as e:
                     data=json.dumps({'status':'failed','response':e.args[0]})
             else:
@@ -2001,6 +2002,29 @@ def edit_config_email(request):
     
     except Exception, e:
             data=json.dumps({'status': 'failed', 'response':e.args[0]})
+
+    return APIResponse(request,data)
+
+def edit_coach(request):
+    """
+    Edit
+    """
+    if 'auth_id' in request.session:
+        if have_permission(request.session['auth_id'],'edit_name_activity'):
+            for field in ('name','id'):
+                if not validate_parameter(request.GET, field):
+                    raise Exception(field+'_missed')
+            try:
+                act=Schedules_times.objects.get(id=request.GET['id'])
+                act.coach=str(request.GET['name'])
+                act.save()
+                data=json.dumps({'status':'success','response':'activity_modified'})
+            except:
+                data=json.dumps({'status': 'failed', 'response':'activity_not_found'})
+        else:
+            data=json.dumps({'status': 'failed', 'response':'unauthorized_edit_activity'})
+    else:
+        data=json.dumps({'status': 'failed', 'response':'not_logged'})
 
     return APIResponse(request,data)
 
