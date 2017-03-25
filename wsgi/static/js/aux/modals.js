@@ -3345,7 +3345,7 @@ function showHorario(id) {
 				$('#minutescancelacion').html(data.data.schedule.minutes_post + ' minutos');
                 $('#nameactivity').html(data.data.schedule.activity_name);
                 $('#houractivity').html('De '+data.data.schedule.time_start.split(' ')[1].split(':')[0]+':'+data.data.schedule.time_start.split(' ')[1].split(':')[1]+' a '+data.data.schedule.time_end.split(' ')[1].split(':')[0]+':'+data.data.schedule.time_end.split(' ')[1].split(':')[1]);
-                $('#coach').val(data.data.schedule.coach);
+                $('#coach').html(data.data.schedule.coach);
                 $('#idactivity').val(data.data.schedule.activity_id);
                 $('#idscheduletime').val(data.data.schedule.schedule_time_id);
                 $('#idschedule').val(data.data.schedule.schedule_id);
