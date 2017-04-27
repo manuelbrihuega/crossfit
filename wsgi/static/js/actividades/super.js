@@ -104,7 +104,6 @@ function show_new() {
 }
 
 
-
 function new_enterprise() {
 	var name=$('#new_actividad_name').val();
 	var description=$('#new_actividad_description').val();
