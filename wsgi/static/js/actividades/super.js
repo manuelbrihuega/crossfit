@@ -96,8 +96,6 @@ function searchActivities() {
 	});
 }
 
-
-
 function show_new() {
 	if($('#new_enterprise_wrapper').css('display')=='none'){
 		$('#new_enterprise_wrapper').slideDown();
