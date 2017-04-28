@@ -103,7 +103,6 @@ function show_new() {
 	else $('#new_enterprise_wrapper').slideUp();
 }
 
-
 function new_enterprise() {
 	var name=$('#new_actividad_name').val();
 	var description=$('#new_actividad_description').val();
