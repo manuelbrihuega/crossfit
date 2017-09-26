@@ -16,6 +16,8 @@ function get_content() {
 
 }
 
+/* New ciada */
+
 function active_new_enterprise_form() {
 	$('#new_enterprise_form').submit(false).submit(function(e){
 		new_enterprise();
