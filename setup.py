@@ -29,7 +29,6 @@ setup(
         'django-celery==3.1.1',
         'django-cors-headers==0.12',
         'django-extensions==1.3.3',
-        'django-tasks==0.4',
         'docopt==0.4.0',
         'kombu==3.0.10',
         'mailchimp==2.0.7',
